@@ -36,7 +36,7 @@ The GitHub Pages shell loads the complete Render application in an embedded work
 
 1. The public address opens on an original, sculpted trident and animated signal field. It enters the connected dashboard automatically after 8.5 seconds; the Enter button and Escape key can advance earlier.
 2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
-3. Design 02 adds a cinematic mint-and-neon-orange hero, expressive Oxanium type, signal-orbit motion, scroll reveals, cursor feedback, progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG, signal visual and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
+3. Design 02 adds a cinematic graphite, warm-ivory and neon-orange hero with restrained ultraviolet accents, expressive Oxanium type, signal-orbit motion, scroll reveals, cursor feedback, progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG, signal visual and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
 
 The public website and the backend are separate repositories/services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the entry shell on GitHub Pages, and this repository hosts the full app on Render. The source for the Pages shell is mirrored in [`deploy/pages/`](deploy/pages/).
 
