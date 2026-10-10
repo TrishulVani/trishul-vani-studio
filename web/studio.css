@@ -3,3 +3,5 @@
 
 /* Shared display typography with the public intro. */
 .brand{font-family:'Oxanium',sans-serif;font-weight:700;letter-spacing:.055em}h1{font-family:'Oxanium',sans-serif;font-weight:600;letter-spacing:-.035em}.eyebrow,.breadcrumb,.panel-title{font-family:'IBM Plex Mono',monospace}
+
+.brand .trident{width:37px;height:52px;object-fit:contain;flex:none;filter:drop-shadow(0 0 8px #edcd8555)}
