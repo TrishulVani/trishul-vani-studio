@@ -1,0 +1,12 @@
+services:
+  research-workbench:
+    build: .
+    ports:
+      - '127.0.0.1:8000:8000'
+    volumes:
+      - experiment_data:/app/artifacts
+    restart: unless-stopped
+    environment:
+      - TRISHUL_ARTIFACT_DIR=/app/artifacts
+volumes:
+  experiment_data:

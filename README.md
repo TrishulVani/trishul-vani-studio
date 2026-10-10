@@ -1,0 +1,177 @@
+<div align="center">
+
+# TRISHUL VANI
+
+**Adaptive Speech Enhancement · Dual-Microphone DSP · Reproducible Research**
+
+`VOLTEDGE ENGINEERING / SOFTWARE RESEARCH WORKBENCH / ALPHA 0.1`
+
+**Local-first audio laboratory with an interactive dashboard, real processing engine, repeatable experiment records, auditable metrics, and automated tests.**
+
+</div>
+
+> [!IMPORTANT]
+> **Research prototype.** No claims of certified real-time performance, speech recognition, hearing protection, tactical safety, secure voice communication, or completed Raspberry Pi deployment. Neural inference only runs when a genuine FFmpeg-compatible RNNoise model is configured; otherwise the UI explicitly displays a **spectral DSP fallback**. Synthetic voice is **not real speech**.
+
+## v0.2 Spectral Studio plan (NOT YET IMPLEMENTED)
+
+A comprehensive Codex-first build contract has been added for a real, editable spectral audio lab and manual SpectraLayers export comparison. **These are planned features, not existing functionality**. See [`docs/SPECTRAL_STUDIO_SPEC.md`](docs/SPECTRAL_STUDIO_SPEC.md), [`docs/PORTAL_UI_UX.md`](docs/PORTAL_UI_UX.md), [`docs/PORTAL_REEL_INTAKE.md`](docs/PORTAL_REEL_INTAKE.md) and [`docs/CODEX_TASK_PROMPTS.md`](docs/CODEX_TASK_PROMPTS.md). The portal reel was mentioned but not provided; do not claim features observed from it. Current visual baseline screenshots are under `docs/references/`.
+
+## What is working now
+
+| Area | Status | Evidence |
+|---|---|---|
+| Responsive interactive web workbench | ✅ Built | `web/index.html`, `web/styles.css`, `web/app.js` |
+| Python/FastAPI REST backend | ✅ Built | `app/main.py`, OpenAPI at `/docs` (see note below) |
+| Synthetic stationary/changing/impulsive noise | ✅ Built | Factory, engine, wind, crowd, impulse; seeded generators |
+| Clean + noise controlled SNR mixture | ✅ Built | SNR calibrated on the entire waveform, common gain clipping prevention |
+| Reference-mic NLMS adaptive cancellation | ✅ Built | `app/dsp.py` + repeatable tests |
+| Spectral DSP reference baseline | ✅ Built | `app/dsp.py`, explicitly not labelled neural |
+| Hybrid controller (gating, freeze, fallback) | ✅ Prototype | DSP fallback works; RNNoise only with optional real model |
+| Actual RNNoise neural inference | ⚙️ Optional | Configure compatible model in `RNNOISE_MODEL` |
+| Upload clean speech + noise | ✅ Built | UI/API accepts WAV/FLAC; computes known-reference metrics |
+| Upload synchronized primary and ambient recordings | ✅ Built | SNR/STOI/PESQ intentionally N/A without clean reference |
+| Experiment playback, waveform, method comparison | ✅ Built | Four methods, optional fifth when model is present |
+| SNR, STOI, PESQ*, processing time, RTF, CSV export | ✅ Built | Only when mathematically available; *PESQ requires optional package/licensing check |
+| Local provenance and repeatable histories | ✅ Built | Persist WAV, parameters, control trace and metrics per run |
+| Dataset benchmark CLI with hashes/CSV/manifest | ✅ Built | `scripts/evaluate_dataset.py` |
+| Unit and end-to-end API tests | ✅ Built | `pytest` |
+| GitHub Actions CI | ✅ Configured | `.github/workflows/ci.yml` |
+| C++/Raspberry Pi and actual two-node link | ◻ Planned | Detailed gates in `docs/ROADMAP.md` |
+
+## Quick start (Windows PowerShell / Linux / macOS)
+
+```powershell
+# From the repository root:
+python -m venv .venv
+# Windows:
+.\.venv\Scripts\Activate.ps1
+# Linux/macOS: source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+python -m pytest
+python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Then open **http://127.0.0.1:8000**. Interactive REST API docs: **http://127.0.0.1:8000/docs** (FastAPI docs route is registered before the static mount). No JavaScript build step, npm subscription, paid API key, database server, or cloud account required. Fonts use online enhancement *only when reachable*, with system fallbacks.
+
+On a different local network device, expose deliberately and **add authentication before any public deployment**. The prototype is not a hardened multi-user service.
+
+### Docker (optional)
+
+```bash
+docker compose up --build
+```
+
+Open the same local URL. In Compose, the server binds to **127.0.0.1**, and output files persist in a named Docker volume.
+
+## Research workflow
+
+1. Open the **Audio laboratory**. Choose a noise class, controlled input SNR (-15 to +20 dB), duration and deterministic seed.
+2. Click **Run signal analysis**. The backend creates clean synthetic test signals, reference-mic noise, raw mixture, NLMS, spectral output and hybrid output.
+3. Compare waveform, listen to **RAW / NLMS / SPECTRAL / HYBRID**, inspect computed SNR, objective metrics if applicable, processing time and RTF.
+4. Download WAV and per-run CSV. Each run is persisted at `artifacts/<run_id>/` and can be re-opened from history.
+5. **Use real human speech before interpreting STOI or PESQ.** Upload speech + noise WAV/FLAC via the UI. Data sources and licensing are in Dataset vault and `docs/DATA_PROVENANCE.md`.
+6. Upload *paired, synchronized* mic recordings through the dual-mic importer once captured. With no true clean ground truth, SNR and intelligibility quality metrics are deliberately unavailable.
+7. Execute multi-file benchmark matrix via the CLI, store licenses, hashes and exact source paths for presentation-ready evidence.
+
+### Benchmark actual public datasets
+
+Download **only the speech/noise subset you are licensed to use**, retain its original terms, then:
+
+```bash
+python -m scripts.evaluate_dataset \
+  --speech-dir data/LibriSpeech/dev-clean \
+  --noise-dir data/DEMAND \
+  --speech-license 'CC BY 4.0' \
+  --noise-license 'CC BY-SA 3.0' \
+  --limit 3 \
+  --snrs -10 -5 0 5 10 \
+  --duration 3 \
+  --out-dir artifacts/benchmark-librispeech-demand
+```
+
+The benchmark writes `metrics.csv`, `summary.csv` (means and standard deviations), `manifest.json` (file SHA-256, seed, source terms and commit), and a small group of WAV examples. **It does not download or commit datasets.** Data in `data/` should be `.gitignore`d and stored locally or in approved research storage.
+
+### Optional real RNNoise (neural) path
+
+The app does **not bundle neural models**. For real RNNoise: install an FFmpeg build that contains the `arnndn` filter, obtain a compatible `.rnnn` model from a source whose model license you have verified, and set an absolute path to the model before starting the backend:
+
+```bash
+# Linux/macOS:
+export RNNOISE_MODEL=/absolute/path/to/verified-model.rnnn
+ffmpeg -filters | grep arnndn
+# Windows PowerShell:
+$env:RNNOISE_MODEL='C:\models\verified-model.rnnn'
+```
+
+A valid model enables **RNNoise** as a *separate* fifth method and changes the hybrid residual stage from spectral to actual neural inference. Misconfigured models raise errors, not fake results. The reference RNNoise interface uses 48 kHz internally; FFmpeg handles conversion from/to the 16 kHz research pipeline. Measure delay after integration. Code is not a neural training system.
+
+### Benchmarks, limitations, interpretation
+
+- **SNR** is an error-based `10log10(Pclean / P(clean−enhanced))` for known, time-aligned clean reference. It is not a subjective quality measurement and is marked `null` without clean reference.
+- **STOI** (via `pystoi`) and **PESQ** (optional) are used for *real speech with known clean reference*; we intentionally do **not** give the synthetic tone a meaningful intelligibility score.
+- **RTF** is offline processing time divided by audio duration. RTF < 1 on a host **does not prove** glitch-free playback or <10 ms real-time latency on Raspberry Pi.
+- **Reference gating** based on short-frame correlation is an initial policy to tune on synchronized real recordings. It is not robust to all speech leakage, multipath propagation, or high-energy transients; validation gates must address this.
+- Do not present software-inferred results as measured military gunfire, vehicle, or battlefield performance. Simulated impulse and engine signals are **proxies**, not field recordings.
+- Generated/audio artifacts use signed PCM16 WAV: processing outputs are clipped to valid WAV range. Peak and clipped-sample counts are saved for analysis. Examine clipping counts before treating outputs as comparable.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Web lab / UI] -->|JSON, WAV upload| B[FastAPI]
+    B --> C[Dataset mixer / two-mic ingest]
+    C --> D[NLMS reference baseline]
+    C --> E[Spectral baseline]
+    C --> F[Optional actual RNNoise]
+    C --> G[Hybrid controller]
+    G --> D
+    G --> H[Residual spectral or RNNoise]
+    D --> I[Quality / runtime evaluator]
+    E --> I
+    F --> I
+    H --> I
+    I --> J[Local artifact store]
+    J -->|WAV, CSV, history, trace| A
+    K[(LibriSpeech / DEMAND / CC0 clips)] -. local, user-supplied .-> C
+```
+
+The longer-term target remains **Operator A → Node A / reference-mic NLMS → residual neural stage → wired link → Node B → Operator B**. AKSHARA is optional, **after** the reliable two-node demonstration; it is not part of the core software scope.
+
+## Repository map
+
+```text
+app/                   FastAPI, WAV input/output, experiment orchestration
+  dsp.py               Algorithms, simulated sources, optional genuine RNNoise
+  main.py              API, validation, local persistence and static web
+web/                   Zero-build responsive UI (CSS, JS, SVG)
+scripts/               Offline benchmark, reproducibility manifests
+tests/                 Deterministic DSP tests, API end-to-end tests
+docs/                  Architecture, dataset licenses, validation, build strategy
+.github/workflows/     Continuous integration pipeline
+artifacts/             Gitignored results (CSV, WAV, JSON, provenance)
+CODEX_MASTER_PROMPT.md  Task contract for Codex to finish software progressively
+```
+
+## API surface
+
+| Endpoint | Function |
+|---|---|
+| `GET /api/health` | Connectivity |
+| `GET /api/meta` | Honest method/capability flags |
+| `GET /api/diagnostics` | Infrastructure state, no pretend Pi telemetry |
+| `POST /api/experiments/simulate` | Deterministic synthetic environment |
+| `POST /api/experiments/upload` | Real clean speech and noise files |
+| `POST /api/experiments/dual-mic` | Recorded synchronized primary/reference mic WAV |
+| `GET /api/experiments` | Stored history |
+| `GET /api/experiments/{id}` | Full report, trace, metrics, waveforms |
+| `GET /api/experiments/{id}/audio/{method}` | 16 kHz WAV download and playback |
+| `GET /api/experiments/{id}/export.csv` | Auditable per-method CSV |
+| `GET /api/datasets` | Source URLs, use and license warnings |
+| `GET /docs` | OpenAPI UI |
+
+## Contributing + Git hygiene
+
+Every software milestone is committed separately with tests and documentation. See `CONTRIBUTING.md` and `CODEX_MASTER_PROMPT.md`. Do **not** commit third-party WAVs, models, datasets, tokens or unvalidated benchmark images. The current starter supplies the source code and local test evidence; **no GitHub repo has been chosen or pushed by this package**.

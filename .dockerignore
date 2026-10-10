@@ -1,0 +1,13 @@
+.git
+.github
+.pytest_cache
+__pycache__
+.venv
+.env*
+artifacts
+node_modules
+data
+*.wav
+*.flac
+*.zip
+*.rnnn

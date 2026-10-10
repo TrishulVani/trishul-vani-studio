@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081112">
+  <meta name="description" content="TRISHUL VANI — reproducible audio intelligence workbench for speech enhancement research.">
+  <title>TRISHUL VANI / Signal Intelligence</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
+ <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+ <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 12h2l2-7 4 14 4-14 4 14 2-7h2"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 20h18M5 17l4-6 4 3 6-8M18 6h1v4"/></symbol>
+ <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 4 18 4 18 0V5M3 12c0 4 18 4 18 0"/></symbol>
+ <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m10 2-.5 2.4L7 5.5l-2-1.3-2.8 3 1.4 2.1-.8 2.7-2.5.7.2 4 2.4.5L4 20l2.8 2 2.1-1.4 2.7.8.7 2.5 4-.2.5-2.4 2.7-1.1 2 1.3 2.8-3-1.4-2.1.8-2.7 2.5-.7-.2-4-2.4-.5L20 4l-2.8-2-2.1 1.4-2.7-.8-.7-2.5"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5z"/></symbol>
+ <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+ <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+ <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 20V6m-5 5 5-5 5 5M4 3h16"/></symbol>
+ <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v6m0-10v.2"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></symbol>
+ <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 3h8v8m0-8L10 14M21 13v8H3V3h8"/></symbol>
+ <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/></symbol>
+</svg>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a href="#overview" class="brand"><span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>TRISHUL<span class="brand-thin">VANI</span></strong><small>RESEARCH WORKBENCH</small></span></a>
+    <div class="sidebar-group-title">WORKSPACE <span>01 / 04</span></div>
+    <nav class="nav-items">
+      <a class="nav-item active" href="#overview"><svg><use href="#i-grid"/></svg><span>Overview</span><span class="nav-current"></span></a>
+      <a class="nav-item" href="#audio-lab"><svg><use href="#i-wave"/></svg><span>Audio laboratory</span></a>
+      <a class="nav-item" href="#analytics"><svg><use href="#i-chart"/></svg><span>Signal intelligence</span></a>
+      <a class="nav-item" href="#datasets"><svg><use href="#i-data"/></svg><span>Dataset vault</span></a>
+      <a class="nav-item" href="#system"><svg><use href="#i-gear"/></svg><span>System diagnostics</span></a>
+    </nav>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-group-title">ARCHITECTURE</div>
+    <div class="architecture-side"><span class="arch-dot"></span><div><strong>Offline research</strong><small>Local host processing</small></div></div>
+    <div class="architecture-side"><span class="arch-dot blue"></span><div><strong>Dual-microphone DSP</strong><small>Simulated / uploaded</small></div></div>
+    <div class="sidebar-bottom">
+      <div class="side-icon"><svg><use href="#i-spark"/></svg></div>
+      <p>ENGINEERING PREVIEW</p><strong>Build. Measure. Verify.</strong>
+      <span>Evidence before claims. Every result is reproducible.</span>
+      <a href="#system">View system status <svg><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="sidebar-credit">VOLTEDGE <span>•</span> 2026 <span>•</span> v0.1 ALPHA</div>
+  </aside>
+  <main class="main" id="overview">
+    <header class="topbar">
+      <div class="breadcrumbs"><span>WORKSPACE</span><span class="slash">/</span><strong>MISSION CONTROL</strong></div>
+      <div class="topbar-right"><span class="status-pill"><i></i> LOCAL PROCESSOR ONLINE</span><span class="today" id="date-label"></span><span class="user-avatar" aria-label="VoltEdge engineering">V</span></div>
+    </header>
+    <div class="content">
+      <div class="page-kicker"><span class="kicker-line"></span> SIGNAL ENHANCEMENT / LABORATORY OS <span class="count-index">[ 001 — 006 ]</span></div>
+      <section class="hero">
+        <div class="hero-main">
+          <div class="alpha"><span class="alpha-square"></span> RESEARCH BUILD • SOFTWARE VALIDATION</div>
+          <h1>Clarity under <em>pressure.</em></h1>
+          <p>Adaptive dual-microphone speech enhancement. Create controlled noise conditions, inspect every stage of the pipeline, and defend each result with reproducible evidence.</p>
+          <div class="hero-actions"><a href="#audio-lab" class="primary-btn"><svg><use href="#i-wave"/></svg> Launch audio experiment <svg class="end-icon"><use href="#i-arrow"/></svg></a><a href="#analytics" class="ghost-btn">Explore results <svg><use href="#i-arrow"/></svg></a></div>
+          <div class="hero-footer"><span class="tiny-circle"></span> NEURAL STAGE: <strong id="hero-ai-state">CHECKING</strong><span class="hero-divider"></span><span>16 KHZ INTERNAL PIPELINE</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-outer"></div><div class="orbit orbit-mid"></div><div class="orbit orbit-inner"></div><div class="beam beam-a"></div><div class="beam beam-b"></div>
+          <div class="visual-core"><div class="core-symbol"><span></span><span></span><span></span></div></div>
+          <span class="orbital-label top-label">DSP / 16.0 KHz</span><span class="orbital-label lower-label">SIGNAL PROCESSED / 001</span>
+          <div class="orbit-dot dot-one"></div><div class="orbit-dot dot-two"></div>
+        </div>
+      </section>
+      <div class="quick-metrics" aria-label="System overview">
+        <article class="metric-card"><span class="mini-index">01 / PIPELINE</span><div class="metric-line"><strong>04<span class="metric-sub">+ optional AI</span></strong><span class="metric-arrow">↗</span></div><small>Processing paths</small><div class="metric-micro">RAW · NLMS · SPECTRAL · HYBRID</div></article>
+        <article class="metric-card"><span class="mini-index">02 / AUDIO ENGINE</span><div class="metric-line"><strong>16<span class="unit">kHz</span></strong><span class="metric-arrow">⌁</span></div><small>Internal sample rate</small><div class="metric-micro">FRAME-BASED DSP / 10 MS</div></article>
+        <article class="metric-card"><span class="mini-index">03 / DATA RECORDS</span><div class="metric-line"><strong id="experiment-count">00</strong><span class="metric-arrow">↗</span></div><small>Saved experiment runs</small><div class="metric-micro">LOCAL • FULLY REPRODUCIBLE</div></article>
+        <article class="metric-card"><span class="mini-index">04 / READINESS</span><div class="metric-line"><strong class="metric-readiness">ALPHA</strong><span class="metric-arrow">◇</span></div><small>Offline software prototype</small><div class="metric-micro">HARDWARE NOT VALIDATED</div></article>
+      </div>
+      <section id="audio-lab" class="section-block">
+        <div class="section-head"><div><span class="section-index">[ 02 ] EXPERIMENTATION</span><h2>Audio laboratory<span class="title-dot">.</span></h2></div><span class="section-hint">CONTROLLED INPUT → VERIFIED OUTPUT</span></div>
+        <div class="lab-layout">
+          <div class="panel experiment-panel">
+            <div class="panel-header"><div><span class="panel-eyebrow">TEST CONFIGURATION</span><h3>Design your environment</h3></div><span class="panel-number">A / 01</span></div>
+            <div class="form-label-row"><label>Noise environment</label><span>05 SCENARIOS</span></div>
+            <div class="scenarios" role="group" aria-label="Noise environment">
+              <button class="scenario selected" data-noise="factory"><span class="scenario-icon">⌁</span><span>Factory</span><small>Industrial hum</small></button>
+              <button class="scenario" data-noise="engine"><span class="scenario-icon">≋</span><span>Engine</span><small>Low frequency</small></button>
+              <button class="scenario" data-noise="wind"><span class="scenario-icon">◌</span><span>Wind</span><small>Variable airflow</small></button>
+              <button class="scenario" data-noise="impulse"><span class="scenario-icon">⌁</span><span>Impulse</span><small>Sudden transients</small></button>
+              <button class="scenario" data-noise="crowd"><span class="scenario-icon">♧</span><span>Crowd</span><small>Changing energy</small></button>
+            </div>
+            <div class="form-label-row range-head"><label for="snr">Input signal-to-noise ratio</label><output id="snr-display">0 dB</output></div>
+            <input type="range" id="snr" min="-15" max="20" value="0" step="1" aria-label="Input signal to noise ratio">
+            <div class="range-ends"><span>-15 dB · VERY NOISY</span><span>+20 dB · CLEANER</span></div>
+            <div class="split-fields"><div><label for="duration">Duration <span>SEC</span></label><select id="duration"><option value="1.5">1.5 seconds</option><option value="3" selected>3 seconds</option><option value="5">5 seconds</option><option value="8">8 seconds</option></select></div><div><label for="seed">Random seed <span>REPRODUCIBILITY</span></label><input id="seed" type="number" min="0" max="2147483647" value="42"></div></div>
+            <div class="lab-notice"><svg><use href="#i-info"/></svg><span>Default voice is a <strong>synthetic formant-like tone</strong>, not human speech. Upload real speech for meaningful intelligibility evaluation.</span></div>
+            <button id="run-btn" class="run-button"><span class="run-pulse"></span><span id="run-text">Run signal analysis</span><svg><use href="#i-arrow"/></svg></button>
+            <div class="upload-divider"><span>OR EXPERIMENT WITH REAL AUDIO</span></div>
+            <form id="upload-form" class="upload-form">
+              <div class="upload-grid"><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Clean speech WAV / FLAC</span><input name="clean" type="file" accept=".wav,.flac,audio/wav,audio/flac" required></label><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Environmental noise WAV / FLAC</span><input name="noise" type="file" accept=".wav,.flac,audio/wav,audio/flac" required></label></div>
+              <button type="submit" id="upload-btn" class="secondary-btn">Analyze uploaded audio <svg><use href="#i-arrow"/></svg></button>
+            </form>
+            <details class="dual-mic"><summary>Have synchronized dual-mic WAV files? <span>OPEN CAPTURE IMPORT ▾</span></summary><form id="dual-form"><p>Upload paired primary and ambient mic recordings of equal length. With no clean reference, objective SNR/STOI/PESQ will be marked unavailable.</p><div class="upload-grid"><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Primary microphone WAV</span><input name="primary" type="file" accept=".wav,.flac" required></label><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Reference microphone WAV</span><input name="reference" type="file" accept=".wav,.flac" required></label></div><button type="submit" id="dual-btn" class="secondary-btn">Process two-mic recording <svg><use href="#i-arrow"/></svg></button></form></details>
+          </div>
+          <div class="panel result-panel">
+            <div class="panel-header"><div><span class="panel-eyebrow">SIGNAL INSPECTION</span><h3>Listen to the difference</h3></div><span id="run-tag" class="live-tag">NO EXPERIMENT</span></div>
+            <div class="wave-controls"><span class="tiny-text">AUDIO CHANNEL</span><div class="wave-select" role="group" aria-label="Audio channel"><button class="active" data-track="raw">RAW</button><button data-track="nlms">NLMS</button><button data-track="spectral">SPECTRAL</button><button data-track="hybrid">HYBRID</button></div></div>
+            <div class="wave-card"><div class="wave-top"><div><strong id="wave-name">Awaiting signal</strong><span id="wave-type">WAVEFORM MONITOR / MONO</span></div><span class="wave-khz">16.0 kHz</span></div><canvas id="wave-canvas" aria-label="Selected audio waveform over time" width="720" height="260"></canvas><div class="wave-ticks"><span>00:00</span><span id="wave-mid">00:01.5</span><span id="wave-end">00:03.0</span></div></div>
+            <div class="playback-row"><button id="play-btn" class="play-btn" aria-label="Play selected audio"><svg><use href="#i-play"/></svg></button><div class="track-meta"><strong id="track-title">No recording yet</strong><span id="track-subtitle">Generate an experiment to unlock playback</span></div><a id="audio-download" class="download-btn disabled" aria-label="Download selected WAV" aria-disabled="true"><svg><use href="#i-download"/></svg></a></div>
+            <div class="pipe-flow"><div class="pipe-title">SIGNAL ROUTE <span>ADAPTIVE PROCESSING</span></div><div class="flow-steps"><span>MIC / IN</span><i></i><span>NLMS</span><i></i><span id="flow-residual">SPECTRAL</span><i></i><span>OUT</span></div></div>
+            <div class="feature-foot"><span><i class="status-light"></i> SIGNAL-GATED ADAPTATION</span><span>IMPULSE WEIGHT FREEZE</span></div>
+          </div>
+        </div>
+      </section>
+      <section id="analytics" class="section-block">
+        <div class="section-head"><div><span class="section-index">[ 03 ] PERFORMANCE INTELLIGENCE</span><h2>Data, not declarations<span class="title-dot">.</span></h2></div><a id="csv-download" class="text-action disabled" aria-disabled="true"><svg><use href="#i-download"/></svg> EXPORT CSV</a></div>
+        <div class="analytics-layout"><div class="panel chart-panel"><div class="panel-header"><div><span class="panel-eyebrow">METHOD COMPARISON</span><h3>Output SNR by processing path</h3></div><span class="panel-number">dB ↑</span></div><div id="snr-chart" class="snr-chart"><div class="chart-empty">Run an experiment to see measured output SNR for every available method.</div></div><div class="chart-caption"><span><i></i> GROUND-TRUTH REFERENCED</span><span>HIGHER IS BETTER (dB)</span></div></div>
+          <div class="panel insights-panel"><div class="panel-header"><div><span class="panel-eyebrow">RUN DIAGNOSTICS</span><h3>What the data says</h3></div><svg class="insight-icon"><use href="#i-spark"/></svg></div><div class="insight-stat"><span>HYBRID SNR IMPROVEMENT</span><strong id="snr-delta">—<small> dB</small></strong><p id="snr-explain">Awaiting comparison against raw reference.</p></div><div class="stat-separator"></div><div class="insight-stat mini"><span>OBJECTIVE INTELLIGIBILITY (STOI)</span><strong id="stoi-result">—</strong><p>Requires a real speech recording for meaningful interpretation.</p></div><div class="insight-foot">Runtime represents <strong>offline host processing time</strong>, not microphone-to-receiver latency.</div></div></div>
+        <div class="panel table-panel"><div class="panel-header"><div><span class="panel-eyebrow">COMPLETE EXPERIMENT RECORD</span><h3>Method-by-method evidence</h3></div><span class="table-badge">SNR / STOI / PESQ / RTF</span></div><div class="table-scroller"><table><thead><tr><th>PROCESSING METHOD</th><th>OUTPUT SNR</th><th>STOI</th><th>PESQ</th><th>PROCESSING</th><th>REAL-TIME FACTOR</th></tr></thead><tbody id="metrics-body"><tr><td colspan="6" class="table-empty">No measurements yet. All metrics will be calculated from real output files.</td></tr></tbody></table></div></div>
+      </section>
+      <section id="history" class="section-block"><div class="section-head"><div><span class="section-index">[ 04 ] REPRODUCIBILITY LOG</span><h2>Experiment history<span class="title-dot">.</span></h2></div><button id="history-refresh" class="text-action"><svg><use href="#i-list"/></svg> REFRESH RUNS</button></div><div class="panel history-panel"><div id="history-content" class="history-content"><p class="empty-message">No recorded experiments. Each finished experiment is saved locally with its parameters and generated WAV outputs.</p></div></div></section>
+      <section id="datasets" class="section-block"><div class="section-head"><div><span class="section-index">[ 05 ] PUBLIC DATA SOURCES</span><h2>Dataset vault<span class="title-dot">.</span></h2></div><span class="section-hint">LICENSE-FIRST / SOURCED RESEARCH</span></div><div class="dataset-intro">Real-world benchmarking requires human speech, diverse noise, and synchronized microphone recordings. These sources are external; <strong>no recordings have been silently downloaded or redistributed.</strong></div><div id="dataset-cards" class="dataset-grid"></div></section>
+      <section id="system" class="section-block"><div class="section-head"><div><span class="section-index">[ 06 ] DEVELOPMENT TRANSPARENCY</span><h2>System diagnostics<span class="title-dot">.</span></h2></div><span class="section-hint">NO SIMULATED TELEMETRY</span></div><div class="system-grid"><div class="panel"><div class="panel-header"><div><span class="panel-eyebrow">AVAILABLE NOW</span><h3>Processor capabilities</h3></div></div><div id="capability-list" class="capability-list"></div></div><div class="panel"><div class="panel-header"><div><span class="panel-eyebrow">OPEN ENGINEERING WORK</span><h3>Not yet hardware-validated</h3></div></div><ul class="pending-list"><li><span class="pending-dot"></span> Actual synchronized two-mic recordings</li><li><span class="pending-dot"></span> Low-latency streaming / C++ port</li><li><span class="pending-dot"></span> Raspberry Pi CPU, RAM & temperature validation</li><li><span class="pending-dot"></span> Node A ↔ Node B communication link</li><li><span class="pending-dot"></span> Hardware end-to-end latency and safety testing</li></ul><div class="integrity-note">EVIDENCE INTEGRITY: Unmeasured fields remain unavailable. No artificial benchmark values are displayed.</div></div></div></section>
+      <footer class="footer"><strong>TRISHUL<span>VANI</span></strong><span>BUILT BY VOLTEDGE • RESEARCH PROTOTYPE / 2026</span><span>CLARITY THROUGH ENGINEERING.</span></footer>
+    </div>
+  </main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<audio id="audio-player" preload="none"></audio>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
