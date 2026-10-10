@@ -17,7 +17,7 @@
 > [!IMPORTANT]
 > **Research prototype.** No claims of certified real-time performance, speech recognition, hearing protection, tactical safety, secure voice communication, or completed Raspberry Pi deployment. Neural inference only runs when a genuine FFmpeg-compatible RNNoise model is configured; otherwise the UI explicitly displays a **spectral DSP fallback**. Synthetic voice is **not real speech**.
 
-## v0.2 Spectral Studio
+## Design 02 · v0.2 Spectral Studio
 
 Implemented: real STFT visualization, non-destructive attenuation/isolation, immutable source layers, previews, undo/redo, A/B playback, external WAV references, and WAV/JSON exports. The Python lab includes controlled experiments, NLMS, spectral gating, hybrid processing and measured metrics.
 
@@ -31,6 +31,21 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
 
 The GitHub Pages shell loads the complete Render application in an embedded workspace. The frontend calls FastAPI using same-origin `/api/...` routes inside that workspace, so uploads, STFT analysis, edits, experiment processing, history and exports are connected to the deployed Python service. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+### Visual experience and flow
+
+1. The public address opens on an original, sculpted trident and animated signal field. It enters the connected dashboard automatically after 8.5 seconds; the Enter button and Escape key can advance earlier.
+2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
+3. Design 02 adds a cinematic mint-and-neon-orange hero, expressive Oxanium type, signal-orbit motion, scroll reveals, cursor feedback, progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG, signal visual and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
+
+The public website and the backend are separate repositories/services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the entry shell on GitHub Pages, and this repository hosts the full app on Render. The source for the Pages shell is mirrored in [`deploy/pages/`](deploy/pages/).
+
+### Release and CI/CD
+
+- **Version 1:** connected intro, dashboard, editor, original trident and working audio pipeline. It was published before Design 02.
+- **Design 02:** presentation upgrade on the `feat/design-v2` branch, integrated into `main` after validation. DSP and API semantics remain v0.2 alpha.
+- GitHub Actions runs Python 3.11/3.12 API and DSP tests, JavaScript syntax/DSP tests, Design 02 asset checks and a Docker build on pushes and pull requests. The workflow is in [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+- Render builds this repository's `main` Docker image after CI checks pass. GitHub Pages publishes the public shell from `TrishulVani/trishulvani.github.io` `main` branch. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
 
 > [!NOTE]
 > Render's free service can take about a minute to wake. Hosted workspaces are separated by an unguessable secure browser cookie, but storage is temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
@@ -193,4 +208,4 @@ CODEX_MASTER_PROMPT.md  Task contract for Codex to finish software progressively
 
 ## Contributing + Git hygiene
 
-Every software milestone is committed separately with tests and documentation. See `CONTRIBUTING.md` and `CODEX_MASTER_PROMPT.md`. Do **not** commit third-party WAVs, models, datasets, tokens or unvalidated benchmark images. The current starter supplies the source code and local test evidence; **no GitHub repo has been chosen or pushed by this package**.
+Every software milestone is committed separately with tests and documentation. See `CONTRIBUTING.md` and `CODEX_MASTER_PROMPT.md`. Do **not** commit third-party WAVs, models, datasets, tokens or unvalidated benchmark images. The public repository is [`TrishulVani/trishul-vani-studio`](https://github.com/TrishulVani/trishul-vani-studio); design work is developed on feature branches and integrated into `main` after validation.

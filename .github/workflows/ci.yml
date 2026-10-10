@@ -37,7 +37,15 @@ jobs:
           node --version
           node --check web/app.js
           node --check web/studio.js
+          node --check web/design-v2.js
           node tests/dsp-core.test.cjs
+      - name: Verify Design 02 assets
+        run: |
+          test -s web/design-v2.css
+          test -s web/design-v2.js
+          test -s web/trident.svg
+          grep -q 'design-v2.css' web/index.html
+          grep -q 'design-v2.css' web/studio.html
       - name: Verify artifacts are excluded
         run: |
           git check-ignore artifacts/secret-test.wav
