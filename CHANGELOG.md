@@ -14,3 +14,9 @@
 - Honest data provenance, absence-of-truth metrics, actual-speaker import and paired microphone recording import.
 - Independent dataset evaluation CLI (input SHA-256 and license manifest) and automated DSP/API tests.
 - Container and GitHub Actions build configuration; architecture, verification and Codex continuation contract.
+
+- Added content-addressed local dataset registry, provenance validation and split-leak tests.
+
+
+- Added real STFT viewer, phase-preserving attenuation/isolation, immutable recipes, external WAV alignment and spectral workspace.
+

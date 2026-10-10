@@ -245,4 +245,8 @@ def diagnostics():
             'embedded_deployment':'not implemented'}
 
 
+from .registry import router as registry_router
+from .spectral import router as spectral_router
+app.include_router(registry_router)
+app.include_router(spectral_router)
 app.mount('/',StaticFiles(directory=BASE/'web',html=True),name='web')
