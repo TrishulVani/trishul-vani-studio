@@ -17,3 +17,6 @@
 
 - Added content-addressed local dataset registry, provenance validation and split-leak tests.
 
+
+- Added real STFT viewer, phase-preserving attenuation/isolation, immutable recipes, external WAV alignment and spectral workspace.
+
