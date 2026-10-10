@@ -27,3 +27,5 @@ Starter baseline: 9 tests passed on Python 3.12.14 / Windows. JavaScript syntax 
 
 ## 2026-10-11 public hosting
 17 Python tests and browser DSP identity/band/FFT/WAV tests passed; JS syntax passed. PR #7 merged at de9342b with Python 3.11/3.12 and Docker CI green. User chose GitHub Pages and Render; Sites was abandoned before publication. Release 519be97 pushed. Final deployment/CI verification follows.
+
+Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Docker on main/release branch). Browser DSP is now included in CI. Uploaded-audio cross-visitor isolation test passed. GitHub Pages entry pushed at 6afbac3. Render deployment in progress.

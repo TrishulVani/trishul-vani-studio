@@ -36,6 +36,8 @@ jobs:
         run: |
           node --version
           node --check web/app.js
+          node --check web/studio.js
+          node tests/dsp-core.test.cjs
       - name: Verify artifacts are excluded
         run: |
           git check-ignore artifacts/secret-test.wav
