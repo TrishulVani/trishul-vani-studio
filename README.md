@@ -4,9 +4,13 @@
 
 **Adaptive Speech Enhancement · Dual-Microphone DSP · Reproducible Research**
 
-`VOLTEDGE ENGINEERING / SOFTWARE RESEARCH WORKBENCH / ALPHA 0.1`
+`VOLTEDGE ENGINEERING / SOFTWARE RESEARCH WORKBENCH / ALPHA 0.2`
 
-**Local-first audio laboratory with an interactive dashboard, real processing engine, repeatable experiment records, auditable metrics, and automated tests.**
+**A connected spectral studio and speech-enhancement research laboratory with real processing, reproducible records, auditable metrics, and automated tests.**
+
+[![Live Studio](https://img.shields.io/badge/LIVE_STUDIO-trishulvani.github.io-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishulvani.github.io/)
+[![Python CI](https://img.shields.io/github/actions/workflow/status/TrishulVani/trishul-vani-studio/ci.yml?style=for-the-badge&label=TESTS)](https://github.com/TrishulVani/trishul-vani-studio/actions)
+[![Source](https://img.shields.io/badge/SOURCE-PUBLIC-82b98b?style=for-the-badge&labelColor=080e10)](https://github.com/TrishulVani/trishul-vani-studio)
 
 </div>
 
@@ -17,7 +21,19 @@
 
 Implemented: real STFT visualization, non-destructive attenuation/isolation, immutable source layers, previews, undo/redo, A/B playback, external WAV references, and WAV/JSON exports. The Python lab includes controlled experiments, NLMS, spectral gating, hybrid processing and measured metrics.
 
-Public deployment uses GitHub Pages for the entry address and Render for the Python application. See `docs/DEPLOYMENT.md`. Free hosting sleeps when idle and temporary audio is lost on restart: export your results.
+### Open the working application
+
+| Destination | URL | Purpose |
+|---|---|---|
+| Public product | **https://trishulvani.github.io/** | Animated Trishul intro and the connected studio |
+| Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
+| Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
+| API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
+
+The GitHub Pages shell loads the complete Render application in an embedded workspace. The frontend calls FastAPI using same-origin `/api/...` routes inside that workspace, so uploads, STFT analysis, edits, experiment processing, history and exports are connected to the deployed Python service. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+> [!NOTE]
+> Render's free service can take about a minute to wake. Hosted workspaces are separated by an unguessable secure browser cookie, but storage is temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
 
 ## What is working now
 
@@ -58,7 +74,7 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 Then open **http://127.0.0.1:8000**. Interactive REST API docs: **http://127.0.0.1:8000/docs** (FastAPI docs route is registered before the static mount). No JavaScript build step, npm subscription, paid API key, database server, or cloud account required. Fonts use online enhancement *only when reachable*, with system fallbacks.
 
-On a different local network device, expose deliberately and **add authentication before any public deployment**. The prototype is not a hardened multi-user service.
+For private durable storage or sensitive recordings, run the application locally. The public service is a bounded research demonstration, not a durable multi-user archive.
 
 ### Docker (optional)
 
@@ -123,7 +139,8 @@ A valid model enables **RNNoise** as a *separate* fifth method and changes the h
 
 ```mermaid
 flowchart LR
-    A[Web lab / UI] -->|JSON, WAV upload| B[FastAPI]
+    P[trishulvani.github.io<br/>intro + public entry] --> A[Hosted web lab / UI]
+    A -->|same-origin JSON + WAV| B[Render FastAPI service]
     B --> C[Dataset mixer / two-mic ingest]
     C --> D[NLMS reference baseline]
     C --> E[Spectral baseline]
@@ -135,7 +152,7 @@ flowchart LR
     E --> I
     F --> I
     H --> I
-    I --> J[Local artifact store]
+    I --> J[Visitor-isolated temporary store]
     J -->|WAV, CSV, history, trace| A
     K[(LibriSpeech / DEMAND / CC0 clips)] -. local, user-supplied .-> C
 ```
