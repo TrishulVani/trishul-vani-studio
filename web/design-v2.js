@@ -1,5 +1,13 @@
 /* Lightweight interactions for Design 02; no framework or tracking. */
 (() => {
+  if (new URLSearchParams(location.search).get('design') !== '2') return;
+  document.querySelectorAll('img[src*="/trident.svg"]').forEach(image => {
+    image.src = '/trident-v2.svg?v=design2copper';
+  });
+  const buildLabel = document.querySelector('.alpha');
+  if (buildLabel?.lastChild?.nodeType === Node.TEXT_NODE) buildLabel.lastChild.textContent = ' DESIGN 02 / SIGNAL RESEARCH';
+  const sidebarCredit = document.querySelector('.sidebar-credit');
+  if (sidebarCredit) sidebarCredit.textContent = 'VOLTEDGE • 2026 • DESIGN 02 / v0.2 ALPHA';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const progress = document.createElement('div');
   progress.className = 'v2-progress';
@@ -75,7 +83,12 @@
     if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
     const url = new URL(link.href);
     if (url.origin !== location.origin || url.pathname === location.pathname || !url.pathname.endsWith('.html')) return;
-    if (reduce) return;
+    url.searchParams.set('design', '2');
+    if (reduce) {
+      event.preventDefault();
+      location.assign(url.href);
+      return;
+    }
     event.preventDefault();
     transition.classList.add('is-active');
     setTimeout(() => location.assign(url.href), 380);

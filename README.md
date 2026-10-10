@@ -17,7 +17,7 @@
 > [!IMPORTANT]
 > **Research prototype.** No claims of certified real-time performance, speech recognition, hearing protection, tactical safety, secure voice communication, or completed Raspberry Pi deployment. Neural inference only runs when a genuine FFmpeg-compatible RNNoise model is configured; otherwise the UI explicitly displays a **spectral DSP fallback**. Synthetic voice is **not real speech**.
 
-## Design 02 · v0.2 Spectral Studio
+## Two live designs · one connected v0.2 engine
 
 Implemented: real STFT visualization, non-destructive attenuation/isolation, immutable source layers, previews, undo/redo, A/B playback, external WAV references, and WAV/JSON exports. The Python lab includes controlled experiments, NLMS, spectral gating, hybrid processing and measured metrics.
 
@@ -25,27 +25,28 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 | Destination | URL | Purpose |
 |---|---|---|
-| Public product | **https://trishulvani.github.io/** | Sculpted trident intro, then the connected landing dashboard and studio |
+| Version 1 | **https://trishulvani.github.io/** | Original mint visual system and intro, then the connected dashboard and studio |
+| Design 02 | **https://trishulvani.github.io/design-v2/** | Separate graphite/ivory/ultraviolet experience with a copper trident and topic-specific microphone imagery |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
 
-The GitHub Pages shell loads the complete Render application in an embedded workspace. The frontend calls FastAPI using same-origin `/api/...` routes inside that workspace, so uploads, STFT analysis, edits, experiment processing, history and exports are connected to the deployed Python service. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+Both GitHub Pages entries load the complete Render application in an embedded workspace. The default backend URL serves Version 1; `?design=2` selects Design 02 without changing API behavior. The frontend calls FastAPI using same-origin `/api/...` routes inside that workspace, so uploads, STFT analysis, edits, experiment processing, history and exports are connected to the deployed Python service. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ### Visual experience and flow
 
 1. The public address opens on an original, sculpted trident and animated signal field. It enters the connected dashboard automatically after 8.5 seconds; the Enter button and Escape key can advance earlier.
 2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
-3. Design 02 adds a cinematic graphite, warm-ivory and neon-orange hero with restrained ultraviolet accents, expressive Oxanium type, signal-orbit motion, scroll reveals, cursor feedback, progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG, signal visual and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
+3. Design 02 lives at its own address. It adds a cinematic graphite, warm-ivory, copper and ultraviolet hero, original dual-microphone signal imagery, expressive Oxanium type, scroll reveals, cursor feedback, progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
 
 The public website and the backend are separate repositories/services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the entry shell on GitHub Pages, and this repository hosts the full app on Render. The source for the Pages shell is mirrored in [`deploy/pages/`](deploy/pages/).
 
 ### Release and CI/CD
 
-- **Version 1:** connected intro, dashboard, editor, original trident and working audio pipeline. It was published before Design 02.
-- **Design 02:** presentation upgrade on the `feat/design-v2` branch, integrated into `main` after validation. DSP and API semantics remain v0.2 alpha.
+- **Version 1:** the original mint intro, typography, dashboard and editor remain at the root address.
+- **Design 02:** a separate `/design-v2/` website path and opt-in `?design=2` backend presentation. The work was developed on the `feat/design-v2` branch. Both designs use the same v0.2 alpha DSP and API.
 - GitHub Actions runs Python 3.11/3.12 API and DSP tests, JavaScript syntax/DSP tests, Design 02 asset checks and a Docker build on pushes and pull requests. The workflow is in [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
-- Render builds this repository's `main` Docker image after CI checks pass. GitHub Pages publishes the public shell from `TrishulVani/trishulvani.github.io` `main` branch. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
+- Render automatically builds this repository's `main` Docker image on every new commit. Feature-branch CI is checked before merging; main CI runs alongside deployment and does not gate it. GitHub Pages publishes the public shell from `TrishulVani/trishulvani.github.io` `main` branch. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
 
 > [!NOTE]
 > Render's free service can take about a minute to wake. Hosted workspaces are separated by an unguessable secure browser cookie, but storage is temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.

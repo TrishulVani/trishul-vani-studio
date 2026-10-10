@@ -95,3 +95,13 @@ body.design-v2 #toast,body.design-v2 dialog{background:#241922;border-color:#8b5
 body.design-v2 .primary,body.design-v2 .play{background:#ff7848;border-color:#ffb083;color:#1c1010}
 body.design-v2 .v2-transition{background:radial-gradient(circle at center,#5a2936,#241521 45%,#09090e 84%)}
 body.design-v2 .v2-transition:after{color:#ffe4ce;text-shadow:0 0 35px #ff784880}
+body.design-v2 .hero{background-image:linear-gradient(90deg,#0b0a12 0%,#0d0b16e8 34%,#13101a91 62%,#14101a1a 100%),url('/assets/signal-microphones-v2.webp');background-size:cover;background-position:center 51%;border-color:#5a4357}
+body.design-v2 .hero-art{display:none}
+body.design-v2 .hero-main{width:min(70%,850px)}
+body.design-v2 .hero:before{background:linear-gradient(120deg,transparent 44%,#bba5ff1e 50%,transparent 56%);background-size:250% 100%;animation:v2-sheen 12s ease-in-out infinite;mask-image:none;opacity:.65}
+body.design-v2 .hero h1 em{color:#c8b2ff;text-shadow:0 0 34px #a888ee70}
+body.design-v2 .hero:after{background:linear-gradient(90deg,#ff8051,#a989ed,#8ebaff,transparent)}
+body.design-v2 .metric-card .mini-index:nth-child(odd),body.design-v2 .section-index{color:#c6adff}
+@keyframes v2-sheen{0%,35%{background-position:130% 0}70%,100%{background-position:-130% 0}}
+@media(max-width:700px){body.design-v2 .hero{min-height:690px;background-position:61% center}body.design-v2 .hero-main{width:100%;padding:250px 22px 30px}body.design-v2 .hero h1{font-size:clamp(43px,11vw,67px)}body.design-v2 .hero p{color:#f0dfe5}}
+@media(prefers-reduced-motion:reduce){body.design-v2 .hero:before{animation:none}}

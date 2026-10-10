@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/design-v2.css">
 </head>
-<body class="design-v2">
+<body><script>if(new URLSearchParams(location.search).get('design')==='2')document.body.classList.add('design-v2')</script>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 12h2l2-7 4 14 4-14 4 14 2-7h2"/></symbol>
@@ -30,7 +30,7 @@
 </svg>
 <div class="app-shell">
   <aside class="sidebar" aria-label="Main navigation">
-    <a href="#overview" class="brand"><img class="brand-symbol" src="/trident.svg?v=design2copper" alt=""><span><strong>TRISHUL<span class="brand-thin">VANI</span></strong><small>RESEARCH WORKBENCH</small></span></a>
+    <a href="#overview" class="brand"><img class="brand-symbol" src="/trident.svg?v=theme2mint" alt=""><span><strong>TRISHUL<span class="brand-thin">VANI</span></strong><small>RESEARCH WORKBENCH</small></span></a>
     <div class="sidebar-group-title">WORKSPACE <span>01 / 04</span></div>
     <nav class="nav-items">
       <a class="nav-item active" href="#overview"><svg><use href="#i-grid"/></svg><span>Overview</span><span class="nav-current"></span></a>
@@ -47,9 +47,9 @@
       <div class="side-icon"><svg><use href="#i-spark"/></svg></div>
       <p>ENGINEERING PREVIEW</p><strong>Build. Measure. Verify.</strong>
       <span>Evidence before claims. Every result is reproducible.</span>
-      <a href="#system">View system status <img class="action-trident" src="/trident.svg?v=design2copper" alt=""></a>
+      <a href="#system">View system status <img class="action-trident" src="/trident.svg?v=theme2mint" alt=""></a>
     </div>
-    <div class="sidebar-credit">VOLTEDGE <span>•</span> 2026 <span>•</span> DESIGN 02 / v0.2 ALPHA</div>
+    <div class="sidebar-credit">VOLTEDGE <span>•</span> 2026 <span>•</span> v0.1 ALPHA</div>
   </aside>
   <main class="main" id="overview">
     <header class="topbar">
@@ -60,23 +60,23 @@
       <div class="page-kicker"><span class="kicker-line"></span> SIGNAL ENHANCEMENT / LABORATORY OS <span class="count-index">[ 001 — 006 ]</span></div>
       <section class="hero">
         <div class="hero-main">
-          <div class="alpha"><span class="alpha-square"></span> DESIGN 02 / SIGNAL RESEARCH</div>
+          <div class="alpha"><span class="alpha-square"></span> RESEARCH BUILD • SOFTWARE VALIDATION</div>
           <h1>Clarity under <em>pressure.</em></h1>
           <p>Adaptive dual-microphone speech enhancement. Create controlled noise conditions, inspect every stage of the pipeline, and defend each result with reproducible evidence.</p>
-          <div class="hero-actions"><a href="#audio-lab" class="primary-btn"><svg><use href="#i-wave"/></svg> Launch audio experiment <img class="action-trident" src="/trident.svg?v=design2copper" alt=""></a><a href="#analytics" class="ghost-btn">Explore results <img class="action-trident" src="/trident.svg?v=design2copper" alt=""></a></div>
+          <div class="hero-actions"><a href="#audio-lab" class="primary-btn"><svg><use href="#i-wave"/></svg> Launch audio experiment <img class="action-trident" src="/trident.svg?v=theme2mint" alt=""></a><a href="#analytics" class="ghost-btn">Explore results <img class="action-trident" src="/trident.svg?v=theme2mint" alt=""></a></div>
           <div class="hero-footer"><span class="tiny-circle"></span> NEURAL STAGE: <strong id="hero-ai-state">CHECKING</strong><span class="hero-divider"></span><span>16 KHZ INTERNAL PIPELINE</span></div>
         </div>
         <div class="hero-art" aria-hidden="true">
           <div class="orbit orbit-outer"></div><div class="orbit orbit-mid"></div><div class="orbit orbit-inner"></div><div class="beam beam-a"></div><div class="beam beam-b"></div>
-          <div class="visual-core"><img class="core-symbol" src="/trident.svg?v=design2copper" alt=""></div>
+          <div class="visual-core"><img class="core-symbol" src="/trident.svg?v=theme2mint" alt=""></div>
           <span class="orbital-label top-label">DSP / 16.0 KHz</span><span class="orbital-label lower-label">SIGNAL PROCESSED / 001</span>
           <div class="orbit-dot dot-one"></div><div class="orbit-dot dot-two"></div>
         </div>
       </section>
       <div class="quick-metrics" aria-label="System overview">
-        <article class="metric-card"><span class="mini-index">01 / PIPELINE</span><div class="metric-line"><strong>04<span class="metric-sub">+ optional AI</span></strong><img class="metric-trident" src="/trident.svg?v=design2copper" alt=""></div><small>Processing paths</small><div class="metric-micro">RAW · NLMS · SPECTRAL · HYBRID</div></article>
+        <article class="metric-card"><span class="mini-index">01 / PIPELINE</span><div class="metric-line"><strong>04<span class="metric-sub">+ optional AI</span></strong><img class="metric-trident" src="/trident.svg?v=theme2mint" alt=""></div><small>Processing paths</small><div class="metric-micro">RAW · NLMS · SPECTRAL · HYBRID</div></article>
         <article class="metric-card"><span class="mini-index">02 / AUDIO ENGINE</span><div class="metric-line"><strong>16<span class="unit">kHz</span></strong><span class="metric-arrow">⌁</span></div><small>Internal sample rate</small><div class="metric-micro">FRAME-BASED DSP / 10 MS</div></article>
-        <article class="metric-card"><span class="mini-index">03 / DATA RECORDS</span><div class="metric-line"><strong id="experiment-count">00</strong><img class="metric-trident" src="/trident.svg?v=design2copper" alt=""></div><small>Saved experiment runs</small><div class="metric-micro">LOCAL • FULLY REPRODUCIBLE</div></article>
+        <article class="metric-card"><span class="mini-index">03 / DATA RECORDS</span><div class="metric-line"><strong id="experiment-count">00</strong><img class="metric-trident" src="/trident.svg?v=theme2mint" alt=""></div><small>Saved experiment runs</small><div class="metric-micro">LOCAL • FULLY REPRODUCIBLE</div></article>
         <article class="metric-card"><span class="mini-index">04 / READINESS</span><div class="metric-line"><strong class="metric-readiness">ALPHA</strong><span class="metric-arrow">◇</span></div><small>Offline software prototype</small><div class="metric-micro">HARDWARE NOT VALIDATED</div></article>
       </div>
       <section id="audio-lab" class="section-block">
@@ -97,13 +97,13 @@
             <div class="range-ends"><span>-15 dB · VERY NOISY</span><span>+20 dB · CLEANER</span></div>
             <div class="split-fields"><div><label for="duration">Duration <span>SEC</span></label><select id="duration"><option value="1.5">1.5 seconds</option><option value="3" selected>3 seconds</option><option value="5">5 seconds</option><option value="8">8 seconds</option></select></div><div><label for="seed">Random seed <span>REPRODUCIBILITY</span></label><input id="seed" type="number" min="0" max="2147483647" value="42"></div></div>
             <div class="lab-notice"><svg><use href="#i-info"/></svg><span>Default voice is a <strong>synthetic formant-like tone</strong>, not human speech. Upload real speech for meaningful intelligibility evaluation.</span></div>
-            <button id="run-btn" class="run-button"><span class="run-pulse"></span><span id="run-text">Run signal analysis</span><img class="action-trident" src="/trident.svg?v=design2copper" alt=""></button>
+            <button id="run-btn" class="run-button"><span class="run-pulse"></span><span id="run-text">Run signal analysis</span><img class="action-trident" src="/trident.svg?v=theme2mint" alt=""></button>
             <div class="upload-divider"><span>OR EXPERIMENT WITH REAL AUDIO</span></div>
             <form id="upload-form" class="upload-form">
               <div class="upload-grid"><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Clean speech WAV / FLAC</span><input name="clean" type="file" accept=".wav,.flac,audio/wav,audio/flac" required></label><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Environmental noise WAV / FLAC</span><input name="noise" type="file" accept=".wav,.flac,audio/wav,audio/flac" required></label></div>
-              <button type="submit" id="upload-btn" class="secondary-btn">Analyze uploaded audio <img class="action-trident" src="/trident.svg?v=design2copper" alt=""></button>
+              <button type="submit" id="upload-btn" class="secondary-btn">Analyze uploaded audio <img class="action-trident" src="/trident.svg?v=theme2mint" alt=""></button>
             </form>
-            <details class="dual-mic"><summary>Have synchronized dual-mic WAV files? <span>OPEN CAPTURE IMPORT ▾</span></summary><form id="dual-form"><p>Upload paired primary and ambient mic recordings of equal length. With no clean reference, objective SNR/STOI/PESQ will be marked unavailable.</p><div class="upload-grid"><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Primary microphone WAV</span><input name="primary" type="file" accept=".wav,.flac" required></label><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Reference microphone WAV</span><input name="reference" type="file" accept=".wav,.flac" required></label></div><button type="submit" id="dual-btn" class="secondary-btn">Process two-mic recording <img class="action-trident" src="/trident.svg?v=design2copper" alt=""></button></form></details>
+            <details class="dual-mic"><summary>Have synchronized dual-mic WAV files? <span>OPEN CAPTURE IMPORT ▾</span></summary><form id="dual-form"><p>Upload paired primary and ambient mic recordings of equal length. With no clean reference, objective SNR/STOI/PESQ will be marked unavailable.</p><div class="upload-grid"><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Primary microphone WAV</span><input name="primary" type="file" accept=".wav,.flac" required></label><label class="file-upload"><svg><use href="#i-upload"/></svg><span>Reference microphone WAV</span><input name="reference" type="file" accept=".wav,.flac" required></label></div><button type="submit" id="dual-btn" class="secondary-btn">Process two-mic recording <img class="action-trident" src="/trident.svg?v=theme2mint" alt=""></button></form></details>
           </div>
           <div class="panel result-panel">
             <div class="panel-header"><div><span class="panel-eyebrow">SIGNAL INSPECTION</span><h3>Listen to the difference</h3></div><span id="run-tag" class="live-tag">NO EXPERIMENT</span></div>
