@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: trishul-vani-api
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    healthCheckPath: /api/health
+    envVars:
+      - key: TRISHUL_PUBLIC_HOSTING
+        value: "1"
+      - key: TRISHUL_HOST_DATA
+        value: /tmp/trishul

@@ -20,4 +20,5 @@ node_modules/
 *.rnnn
 !tests/fixtures/*.wav
 data/
+dist/
 *.swp
