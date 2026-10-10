@@ -25,7 +25,7 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 | Destination | URL | Purpose |
 |---|---|---|
-| Public product | **https://trishulvani.github.io/** | Animated Trishul intro and the connected studio |
+| Public product | **https://trishulvani.github.io/** | Sculpted trident intro, then the connected landing dashboard and studio |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
