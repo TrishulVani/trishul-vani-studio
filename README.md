@@ -13,9 +13,11 @@
 > [!IMPORTANT]
 > **Research prototype.** No claims of certified real-time performance, speech recognition, hearing protection, tactical safety, secure voice communication, or completed Raspberry Pi deployment. Neural inference only runs when a genuine FFmpeg-compatible RNNoise model is configured; otherwise the UI explicitly displays a **spectral DSP fallback**. Synthetic voice is **not real speech**.
 
-## v0.2 Spectral Studio plan (NOT YET IMPLEMENTED)
+## v0.2 Spectral Studio
 
-A comprehensive Codex-first build contract has been added for a real, editable spectral audio lab and manual SpectraLayers export comparison. **These are planned features, not existing functionality**. See [`docs/SPECTRAL_STUDIO_SPEC.md`](docs/SPECTRAL_STUDIO_SPEC.md), [`docs/PORTAL_UI_UX.md`](docs/PORTAL_UI_UX.md), [`docs/PORTAL_REEL_INTAKE.md`](docs/PORTAL_REEL_INTAKE.md) and [`docs/CODEX_TASK_PROMPTS.md`](docs/CODEX_TASK_PROMPTS.md). The portal reel was mentioned but not provided; do not claim features observed from it. Current visual baseline screenshots are under `docs/references/`.
+Implemented: real STFT visualization, non-destructive attenuation/isolation, immutable source layers, previews, undo/redo, A/B playback, external WAV references, and WAV/JSON exports. The Python lab includes controlled experiments, NLMS, spectral gating, hybrid processing and measured metrics.
+
+Public deployment uses GitHub Pages for the entry address and Render for the Python application. See `docs/DEPLOYMENT.md`. Free hosting sleeps when idle and temporary audio is lost on restart: export your results.
 
 ## What is working now
 

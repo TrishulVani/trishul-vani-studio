@@ -24,3 +24,6 @@ Starter baseline: 9 tests passed on Python 3.12.14 / Windows. JavaScript syntax 
 ## Spectral Studio A/B/C implementation
 16 tests pass, including identity at odd lengths, selected-band suppression, deterministic recipes, source immutability, audio export and external-reference N/A handling. Browser imported the 4-second original test signal and applied an edit; measured RMS changed from 0.1605 to 0.0680. Health and /docs returned HTTP 200. Added responsive workspace; browser QA continues. No proprietary integration or real RNNoise claimed.
 
+
+## 2026-10-11 public hosting
+17 Python tests and browser DSP identity/band/FFT/WAV tests passed; JS syntax passed. PR #7 merged at de9342b with Python 3.11/3.12 and Docker CI green. User chose GitHub Pages and Render; Sites was abandoned before publication. Release 519be97 pushed. Final deployment/CI verification follows.

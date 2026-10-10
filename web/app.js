@@ -31,7 +31,7 @@ function drawWaveform(values=[]) {
   for(let x=0;x<w;x+=34){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
   for(let y=0;y<h;y+=34){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
   ctx.strokeStyle='rgba(184,246,178,.33)';ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
-  let waves=values.length?values: Array.from({length:190},(_,i)=>(.05+.022*Math.sin(i*.28))*Math.abs(Math.sin(i*.42)));
+  let waves=values.length?values: [];
   let high=Math.max(.03,Math.max(...waves))*1.22;
   let gradient=ctx.createLinearGradient(0,0,0,h);gradient.addColorStop(0,'#b8f6b2');gradient.addColorStop(.5,'#5acaa0');gradient.addColorStop(1,'#b8f6b2');
   ctx.strokeStyle=gradient;ctx.lineWidth=Math.max(1.4,w/waves.length*.45);ctx.shadowColor='#aaffc4';ctx.shadowBlur=7;ctx.beginPath();

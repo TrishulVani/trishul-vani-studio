@@ -20,3 +20,6 @@
 
 - Added real STFT viewer, phase-preserving attenuation/isolation, immutable recipes, external WAV alignment and spectral workspace.
 
+
+## Public hosting
+Added isolated Python workspaces, Render configuration, tested browser DSP, and corrected the Spectral Studio status.
