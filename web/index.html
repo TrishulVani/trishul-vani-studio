@@ -8,7 +8,8 @@
   <title>TRISHUL VANI / Signal Intelligence</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/design-v2.css?v=20261011e">
+  <link rel="stylesheet" href="/design-v2.css?v=20261011f">
+  <link rel="stylesheet" href="/relaunch-v2.css?v=2">
 <link rel="stylesheet" href="/tour.css"></head>
 <body><script>if(new URLSearchParams(location.search).get('design')==='2')document.body.classList.add('design-v2')</script>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -56,11 +57,24 @@
       <div class="breadcrumbs"><span>WORKSPACE</span><span class="slash">/</span><strong>MISSION CONTROL</strong></div>
       <div class="topbar-right"><span class="status-pill"><i></i><span id="processor-status">CONNECTING TO PROCESSOR</span></span><button id="retry-connection" type="button" hidden>Retry connection</button><span class="today" id="date-label"></span><span class="user-avatar" aria-label="VoltEdge engineering">V</span></div>
     </header>
+    <section class="v2-cinema" id="v2-cinema" aria-label="Immersive signal journey">
+      <div class="v2-cinema-stage">
+        <div class="v2-cinema-counter" aria-hidden="true"><span>TRISHUL VANI / SIGNAL JOURNEY</span><span id="v2-cinema-count">01 — 06</span></div>
+        <div class="v2-cinema-copy v2-cinema-opening" data-chapter="0"><span class="v2-cinema-eyebrow">AN ORIGINAL AUDIO ENGINEERING EXPERIENCE</span><h1>Hear what<br><em>matters.</em></h1><p>In demanding acoustic environments, speech and interference arrive together. Move through the signal before you enter the working laboratory.</p><div class="v2-cinema-actions"><a href="#audio-lab">Open the audio lab</a><a href="#v2-cinema" class="v2-cinema-scroll-link">Scroll to explore</a></div></div>
+        <div class="v2-cinema-window" aria-hidden="true"><canvas id="v2-cinema-field"></canvas><div class="v2-cinema-depth"><img class="v2-cinema-trident" src="/mark-v2.svg" alt=""><div class="v2-cinema-node v2-cinema-primary"><span></span><small>PRIMARY / SPEECH + NOISE</small></div><div class="v2-cinema-node v2-cinema-reference"><span></span><small>REFERENCE / AMBIENT</small></div><div class="v2-cinema-route">NLMS <i></i> SPECTRAL DSP <i></i> OUTPUT</div><img class="v2-cinema-aircraft" src="/assets/flying-wing-shadow-v2.svg" alt=""><div class="v2-cinema-sonar"></div><div class="v2-cinema-sea"></div><div class="v2-cinema-terrain"></div></div><span class="v2-cinema-window-label">ILLUSTRATIVE SOUND FIELD / WORKING AUDIO IN LAB</span></div>
+        <div class="v2-cinema-copy v2-cinema-caption" data-chapter="1"><span class="v2-cinema-eyebrow">01 / TWO MICROPHONES</span><h2>One voice.<br>Two views.</h2><p>The primary microphone hears speech with noise. The reference hears the environment. The adaptive stage compares them.</p></div>
+        <div class="v2-cinema-copy v2-cinema-caption" data-chapter="2"><span class="v2-cinema-eyebrow">02 / GROUND</span><h2>Steady<br>interference.</h2><p>Persistent hum gives the adaptive filter time to converge. This is a concept scene, not a service recording.</p></div>
+        <div class="v2-cinema-copy v2-cinema-caption" data-chapter="3"><span class="v2-cinema-eyebrow">03 / SEA</span><h2>Nothing<br>stays still.</h2><p>Wind and ambient energy shift. The processor must keep updating its estimate without swallowing speech.</p></div>
+        <div class="v2-cinema-copy v2-cinema-caption" data-chapter="4"><span class="v2-cinema-eyebrow">04 / AIR</span><h2>When the<br>impulse hits.</h2><p>A short transient calls for adaptation control. The aircraft shadow is an abstract visual, not a validated platform.</p></div>
+        <div class="v2-cinema-copy v2-cinema-caption" data-chapter="5"><span class="v2-cinema-eyebrow">05 / TEST THE PATH</span><h2>Now make<br>it measurable.</h2><p>Run the real processor, listen to each stage, inspect the signal, and export a reproducible experiment.</p><a class="v2-cinema-lab-link" href="#audio-lab">Enter the working lab</a></div>
+        <div class="v2-cinema-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
     <div class="content">
       <div class="page-kicker"><span class="kicker-line"></span> SIGNAL ENHANCEMENT / LABORATORY OS <span class="count-index">[ 001 — 006 ]</span></div>
       <section class="hero">
         <canvas class="v2-dashboard-field" aria-hidden="true"></canvas>
-        <div class="v2-floating-rig" aria-hidden="true"><div class="rig-halo"></div><img class="rig-mic rig-mic-a" src="/assets/microphone-v2.svg" alt=""><img class="rig-mic rig-mic-b" src="/assets/microphone-v2.svg" alt=""><span class="rig-wave rig-wave-a"></span><span class="rig-wave rig-wave-b"></span><span class="rig-caption">DUAL INPUT / ADAPTIVE OUTPUT</span></div>
+        <div class="v2-floating-rig" aria-hidden="true"><div class="rig-halo"></div><div class="rig-node rig-node-primary"><span></span><small>PRIMARY</small></div><div class="rig-node rig-node-reference"><span></span><small>REFERENCE</small></div><span class="rig-wave rig-wave-a"></span><span class="rig-wave rig-wave-b"></span><span class="rig-caption">DUAL INPUT / ADAPTIVE OUTPUT</span></div>
         <div class="hero-main">
           <div class="alpha"><span class="alpha-square"></span> RESEARCH BUILD • SOFTWARE VALIDATION</div>
           <h1>Clarity under <em>pressure.</em></h1>
@@ -139,6 +153,7 @@
 <div id="toast" role="status" aria-live="polite"></div>
 <audio id="audio-player" preload="none"></audio>
 <script type="module" src="/app.js"></script>
-<script defer src="/design-v2.js?v=20261011e"></script>
+<script defer src="/design-v2.js?v=20261011f"></script>
+<script defer src="/relaunch-v2.js?v=1"></script>
 <script defer src="/tour.js"></script></body>
 </html>

@@ -8,6 +8,10 @@
 
 ## Immersive Version 2 candidate — 2026-10-11
 
+- Rebuilt the current V2 candidate around a dark violet-and-silver introduction and landing. An original sculpted trident moves through a reactive sound field, approaches the viewer, and enters the connected app automatically; Skip and Escape work immediately. The landing now scrolls through four sound-processing chapters before the real laboratory. Browser validation: 27/27 desktop, tablet and mobile checks passed, including Version 1 regression, connected lab and spectral editor.
+
+- Replaced the V2 landing composition with a pinned, scroll-linked acoustic narrative that expands from an editorial trident window into a full-screen field, then moves through labelled primary/reference processing nodes and ground/sea/air conditions before the actual lab. Removed microphone product renders from V2; deferred the first-visit tour suggestion until the visitor reaches the lab. Six-scene entrance, DSP, Spectral Studio and Version 1 remain available. Playwright: 21/21 locally across 1440/768/390 px.
+
 - Reworked the main story chapters into a spatial editorial layout with sticky copy, moving microphone rig, large scroll-driven sound cards, portal rings, and an original illustrative flying-wing shadow. Added a trident launch transition from story to lab. Rebuilt the Design 02 dashboard hero around floating dual microphones and a cursor-responsive acoustic membrane, with staggered metric cards and large chapter typography. No third-party imagery or code was copied. Browser suite: 21/21 passed locally across desktop, tablet, and mobile.
 
 - Added a pointer-responsive, canvas-rendered sound field to the intro, with eased water-like ripples and reduced-motion/static and offscreen-pause behavior. Introduced scroll/pointer-responsive acoustic condition cards and original microphone concept artwork in the comparison panel. Ground, sea and air are explicitly illustrative settings, not recorded or validated service conditions.

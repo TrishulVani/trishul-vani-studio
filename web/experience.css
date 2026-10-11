@@ -119,3 +119,8 @@ body{background:var(--bg)}
 #story .hero-object img{height:100%;width:100%;filter:drop-shadow(0 50px 60px #000) drop-shadow(0 0 100px #8ea9ff55)}
 #story .hero .scroll-cue{left:auto;right:6vw;transform:none}
 }
+/* The research story visualizes microphone roles as signal origins, without product renders. */
+.split:before,.instrument-poster:before{background-image:repeating-radial-gradient(ellipse at 70% 55%,transparent 0 30px,#a8bbff3d 31px 32px,transparent 33px 72px)!important;filter:none!important}
+.floating-source{position:absolute;width:35%;aspect-ratio:1;border:1px solid #bdcbff99;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#9db2ff32,transparent 67%);box-shadow:0 0 0 20px #a8bbff09,0 0 0 55px #a8bbff05;transform:translateY(var(--source-shift,0px));transition:transform .15s linear}.source-primary{left:12%;top:10%;--source-shift:var(--float-a,0px)}.source-reference{right:9%;top:27%;width:30%;--source-shift:var(--float-b,0px)}.floating-source:before,.floating-source:after{content:'';position:absolute;inset:15%;border:1px dashed #cbd5ff7b;border-radius:50%}.floating-source:after{inset:30%;border-style:solid}.floating-source span{width:18%;aspect-ratio:1;background:#d5deff;border-radius:50%;box-shadow:0 0 30px #b9c9ff}.floating-source small{position:absolute;top:calc(100% + 22px);white-space:nowrap;font:700 clamp(8px,.75vw,11px) var(--body);letter-spacing:.15em;color:#dce4ff}
+@media(max-width:650px){.floating-source{width:36%}.source-reference{width:31%}.floating-source small{font-size:7px;letter-spacing:.04em}}
+@media(prefers-reduced-motion:reduce){.floating-source{transform:none;transition:none}}
