@@ -19,6 +19,8 @@ test('real processor generates a user-triggered synthetic comparison', async ({ 
   await expect(page.locator('#evidence-content')).not.toHaveText(/Checking this visitor/);
   await page.getByRole('button', { name: 'Generate a synthetic example' }).click();
   await expect(page.getByText(/Synthetic example ready/)).toBeVisible({ timeout: 45000 });
+  await expect(page.locator('#spectrum-caption')).toContainText('Measured STFT', { timeout: 45000 });
+  await expect(page.locator('#comparison-wave')).toHaveAttribute('aria-label', /Measured RMS envelope/);
   await page.getByRole('button', { name: /01 Raw input/ }).click();
   const src = await page.locator('#comparison-audio').getAttribute('src');
   expect(src).toMatch(/^\/api\/experiments\/[a-f0-9]{12}\/audio\/raw$/);
@@ -37,4 +39,36 @@ test('reduced motion and disconnected processor keep navigation usable', async (
   await expect(page.getByRole('link', { name: 'Open Spectral Studio' })).toHaveAttribute('href', '/studio.html?design=2');
   await page.getByRole('link', { name: 'Launch research lab' }).first().click();
   await expect(page).toHaveURL(/index\.html\?design=2#audio-lab/);
+});
+
+test('laboratory runs a measured experiment and exports evidence', async ({ page, request }) => {
+  await page.goto('/index.html?design=2');
+  await expect(page.locator('.status-pill')).toContainText('PROCESSOR CONNECTED');
+  await page.getByRole('button', { name: 'Run signal analysis' }).click();
+  const wav = page.getByRole('link', { name: 'Download selected WAV' });
+  await expect(wav).toHaveAttribute('href', /\/api\/experiments\/[a-f0-9]{12}\/audio\/raw$/, { timeout: 45000 });
+  const csv = page.getByRole('link', { name: 'EXPORT CSV' });
+  await expect(csv).toHaveAttribute('href', /\/api\/experiments\/[a-f0-9]{12}\/export\.csv$/);
+  expect((await request.get(await wav.getAttribute('href'))).ok()).toBeTruthy();
+  const exported = await request.get(await csv.getAttribute('href'));
+  expect(exported.ok()).toBeTruthy();
+  expect(await exported.text()).toContain('snr_db');
+  await expect(page.locator('#stoi-result')).toHaveText('—');
+});
+
+test('Spectral Studio edits a real signal without replacing the source', async ({ page, request }) => {
+  await page.goto('/studio.html?design=2');
+  await page.getByRole('button', { name: 'Try a test signal' }).click();
+  await expect(page.getByRole('button', { name: 'Apply edit' })).toBeEnabled({ timeout: 45000 });
+  const original = await page.getByRole('link', { name: '↓ Export WAV' }).getAttribute('href');
+  expect(original).toMatch(/\/audio\/source$/);
+  await page.getByRole('button', { name: 'Apply edit' }).click();
+  await expect(page.getByRole('button', { name: /Spectral edit · 1 operations/ })).toBeVisible({ timeout: 45000 });
+  await expect(page.getByRole('button', { name: /Original · locked/ })).toBeVisible();
+  const edited = await page.getByRole('link', { name: '↓ Export WAV' }).getAttribute('href');
+  expect(edited).not.toBe(original);
+  expect((await request.get(original)).ok()).toBeTruthy();
+  expect((await request.get(edited)).ok()).toBeTruthy();
+  await page.getByRole('button', { name: /Undo/ }).click();
+  await expect(page.getByRole('button', { name: /Redo/ })).toBeEnabled();
 });

@@ -13,6 +13,7 @@
 - Unified Design 02 lab colors, included the five-step guided tour in both lab versions and removed public-facing design-build tags.
 - Replaced the candidate Version 2 iframe shell with a direct same-origin destination to avoid third-party cookie problems; Version 1 remains untouched.
 - Added Playwright desktop/tablet/mobile browser tests for navigation, connected audio, reduced motion and processor failure.
+- Added chapter navigation, real output-envelope and backend STFT visualizations, and browser coverage for lab exports and source-preserving spectral edits.
 
 ## 0.1.0 — Software laboratory alpha
 

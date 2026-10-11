@@ -49,5 +49,6 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Adopted a coherent dark graphite/jade/warm-metal Design 02 palette. Preserved the root Version 1 theme and intro. The Version 2 Pages alias now points to the same-origin Render experience in the candidate, avoiding third-party cookie dependence.
 - Integrated the guided-tour commit into this combined branch. Browser tests: 9/9 Playwright cases passed across 1440, 768 and 390 px; all three measured without horizontal overflow. Chrome manual test generated a three-second WAV using the local FastAPI engine. Desktop/tablet/mobile screenshots saved in `outputs/` outside the Git repository for visual review.
 - Production routes have not been replaced from this preview branch. The tutorial video is not produced. MySQL remains separately gated by production provider and credentials; metadata persistence does not make media durable.
+- Refined the story flow with an accessible six-chapter rail, actual experiment RMS envelope and measured STFT from the existing spectral API. Expanded browser QA to 15 cases, including lab CSV/WAV export and source-preserving spectral edit with undo; all 15 passed locally across desktop, tablet and mobile.
 
 
