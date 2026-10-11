@@ -223,11 +223,20 @@
       return Math.max(-1, Math.min(1, (innerHeight * .5 - box.top - box.height * .5) / (innerHeight + box.height) * 2));
     };
     const conceptPosition = normalized(concept);
+    concept.style.setProperty('--portal-scale', `${(1.1 + conceptPosition * .3).toFixed(3)}`);
+    policies.style.setProperty('--portal-scale', `${(1.05 + normalized(policies) * .3).toFixed(3)}`);
+    spectral.style.setProperty('--portal-scale', `${(1.05 + normalized(spectral) * .3).toFixed(3)}`);
     concept.style.setProperty('--float-a', `${Math.round(conceptPosition * -85)}px`);
     concept.style.setProperty('--float-b', `${Math.round(conceptPosition * 100)}px`);
     concept.style.setProperty('--wave-y', `${Math.round(conceptPosition * 32)}px`);
     concept.style.setProperty('--wave-scale', `${(1 + conceptPosition * .14).toFixed(3)}`);
     problem.style.setProperty('--photo-y', `${Math.round(normalized(problem) * 45)}px`);
+    problem.querySelector('.instrument').style.setProperty('--instrument-rise', `${Math.round(normalized(problem) * -48)}px`);
+    problem.querySelector('.instrument').style.setProperty('--instrument-turn', `${(normalized(problem) * -5).toFixed(2)}deg`);
+    concept.querySelectorAll('.signal-path li').forEach((item, index) => {
+      item.style.setProperty('--path-y', `${Math.round(conceptPosition * (index - 2) * 19)}px`);
+      item.style.setProperty('--path-turn', `${(conceptPosition * (index - 2) * 2.2).toFixed(2)}deg`);
+    });
     policies.querySelectorAll('.policy-grid article').forEach((card, index) => {
       const progress = normalized(policies);
       card.style.setProperty('--policy-y', `${Math.round(progress * (index - 1) * 48)}px`);
@@ -236,8 +245,16 @@
         card.style.setProperty('--card-y', `${(progress * (index - 1) * -7).toFixed(2)}deg`);
       }
     });
+    const air = policies.querySelector('.visual-impulse');
+    air.style.setProperty('--air-x', `${Math.round(normalized(policies) * 14)}%`);
+    air.style.setProperty('--air-y', `${Math.round(normalized(policies) * -12)}%`);
+    air.style.setProperty('--air-scale', `${(1 + normalized(policies) * .15).toFixed(3)}`);
+    air.style.setProperty('--flutter-y', `${Math.round(normalized(policies) * 30)}px`);
     spectral.style.setProperty('--spectrum-roll', `${(normalized(spectral) * -7).toFixed(2)}deg`);
     spectral.style.setProperty('--spectrum-y', `${Math.round(normalized(spectral) * 25)}px`);
+    const evidence = $('evidence');
+    evidence.style.setProperty('--evidence-y', `${Math.round(normalized(evidence) * -65)}px`);
+    evidence.style.setProperty('--evidence-turn', `${(normalized(evidence) * 7).toFixed(2)}deg`);
   }
   addEventListener('scroll', () => {
     if (scheduled) return;
@@ -271,7 +288,34 @@
       poster.style.setProperty('--poster-x', '0px');
       poster.style.setProperty('--poster-y', '0px');
     });
+    const stage = document.querySelector('.floating-stage');
+    concept.addEventListener('pointermove', event => {
+      const bounds = concept.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - .5;
+      const y = (event.clientY - bounds.top) / bounds.height - .5;
+      stage.style.setProperty('--stage-x', `${Math.round(x * 28)}px`);
+      stage.style.setProperty('--stage-y', `${Math.round(y * 22)}px`);
+      stage.style.setProperty('--stage-turn', `${(x * -7).toFixed(2)}deg`);
+    }, { passive: true });
+    concept.addEventListener('pointerleave', () => {
+      stage.style.setProperty('--stage-x', '0px');
+      stage.style.setProperty('--stage-y', '0px');
+      stage.style.setProperty('--stage-turn', '0deg');
+    });
   }
+  const portal = document.createElement('div');
+  portal.className = 'launch-portal';
+  portal.setAttribute('aria-hidden', 'true');
+  portal.innerHTML = '<img src="/mark-v2.svg" alt=""><strong>ENTER THE SIGNAL</strong>';
+  document.body.append(portal);
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="/index.html"]');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || reduced) return;
+    event.preventDefault();
+    if (portal.classList.contains('is-active')) return;
+    portal.classList.add('is-active');
+    setTimeout(() => location.assign(link.href), 900);
+  });
   loadMeta();
   loadEvidence();
 })();

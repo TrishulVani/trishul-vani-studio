@@ -14,6 +14,15 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('story launch reaches the redesigned working lab', async ({ page }) => {
+  await page.goto('/experience.html');
+  await page.getByRole('link', { name: 'Launch research lab' }).first().click();
+  await expect(page).toHaveURL(/index\.html\?design=2#audio-lab$/);
+  await expect(page.getByRole('heading', { name: 'Audio laboratory.' })).toBeVisible();
+  await expect(page.locator('.v2-floating-rig')).toBeAttached();
+  await expect(page.locator('.v2-dashboard-field')).toBeAttached();
+});
+
 test('microphone scene responds to scroll while keeping its content readable', async ({ page }) => {
   await page.goto('/experience.html');
   const scene = page.locator('#concept');

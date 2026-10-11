@@ -13,6 +13,8 @@ Status: the six-chapter route is implemented at `/experience.html` on the immers
 
 A single restrained midnight and ion-blue system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. The intro's original canvas sound field bends under the pointer like a suspended acoustic membrane; the signal-path microphones float with scroll, and ground/sea/air condition cards shift in depth. All these visuals are illustrative. Version 1 mint styles remain untouched. Motion is reduced to a static frame or disabled when requested, and the canvas pauses offscreen.
 
+The main chapters now use sticky editorial copy beside large moving media. The ground/sea/air panels move vertically and tilt, the air illustration includes an original flying-wing shadow, and portal rings scale between chapters. A rapid trident transition leads from the story into the working Design 02 dashboard. That dashboard uses its own pointer-responsive acoustic membrane and floating dual-microphone rig, so the motion language continues into the real lab. These visual techniques are informed by [Lusion's DDD 2024](https://lusion.co/projects/ddd_2024/) and [Spaace](https://lusion.co/projects/spaace/) project pacing; no third-party art or code is used.
+
 | Token | Value | Use |
 |---|---|---|
 | Midnight | `#090d18` | Story and app background |

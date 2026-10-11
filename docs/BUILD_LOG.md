@@ -45,6 +45,8 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 
 ## 2026-10-11 — Immersive story integration
 
+- Replaced the candidate dashboard's static hero with a floating dual-microphone rig and interactive acoustic canvas; enlarged and recomposed all story chapters with sticky editorial text, scroll-responsive media/cards, portal rings, and an original flying-wing silhouette for the illustrative air condition. Story-to-lab entry now animates a trident before navigating to the same-origin working application. Cache-versioned CSS/JS references avoid stale deployed assets. JavaScript syntax and `git diff --check` passed; Playwright 21/21 passed locally across 1440/768/390 px, including the new story-to-lab route. Remote CI must be verified after push.
+
 - Revised the candidate's hero with an original canvas sound field that eases toward the pointer and produces local wave ripples; it pauses when offscreen and renders a static frame for reduced-motion visitors. Added depth-responsive acoustic cards and microphone poster, with ground/sea/air context labelled as illustrative. Browser suite passed 18/18 locally after this revision. Branch push and remote CI are separate checks.
 
 - Visual revision after user feedback: the earlier graphite/jade/metal mix was rejected. The candidate now uses a single midnight/ion-blue palette, a clearly visible trident above the entrance title, a centered spatial intro, original floating microphone illustrations, a parallax chapter backdrop, and matching lab/tutorial controls. Playwright browser suite: 18/18 passed on desktop, tablet, and mobile after the visual change, including scroll-driven microphone motion. This is still a review candidate, not a public release.
