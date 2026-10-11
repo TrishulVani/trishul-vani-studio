@@ -23,3 +23,8 @@
 
 ## Public hosting
 Added isolated Python workspaces, Render configuration, tested browser DSP, and corrected the Spectral Studio status.
+
+## Design 02 visual release — 2026-10-11
+
+- Added a separate monochrome editorial intro and workspace at `/design-v2/`, with an original forged trident, microphone imagery and reduced-motion-aware transitions. Version 1 remains the default at `/`.
+- Matched waveform and spectrogram rendering to Design 02 while preserving Version 1 colors. Both designs share the real Python API.

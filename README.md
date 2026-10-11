@@ -26,7 +26,7 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 | Destination | URL | Purpose |
 |---|---|---|
 | Version 1 | **https://trishulvani.github.io/** | Original mint visual system and intro, then the connected dashboard and studio |
-| Design 02 | **https://trishulvani.github.io/design-v2/** | Separate graphite/ivory/ultraviolet experience with a copper trident and topic-specific microphone imagery |
+| Design 02 | **https://trishulvani.github.io/design-v2/** | Separate paper-and-graphite experience with a sculpted steel trident and original microphone imagery |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
@@ -37,7 +37,7 @@ Both GitHub Pages entries load the complete Render application in an embedded wo
 
 1. The public address opens on an original, sculpted trident and animated signal field. It enters the connected dashboard automatically after 8.5 seconds; the Enter button and Escape key can advance earlier.
 2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
-3. Design 02 lives at its own address. It adds a cinematic graphite, warm-ivory, copper and ultraviolet hero, original dual-microphone signal imagery, expressive Oxanium type, scroll reveals, cursor feedback, progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
+3. Design 02 lives at its own address. It adds an editorial monochrome intro and workspace, original dual-microphone imagery, a sculpted steel trident, large Manrope typography, kinetic signal lines, scroll reveals, cursor feedback, a progress indicator and internal page transitions. Motion reduces automatically when the visitor requests reduced motion. The trident SVG and interface code are original; [Lusion](https://lusion.co/) informed the level of motion and pacing, and no imagery from that site is used.
 
 The public website and the backend are separate repositories/services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the entry shell on GitHub Pages, and this repository hosts the full app on Render. The source for the Pages shell is mirrored in [`deploy/pages/`](deploy/pages/).
 

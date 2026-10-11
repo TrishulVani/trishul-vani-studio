@@ -44,10 +44,11 @@ jobs:
           test -s web/design-v2.css
           test -s web/design-v2.js
           test -s web/trident.svg
-          test -s web/trident-v2.svg
+          test -s web/mark-v2.svg
           test -s web/assets/signal-microphones-v2.webp
           test -s deploy/pages/design-v2/index.html
-          test -s deploy/pages/design-v2/trident.svg
+          test -s deploy/pages/design-v2/mark.svg
+          test -s deploy/pages/design-v2/signal-microphones-v2.webp
           grep -q 'design-v2.css' web/index.html
           grep -q 'design-v2.css' web/studio.html
           grep -q 'design=2' deploy/pages/design-v2/index.html

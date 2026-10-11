@@ -2,7 +2,7 @@
 (() => {
   if (new URLSearchParams(location.search).get('design') !== '2') return;
   document.querySelectorAll('img[src*="/trident.svg"]').forEach(image => {
-    image.src = '/trident-v2.svg?v=design2copper';
+    image.src = '/mark-v2.svg?v=design2mono';
   });
   const buildLabel = document.querySelector('.alpha');
   if (buildLabel?.lastChild?.nodeType === Node.TEXT_NODE) buildLabel.lastChild.textContent = ' DESIGN 02 / SIGNAL RESEARCH';

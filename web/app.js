@@ -27,14 +27,15 @@ function drawWaveform(values=[]) {
   canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);
   const ctx=canvas.getContext('2d'); ctx.scale(ratio,ratio);
   ctx.clearRect(0,0,w,h);
-  ctx.strokeStyle='rgba(151,210,169,.13)';ctx.lineWidth=1;
+  const mono=document.body.classList.contains('design-v2');
+  ctx.strokeStyle=mono?'rgba(140,140,140,.18)':'rgba(151,210,169,.13)';ctx.lineWidth=1;
   for(let x=0;x<w;x+=34){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
   for(let y=0;y<h;y+=34){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
-  ctx.strokeStyle='rgba(184,246,178,.33)';ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
+  ctx.strokeStyle=mono?'rgba(190,190,190,.4)':'rgba(184,246,178,.33)';ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
   let waves=values.length?values: [];
   let high=Math.max(.03,Math.max(...waves))*1.22;
-  let gradient=ctx.createLinearGradient(0,0,0,h);gradient.addColorStop(0,'#b8f6b2');gradient.addColorStop(.5,'#5acaa0');gradient.addColorStop(1,'#b8f6b2');
-  ctx.strokeStyle=gradient;ctx.lineWidth=Math.max(1.4,w/waves.length*.45);ctx.shadowColor='#aaffc4';ctx.shadowBlur=7;ctx.beginPath();
+  let gradient=ctx.createLinearGradient(0,0,0,h);gradient.addColorStop(0,mono?'#f2f2ed':'#b8f6b2');gradient.addColorStop(.5,mono?'#999997':'#5acaa0');gradient.addColorStop(1,mono?'#f2f2ed':'#b8f6b2');
+  ctx.strokeStyle=gradient;ctx.lineWidth=Math.max(1.4,w/waves.length*.45);ctx.shadowColor=mono?'#dededa':'#aaffc4';ctx.shadowBlur=7;ctx.beginPath();
   const center=h/2;
   waves.forEach((value,i)=>{const x=(i+.5)*w/waves.length;const len=Math.max(1,Math.min(.95,Math.abs(value)/high))*h*.45;ctx.moveTo(x,center-len);ctx.lineTo(x,center+len)});
   ctx.stroke();ctx.shadowBlur=0;
@@ -128,7 +129,7 @@ async function loadDatasets(){
 async function init(){
   $('#date-label').textContent=new Date().toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'}).toUpperCase();
   $$('.scenario').forEach(btn=>btn.addEventListener('click',()=>{state.noise=btn.dataset.noise;$$('.scenario').forEach(x=>x.classList.toggle('selected',x===btn));}));
-  const snr=$('#snr');const updateSNR=()=>{$('#snr-display').textContent=`${snr.value} dB`;snr.style.background=`linear-gradient(90deg,#95efa4 ${(Number(snr.value)+15)/35*100}%,#34493d ${(Number(snr.value)+15)/35*100}%)`};snr.addEventListener('input',updateSNR);updateSNR();
+  const snr=$('#snr');const updateSNR=()=>{$('#snr-display').textContent=`${snr.value} dB`;snr.style.background=document.body.classList.contains('design-v2')?`linear-gradient(90deg,#242424 ${(Number(snr.value)+15)/35*100}%,#c9c9c3 ${(Number(snr.value)+15)/35*100}%)`:`linear-gradient(90deg,#95efa4 ${(Number(snr.value)+15)/35*100}%,#34493d ${(Number(snr.value)+15)/35*100}%)`};snr.addEventListener('input',updateSNR);updateSNR();
   $('#run-btn').addEventListener('click',run);
   $('#upload-form').addEventListener('submit',event=>{event.preventDefault();upload()});
   $('#dual-form').addEventListener('submit',event=>{event.preventDefault();uploadDual()});
