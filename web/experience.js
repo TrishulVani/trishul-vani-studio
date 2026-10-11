@@ -225,6 +225,8 @@
     const conceptPosition = normalized(concept);
     concept.style.setProperty('--portal-scale', `${(1.1 + conceptPosition * .3).toFixed(3)}`);
     policies.style.setProperty('--portal-scale', `${(1.05 + normalized(policies) * .3).toFixed(3)}`);
+    policies.style.setProperty('--shadow-x', `${Math.round(normalized(policies) * -150)}px`);
+    policies.style.setProperty('--shadow-y', `${Math.round(normalized(policies) * 95)}px`);
     spectral.style.setProperty('--portal-scale', `${(1.05 + normalized(spectral) * .3).toFixed(3)}`);
     concept.style.setProperty('--float-a', `${Math.round(conceptPosition * -85)}px`);
     concept.style.setProperty('--float-b', `${Math.round(conceptPosition * 100)}px`);
