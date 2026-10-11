@@ -275,3 +275,44 @@ body.design-v2 .panel{box-shadow:0 25px 75px #0006}body.design-v2 .lab-layout .p
 @media(max-width:700px){body.design-v2 .hero{min-height:820px}body.design-v2 .hero-main{width:100%;min-height:820px;padding:340px 23px 45px;justify-content:flex-start}body.design-v2 .hero h1{font-size:clamp(46px,11vw,70px)}body.design-v2 .v2-floating-rig{top:0;right:3%;width:94%;height:330px;opacity:.7}body.design-v2 .v2-dashboard-field{opacity:.4}body.design-v2 .hero:after{background:linear-gradient(0deg,#070b17f5 13%,#070b1799 57%,#070b1744)}body.design-v2 .quick-metrics{grid-template-columns:repeat(2,1fr);gap:10px}body.design-v2 .metric-card{min-height:185px}body.design-v2 .section-block{padding-top:110px}}
 @media(max-width:430px){body.design-v2 .quick-metrics{grid-template-columns:1fr}body.design-v2 .metric-card{min-height:140px}body.design-v2 .hero-main{padding-top:325px}}
 @media(prefers-reduced-motion:reduce){body.design-v2 .rig-mic-a,body.design-v2 .rig-mic-b,.rig-wave:after{animation:none}body.design-v2 .v2-floating-rig,body.design-v2 .hero:before{transform:none;transition:none}body.design-v2 .metric-card:nth-child(n){--metric-shift:0px}}
+
+/* Version 2 has a floating navigation capsule and a full-width cinematic workspace. */
+body.design-v2 .app-shell{display:block}
+body.design-v2 .sidebar{position:fixed;top:16px;bottom:auto;left:50%;width:min(94vw,1480px);min-width:0;height:66px;min-height:0;padding:7px 18px;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:20px;background:#0a1021dc;border:1px solid #8da4e866;border-radius:100px;box-shadow:0 18px 55px #0008;backdrop-filter:blur(24px);z-index:40}
+body.design-v2 .brand{margin:0 12px 0 4px;white-space:nowrap;gap:9px}body.design-v2 .brand-symbol{width:30px;height:38px}body.design-v2 .brand strong{font-size:13px;letter-spacing:-.055em}body.design-v2 .brand small{font-size:6px;letter-spacing:.14em}
+body.design-v2 .sidebar-group-title,body.design-v2 .sidebar-divider,body.design-v2 .architecture-side,body.design-v2 .sidebar-bottom,body.design-v2 .sidebar-credit{display:none}
+body.design-v2 .nav-items{min-width:0;flex:1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:2px;overflow-x:auto;scrollbar-width:none}body.design-v2 .nav-items::-webkit-scrollbar{display:none}
+body.design-v2 .nav-item{flex:0 0 auto;display:flex;justify-content:center;gap:8px;width:auto;height:43px;padding:0 13px;border-radius:100px;white-space:nowrap;font-size:11px}body.design-v2 .nav-item svg{width:15px;height:15px}body.design-v2 .nav-current{display:none}
+body.design-v2 .main{width:100%;padding:0}body.design-v2 .topbar{height:70px;position:relative;top:auto;z-index:1;margin-top:98px;padding:0 clamp(24px,5vw,85px);border:0;background:transparent}body.design-v2 .content{max-width:1800px;padding:0 clamp(22px,5vw,90px) 60px}body.design-v2 .page-kicker{margin:8px 0 20px}
+body.design-v2 .hero{min-height:calc(100svh - 185px);margin:0;border-radius:30px}body.design-v2 .hero-main{min-height:calc(100svh - 185px);padding-left:clamp(42px,6vw,100px)}body.design-v2 .v2-floating-rig{right:1%;width:48%}
+body.design-v2 .quick-metrics{margin-bottom:70px}
+@media(max-width:1000px){body.design-v2 .sidebar{width:calc(100% - 30px);gap:8px}body.design-v2 .brand{margin-right:0}body.design-v2 .nav-item{padding:0 9px}body.design-v2 .nav-item span:not(.nav-current){display:none}body.design-v2 .nav-item svg{width:19px;height:19px}}
+@media(max-width:700px){body.design-v2 .sidebar{top:auto;bottom:9px;left:50%;height:62px;width:calc(100% - 16px);padding:5px 10px;border-radius:100px}body.design-v2 .brand{display:none}body.design-v2 .nav-items{justify-content:space-around}body.design-v2 .nav-item{width:48px;height:47px;padding:0}body.design-v2 .main{padding-bottom:78px}body.design-v2 .topbar{margin-top:0;height:66px;padding:0 20px}body.design-v2 .content{padding:0 12px 50px}body.design-v2 .page-kicker{padding:0 10px;margin:15px 0}body.design-v2 .hero{min-height:calc(100svh - 100px);border-radius:23px}body.design-v2 .hero-main{min-height:calc(100svh - 100px);padding-left:24px;padding-right:24px}}
+/* Camera settles into the V2 overview after the trident crosses the lens. */
+body.design-v2.arrived-through-portal .hero{animation:v2-scene-arrive 1.15s cubic-bezier(.16,1,.3,1) both}
+body.design-v2.arrived-through-portal .hero-main{animation:v2-copy-arrive 1.25s cubic-bezier(.16,1,.3,1) both}
+body.design-v2.arrived-through-portal .v2-floating-rig{animation:v2-rig-arrive 1.4s cubic-bezier(.16,1,.3,1) both}
+@keyframes v2-scene-arrive{from{filter:brightness(2) blur(18px);transform:scale(1.13)}to{filter:none;transform:scale(1)}}
+@keyframes v2-copy-arrive{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v2-rig-arrive{from{opacity:0;filter:blur(20px);transform:translate3d(100px,30px,0) scale(1.22)}to{opacity:1;filter:none;transform:translate3d(0,0,0) scale(1)}}
+@media(prefers-reduced-motion:reduce){body.design-v2.arrived-through-portal .hero,body.design-v2.arrived-through-portal .hero-main,body.design-v2.arrived-through-portal .v2-floating-rig{animation:none}}
+/* V2 art direction: an immersive editorial cover, not a centered marketing panel. */
+@media(min-width:901px){
+body.design-v2 .topbar{position:absolute;top:86px;left:0;right:0;margin:0;z-index:5;color:#fff}
+body.design-v2 .page-kicker{position:absolute;z-index:5;top:173px;left:clamp(35px,7vw,125px);margin:0;color:#d5ddff}
+body.design-v2 .content{max-width:none;padding:0}
+body.design-v2 .hero{min-height:100svh;margin:0;border:0;border-radius:0;overflow:hidden;background:#060918}
+body.design-v2 .hero:before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#050819 0%,#070b19e8 28%,#070b1980 51%,transparent 72%),linear-gradient(0deg,#060817aa,transparent 23%)}
+body.design-v2 .hero:after{content:'';position:absolute;left:56%;top:54%;width:60vw;height:60vw;max-width:950px;max-height:950px;transform:translate(-50%,-50%);background:radial-gradient(circle,#aebeff11 0 2%,transparent 3% 11%,#aebeff12 11.2% 11.4%,transparent 11.6% 22%,#aebeff1a 22.2% 22.3%,transparent 22.5% 39%,#aebeff0e 39.2% 39.4%,transparent 39.6%);opacity:.8;animation:v2-sonar 12s linear infinite;pointer-events:none}
+body.design-v2 .hero-main{position:relative;z-index:4;min-height:100svh;width:54%;padding:24vh 2vw 8vh clamp(35px,7vw,125px);justify-content:center}
+body.design-v2 .hero h1{font-size:clamp(78px,9.1vw,165px);line-height:.81;max-width:930px;letter-spacing:-.1em;text-wrap:balance}
+body.design-v2 .hero-description{max-width:540px}
+body.design-v2 .v2-floating-rig{z-index:2;width:59%;height:90%;right:-4%;top:7%;transform:rotate(-7deg) scale(1.12);opacity:1}
+body.design-v2 .v2-dashboard-field{z-index:1;opacity:.7;mix-blend-mode:screen}
+body.design-v2 .quick-metrics{z-index:5;position:relative;max-width:1600px;margin:-35px auto 13vh;padding:0 5vw;gap:10px}
+body.design-v2 .metric-card{background:#11172be3;min-height:170px;box-shadow:0 35px 80px #000b;border-radius:18px}
+body.design-v2 .section-block{max-width:1600px;margin:0 auto;padding-left:5vw;padding-right:5vw}
+}
+@keyframes v2-sonar{to{transform:translate(-50%,-50%) rotate(1turn)}}
+@media(prefers-reduced-motion:reduce){body.design-v2 .hero:after{animation:none}}
+@media(min-width:901px){body.design-v2 .page-kicker{display:none}body.design-v2 .hero-main{padding-top:22vh}body.design-v2 .hero{scroll-margin-top:0}}

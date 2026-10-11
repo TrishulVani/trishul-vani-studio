@@ -308,7 +308,7 @@
   const portal = document.createElement('div');
   portal.className = 'launch-portal';
   portal.setAttribute('aria-hidden', 'true');
-  portal.innerHTML = '<img src="/mark-v2.svg" alt=""><strong>ENTER THE SIGNAL</strong>';
+  portal.innerHTML = '<div class="throw-object">' + Array.from({ length: 6 }, (_, layer) => `<img src="/mark-v2.svg" alt="" style="--layer:${layer}">`).join('') + '</div><strong>ENTER THE SIGNAL</strong>';
   document.body.append(portal);
   document.addEventListener('click', event => {
     const link = event.target.closest('a[href^="/index.html"]');
@@ -316,7 +316,10 @@
     event.preventDefault();
     if (portal.classList.contains('is-active')) return;
     portal.classList.add('is-active');
-    setTimeout(() => location.assign(link.href), 900);
+    setTimeout(() => {
+      try { sessionStorage.setItem('tv-v2-arrival', '1'); } catch (_) { /* Navigation still works without storage. */ }
+      location.assign(link.href);
+    }, 1320);
   });
   loadMeta();
   loadEvidence();

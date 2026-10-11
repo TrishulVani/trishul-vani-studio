@@ -1,6 +1,7 @@
 /* Lightweight interactions for Design 02; no framework or tracking. */
 (() => {
   if (new URLSearchParams(location.search).get('design') !== '2') return;
+  try { if (sessionStorage.getItem('tv-v2-arrival') === '1') { sessionStorage.removeItem('tv-v2-arrival'); document.body.classList.add('arrived-through-portal'); } } catch (_) { /* Arrival animation is optional. */ }
   document.querySelectorAll('img[src*="/trident.svg"]').forEach(image => {
     image.src = '/mark-v2.svg?v=design2mono';
   });

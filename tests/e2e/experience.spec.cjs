@@ -7,7 +7,7 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   await expect(page.getByRole('heading', { name: /When noise rises/ })).toBeVisible();
   await expect(page.locator('main section')).toHaveCount(6);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
-  await expect(page.getByRole('link', { name: 'Launch research lab' }).first()).toHaveAttribute('href', '/index.html?design=2#audio-lab');
+  await expect(page.getByRole('link', { name: 'Enter TRISHUL VANI' }).first()).toHaveAttribute('href', '/index.html?design=2');
   await page.getByRole('link', { name: 'Explore how it works' }).click();
   await expect(page).toHaveURL(/#problem$/);
   await expect(page.getByText('DSP fallback; not neural AI')).toBeVisible();
@@ -16,9 +16,10 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
 
 test('story launch reaches the redesigned working lab', async ({ page }) => {
   await page.goto('/experience.html');
-  await page.getByRole('link', { name: 'Launch research lab' }).first().click();
-  await expect(page).toHaveURL(/index\.html\?design=2#audio-lab$/);
-  await expect(page.getByRole('heading', { name: 'Audio laboratory.' })).toBeVisible();
+  await page.getByRole('link', { name: 'Enter TRISHUL VANI' }).first().click();
+  await expect(page.locator('.launch-portal.is-active .throw-object img')).toHaveCount(6);
+  await expect(page).toHaveURL(/index\.html\?design=2$/);
+  await expect(page.getByRole('heading', { name: /Clarity under pressure/i })).toBeVisible();
   await expect(page.locator('.v2-floating-rig')).toBeAttached();
   await expect(page.locator('.v2-dashboard-field')).toBeAttached();
 });
@@ -64,8 +65,8 @@ test('reduced motion and disconnected processor keep navigation usable', async (
   await page.goto('/experience.html');
   await expect(page.getByText(/processor is unavailable/i)).toBeVisible();
   await expect(page.getByRole('link', { name: 'Open Spectral Studio' })).toHaveAttribute('href', '/studio.html?design=2');
-  await page.getByRole('link', { name: 'Launch research lab' }).first().click();
-  await expect(page).toHaveURL(/index\.html\?design=2#audio-lab/);
+  await page.getByRole('link', { name: 'Enter TRISHUL VANI' }).first().click();
+  await expect(page).toHaveURL(/index\.html\?design=2/);
 });
 
 test('laboratory runs a measured experiment and exports evidence', async ({ page, request }) => {
