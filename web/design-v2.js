@@ -26,6 +26,12 @@
     const max = Math.max(1, root.scrollHeight - innerHeight);
     fill.style.transform = `scaleX(${Math.min(1, scrollY / max)})`;
     if (!reduce) {
+      document.querySelectorAll('.v2-service-scene').forEach((scene, index) => {
+        const box = scene.getBoundingClientRect();
+        const travel = Math.max(-1, Math.min(1, (innerHeight * .5 - box.top - box.height * .5) / (innerHeight + box.height) * 2));
+        scene.style.setProperty('--scene-y', `${Math.round(travel * -75)}px`);
+        scene.style.setProperty('--scene-x', `${Math.round(travel * (index % 2 ? 90 : -90))}px`);
+      });
       const metrics = document.querySelector('.quick-metrics');
       if (metrics) {
         const rect = metrics.getBoundingClientRect();

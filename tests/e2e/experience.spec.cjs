@@ -71,6 +71,9 @@ test('reduced motion and disconnected processor keep navigation usable', async (
 
 test('laboratory runs a measured experiment and exports evidence', async ({ page, request }) => {
   await page.goto('/index.html?design=2');
+  await expect(page.locator('.v2-service-scene')).toHaveCount(3);
+  await page.locator('.v2-air').scrollIntoViewIfNeeded();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
   await expect(page.locator('.status-pill')).toContainText('PROCESSOR CONNECTED');
   await page.getByRole('button', { name: 'Run signal analysis' }).click();
   const wav = page.getByRole('link', { name: 'Download selected WAV' });

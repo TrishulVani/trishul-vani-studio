@@ -316,3 +316,27 @@ body.design-v2 .section-block{max-width:1600px;margin:0 auto;padding-left:5vw;pa
 @keyframes v2-sonar{to{transform:translate(-50%,-50%) rotate(1turn)}}
 @media(prefers-reduced-motion:reduce){body.design-v2 .hero:after{animation:none}}
 @media(min-width:901px){body.design-v2 .page-kicker{display:none}body.design-v2 .hero-main{padding-top:22vh}body.design-v2 .hero{scroll-margin-top:0}}
+/* Three acoustic environments create a scroll story within the working app. */
+.v2-service-theatre{display:none}
+body.design-v2 .v2-service-theatre{display:block;position:relative;margin:0 0 8vh;background:#070b18;color:#f5f6ff;overflow:hidden}
+body.design-v2 .v2-theatre-intro{min-height:72svh;padding:18vh 8vw 12vh;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;background:radial-gradient(circle at 90% 50%,#34437442,transparent 47%)}
+body.design-v2 .v2-theatre-intro>span,body.design-v2 .v2-service-copy>span{font:700 11px 'DM Sans',Arial,sans-serif;letter-spacing:.22em;color:#b5c5ff}
+body.design-v2 .v2-theatre-intro h2{font:800 clamp(52px,8vw,145px)/.9 Manrope,Arial,sans-serif;letter-spacing:-.09em;margin:22px 0 35px}
+body.design-v2 .v2-theatre-intro h2 em{color:#a8bbff;font-style:normal}
+body.design-v2 .v2-theatre-intro p{max-width:560px;color:#b9c2db;line-height:1.7;font-size:16px}
+body.design-v2 .v2-service-scene{height:min(85svh,850px);min-height:580px;position:relative;overflow:hidden;isolation:isolate;border-top:1px solid #acbbff23;--scene-y:0px;--scene-x:0px}
+body.design-v2 .v2-service-scene:before{content:'';position:absolute;inset:-12%;background:radial-gradient(ellipse at 75% 50%,#728de850,transparent 45%),repeating-radial-gradient(ellipse at 70% 50%,transparent 0 49px,#b6c5ff18 50px 51px,transparent 52px 101px);transform:translateY(var(--scene-y)) scale(1.12);transition:transform .15s linear;z-index:-2}
+body.design-v2 .v2-service-copy{position:relative;z-index:3;max-width:750px;padding:clamp(90px,11vh,150px) 8vw}
+body.design-v2 .v2-service-copy h3{font:800 clamp(55px,7.3vw,130px)/.91 Manrope,Arial,sans-serif;letter-spacing:-.085em;margin:20px 0 27px}
+body.design-v2 .v2-service-copy p{max-width:470px;color:#c3cbe3;line-height:1.7}
+body.design-v2 .v2-service-copy a{display:inline-block;margin-top:26px;padding:15px 0;border-bottom:1px solid #a8bbff;color:#dce4ff;font-weight:700}
+
+body.design-v2 .v2-sound-horizon{position:absolute;left:-10%;right:-10%;top:45%;height:120px;border-top:1px solid #b7c7ff42;border-bottom:1px solid #b7c7ff26;transform:translateY(var(--scene-y)) rotate(-8deg);filter:drop-shadow(0 0 26px #a8bbff88);opacity:.9;z-index:-1}
+body.design-v2 .v2-sound-horizon:before,body.design-v2 .v2-sound-horizon:after{content:'';position:absolute;left:0;right:0;top:25%;height:1px;background:#b7c7ff55;transform:skewY(5deg)}body.design-v2 .v2-sound-horizon:after{top:67%;transform:skewY(-4deg)}
+body.design-v2 .v2-ground{background:linear-gradient(160deg,#0b1124,#0a0d16 58%,#151d2e)}
+body.design-v2 .v2-terrain{position:absolute;right:-10%;bottom:-26%;width:75%;height:75%;background:repeating-radial-gradient(ellipse at 50% 100%,transparent 0 31px,#b8c6f026 32px 34px,transparent 35px 64px);transform:perspective(500px) rotateX(55deg) translate3d(var(--scene-x),var(--scene-y),0);filter:drop-shadow(0 0 20px #a8bbff55);opacity:.85}
+body.design-v2 .v2-sea{background:linear-gradient(125deg,#090c1b,#152445 85%)}body.design-v2 .v2-sea .v2-service-copy{margin-left:auto;max-width:760px}body.design-v2 .v2-sea-lines{position:absolute;left:-12%;top:15%;width:80%;height:90%;background:repeating-radial-gradient(ellipse at 45% 56%,transparent 0 29px,#a8bbff25 31px 33px,transparent 35px 74px);transform:rotate(-12deg) translate3d(var(--scene-x),var(--scene-y),0);opacity:.8}
+body.design-v2 .v2-air{background:radial-gradient(ellipse at 80% 43%,#34406b,#0a0e1d 75%)}body.design-v2 .v2-air-shadow{position:absolute;right:0;top:0;width:65%;height:100%;object-fit:contain;opacity:.56;filter:drop-shadow(0 0 40px #9fb0ff77);transform:translate3d(var(--scene-x),var(--scene-y),0) rotate(-10deg) scale(1.1)}
+@media(max-width:800px){body.design-v2 .v2-theatre-intro{min-height:65svh;padding:100px 7vw}body.design-v2 .v2-service-scene{height:78svh;min-height:620px}body.design-v2 .v2-service-copy{padding:75px 7vw}body.design-v2 .v2-service-copy h3{font-size:clamp(52px,9vw,90px)}body.design-v2 .v2-sea .v2-service-copy{margin-left:0}body.design-v2 .v2-air-shadow{top:31%;right:-13%;width:105%;height:75%;opacity:.33}body.design-v2 .v2-terrain{width:115%}}
+@media(max-width:500px){body.design-v2 .v2-service-scene{height:690px}body.design-v2 .v2-service-copy{padding-top:80px}body.design-v2 .v2-service-copy h3{font-size:54px}body.design-v2 .v2-theatre-intro h2{font-size:55px}}
+@media(prefers-reduced-motion:reduce){body.design-v2 .v2-service-scene:before,body.design-v2 .v2-sound-horizon,body.design-v2 .v2-terrain,body.design-v2 .v2-sea-lines,body.design-v2 .v2-air-shadow{transform:none;transition:none}}
