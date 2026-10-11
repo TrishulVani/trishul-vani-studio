@@ -9,7 +9,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/design-v2.css">
-</head>
+<link rel="stylesheet" href="/tour.css"></head>
 <body><script>if(new URLSearchParams(location.search).get('design')==='2')document.body.classList.add('design-v2')</script>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
@@ -54,7 +54,7 @@
   <main class="main" id="overview">
     <header class="topbar">
       <div class="breadcrumbs"><span>WORKSPACE</span><span class="slash">/</span><strong>MISSION CONTROL</strong></div>
-      <div class="topbar-right"><span class="status-pill"><i></i> LOCAL PROCESSOR ONLINE</span><span class="today" id="date-label"></span><span class="user-avatar" aria-label="VoltEdge engineering">V</span></div>
+      <div class="topbar-right"><span class="status-pill"><i></i><span id="processor-status">CONNECTING TO PROCESSOR</span></span><button id="retry-connection" type="button" hidden>Retry connection</button><span class="today" id="date-label"></span><span class="user-avatar" aria-label="VoltEdge engineering">V</span></div>
     </header>
     <div class="content">
       <div class="page-kicker"><span class="kicker-line"></span> SIGNAL ENHANCEMENT / LABORATORY OS <span class="count-index">[ 001 — 006 ]</span></div>
@@ -132,6 +132,6 @@
 <audio id="audio-player" preload="none"></audio>
 <script type="module" src="/app.js"></script>
 <script defer src="/design-v2.js"></script>
-</body>
+<script defer src="/tour.js"></script></body>
 </html>
 

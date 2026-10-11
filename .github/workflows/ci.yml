@@ -38,6 +38,9 @@ jobs:
           node --check web/app.js
           node --check web/studio.js
           node --check web/design-v2.js
+          node --check web/tour.js
+          test -s web/tour.css
+          test -s docs/TUTORIAL_STORYBOARD.md
           node tests/dsp-core.test.cjs
       - name: Verify Design 02 assets
         run: |

@@ -35,3 +35,12 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Implemented a Design 02-only monochrome candidate with a pointed, curved trident SVG, original microphone image, updated intro, transitions and matching signal visualization. Version 1 files and production Pages repository were not changed.
 - JavaScript syntax and browser DSP suite passed locally. Python pytest could not complete locally because Windows denied the default temporary directory; rerun with a workspace base temporary directory stalled, so GitHub CI is the independent check.
 - Added `IMMERSIVE_UX_SPEC.md` and `V03_COMPATIBILITY.md` for six-scene narrative and tutorial/MySQL gates. Neither the six-scene narrative, tutorial video nor MySQL is claimed complete.
+
+
+## 2026-10-11 — Guided tour candidate
+
+- Tested tour flow in Chrome at local `127.0.0.1`: Help opens, steps 1–3 advance, step 4 navigates to Studio, step 5 finishes, and Help remains available. The local static preview correctly reports backend 404; processing was not tested against that preview.
+- JavaScript syntax checks passed. Pending GitHub CI/PR review and direct deployed backend QA. No tutorial video exists yet.
+- First-visit prompt appears on a fresh browser origin. Escape closes the modal; Help reopens it. A static-server failure correctly changes the badge to PROCESSOR UNAVAILABLE and exposes Retry. Mobile screenshot was attempted but the browser viewport override was inconclusive; responsive QA remains open.
+
+

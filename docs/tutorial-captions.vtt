@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.000
+A research workbench for comparing speech-enhancement methods.
+
+00:00:08.000 --> 00:00:22.000
+Choose a controlled environment and set the input SNR.
+
+00:00:22.000 --> 00:00:34.000
+One input is processed through multiple tested paths.
+
+00:00:34.000 --> 00:00:50.000
+Listen to every output; filtering alone is not quality.
+
+00:00:50.000 --> 00:01:02.000
+A score needs the right reference. Unavailable values stay unavailable.
+
+00:01:02.000 --> 00:01:14.000
+Inspect the real spectrogram and make a non-destructive edit.
+
+00:01:14.000 --> 00:01:20.000
+Export the evidence and reproduce the work.

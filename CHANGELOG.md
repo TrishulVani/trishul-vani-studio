@@ -28,3 +28,10 @@ Added isolated Python workspaces, Render configuration, tested browser DSP, and 
 
 - Added a separate monochrome editorial intro and workspace at `/design-v2/`, with an original forged trident, microphone imagery and reduced-motion-aware transitions. Version 1 remains the default at `/`.
 - Matched waveform and spectrogram rendering to Design 02 while preserving Version 1 colors. Both designs share the real Python API.
+
+## Guided onboarding candidate — 2026-10-11
+
+- Added a five-step, keyboard-accessible guided tour across Mission Control and Spectral Studio. It highlights real controls, preserves progress during navigation, supports Skip/Back/Next/Finish and can be reopened from Help.
+- The 80-second video is explicitly labelled coming soon. Added a real-screen storyboard and caption draft; no video file is claimed.
+
+

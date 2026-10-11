@@ -33,6 +33,10 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 Both GitHub Pages entries load the complete Render application in an embedded workspace. The default backend URL serves Version 1; `?design=2` selects Design 02 without changing API behavior. The frontend calls FastAPI using same-origin `/api/...` routes inside that workspace, so uploads, STFT analysis, edits, experiment processing, history and exports are connected to the deployed Python service. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
+### First-visit guidance
+
+Mission Control and Spectral Studio now include a **? Help & tour** control. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The 80-second product video is **not yet recorded**; see [`docs/TUTORIAL_STORYBOARD.md`](docs/TUTORIAL_STORYBOARD.md) and caption draft for the planned authentic screen capture. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
+
 ### Visual experience and flow
 
 1. The public address opens on an original, sculpted trident and animated signal field. It enters the connected dashboard automatically after 8.5 seconds; the Enter button and Escape key can advance earlier.
