@@ -179,3 +179,24 @@ body.design-v2 .footer,body.design-v2 .integrity-note{background:#eeede9;color:#
 body.design-v2 .footer strong,body.design-v2 .footer strong span{color:#1c1c1c}
 body.design-v2 .run-pulse{background:#f0f0ec;box-shadow:0 0 0 4px #777}
 body.design-v2 .reveal-ready{will-change:transform,opacity}
+
+/* 2.0 unified dark signal palette; Version 1 selectors are intentionally untouched. */
+body.design-v2{color-scheme:dark;--bg:#080d10;--sidebar:#0d171a;--card:#142024;--card2:#18282b;--hair:#385054;--line:#385054;--text:#f4f4ee;--muted:#b6c5c1;--mint:#8dd5c2;--mint2:#b4e5d4;--cyan:#8dd5c2;--soft:#bacbc5;--v2-orange:#8dd5c2;--v2-orange-bright:#a9e4d2;--v2-orange-shadow:#8dd5c244;background:#080d10;color:#f4f4ee}
+body.design-v2 .sidebar,body.design-v2 .rail{background:#0d171a;border-color:#385054}
+body.design-v2 .topbar,body.design-v2 header{background:#0b1417ed;border-color:#385054}
+body.design-v2 .hero{background:radial-gradient(circle at 80% 46%,#3b837555,transparent 35%),linear-gradient(125deg,#0b1417,#132529 60%,#080d10);border-color:#456765}
+body.design-v2 .visual-core{background:radial-gradient(circle,#335a52,#182c2b 56%,#091211);border-color:#8dd5c2a6;box-shadow:0 0 0 22px #8dd5c20c,0 0 90px #5cbb9a43}
+body.design-v2 .orbit-outer,body.design-v2 .orbit-mid,body.design-v2 .orbit-inner{border-color:#8dd5c255}
+body.design-v2 .metric-card,body.design-v2 .panel,body.design-v2 .workspace .panel{background:linear-gradient(150deg,#162629,#101b1e);border-color:#395256;color:#f4f4ee}
+body.design-v2 .metric-card:hover,body.design-v2 .panel:hover{border-color:#8dd5c28a}
+body.design-v2 .nav-item.active,body.design-v2 .rail nav a.active{background:#19332f;border-color:#8dd5c2;color:#f4f4ee}
+body.design-v2 .status-pill{background:#19332f;border-color:#8dd5c2;color:#d5f0e7}
+body.design-v2 .brand-thin,body.design-v2 .brand b,body.design-v2 .page-kicker,body.design-v2 .section-index,body.design-v2 .top-label,body.design-v2 .title-dot{color:#8dd5c2}
+body.design-v2 .primary-btn,body.design-v2 .primary,body.design-v2 .run-button{background:#8dd5c2;border-color:#8dd5c2;color:#091511}
+body.design-v2 .primary-btn:hover,body.design-v2 .primary:hover,body.design-v2 .run-button:hover{background:#b0ead8}
+body.design-v2 .capability-row,body.design-v2 .history-row,body.design-v2 .dataset-card,body.design-v2 .dataset-intro{background:#152528;color:#e9efeb;border-color:#395256}
+body.design-v2 .capability-row .cap-status,body.design-v2 .dataset-card .data-index,body.design-v2 .dataset-card p,body.design-v2 .dataset-card .data-type,body.design-v2 .dataset-intro strong,body.design-v2 .history-row .id,body.design-v2 .history-row small,body.design-v2 .value-green{color:#a8d9c9}
+body.design-v2 .bar-fill{background:linear-gradient(90deg,#4f9e88,#a3dbc9)}
+body.design-v2 .footer,body.design-v2 .integrity-note{background:#0d171a;color:#a9bbb5;border-color:#395256}
+body.design-v2 .footer strong,body.design-v2 .footer strong span{color:#e9eee9}
+body.design-v2 .v2-progress span{background:#8dd5c2}

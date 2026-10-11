@@ -1,6 +1,6 @@
 # Immersive UX specification — Design 02 candidate
 
-Status: implementation direction, not a claim that every chapter or tutorial is built. The public Version 1 remains at `/`; the current Design 02 public release remains unchanged while this branch is reviewed.
+Status: the six-chapter route is implemented at `/experience.html` on the immersive-story branch. The public Version 1 remains at `/`; the current Design 02 public release remains unchanged while this branch is reviewed.
 
 ## Audit (11 October 2026)
 
@@ -11,15 +11,16 @@ Status: implementation direction, not a claim that every chapter or tutorial is 
 
 ## Visual direction
 
-A single restrained graphite and warm-silver system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. Version 1 mint styles remain untouched. Motion is limited to transforms, opacity and canvas signal lines, with reduced-motion support.
+A single restrained graphite, jade and warm-metal system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. Version 1 mint styles remain untouched. Motion is limited to transforms and opacity, with reduced-motion support.
 
 | Token | Value | Use |
 |---|---|---|
-| Paper | `#e9e8e4` | Intro mast and research canvas |
-| Graphite | `#0c0c0c` | Story scenes and visual anchor |
-| Instrument | `#f6f5f1` | Data cards and controls |
-| Ink | `#191919` | Main copy and primary controls |
-| Steel | `#a3a3a3` | Diagram and inactive labels |
+| Graphite | `#080d10` | Story and app background |
+| Instrument | `#121d20` | Cards and control surfaces |
+| Ink | `#f4f4ee` | Main copy |
+| Signal | `#8dd5c2` | Controls, progress and signal emphasis |
+| Metal | `#c6aa78` | Restrained trident highlight |
+| Muted | `#b7c5c2` | Supporting text |
 
 ## Six-chapter storyboard
 

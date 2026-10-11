@@ -6,6 +6,14 @@
 
 # Changelog
 
+## Immersive Version 2 candidate — 2026-10-11
+
+- Built a six-scene, dark graphite/jade entrance with an original trident, direct lab links, truthful two-mic architecture, noise-policy explanations and evidence empty states.
+- Connected the optional raw/hybrid comparison to real FastAPI simulation and WAV endpoints; audio remains user initiated and clearly marked synthetic.
+- Unified Design 02 lab colors, included the five-step guided tour in both lab versions and removed public-facing design-build tags.
+- Replaced the candidate Version 2 iframe shell with a direct same-origin destination to avoid third-party cookie problems; Version 1 remains untouched.
+- Added Playwright desktop/tablet/mobile browser tests for navigation, connected audio, reduced motion and processor failure.
+
 ## 0.1.0 — Software laboratory alpha
 
 - Local-first interactive dashboard with responsive layout, audio playback and waveform inspector.

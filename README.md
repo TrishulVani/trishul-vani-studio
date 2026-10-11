@@ -17,6 +17,12 @@
 > [!IMPORTANT]
 > **Research prototype.** No claims of certified real-time performance, speech recognition, hearing protection, tactical safety, secure voice communication, or completed Raspberry Pi deployment. Neural inference only runs when a genuine FFmpeg-compatible RNNoise model is configured; otherwise the UI explicitly displays a **spectral DSP fallback**. Synthetic voice is **not real speech**.
 
+### Version 2 preview branch
+
+The `feat/immersive-story` candidate adds a dark six-scene entrance at `/experience.html`, a graphite/jade/warm-metal Design 02 lab, and the same skippable guided tour in both lab versions. Its story generates a synthetic raw/hybrid comparison through the real FastAPI API when requested; it never autoplays or treats the synthetic tone as intelligible speech. The separate [Version 2 public alias](https://trishulvani.github.io/design-v2/) is configured to redirect to the same-origin [Version 2 entrance](https://trishul-vani-studio.onrender.com/experience.html) when this candidate is released, avoiding third-party iframe cookie failures. The current public sites keep their existing behavior until the candidate passes review and deployment.
+
+Run the browser tests with `pnpm install && pnpm exec playwright install chrome && pnpm exec playwright test`. They cover desktop, tablet and mobile navigation, the connected WAV comparison, reduced motion and disconnected processor behavior. CI runs these alongside the existing Python, DSP and Docker checks.
+
 ## Two live designs · one connected v0.2 engine
 
 Implemented: real STFT visualization, non-destructive attenuation/isolation, immutable source layers, previews, undo/redo, A/B playback, external WAV references, and WAV/JSON exports. The Python lab includes controlled experiments, NLMS, spectral gating, hybrid processing and measured metrics.
@@ -35,7 +41,7 @@ Both GitHub Pages entries load the complete Render application in an embedded wo
 
 ### First-visit guidance
 
-Mission Control and Spectral Studio now include a **? Help & tour** control. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The 80-second product video is **not yet recorded**; see [`docs/TUTORIAL_STORYBOARD.md`](docs/TUTORIAL_STORYBOARD.md) and caption draft for the planned authentic screen capture. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
+On the preview branch, Mission Control and Spectral Studio include a **? Help & tour** control in both designs. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The 80-second product video is **not yet recorded**; see [`docs/TUTORIAL_STORYBOARD.md`](docs/TUTORIAL_STORYBOARD.md) and caption draft for the planned authentic screen capture. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
 
 ### Visual experience and flow
 

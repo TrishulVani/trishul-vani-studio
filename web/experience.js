@@ -59,6 +59,31 @@
     });
   }
   const progress = document.querySelector('.chapter-progress span');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        entry.target.classList.add('entered');
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.scene').forEach(scene => observer.observe(scene));
+    document.body.classList.add('motion-ready');
+  }
+  if (!reduced && matchMedia('(pointer:fine)').matches) {
+    const hero = document.querySelector('.hero');
+    const object = document.querySelector('.hero-object');
+    hero.addEventListener('pointermove', event => {
+      const x = (event.clientX / innerWidth - .5) * 16;
+      const y = (event.clientY / innerHeight - .5) * 12;
+      object.style.setProperty('--tilt-x', `${x}px`);
+      object.style.setProperty('--tilt-y', `${y}px`);
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      object.style.setProperty('--tilt-x', '0px');
+      object.style.setProperty('--tilt-y', '0px');
+    });
+  }
   let scheduled = false;
   addEventListener('scroll', () => {
     if (scheduled) return;

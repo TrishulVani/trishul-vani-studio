@@ -5,9 +5,9 @@
     image.src = '/mark-v2.svg?v=design2mono';
   });
   const buildLabel = document.querySelector('.alpha');
-  if (buildLabel?.lastChild?.nodeType === Node.TEXT_NODE) buildLabel.lastChild.textContent = ' DESIGN 02 / SIGNAL RESEARCH';
+  if (buildLabel?.lastChild?.nodeType === Node.TEXT_NODE) buildLabel.lastChild.textContent = ' RESEARCH BUILD • SOFTWARE VALIDATION';
   const sidebarCredit = document.querySelector('.sidebar-credit');
-  if (sidebarCredit) sidebarCredit.textContent = 'VOLTEDGE • 2026 • DESIGN 02 / v0.2 ALPHA';
+  if (sidebarCredit) sidebarCredit.textContent = 'VOLTEDGE • 2026 • RESEARCH PROTOTYPE';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const progress = document.createElement('div');
   progress.className = 'v2-progress';
