@@ -11,16 +11,15 @@ Status: the six-chapter route is implemented at `/experience.html` on the immers
 
 ## Visual direction
 
-A single restrained midnight and ion-blue system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. Version 1 mint styles remain untouched. Motion is limited to transforms and opacity, with reduced-motion support.
+A single restrained midnight and ion-blue system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. The intro's original canvas sound field bends under the pointer like a suspended acoustic membrane; the signal-path microphones float with scroll, and ground/sea/air condition cards shift in depth. All these visuals are illustrative. Version 1 mint styles remain untouched. Motion is reduced to a static frame or disabled when requested, and the canvas pauses offscreen.
 
 | Token | Value | Use |
 |---|---|---|
-| Graphite | `#080d10` | Story and app background |
-| Instrument | `#121d20` | Cards and control surfaces |
-| Ink | `#f4f4ee` | Main copy |
-| Signal | `#8dd5c2` | Controls, progress and signal emphasis |
-| Metal | `#c6aa78` | Restrained trident highlight |
-| Muted | `#b7c5c2` | Supporting text |
+| Midnight | `#090d18` | Story and app background |
+| Instrument | `#111a2d` | Cards and control surfaces |
+| Ink | `#f3f5ff` | Main copy |
+| Signal | `#a8bbff` | Controls, progress and signal emphasis |
+| Muted | `#b7c4e4` | Supporting text |
 
 ## Six-chapter storyboard
 

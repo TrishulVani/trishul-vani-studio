@@ -23,6 +23,12 @@ test('microphone scene responds to scroll while keeping its content readable', a
   await page.evaluate(() => scrollBy(0, 280));
   await expect.poll(() => scene.evaluate(element => getComputedStyle(element).getPropertyValue('--float-a').trim())).not.toBe(before);
   await expect(page.getByRole('heading', { name: /Two ears for the environment/ })).toBeVisible();
+  const cards = page.locator('#policies .policy-grid article');
+  await expect(cards).toHaveCount(3);
+  await cards.first().scrollIntoViewIfNeeded();
+  const cardBefore = await cards.first().evaluate(element => getComputedStyle(element).transform);
+  await page.evaluate(() => scrollBy(0, 240));
+  await expect.poll(() => cards.first().evaluate(element => getComputedStyle(element).transform)).not.toBe(cardBefore);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
 });
 

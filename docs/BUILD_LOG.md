@@ -45,6 +45,8 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 
 ## 2026-10-11 — Immersive story integration
 
+- Revised the candidate's hero with an original canvas sound field that eases toward the pointer and produces local wave ripples; it pauses when offscreen and renders a static frame for reduced-motion visitors. Added depth-responsive acoustic cards and microphone poster, with ground/sea/air context labelled as illustrative. Browser suite passed 18/18 locally after this revision. Branch push and remote CI are separate checks.
+
 - Visual revision after user feedback: the earlier graphite/jade/metal mix was rejected. The candidate now uses a single midnight/ion-blue palette, a clearly visible trident above the entrance title, a centered spatial intro, original floating microphone illustrations, a parallax chapter backdrop, and matching lab/tutorial controls. Playwright browser suite: 18/18 passed on desktop, tablet, and mobile after the visual change, including scroll-driven microphone motion. This is still a review candidate, not a public release.
 
 - Built `/experience.html` with six connected chapters, original trident hero, visible lab navigation, real user-triggered synthetic engine playback, processor-derived RNNoise/spectral label and real visitor-history empty state. Educational policy and spectral artwork are explicitly labelled illustrations.

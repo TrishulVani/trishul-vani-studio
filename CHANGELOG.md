@@ -8,6 +8,8 @@
 
 ## Immersive Version 2 candidate — 2026-10-11
 
+- Added a pointer-responsive, canvas-rendered sound field to the intro, with eased water-like ripples and reduced-motion/static and offscreen-pause behavior. Introduced scroll/pointer-responsive acoustic condition cards and original microphone concept artwork in the comparison panel. Ground, sea and air are explicitly illustrative settings, not recorded or validated service conditions.
+
 - Revised after visual review: removed the orange/gold and jade mix in favor of one midnight and ion-blue system. Reframed the opening around a visible trident, oversized centered type, spatial grid, floating microphone chapter and scroll-driven motion; carried the same palette through the lab and tutorial.
 
 - Built a six-scene, dark graphite/jade entrance with an original trident, direct lab links, truthful two-mic architecture, noise-policy explanations and evidence empty states.

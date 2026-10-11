@@ -19,7 +19,7 @@
 
 ### Version 2 preview branch
 
-The `feat/immersive-story` candidate adds a dark six-scene entrance at `/experience.html`, a unified midnight/ion-blue Design 02 lab, and the same skippable guided tour in both lab versions. Its story generates a synthetic raw/hybrid comparison through the real FastAPI API when requested, draws its measured RMS waveform, and calculates an STFT spectrogram through the existing spectral backend. It never autoplays or treats the synthetic tone as intelligible speech. The separate [Version 2 public alias](https://trishulvani.github.io/design-v2/) is configured to redirect to the same-origin [Version 2 entrance](https://trishul-vani-studio.onrender.com/experience.html) when this candidate is released, avoiding third-party iframe cookie failures. The current public sites keep their existing behavior until the candidate passes review and deployment.
+The `feat/immersive-story` candidate adds a dark six-scene entrance at `/experience.html`, a unified midnight/ion-blue Design 02 lab, and the same skippable guided tour in both lab versions. The entrance has an original pointer-responsive sound-field canvas, scroll-responsive microphone scene, and dimensional cards for illustrative ground, sea and air noise conditions. Its story generates a synthetic raw/hybrid comparison through the real FastAPI API when requested, draws its measured RMS waveform, and calculates an STFT spectrogram through the existing spectral backend. It never autoplays or treats the synthetic tone as intelligible speech. The separate [Version 2 public alias](https://trishulvani.github.io/design-v2/) is configured to redirect to the same-origin [Version 2 entrance](https://trishul-vani-studio.onrender.com/experience.html) when this candidate is released, avoiding third-party iframe cookie failures. The current public sites keep their existing behavior until the candidate passes review and deployment.
 
 Run the browser tests with `pnpm install && pnpm exec playwright install chrome && pnpm exec playwright test`. They cover desktop, tablet and mobile navigation, the connected WAV/STFT comparison, reduced motion, disconnected processor behavior, laboratory measurement/CSV export, and a non-destructive spectral edit with WAV exports. CI runs these alongside the existing Python, DSP and Docker checks.
 
@@ -32,7 +32,7 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 | Destination | URL | Purpose |
 |---|---|---|
 | Version 1 | **https://trishulvani.github.io/** | Original mint visual system and intro, then the connected dashboard and studio |
-| Design 02 | **https://trishulvani.github.io/design-v2/** | Separate paper-and-graphite experience with a sculpted steel trident and original microphone imagery |
+| Design 02 | **https://trishulvani.github.io/design-v2/** | Current public design; replacement midnight/ion-blue story is pending review |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |

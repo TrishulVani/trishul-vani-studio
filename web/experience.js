@@ -124,6 +124,65 @@
     document.querySelectorAll('main section').forEach(section => chapterObserver.observe(section));
   }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const field = $('signal-tunnel');
+  const fieldContext = field.getContext('2d');
+  const fieldState = { x: .5, y: .5, targetX: .5, targetY: .5, energy: 0, active: false, frame: 0 };
+  const fieldHero = $('hero');
+  function sizeField() {
+    const pixelRatio = Math.min(2, devicePixelRatio || 1);
+    field.width = Math.round(fieldHero.clientWidth * pixelRatio);
+    field.height = Math.round(fieldHero.clientHeight * pixelRatio);
+    fieldContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    drawField(0, false);
+  }
+  function drawField(time, schedule = true) {
+    const width = fieldHero.clientWidth, height = fieldHero.clientHeight;
+    fieldContext.clearRect(0, 0, width, height);
+    fieldState.x += (fieldState.targetX - fieldState.x) * .055;
+    fieldState.y += (fieldState.targetY - fieldState.y) * .055;
+    fieldState.energy *= .966;
+    const pointerX = fieldState.x * width, pointerY = fieldState.y * height;
+    const radius = Math.max(160, width * .22);
+    const rows = 24, columns = 74;
+    for (let row = 0; row < rows; row++) {
+      const depth = row / (rows - 1);
+      const baseY = height * (.18 + depth * .67);
+      fieldContext.beginPath();
+      for (let column = 0; column <= columns; column++) {
+        const x = column / columns * width;
+        const dx = x - pointerX, dy = baseY - pointerY;
+        const distance = Math.hypot(dx, dy);
+        const influence = Math.exp(-distance * distance / (radius * radius));
+        const ambient = reduced ? 0 : Math.sin(x * .007 + time * .00055 + row * .34) * (3 + depth * 6);
+        const ripple = reduced ? 0 : influence * fieldState.energy * Math.sin(distance * .025 - time * .007) * (26 + depth * 30);
+        const y = baseY + ambient + ripple;
+        if (column === 0) fieldContext.moveTo(x, y); else fieldContext.lineTo(x, y);
+      }
+      fieldContext.strokeStyle = `rgba(169,190,255,${(.055 + depth * .12).toFixed(3)})`;
+      fieldContext.lineWidth = depth > .7 ? 1.2 : .8;
+      fieldContext.stroke();
+    }
+    if (fieldState.energy > .02 && !reduced) {
+      const glow = fieldContext.createRadialGradient(pointerX, pointerY, 0, pointerX, pointerY, radius);
+      glow.addColorStop(0, `rgba(168,187,255,${(.1 * fieldState.energy).toFixed(3)})`);
+      glow.addColorStop(1, 'rgba(168,187,255,0)');
+      fieldContext.fillStyle = glow;
+      fieldContext.fillRect(pointerX - radius, pointerY - radius, radius * 2, radius * 2);
+    }
+    if (!reduced && fieldState.active && schedule) fieldState.frame = requestAnimationFrame(drawField);
+  }
+  sizeField();
+  addEventListener('resize', sizeField, { passive: true });
+  if (!reduced && 'IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      const visible = entries[0]?.isIntersecting;
+      if (visible && !fieldState.active) { fieldState.active = true; fieldState.frame = requestAnimationFrame(drawField); }
+      else if (!visible && fieldState.active) { fieldState.active = false; cancelAnimationFrame(fieldState.frame); }
+    }, { threshold: 0 }).observe(fieldHero);
+  } else if (!reduced) {
+    fieldState.active = true;
+    fieldState.frame = requestAnimationFrame(drawField);
+  }
   if (!reduced && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) {
@@ -142,6 +201,10 @@
       const y = (event.clientY / innerHeight - .5) * 12;
       object.style.setProperty('--tilt-x', `${x}px`);
       object.style.setProperty('--tilt-y', `${y}px`);
+      const bounds = hero.getBoundingClientRect();
+      fieldState.targetX = (event.clientX - bounds.left) / bounds.width;
+      fieldState.targetY = (event.clientY - bounds.top) / bounds.height;
+      fieldState.energy = Math.min(1, fieldState.energy + .35);
     }, { passive: true });
     hero.addEventListener('pointerleave', () => {
       object.style.setProperty('--tilt-x', '0px');
@@ -165,7 +228,14 @@
     concept.style.setProperty('--wave-y', `${Math.round(conceptPosition * 32)}px`);
     concept.style.setProperty('--wave-scale', `${(1 + conceptPosition * .14).toFixed(3)}`);
     problem.style.setProperty('--photo-y', `${Math.round(normalized(problem) * 45)}px`);
-    policies.querySelectorAll('.policy-grid article').forEach((card, index) => card.style.setProperty('--policy-y', `${Math.round(normalized(policies) * (index - 1) * 32)}px`));
+    policies.querySelectorAll('.policy-grid article').forEach((card, index) => {
+      const progress = normalized(policies);
+      card.style.setProperty('--policy-y', `${Math.round(progress * (index - 1) * 48)}px`);
+      if (!card.matches(':hover')) {
+        card.style.setProperty('--card-x', `${(progress * (index - 1) * 5).toFixed(2)}deg`);
+        card.style.setProperty('--card-y', `${(progress * (index - 1) * -7).toFixed(2)}deg`);
+      }
+    });
     spectral.style.setProperty('--spectrum-roll', `${(normalized(spectral) * -7).toFixed(2)}deg`);
     spectral.style.setProperty('--spectrum-y', `${Math.round(normalized(spectral) * 25)}px`);
   }
@@ -180,6 +250,28 @@
     });
   }, { passive: true });
   sceneMotion();
+  if (!reduced && matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.policy-grid article').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const bounds = card.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - .5;
+        const y = (event.clientY - bounds.top) / bounds.height - .5;
+        card.style.setProperty('--card-x', `${(-y * 13).toFixed(2)}deg`);
+        card.style.setProperty('--card-y', `${(x * 13).toFixed(2)}deg`);
+      }, { passive: true });
+      card.addEventListener('pointerleave', sceneMotion);
+    });
+    const poster = document.querySelector('.instrument-poster');
+    poster.addEventListener('pointermove', event => {
+      const bounds = poster.getBoundingClientRect();
+      poster.style.setProperty('--poster-x', `${Math.round(((event.clientX - bounds.left) / bounds.width - .5) * 18)}px`);
+      poster.style.setProperty('--poster-y', `${Math.round(((event.clientY - bounds.top) / bounds.height - .5) * 12)}px`);
+    }, { passive: true });
+    poster.addEventListener('pointerleave', () => {
+      poster.style.setProperty('--poster-x', '0px');
+      poster.style.setProperty('--poster-y', '0px');
+    });
+  }
   loadMeta();
   loadEvidence();
 })();
