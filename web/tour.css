@@ -9,3 +9,9 @@ body.design-v2 .tv-tour-kicker,body.design-v2 .tv-video-note,body.design-v2 .tv-
 body.design-v2 .tv-tour-actions button{border-color:#52736e;background:#19332f;color:#f4f4ee}
 body.design-v2 .tv-tour-target{outline-color:#8dd5c2!important}
 body.design-v2 .tv-help-button:focus-visible,body.design-v2 .tv-tour button:focus-visible{outline-color:#8dd5c2}
+body.design-v2 .tv-help-button,body.design-v2 .tv-first,body.design-v2 .tv-tour{background:#151d34;color:#f5f6ff;border-color:#596996}
+body.design-v2 .tv-first button,body.design-v2 .tv-tour-actions [data-action=next]{background:#a8bbff;color:#090e20}
+body.design-v2 .tv-tour-kicker,body.design-v2 .tv-video-note,body.design-v2 .tv-video-note a{color:#c8d4ff!important}
+body.design-v2 .tv-tour-actions button{border-color:#596996;background:#1c2750;color:#f5f6ff}
+body.design-v2 .tv-tour-target{outline-color:#a8bbff!important}
+body.design-v2 .tv-help-button:focus-visible,body.design-v2 .tv-tour button:focus-visible{outline-color:#a8bbff}

@@ -10,7 +10,7 @@
     const canvas = $('comparison-wave'), ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const peak = Math.max(.01, ...values);
-    ctx.strokeStyle = '#8dd5c2'; ctx.lineWidth = 2; ctx.beginPath();
+    ctx.strokeStyle = '#a8bbff'; ctx.lineWidth = 2; ctx.beginPath();
     values.forEach((value, index) => {
       const x = index / (values.length - 1) * canvas.width;
       const height = Math.max(1, value / peak * canvas.height * .42);
@@ -45,9 +45,9 @@
           const db = rows[bin][Math.min(columns - 1, Math.floor(x / width * columns))];
           const energy = Math.pow(Math.max(0, Math.min(1, (db + 85) / 65)), 1.7);
           const i = (y * width + x) * 4;
-          frame.data[i] = Math.round(8 + 157 * energy);
-          frame.data[i + 1] = Math.round(17 + 208 * energy);
-          frame.data[i + 2] = Math.round(19 + 178 * energy);
+          frame.data[i] = Math.round(8 + 178 * energy);
+          frame.data[i + 1] = Math.round(12 + 194 * energy);
+          frame.data[i + 2] = Math.round(27 + 228 * energy);
           frame.data[i + 3] = 255;
         }
       }
@@ -149,15 +149,37 @@
     });
   }
   let scheduled = false;
+  const concept = $('concept');
+  const problem = $('problem');
+  const policies = $('policies');
+  const spectral = $('spectral');
+  function sceneMotion() {
+    if (reduced) return;
+    const normalized = element => {
+      const box = element.getBoundingClientRect();
+      return Math.max(-1, Math.min(1, (innerHeight * .5 - box.top - box.height * .5) / (innerHeight + box.height) * 2));
+    };
+    const conceptPosition = normalized(concept);
+    concept.style.setProperty('--float-a', `${Math.round(conceptPosition * -85)}px`);
+    concept.style.setProperty('--float-b', `${Math.round(conceptPosition * 100)}px`);
+    concept.style.setProperty('--wave-y', `${Math.round(conceptPosition * 32)}px`);
+    concept.style.setProperty('--wave-scale', `${(1 + conceptPosition * .14).toFixed(3)}`);
+    problem.style.setProperty('--photo-y', `${Math.round(normalized(problem) * 45)}px`);
+    policies.querySelectorAll('.policy-grid article').forEach((card, index) => card.style.setProperty('--policy-y', `${Math.round(normalized(policies) * (index - 1) * 32)}px`));
+    spectral.style.setProperty('--spectrum-roll', `${(normalized(spectral) * -7).toFixed(2)}deg`);
+    spectral.style.setProperty('--spectrum-y', `${Math.round(normalized(spectral) * 25)}px`);
+  }
   addEventListener('scroll', () => {
     if (scheduled) return;
     scheduled = true;
     requestAnimationFrame(() => {
       const max = document.documentElement.scrollHeight - innerHeight;
       progress.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+      sceneMotion();
       scheduled = false;
     });
   }, { passive: true });
+  sceneMotion();
   loadMeta();
   loadEvidence();
 })();

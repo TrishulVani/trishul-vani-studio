@@ -11,7 +11,7 @@ Status: the six-chapter route is implemented at `/experience.html` on the immers
 
 ## Visual direction
 
-A single restrained graphite, jade and warm-metal system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. Version 1 mint styles remain untouched. Motion is limited to transforms and opacity, with reduced-motion support.
+A single restrained midnight and ion-blue system for Design 02. Large Manrope editorial type, compact DM Sans data labels, a lone upright three-prong trident with reference-inspired curved arms and pointed spearheads. The microphone image is original project art; it is an atmospheric backdrop, never a substitute for measured signal data. Version 1 mint styles remain untouched. Motion is limited to transforms and opacity, with reduced-motion support.
 
 | Token | Value | Use |
 |---|---|---|

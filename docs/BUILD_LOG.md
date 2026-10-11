@@ -45,10 +45,10 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 
 ## 2026-10-11 — Immersive story integration
 
+- Visual revision after user feedback: the earlier graphite/jade/metal mix was rejected. The candidate now uses a single midnight/ion-blue palette, a clearly visible trident above the entrance title, a centered spatial intro, original floating microphone illustrations, a parallax chapter backdrop, and matching lab/tutorial controls. Playwright browser suite: 18/18 passed on desktop, tablet, and mobile after the visual change, including scroll-driven microphone motion. This is still a review candidate, not a public release.
+
 - Built `/experience.html` with six connected chapters, original trident hero, visible lab navigation, real user-triggered synthetic engine playback, processor-derived RNNoise/spectral label and real visitor-history empty state. Educational policy and spectral artwork are explicitly labelled illustrations.
 - Adopted a coherent dark graphite/jade/warm-metal Design 02 palette. Preserved the root Version 1 theme and intro. The Version 2 Pages alias now points to the same-origin Render experience in the candidate, avoiding third-party cookie dependence.
 - Integrated the guided-tour commit into this combined branch. Browser tests: 9/9 Playwright cases passed across 1440, 768 and 390 px; all three measured without horizontal overflow. Chrome manual test generated a three-second WAV using the local FastAPI engine. Desktop/tablet/mobile screenshots saved in `outputs/` outside the Git repository for visual review.
 - Production routes have not been replaced from this preview branch. The tutorial video is not produced. MySQL remains separately gated by production provider and credentials; metadata persistence does not make media durable.
 - Refined the story flow with an accessible six-chapter rail, actual experiment RMS envelope and measured STFT from the existing spectral API. Expanded browser QA to 15 cases, including lab CSV/WAV export and source-preserving spectral edit with undo; all 15 passed locally across desktop, tablet and mobile.
-
-

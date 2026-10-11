@@ -224,3 +224,31 @@ body.design-v2 .hero:after{background:linear-gradient(90deg,#071011fa 0%,#071011
 body.design-v2 .hero h1 em{color:#8dd5c2;-webkit-text-stroke:0}
 body.design-v2 .hero .primary-btn{background:#8dd5c2;border-color:#8dd5c2;color:#091511}
 body.design-v2 .hero .ghost-btn{color:#e5f3eb;border-color:#8dd5c2}
+
+/* Single-colour Design 02 system shared with the revised immersive entrance. */
+body.design-v2{--bg:#070910;--sidebar:#0b1020;--card:#12182b;--card2:#19223b;--hair:#3b466a;--line:#3b466a;--text:#f5f6ff;--muted:#adb6d4;--mint:#a8bbff;--mint2:#d3dcff;--cyan:#a8bbff;--soft:#b8c4eb;--v2-orange:#a8bbff;--v2-orange-bright:#d3dcff;--v2-orange-shadow:#a8bbff44;background:#070910;color:#f5f6ff}
+body.design-v2 .sidebar,body.design-v2 .rail,body.design-v2 .footer,body.design-v2 .integrity-note{background:#0b1020;border-color:#3b466a}
+body.design-v2 .topbar,body.design-v2 header{background:#090e1deD;border-color:#3b466a}
+body.design-v2 .main,body.design-v2 main,body.design-v2 .content,body.design-v2 .page{background:#070910;color:#f5f6ff}
+body.design-v2 .hero{background:radial-gradient(circle at 70% 45%,#394b8255,transparent 42%),linear-gradient(125deg,#090c18,#141d35 60%,#070910);border-color:#596996}
+body.design-v2 .hero:before{filter:grayscale(1) hue-rotate(180deg);opacity:.32}
+body.design-v2 .hero:after{background:linear-gradient(90deg,#070910fc 0%,#070910df 36%,#07091055 78%,transparent)}
+body.design-v2 .visual-core{background:radial-gradient(circle,#394970,#1a2442 56%,#0a1021);border-color:#a8bbff;box-shadow:0 0 0 22px #a8bbff0c,0 0 90px #a8bbff43}
+body.design-v2 .orbit-outer,body.design-v2 .orbit-mid,body.design-v2 .orbit-inner{border-color:#a8bbff55}
+body.design-v2 .metric-card,body.design-v2 .panel,body.design-v2 .workspace .panel{background:linear-gradient(150deg,#151d34,#0d1120);border-color:#3b466a;color:#f5f6ff}
+body.design-v2 .metric-card:hover,body.design-v2 .panel:hover{border-color:#a8bbff8a}
+body.design-v2 .nav-item.active,body.design-v2 .rail nav a.active,body.design-v2 .nav-item:hover,body.design-v2 .rail nav a:hover{background:#1c2750;border-color:#a8bbff;color:#f5f6ff}
+body.design-v2 .status-pill{background:#1c2750;border-color:#a8bbff;color:#e8edff}
+body.design-v2 .brand-thin,body.design-v2 .brand b,body.design-v2 .page-kicker,body.design-v2 .section-index,body.design-v2 .top-label,body.design-v2 .title-dot,body.design-v2 .metric-card .mini-index{color:#a8bbff}
+body.design-v2 .primary-btn,body.design-v2 .primary,body.design-v2 .run-button,body.design-v2 .hero .primary-btn{background:#a8bbff;border-color:#a8bbff;color:#090e20}
+body.design-v2 .primary-btn:hover,body.design-v2 .primary:hover,body.design-v2 .run-button:hover{background:#d3dcff}
+body.design-v2 .capability-row,body.design-v2 .history-row,body.design-v2 .dataset-card,body.design-v2 .dataset-intro,body.design-v2 .layer{background:#151d34;color:#f5f6ff;border-color:#3b466a}
+body.design-v2 .layer.selected{background:#26345c;border-color:#a8bbff}
+body.design-v2 .capability-row .cap-status,body.design-v2 .dataset-card .data-index,body.design-v2 .dataset-card p,body.design-v2 .dataset-card .data-type,body.design-v2 .dataset-intro strong,body.design-v2 .history-row .id,body.design-v2 .history-row small,body.design-v2 .value-green,body.design-v2 .layer .symbol,body.design-v2 .layer i,body.design-v2 .rail-note{color:#b6c6ff}
+body.design-v2 .bar-fill{background:linear-gradient(90deg,#586cad,#c8d4ff)}
+body.design-v2 .v2-progress span,body.design-v2 .arch-dot,body.design-v2 .arch-dot.blue,body.design-v2 .nav-current,body.design-v2 .status-pill i,body.design-v2 .tiny-circle,body.design-v2 .status-light,body.design-v2 .dot{background:#a8bbff;box-shadow:0 0 0 4px #a8bbff24}
+body.design-v2 .secondary-btn,body.design-v2 button:not(.primary-btn):not(.primary):not(.play):not(.run-button){border-color:#596996}
+body.design-v2 input[type=number],body.design-v2 input[type=text],body.design-v2 input:not([type]),body.design-v2 select{background:#0d1429;color:#f5f6ff;border-color:#596996}
+body.design-v2 .file-button{background:#1c2750;color:#f5f6ff;border-color:#596996}
+body.design-v2 #toast,body.design-v2 dialog{background:#151d34;color:#f5f6ff;border-color:#596996}
+body.design-v2 .hero h1 em{color:#a8bbff}body.design-v2 .hero .ghost-btn{color:#f5f6ff;border-color:#a8bbff}

@@ -8,6 +8,8 @@
 
 ## Immersive Version 2 candidate — 2026-10-11
 
+- Revised after visual review: removed the orange/gold and jade mix in favor of one midnight and ion-blue system. Reframed the opening around a visible trident, oversized centered type, spatial grid, floating microphone chapter and scroll-driven motion; carried the same palette through the lab and tutorial.
+
 - Built a six-scene, dark graphite/jade entrance with an original trident, direct lab links, truthful two-mic architecture, noise-policy explanations and evidence empty states.
 - Connected the optional raw/hybrid comparison to real FastAPI simulation and WAV endpoints; audio remains user initiated and clearly marked synthetic.
 - Unified Design 02 lab colors, included the five-step guided tour in both lab versions and removed public-facing design-build tags.
@@ -42,5 +44,3 @@ Added isolated Python workspaces, Render configuration, tested browser DSP, and 
 
 - Added a five-step, keyboard-accessible guided tour across Mission Control and Spectral Studio. It highlights real controls, preserves progress during navigation, supports Skip/Back/Next/Finish and can be reopened from Help.
 - The 80-second video is explicitly labelled coming soon. Added a real-screen storyboard and caption draft; no video file is claimed.
-
-

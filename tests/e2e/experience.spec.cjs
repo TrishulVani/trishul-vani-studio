@@ -14,6 +14,18 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('microphone scene responds to scroll while keeping its content readable', async ({ page }) => {
+  await page.goto('/experience.html');
+  const scene = page.locator('#concept');
+  await scene.scrollIntoViewIfNeeded();
+  await expect(scene.locator('.floating-mic')).toHaveCount(2);
+  const before = await scene.evaluate(element => getComputedStyle(element).getPropertyValue('--float-a').trim());
+  await page.evaluate(() => scrollBy(0, 280));
+  await expect.poll(() => scene.evaluate(element => getComputedStyle(element).getPropertyValue('--float-a').trim())).not.toBe(before);
+  await expect(page.getByRole('heading', { name: /Two ears for the environment/ })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+});
+
 test('real processor generates a user-triggered synthetic comparison', async ({ page, request }) => {
   await page.goto('/experience.html');
   await expect(page.locator('#evidence-content')).not.toHaveText(/Checking this visitor/);
