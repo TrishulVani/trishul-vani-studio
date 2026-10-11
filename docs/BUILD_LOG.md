@@ -29,3 +29,9 @@ Starter baseline: 9 tests passed on Python 3.12.14 / Windows. JavaScript syntax 
 17 Python tests and browser DSP identity/band/FFT/WAV tests passed; JS syntax passed. PR #7 merged at de9342b with Python 3.11/3.12 and Docker CI green. User chose GitHub Pages and Render; Sites was abandoned before publication. Release 519be97 pushed. Final deployment/CI verification follows.
 
 Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Docker on main/release branch). Browser DSP is now included in CI. Uploaded-audio cross-visitor isolation test passed. GitHub Pages entry pushed at 6afbac3. Render deployment in progress.
+## 2026-10-11 — Design 02 candidate and v0.3 intake
+
+- Inspected both repository baselines (`229858c` app, `8514c52` Pages), routes, CI, existing UX specifications and the supplied logo reference.
+- Implemented a Design 02-only monochrome candidate with a pointed, curved trident SVG, original microphone image, updated intro, transitions and matching signal visualization. Version 1 files and production Pages repository were not changed.
+- JavaScript syntax and browser DSP suite passed locally. Python pytest could not complete locally because Windows denied the default temporary directory; rerun with a workspace base temporary directory stalled, so GitHub CI is the independent check.
+- Added `IMMERSIVE_UX_SPEC.md` and `V03_COMPATIBILITY.md` for six-scene narrative and tutorial/MySQL gates. Neither the six-scene narrative, tutorial video nor MySQL is claimed complete.
