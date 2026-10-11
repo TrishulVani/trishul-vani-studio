@@ -116,7 +116,11 @@ async function refreshHistory(){
   }catch(err){notify('Cannot refresh history: '+err.message,true)}
 }
 async function loadMeta(){
-  const meta=await api('/api/meta');state.meta=meta;
+  const [health,meta]=await Promise.all([api('/api/health'),api('/api/meta')]);
+  if(health.status!=='ok')throw new Error('Health check failed');
+  state.meta=meta;
+  $('#processor-status').textContent='PYTHON PROCESSOR CONNECTED';
+  $('#retry-connection').hidden=true;
   $('#hero-ai-state').textContent=meta.capabilities.rnnoise?'RNNOISE ENABLED':'SPECTRAL FALLBACK / NO AI MODEL';
   const capabilities=[['Adaptive NLMS','nlms'],['Spectral DSP baseline','spectral'],['Hybrid reference controller','hybrid'],['Real RNNoise neural enhancement','rnnoise'],['STOI intelligibility scoring','stoi'],['PESQ scoring (optional)','pesq']];
   $('#capability-list').innerHTML=capabilities.map(([label,key])=>`<div class="capability-row"><span>${label}</span><span class="cap-status ${meta.capabilities[key]?'':'off'}">${meta.capabilities[key]?'READY':'NOT CONFIGURED'}</span></div>`).join('');
@@ -140,7 +144,17 @@ async function init(){
   $$('.nav-item').forEach(item=>item.addEventListener('click',()=>{$$('.nav-item').forEach(x=>x.classList.toggle('active',x===item))}));
   window.addEventListener('resize',()=>drawWaveform(state.report?.waveforms?.[state.track]));
   drawWaveform();setTrack('raw');
-  const results=await Promise.allSettled([loadMeta(),refreshHistory(),loadDatasets()]);
-  const err=results.find(x=>x.status==='rejected');if(err)notify('Service not fully available: '+err.reason.message,true);
+  const checkConnection=async()=>{
+    $('#processor-status').textContent='CONNECTING TO PROCESSOR';
+    const results=await Promise.allSettled([loadMeta(),refreshHistory(),loadDatasets()]);
+    const err=results.find(x=>x.status==='rejected');
+    if(results[0].status==='rejected'){
+      $('#processor-status').textContent='PROCESSOR UNAVAILABLE';
+      $('#retry-connection').hidden=false;
+    }
+    if(err)notify('Service not fully available: '+err.reason.message,true);
+  };
+  $('#retry-connection').addEventListener('click',checkConnection);
+  await checkConnection();
 }
 init();
