@@ -20,3 +20,7 @@ Set TRISHUL_PUBLIC_HOSTING=1 for visitor-isolated temporary workspaces. Visitors
 Free Render storage is ephemeral and services sleep when idle. Export WAV/JSON to keep results. This is a research prototype, not a durable archive or production SLA. GitHub Pages embeds the Python app; browsers blocking third-party cookies can open the backend directly.
 
 Local: install requirements-dev.txt, run pytest, then uvicorn app.main:app --port 8000. Docker: docker compose up --build. Optional browser-only edition: python scripts/build_public.py.
+
+## Optional database branch
+
+The public Render service has no configured MySQL provider or production `DATABASE_URL`. The database foundation is staged separately. Do not enable it until migrations, provider TLS, owner isolation, backup/restore and binary-storage limitations are verified; see [`DATABASE.md`](DATABASE.md).

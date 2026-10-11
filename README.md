@@ -41,6 +41,10 @@ Both GitHub Pages entries load the complete Render application in an embedded wo
 
 The public website and the backend are separate repositories/services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the entry shell on GitHub Pages, and this repository hosts the full app on Render. The source for the Pages shell is mirrored in [`deploy/pages/`](deploy/pages/).
 
+### Optional MySQL metadata candidate
+
+The current public deployment still uses temporary file-backed storage. A separate `feat/mysql-foundation` branch prepares owner-scoped structured metadata, an Alembic migration, opt-in MySQL 8.4 Compose, a readiness endpoint, and an idempotent file-metadata import. **No production database or durable audio store is configured.** Read [`docs/DATABASE.md`](docs/DATABASE.md) before enabling it.
+
 ### Release and CI/CD
 
 - **Version 1:** the original mint intro, typography, dashboard and editor remain at the root address.

@@ -23,3 +23,7 @@
 
 ## Public hosting
 Added isolated Python workspaces, Render configuration, tested browser DSP, and corrected the Spectral Studio status.
+
+## Optional MySQL foundation candidate — 2026-10-11
+
+- Prepared pinned SQLAlchemy/Alembic/PyMySQL, owner-scoped metadata tables, reversible initial migration, opt-in MySQL Compose and CI service, readiness, safe DB-save failure handling, and idempotent file-metadata import. Production database and durable audio remain unconfigured.
