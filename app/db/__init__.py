@@ -52,6 +52,9 @@ def save_experiment(record: dict) -> None:
             visitor = VisitorSession(token_hash=session_id, created_at=now, last_seen_at=now,
                                      expires_at=now+timedelta(days=7))
             session.add(visitor)
+            # MySQL enforces the experiment FK before SQLAlchemy can infer an
+            # ordering between these independent pending ORM objects.
+            session.flush()
         else:
             visitor.last_seen_at = now
         row = Experiment(id=record['id'], owner_hash=session_id, source_type=record['source'],

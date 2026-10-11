@@ -33,3 +33,5 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 ## 2026-10-11 — Optional MySQL foundation candidate
 
 - SQLite Alembic upgrade and readiness passed. Metadata owner separation and expired-media status tests: 2 passed, MySQL-specific test skipped locally without a service. Migration CLI: dry-run 1 examined/0 imported; apply 1 imported; repeat 1 existing/0 imported. Python compile passed. Full Windows API suite still stalls in TestClient, so GitHub CI is required for independent regression and MySQL-service verification. No production DB configured.
+
+- GitHub MySQL integration found an FK ordering issue: the new visitor row was not flushed before the experiment insert. Added an explicit flush within the same transaction. Local SQLite tests again pass (2 passed, MySQL skipped); remote MySQL CI will verify the actual server behavior.
