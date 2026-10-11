@@ -8,6 +8,7 @@ import csv
 import io
 import json
 import os
+import shutil
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,6 +23,7 @@ from pydantic import BaseModel, Field
 
 from .dsp import (FS, envelope, evaluate_methods, mix_pair, repeat_or_crop,
                   resample, rnnoise_available, synthetic_noise, synthetic_voice)
+from . import db
 
 BASE = Path(__file__).resolve().parent.parent
 DATA_DIR = Path(os.environ.get('TRISHUL_ARTIFACT_DIR', str(BASE/'artifacts'))).resolve()
@@ -44,12 +46,20 @@ def _dir(run_id: str) -> Path:
     if not run_id or not all(c in '0123456789abcdef' for c in run_id) or len(run_id) != 12:
         raise HTTPException(404,'Experiment not found')
     p = DATA_DIR/run_id
+    if db.configured():
+        if db.get_experiment(run_id) is None:
+            raise HTTPException(404,'Experiment not found')
+        if not (p/'report.json').is_file():
+            raise HTTPException(410,'Audio and file-based report expired; export results before temporary storage resets')
     if not (p/'report.json').is_file():
         raise HTTPException(404,'Experiment not found')
     return p
 
 
 def _index() -> list[dict]:
+    if db.configured():
+        records = db.list_experiments()
+        return [{k:record.get(k) for k in ('id','created_at','source','noise','snr_db','duration_s','seed','model','metrics')} for record in records]
     if not DATA_DIR.exists():
         return []
     reports = []
@@ -99,12 +109,27 @@ def _store(clean:np.ndarray|None, primary:np.ndarray, reference:np.ndarray, *, s
         for name, wave in {'raw':primary,'reference':reference,**({'clean':clean} if clean is not None else {}),**methods}.items():
             sf.write(target/f'{name}.wav',np.clip(wave,-1,1),FS,subtype='PCM_16')
         (target/'report.json').write_text(json.dumps(record,allow_nan=False,indent=2),encoding='utf-8')
+        if db.configured():
+            try:
+                db.save_experiment(record)
+            except Exception as exc:
+                shutil.rmtree(target)
+                raise HTTPException(503,'Database save failed; experiment was not retained') from exc
     return record
 
 
 @app.get('/api/health')
 def health():
     return {'status':'ok','service':'TRISHUL VANI','version':'0.1.0'}
+
+
+@app.get('/api/readiness')
+def readiness():
+    if not db.configured():
+        return {'status':'ready','metadata_mode':'ephemeral_files','database':'disabled'}
+    if not db.ready():
+        return JSONResponse({'status':'unavailable','metadata_mode':'mysql','database':'unavailable_or_unmigrated'},status_code=503)
+    return {'status':'ready','metadata_mode':'mysql','database':'connected'}
 
 
 @app.get('/api/meta')

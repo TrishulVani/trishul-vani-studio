@@ -1,0 +1,27 @@
+# Opt-in local MySQL development. Never use the example password outside localhost.
+services:
+  mysql:
+    image: mysql:8.4
+    profiles: [mysql]
+    environment:
+      MYSQL_DATABASE: trishul
+      MYSQL_USER: research
+      MYSQL_PASSWORD: ${MYSQL_LOCAL_PASSWORD:-local-only-change-me}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_LOCAL_ROOT_PASSWORD:-local-root-change-me}
+    ports:
+      - '127.0.0.1:3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  research-workbench:
+    environment:
+      DATABASE_URL: mysql+pymysql://research:${MYSQL_LOCAL_PASSWORD:-local-only-change-me}@mysql:3306/trishul
+    depends_on:
+      mysql:
+        condition: service_healthy
+volumes:
+  mysql_data:

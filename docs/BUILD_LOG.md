@@ -29,3 +29,9 @@ Starter baseline: 9 tests passed on Python 3.12.14 / Windows. JavaScript syntax 
 17 Python tests and browser DSP identity/band/FFT/WAV tests passed; JS syntax passed. PR #7 merged at de9342b with Python 3.11/3.12 and Docker CI green. User chose GitHub Pages and Render; Sites was abandoned before publication. Release 519be97 pushed. Final deployment/CI verification follows.
 
 Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Docker on main/release branch). Browser DSP is now included in CI. Uploaded-audio cross-visitor isolation test passed. GitHub Pages entry pushed at 6afbac3. Render deployment in progress.
+
+## 2026-10-11 — Optional MySQL foundation candidate
+
+- SQLite Alembic upgrade and readiness passed. Metadata owner separation and expired-media status tests: 2 passed, MySQL-specific test skipped locally without a service. Migration CLI: dry-run 1 examined/0 imported; apply 1 imported; repeat 1 existing/0 imported. Python compile passed. Full Windows API suite still stalls in TestClient, so GitHub CI is required for independent regression and MySQL-service verification. No production DB configured.
+
+- GitHub MySQL integration found an FK ordering issue: the new visitor row was not flushed before the experiment insert. Added an explicit flush within the same transaction. Local SQLite tests again pass (2 passed, MySQL skipped); remote MySQL CI will verify the actual server behavior.
