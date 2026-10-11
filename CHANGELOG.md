@@ -23,3 +23,8 @@
 
 ## Public hosting
 Added isolated Python workspaces, Render configuration, tested browser DSP, and corrected the Spectral Studio status.
+
+## Guided onboarding candidate — 2026-10-11
+
+- Added a five-step, keyboard-accessible guided tour across Mission Control and Spectral Studio. It highlights real controls, preserves progress during navigation, supports Skip/Back/Next/Finish and can be reopened from Help.
+- The 80-second video is explicitly labelled coming soon. Added a real-screen storyboard and caption draft; no video file is claimed.
