@@ -2,3 +2,10 @@
 
 body.design-v2 .tv-help-button,body.design-v2 .tv-tour{background:#181818;color:#f5f4ef;border-color:#aaa}body.design-v2 .tv-first{background:#f4f3ef;color:#171717;border-color:#999}body.design-v2 .tv-first button,body.design-v2 .tv-tour-actions [data-action=next]{background:#191919;color:#f5f4ef}body.design-v2 .tv-first [data-action=dismiss]{color:#111;background:transparent}body.design-v2 .tv-tour-kicker,body.design-v2 .tv-video-note,body.design-v2 .tv-video-note a{color:#d3d3ce!important}body.design-v2 .tv-tour-actions button{border-color:#bcbcb7;background:#343434;color:#f3f3ef}body.design-v2 .tv-tour-target{outline-color:#111!important}body.design-v2 .tv-help-button:focus-visible,body.design-v2 .tv-tour button:focus-visible{outline-color:#111}
 #retry-connection{padding:7px 10px;border:1px solid currentColor;border-radius:4px;background:transparent;color:inherit;font-size:10px;font-weight:700;cursor:pointer}#retry-connection[hidden]{display:none}.status-pill:has(+ #retry-connection:not([hidden])){border-color:#b68b79;color:#e4b7a5}.status-pill:has(+ #retry-connection:not([hidden])) i{background:#cb8b75;box-shadow:none}
+body.design-v2 .tv-help-button,body.design-v2 .tv-first,body.design-v2 .tv-tour{background:#142522;color:#f4f4ee;border-color:#52736e}
+body.design-v2 .tv-first button,body.design-v2 .tv-tour-actions [data-action=next]{background:#8dd5c2;color:#081411}
+body.design-v2 .tv-first [data-action=dismiss]{background:transparent;color:#f4f4ee}
+body.design-v2 .tv-tour-kicker,body.design-v2 .tv-video-note,body.design-v2 .tv-video-note a{color:#a9dfce!important}
+body.design-v2 .tv-tour-actions button{border-color:#52736e;background:#19332f;color:#f4f4ee}
+body.design-v2 .tv-tour-target{outline-color:#8dd5c2!important}
+body.design-v2 .tv-help-button:focus-visible,body.design-v2 .tv-tour button:focus-visible{outline-color:#8dd5c2}

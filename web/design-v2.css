@@ -200,3 +200,27 @@ body.design-v2 .bar-fill{background:linear-gradient(90deg,#4f9e88,#a3dbc9)}
 body.design-v2 .footer,body.design-v2 .integrity-note{background:#0d171a;color:#a9bbb5;border-color:#395256}
 body.design-v2 .footer strong,body.design-v2 .footer strong span{color:#e9eee9}
 body.design-v2 .v2-progress span{background:#8dd5c2}
+body.design-v2 .main,body.design-v2 main,body.design-v2 .content,body.design-v2 .page{background:#080d10;color:#f4f4ee}
+body.design-v2 .brand,body.design-v2 .brand strong,body.design-v2 .brand b{color:#f4f4ee}
+body.design-v2 .brand-symbol,body.design-v2 .brand .trident{filter:drop-shadow(0 0 8px #8dd5c255)}
+body.design-v2 .brand small,body.design-v2 .sidebar-group-title,body.design-v2 .eyebrow,body.design-v2 .breadcrumbs span:first-child,body.design-v2 .sidebar-credit{color:#a6bdb5}
+body.design-v2 .nav-item,body.design-v2 .rail nav a{color:#b4c7c0}
+body.design-v2 .nav-item:hover,body.design-v2 .rail nav a:hover{background:#19332f;color:#f4f4ee}
+body.design-v2 .sidebar-divider{background:#385054}
+body.design-v2 .sidebar-bottom{background:#142522;border-color:#395256}
+body.design-v2 .sidebar-bottom strong,body.design-v2 .architecture-side strong{color:#f2f4ef}
+body.design-v2 .sidebar-bottom>span,body.design-v2 .architecture-side small{color:#adc0b8}
+body.design-v2 .arch-dot,body.design-v2 .arch-dot.blue,body.design-v2 .nav-current,body.design-v2 .status-pill i,body.design-v2 .tiny-circle,body.design-v2 .status-light,body.design-v2 .dot{background:#8dd5c2;box-shadow:0 0 0 4px #8dd5c224}
+body.design-v2 .section-head h2,body.design-v2 h1:not(.hero h1),body.design-v2 h2,body.design-v2 h3{color:#f4f4ee}
+body.design-v2 .metric-card .mini-index{color:#8dd5c2}
+body.design-v2 .metric-card strong,body.design-v2 .panel strong{color:#f4f4ee}
+body.design-v2 .secondary-btn,body.design-v2 button:not(.primary-btn):not(.primary):not(.play):not(.run-button){border-color:#52736e}
+body.design-v2 input[type=number],body.design-v2 input[type=text],body.design-v2 input:not([type]),body.design-v2 select{background:#0d1a1b;color:#f4f4ee;border-color:#45645f}
+body.design-v2 .layer{background:#152528;color:#f4f4ee}body.design-v2 .layer.selected{background:#214139;border-color:#8dd5c2}
+body.design-v2 .layer .symbol,body.design-v2 .layer i,body.design-v2 .rail-note{color:#acd8c7}
+body.design-v2 .file-button{background:#1b3530;color:#eaf3ed;border-color:#52736e}
+body.design-v2 #toast,body.design-v2 dialog{background:#152528;color:#f4f4ee;border-color:#52736e}
+body.design-v2 .hero:after{background:linear-gradient(90deg,#071011fa 0%,#071011da 36%,#07101144 78%,transparent)}
+body.design-v2 .hero h1 em{color:#8dd5c2;-webkit-text-stroke:0}
+body.design-v2 .hero .primary-btn{background:#8dd5c2;border-color:#8dd5c2;color:#091511}
+body.design-v2 .hero .ghost-btn{color:#e5f3eb;border-color:#8dd5c2}
