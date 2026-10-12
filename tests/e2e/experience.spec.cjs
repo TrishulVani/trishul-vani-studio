@@ -48,6 +48,26 @@ test('sound chamber grows to full width and the figure moves through it', async 
   await expect(page.locator('.relaunch-media-index')).toContainText('SEPARATE');
 });
 
+test('aircraft flyover follows scroll in both directions before the sound story', async ({ page }) => {
+  await page.goto('/index.html?design=2');
+  const flyover = page.locator('.flyover-v2');
+  const craft = page.locator('.flyover-craft');
+  await expect(flyover).toBeVisible();
+  await expect(craft.locator('img')).toHaveAttribute('src', '/assets/b2-flyover-v2.webp');
+  await expect(page.locator('.relaunch-story')).toBeVisible();
+  const progress = async () => Number((await page.locator('#flyover-percent').innerText()).replace('%', ''));
+  await page.evaluate(() => { const scene = document.querySelector('.flyover-v2'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .66); });
+  await expect.poll(progress).toBeGreaterThan(60);
+  const forward = await craft.evaluate(el => getComputedStyle(el).transform);
+  await page.evaluate(() => { const scene = document.querySelector('.flyover-v2'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .23); });
+  await expect.poll(progress).toBeLessThan(30);
+  await expect(page.locator('#flyover-direction')).toContainText('REWINDING');
+  expect(await craft.evaluate(el => getComputedStyle(el).transform)).not.toBe(forward);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+  await page.goto('/index.html');
+  await expect(page.locator('.flyover-v2')).toHaveCount(0);
+});
+
 test('story launch reaches the redesigned working lab', async ({ page }) => {
   await page.goto('/experience.html?story=1');
   await page.getByRole('link', { name: 'Enter TRISHUL VANI' }).first().click();

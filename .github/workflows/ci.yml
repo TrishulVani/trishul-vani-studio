@@ -41,6 +41,7 @@ jobs:
           node --check web/experience.js
           node --check web/arrival-v2.js
           node --check web/relaunch-v2.js
+          node --check web/flyover-v2.js
           node --check web/tour.js
           test -s web/tour.css
           test -s docs/TUTORIAL_STORYBOARD.md
@@ -55,6 +56,8 @@ jobs:
           test -s web/mark-v2.svg
           test -s web/assets/signal-chamber-v2.png
           test -s web/assets/signal-operator-v2.png
+          test -s web/assets/b2-flyover-v2.webp
+          test -s web/flyover-v2.css
           test -s web/assets/signal-microphones-v2.webp
           test -s deploy/pages/design-v2/index.html
           test -s deploy/pages/design-v2/mark.svg

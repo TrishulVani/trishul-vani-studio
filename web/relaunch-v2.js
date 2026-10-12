@@ -73,7 +73,7 @@
     for (let ring = 0; ring < 25; ring++) {
       const radius = ((ring / 25 + progress * .5 + (reduce ? 0 : time * .000025)) % 1) * Math.max(w, h) * .85;
       ctx.beginPath(); ctx.ellipse(centerX, centerY, radius, radius * (.45 + progress * .22), progress * .15, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(151,224,193,${(.13 * (1 - radius / (Math.max(w, h) * .85))).toFixed(3)})`;
+      ctx.strokeStyle = `rgba(171,191,205,${(.13 * (1 - radius / (Math.max(w, h) * .85))).toFixed(3)})`;
       ctx.lineWidth = ring % 5 === 0 ? 1.4 : .6; ctx.stroke();
     }
     if (active >= 1) {
@@ -86,7 +86,7 @@
           const y = yBase + (line - 10) * 13 + wave;
           if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = `rgba(128,208,174,${.016 + line / 170})`; ctx.stroke();
+        ctx.strokeStyle = `rgba(214,170,121,${.016 + line / 170})`; ctx.stroke();
       }
     }
     raf = requestAnimationFrame(draw);

@@ -47,7 +47,7 @@
       const radius = (((i / 18 + Math.max(0, elapsed) * .00007) % 1) + 1) % 1 * Math.max(w, h) * .77;
       const opacity = (1 - radius / (Math.max(w, h) * .77)) * .18;
       ctx.beginPath(); ctx.ellipse(cx, cy, radius * 1.75, radius * .46, -.15, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(151,224,193,${opacity})`; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.strokeStyle = `rgba(171,191,205,${opacity})`; ctx.lineWidth = 1.2; ctx.stroke();
     }
     for (let row = 0; row < 34; row++) {
       const y = h * (.57 + (row - 17) * .013);
@@ -57,7 +57,7 @@
         const wave = Math.sin(x * .018 + elapsed * .0017 + row * .3) * center * (7 + p * 12);
         if (!x) ctx.moveTo(x, y + wave); else ctx.lineTo(x, y + wave);
       }
-      ctx.strokeStyle = `rgba(128,208,174,${.013 + Math.abs(row - 17) / 34 * .024})`; ctx.stroke();
+      ctx.strokeStyle = `rgba(214,170,121,${.013 + Math.abs(row - 17) / 34 * .024})`; ctx.stroke();
     }
     if (p >= 1) { go(); return; }
     raf = requestAnimationFrame(draw);

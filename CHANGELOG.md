@@ -6,6 +6,12 @@
 
 # Changelog
 
+## Version 2 flyover candidate — 2026-10-12
+
+- Added a reversible, scroll-controlled B-2 concept flyover before the connected sound story, using the image from the user-supplied `B2_Spirit_Scroll_Flyover.html`. The aircraft is illustrative artwork, not Indian service equipment or a performance claim.
+- Replaced the rejected green V2 palette with the reference study's charcoal, steel and copper colors across the intro, landing, lab and spectral workspace. The floating signal figure remains in the intro and sound chamber. Version 1 and the audio-processing algorithms remain unchanged.
+- Added browser coverage for forward and reverse flight motion and retained connected API, export, editor and reduced-motion checks. The public V2 alias remains on its previous version pending visual approval.
+
 ## Immersive Version 2 candidate — 2026-10-11
 
 - Rebuilt the current V2 candidate around a dark violet-and-silver introduction and landing. An original sculpted trident moves through a reactive sound field, approaches the viewer, and enters the connected app automatically; Skip and Escape work immediately. The landing now scrolls through four sound-processing chapters before the real laboratory. Browser validation: 27/27 desktop, tablet and mobile checks passed, including Version 1 regression, connected lab and spectral editor.
