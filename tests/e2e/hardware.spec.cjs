@@ -72,7 +72,7 @@ test('V2 Hindi mark is legible and hardware layout fits viewport', async ({ page
 });
 
 test('the same green favicon and Hindi brand appear across site pages', async ({ page }) => {
-  for (const route of ['/index.html', '/index.html?design=2', '/experience.html', '/studio.html', '/hardware.html', '/about.html']) {
+  for (const route of ['/index.html', '/index.html?design=2', '/experience.html', '/studio.html', '/hardware.html', '/hardware-mkv.html', '/about.html']) {
     await page.goto(route);
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', /favicon\.svg/);
     await expect(page).toHaveTitle(/त्रिSHUL VANI/);
