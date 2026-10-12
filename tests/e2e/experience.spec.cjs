@@ -21,8 +21,8 @@ test('intro automatically leads to the rebuilt working landing', async ({ page }
   await expect.poll(() => page.locator('.arrival-wordmark').evaluate(el => Number(getComputedStyle(el).opacity)), { timeout: 5000 }).toBeGreaterThan(.5);
   await expect(page).toHaveURL(/index\.html\?design=2$/, { timeout: 20000 });
   await expect(page.locator('.relaunch-story')).toBeVisible();
-  await expect(page.getByRole('heading', { name: /Hear what matters/i })).toBeVisible();
-  await expect(page.locator('.relaunch-shot')).toHaveCount(3);
+  await expect(page.getByRole('heading', { name: /The signal survives/i })).toBeVisible();
+  await expect(page.locator('.relaunch-flight')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
   await expect(page.locator('img[src*="microphone-v2"]')).toHaveCount(0);
 });
 
@@ -36,7 +36,7 @@ test('intro can be skipped and Version 1 keeps its original landing', async ({ p
   await expect(page.getByRole('heading', { name: /Clarity under pressure/i })).toBeVisible();
 });
 
-test('scene grows to full width and moves from ground to sea', async ({ page }) => {
+test('sound chamber grows to full width and the figure moves through it', async ({ page }) => {
   await page.goto('/index.html?design=2');
   const media = page.locator('.relaunch-media');
   const firstWidth = (await media.boundingBox()).width;
@@ -44,7 +44,8 @@ test('scene grows to full width and moves from ground to sea', async ({ page }) 
   await page.evaluate(() => { const scene = document.querySelector('.relaunch-story'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .62); });
   await expect(page.locator('.relaunch-story')).toHaveAttribute('data-chapter', '2');
   await expect.poll(async () => (await media.boundingBox()).width).toBeGreaterThan(page.viewportSize().width * .98);
-  await expect(page.locator('.shot-sea')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.relaunch-flight')).toBeVisible();
+  await expect(page.locator('.relaunch-media-index')).toContainText('SEPARATE');
 });
 
 test('story launch reaches the redesigned working lab', async ({ page }) => {
@@ -52,7 +53,7 @@ test('story launch reaches the redesigned working lab', async ({ page }) => {
   await page.getByRole('link', { name: 'Enter TRISHUL VANI' }).first().click();
   await expect(page.locator('.launch-portal.is-active .throw-object img')).toHaveCount(6);
   await expect(page).toHaveURL(/index\.html\?design=2$/);
-  await expect(page.getByRole('heading', { name: /Hear what matters/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /The signal survives/i })).toBeVisible();
   await expect(page.locator('.relaunch-story')).toBeVisible();
   await expect(page.locator('img[src*="microphone-v2"]')).toHaveCount(0);
 });

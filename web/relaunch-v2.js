@@ -8,14 +8,13 @@
   story.innerHTML = `
     <div class="relaunch-stage">
       <canvas id="relaunch-field" aria-hidden="true"></canvas>
-      <div class="relaunch-media" aria-hidden="true"><img class="relaunch-shot shot-ground" src="/assets/signal-ground-v2.png" alt=""><img class="relaunch-shot shot-sea" src="/assets/signal-sea-v2.png" alt=""><img class="relaunch-shot shot-air" src="/assets/signal-air-v2.png" alt=""><span class="relaunch-media-index" id="relaunch-media-index">FIELD 01 / GROUND</span><span class="relaunch-media-corner"></span></div>
+      <div class="relaunch-media" aria-hidden="true"><img class="relaunch-chamber" src="/assets/signal-chamber-v2.png" alt=""><div class="relaunch-energy"></div><div class="relaunch-flight-wrap"><img class="relaunch-flight" src="/assets/signal-operator-v2.png" alt=""></div><span class="relaunch-media-index" id="relaunch-media-index">TRANSMISSION 01 / ACQUIRE</span><span class="relaunch-media-corner"></span></div>
       <div class="relaunch-orbit" aria-hidden="true"></div>
-      <img class="relaunch-art" src="/assets/trident-sculpture-v2.png" alt="" aria-hidden="true">
       <div class="relaunch-top"><span>TRISHUL VANI / 2026</span><span id="relaunch-count">01 / 04</span></div>
-      <div class="relaunch-chapter is-current" data-index="0"><span class="relaunch-kicker">SOUND INTELLIGENCE / INDEPENDENT RESEARCH</span><h1>Hear what<br><em>matters.</em></h1><p>A research instrument for speech clarity in the demanding acoustic conditions of ground, sea and air.</p><a href="#audio-lab">Start with the audio lab <span aria-hidden="true">↗</span></a></div>
-      <div class="relaunch-chapter" data-index="1"><span class="relaunch-kicker">01 / GROUND · STEADY INTERFERENCE</span><h2>Find the voice<br><em>inside the noise.</em></h2><p>Two inputs observe one environment. The adaptive filter learns the persistent hum while preserving the speech path.</p></div>
-      <div class="relaunch-chapter" data-index="2"><span class="relaunch-kicker">02 / SEA · CHANGING CONDITIONS</span><h2>Nothing<br><em>stays still.</em></h2><p>Wind and water shift around the reference signal. The processor updates its estimate as the sound field changes.</p></div>
-      <div class="relaunch-chapter" data-index="3"><span class="relaunch-kicker">03 / AIR · SUDDEN TRANSIENTS</span><h2>Clarity is<br><em>a decision.</em></h2><p>Impulsive events call for controlled adaptation. Test the real processing path, listen to every stage and keep the evidence.</p><a href="#audio-lab">Enter the working lab <span aria-hidden="true">↗</span></a></div>
+      <div class="relaunch-chapter is-current" data-index="0"><span class="relaunch-kicker">SOUND INTELLIGENCE / INDEPENDENT RESEARCH</span><h1>The signal<br><em>survives.</em></h1><p>Discover speech clarity under pressure. A research instrument shaped for the changing acoustic conditions of ground, sea and air.</p><a href="#audio-lab">Enter the audio lab <span aria-hidden="true">↗</span></a></div>
+      <div class="relaunch-chapter" data-index="1"><span class="relaunch-kicker">01 / ACQUIRE</span><h2>Listen beyond<br><em>the obvious.</em></h2><p>Primary and reference channels capture the same acoustic world from different positions. Their difference carries useful evidence.</p></div>
+      <div class="relaunch-chapter" data-index="2"><span class="relaunch-kicker">02 / SEPARATE</span><h2>Let noise move.<br><em>Keep the voice.</em></h2><p>Adaptive cancellation follows changing interference while the speech path stays measurable and available for comparison.</p></div>
+      <div class="relaunch-chapter" data-index="3"><span class="relaunch-kicker">03 / REVEAL</span><h2>Hear the result.<br><em>See the proof.</em></h2><p>Run the real processor, inspect each waveform and spectrogram, and export the evidence. No prerecorded effect replaces the experiment.</p><a href="#audio-lab">Open the working lab <span aria-hidden="true">↗</span></a></div>
       <div class="relaunch-side"><span>SCROLL TO MOVE THROUGH SOUND</span><i></i><span>NO AUTOPLAY AUDIO</span></div>
       <div class="relaunch-progress" aria-hidden="true"><span></span></div>
     </div>`;
@@ -31,6 +30,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let pointerX = .5, pointerY = .5, progress = 0, active = -1, raf = 0;
   const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
+  const path = (p, points) => { for (let i = 1; i < points.length; i++) if (p <= points[i][0]) { const a = points[i - 1], b = points[i], t = clamp((p - a[0]) / (b[0] - a[0])); return a[1] + (b[1] - a[1]) * (t * t * (3 - 2 * t)); } return points.at(-1)[1]; };
   function update() {
     const rect = story.getBoundingClientRect();
     progress = clamp(-rect.top / Math.max(1, story.offsetHeight - innerHeight));
@@ -38,12 +38,18 @@
     const eased = expand * expand * (3 - 2 * expand);
     const compact = innerWidth < 650;
     story.style.setProperty('--media-left', `${(compact ? 5 * (1 - eased) : 43 * (1 - eased)).toFixed(2)}vw`);
-    story.style.setProperty('--media-top', `${(compact ? 48 * (1 - eased) : 17 * (1 - eased)).toFixed(2)}vh`);
+    story.style.setProperty('--media-top', `${(compact ? 60 * (1 - eased) : 17 * (1 - eased)).toFixed(2)}vh`);
     story.style.setProperty('--media-width', `${(compact ? 90 + 10 * eased : 52 + 48 * eased).toFixed(2)}vw`);
-    story.style.setProperty('--media-height', `${(compact ? 44 + 56 * eased : 67 + 33 * eased).toFixed(2)}vh`);
+    story.style.setProperty('--media-height', `${(compact ? 40 + 60 * eased : 67 + 33 * eased).toFixed(2)}vh`);
     story.style.setProperty('--media-radius', `${Math.round(14 * (1 - eased))}px`);
     story.style.setProperty('--media-shade', (.08 + eased * .45).toFixed(3));
     story.style.setProperty('--media-zoom', (1.14 - progress * .1).toFixed(3));
+    story.style.setProperty('--flight-left', `${path(progress, compact ? [[0,27],[.3,24],[.58,0],[.86,25],[1,28]] : [[0,44],[.3,49],[.58,7],[.86,43],[1,48]]).toFixed(2)}%`);
+    story.style.setProperty('--flight-top', `${path(progress, [[0,5],[.3,3],[.58,6],[.86,2],[1,1]]).toFixed(2)}%`);
+    story.style.setProperty('--flight-scale', path(progress, [[0,.82],[.3,.98],[.58,.88],[.86,.98],[1,1.04]]).toFixed(3));
+    story.style.setProperty('--flight-rotate', `${path(progress, [[0,-8],[.3,9],[.58,-18],[.86,21],[1,28]]).toFixed(2)}deg`);
+    story.style.setProperty('--chamber-shift', `${(-18 * progress).toFixed(2)}%`);
+    story.style.setProperty('--energy-scale', (1 + progress * .65).toFixed(3));
     story.style.setProperty('--art-x', `${(-12 * progress).toFixed(2)}vw`);
     story.style.setProperty('--art-y', `${(5 * progress).toFixed(2)}vh`);
     story.style.setProperty('--art-rot-y', `${Math.round(140 * progress)}deg`);
@@ -54,7 +60,7 @@
     story.style.setProperty('--orbit-z', `${Math.round(progress * 170)}deg`);
     story.style.setProperty('--orbit-scale', (.7 + progress * .6).toFixed(3));
     const index = Math.min(3, Math.floor(progress * 4));
-    if (index !== active) { active = index; chapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === index)); count.textContent = `0${index + 1} / 04`; mediaIndex.textContent = index <= 1 ? 'FIELD 01 / GROUND' : index === 2 ? 'FIELD 02 / SEA' : 'FIELD 03 / AIR'; story.dataset.chapter = String(index); }
+    if (index !== active) { active = index; chapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === index)); count.textContent = `0${index + 1} / 04`; mediaIndex.textContent = ['TRANSMISSION 01 / ACQUIRE','TRANSMISSION 02 / TRACK','TRANSMISSION 03 / SEPARATE','TRANSMISSION 04 / REVEAL'][index]; story.dataset.chapter = String(index); }
     story.style.setProperty('--story-progress', progress.toFixed(4));
   }
   function draw(time) {
@@ -85,7 +91,7 @@
     }
     raf = requestAnimationFrame(draw);
   }
-  story.addEventListener('pointermove', e => { pointerX = e.clientX / innerWidth; pointerY = e.clientY / innerHeight; story.style.setProperty('--media-drift-x', `${Math.round((pointerX - .5) * -24)}px`); story.style.setProperty('--media-drift-y', `${Math.round((pointerY - .5) * -16)}px`); }, { passive: true });
+  story.addEventListener('pointermove', e => { pointerX = e.clientX / innerWidth; pointerY = e.clientY / innerHeight; story.style.setProperty('--media-drift-x', `${Math.round((pointerX - .5) * -24)}px`); story.style.setProperty('--media-drift-y', `${Math.round((pointerY - .5) * -16)}px`); story.style.setProperty('--flight-pointer-x', `${Math.round((pointerX - .5) * 35)}px`); story.style.setProperty('--flight-pointer-y', `${Math.round((pointerY - .5) * 26)}px`); }, { passive: true });
   addEventListener('scroll', update, { passive: true }); addEventListener('resize', update);
   update(); raf = requestAnimationFrame(draw);
   new IntersectionObserver(entries => { if (entries[0].isIntersecting && !raf) raf = requestAnimationFrame(draw); }, { rootMargin: '100px' }).observe(story);
