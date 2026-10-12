@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/design-v2.css?v=20261012g">
   <link rel="stylesheet" href="/relaunch-v2.css?v=5">
   <link rel="stylesheet" href="/flyover-v2.css?v=2">
-  <link rel="stylesheet" href="/journey-v2.css?v=4"><link rel="stylesheet" href="/brand-v2.css?v=2">
+  <link rel="stylesheet" href="/journey-v2.css?v=4"><link rel="stylesheet" href="/brand-v2.css?v=3">
 <link rel="stylesheet" href="/tour.css"><link rel="stylesheet" href="/atmosphere-v4.css?v=1"></head>
 <body><script>if(new URLSearchParams(location.search).get('design')==='2'){document.body.classList.add('design-v2');document.querySelector('meta[name="theme-color"]').content='#080d15'}</script>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -37,7 +37,7 @@
     <div class="sidebar-group-title">WORKSPACE <span>01 / 04</span></div>
     <nav class="nav-items">
       <a class="nav-item active" href="#overview"><svg><use href="#i-grid"/></svg><span>Overview</span><span class="nav-current"></span></a>
-      <a class="nav-item" href="/studio.html"><svg><use href="#i-wave"/></svg><span>Spectral studio</span></a><a class="nav-item" href="#audio-lab"><svg><use href="#i-wave"/></svg><span>Audio laboratory</span></a>
+      <a class="nav-item" href="/studio.html"><svg><use href="#i-wave"/></svg><span>Spectral studio</span></a><a class="nav-item" href="#audio-lab"><svg><use href="#i-wave"/></svg><span>Audio laboratory</span></a><a class="nav-item v2-only" href="/hardware.html"><svg><use href="#i-gear"/></svg><span>Hardware workbench</span></a>
       <a class="nav-item" href="#analytics"><svg><use href="#i-chart"/></svg><span>Signal intelligence</span></a>
       <a class="nav-item" href="#datasets"><svg><use href="#i-data"/></svg><span>Dataset vault</span></a>
       <a class="nav-item" href="#system"><svg><use href="#i-gear"/></svg><span>System diagnostics</span></a>
@@ -166,14 +166,14 @@
       </section>
       <section id="history" class="section-block"><div class="section-head"><div><span class="section-index">[ 04 ] REPRODUCIBILITY LOG</span><h2>Experiment history<span class="title-dot">.</span></h2></div><button id="history-refresh" class="text-action"><svg><use href="#i-list"/></svg> REFRESH RUNS</button></div><div class="panel history-panel"><div id="history-content" class="history-content"><p class="empty-message">No recorded experiments. Each finished experiment is saved locally with its parameters and generated WAV outputs.</p></div></div></section>
       <section id="datasets" class="section-block"><div class="section-head"><div><span class="section-index">[ 05 ] PUBLIC DATA SOURCES</span><h2>Dataset vault<span class="title-dot">.</span></h2></div><span class="section-hint">LICENSE-FIRST / SOURCED RESEARCH</span></div><div class="dataset-intro">Real-world benchmarking requires human speech, diverse noise, and synchronized microphone recordings. These sources are external; <strong>no recordings have been silently downloaded or redistributed.</strong></div><div id="dataset-cards" class="dataset-grid"></div></section>
-      <section id="system" class="section-block"><div class="section-head"><div><span class="section-index">[ 06 ] DEVELOPMENT TRANSPARENCY</span><h2>System diagnostics<span class="title-dot">.</span></h2></div><span class="section-hint">NO SIMULATED TELEMETRY</span></div><div class="system-grid"><div class="panel"><div class="panel-header"><div><span class="panel-eyebrow">AVAILABLE NOW</span><h3>Processor capabilities</h3></div></div><div id="capability-list" class="capability-list"></div></div><div class="panel"><div class="panel-header"><div><span class="panel-eyebrow">OPEN ENGINEERING WORK</span><h3>Not yet hardware-validated</h3></div></div><ul class="pending-list"><li><span class="pending-dot"></span> Actual synchronized two-mic recordings</li><li><span class="pending-dot"></span> Low-latency streaming / C++ port</li><li><span class="pending-dot"></span> Raspberry Pi CPU, RAM & temperature validation</li><li><span class="pending-dot"></span> Node A ↔ Node B communication link</li><li><span class="pending-dot"></span> Hardware end-to-end latency and safety testing</li></ul><div class="integrity-note">EVIDENCE INTEGRITY: Unmeasured fields remain unavailable. No artificial benchmark values are displayed.</div></div></div></section>
+      <section id="system" class="section-block"><div class="section-head"><div><span class="section-index">[ 06 ] DEVELOPMENT TRANSPARENCY</span><h2>System diagnostics<span class="title-dot">.</span></h2></div><span class="section-hint">NO SIMULATED TELEMETRY</span></div><div class="system-grid"><div class="panel"><div class="panel-header"><div><span class="panel-eyebrow">AVAILABLE NOW</span><h3>Processor capabilities</h3></div></div><div id="capability-list" class="capability-list"></div></div><div class="panel"><div class="panel-header"><div><span class="panel-eyebrow">OPEN ENGINEERING WORK</span><h3>Not yet hardware-validated</h3></div></div><ul class="pending-list"><li><span class="pending-dot"></span> Actual synchronized two-mic recordings</li><li><span class="pending-dot"></span> Low-latency streaming / C++ port</li><li><span class="pending-dot"></span> Raspberry Pi CPU, RAM & temperature validation</li><li><span class="pending-dot"></span> Node A ↔ Node B communication link</li><li><span class="pending-dot"></span> Hardware end-to-end latency and safety testing</li></ul><div class="integrity-note">EVIDENCE INTEGRITY: Unmeasured fields remain unavailable. No artificial benchmark values are displayed.</div><a class="v2-only" href="/hardware.html" style="display:block;margin-top:20px;color:#e4c397;font-weight:800">Open the virtual hardware workbench →</a></div></div></section>
       <footer class="footer"><strong>TRISHUL<span>VANI</span></strong><span>BUILT BY VOLTEDGE • RESEARCH PROTOTYPE / 2026</span><span>CLARITY THROUGH ENGINEERING.</span></footer>
     </div>
   </main>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <audio id="audio-player" preload="none"></audio>
-<script type="module" src="/app.js"></script>
+<script type="module" src="/app.js?v=hardware2"></script>
 <script defer src="/design-v2.js?v=20261011f"></script>
 <script defer src="/relaunch-v2.js?v=5"></script>
 <script defer src="/flyover-v2.js?v=2"></script>

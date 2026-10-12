@@ -157,5 +157,14 @@ async function init(){
   };
   $('#retry-connection').addEventListener('click',checkConnection);
   await checkConnection();
+  const params=new URLSearchParams(location.search);
+  const runId=params.get('run');
+  if(runId && /^[a-zA-Z0-9_-]{1,80}$/.test(runId)){
+    try{
+      renderReport(await api(`/api/experiments/${encodeURIComponent(runId)}`));
+      setTrack(params.get('track')||'raw');
+      notify(`Hardware workbench run ${runId} loaded.`);
+    }catch(error){notify(`Could not load linked run: ${error.message}`,true)}
+  }
 }
 init();

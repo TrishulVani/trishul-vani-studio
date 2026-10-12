@@ -39,8 +39,8 @@ body.experience-v2 .arrival-rings{width:min(68vw,790px);border-color:#9fbd8a2f;b
 .arrival-top{align-items:flex-start}
 body.experience-v2 .arrival-brand{position:relative;display:grid;grid-template-columns:36px auto;column-gap:12px;row-gap:2px;align-items:center}
 .arrival-brand .v2-brand-glyph{grid-row:1/3;width:36px;height:34px}
-.arrival-brand .deva-wordmark{font:800 13px/1.1 Manrope,Arial,sans-serif;letter-spacing:.19em;color:#f4f0e8;white-space:nowrap}
-.deva-wordmark [lang=hi]{font-family:'Nirmala UI','Mangal',sans-serif;font-weight:800;letter-spacing:0;font-size:1.1em}
+.arrival-brand .deva-wordmark{font:800 17px/1.2 Manrope,Arial,sans-serif;letter-spacing:.09em;color:#f4f0e8;white-space:nowrap}
+.arrival-brand .deva-wordmark [lang=hi]{font-family:'Noto Sans Devanagari','Nirmala UI','Mangal',sans-serif;font-size:1.25em;color:#edc990;text-shadow:none;font-synthesis:none}
 .arrival-brand small{grid-column:2;font:600 8px Manrope,Arial,sans-serif;letter-spacing:.25em;color:#a8bcb4}
 .arrival-live{margin-left:auto;margin-right:24px;text-align:right;color:#a9d4b1;font:700 9px/1.55 Manrope,Arial,sans-serif;letter-spacing:.21em}
 .arrival-live small{color:#a4aeb0;font-size:9px;letter-spacing:.15em}
@@ -60,4 +60,5 @@ body.experience-v2 .arrival-top button{padding:11px 17px;border-color:#bda57b62;
 body.experience-v2 .arrival-wordmark strong{color:#f5f0e4;text-shadow:0 0 60px #d6aa7970}
 .arrival[data-phase="3"] .arrival-ghost{opacity:0}
 @media(max-width:700px){.arrival-live{display:none}.arrival-brand .deva-wordmark{font-size:10px;letter-spacing:.12em}.arrival-brand small{font-size:7px}.arrival-brand .v2-brand-glyph{width:29px;height:27px}.arrival-brand{grid-template-columns:29px auto;column-gap:8px}.arrival-weapon-anchor{top:39%;width:min(27vw,16vh,130px)}.arrival-beats{left:22px;bottom:120px;width:calc(100vw - 44px);height:105px}.arrival-beats strong{font-size:clamp(28px,7.5vw,41px);white-space:normal}.arrival-beats p{top:80px;font-size:10px}.arrival-scroll-hint{bottom:79px}.arrival-wordmark{top:42%;font-size:clamp(48px,12vw,76px)}.arrival-wordmark span{font-size:8px;letter-spacing:.17em}.arrival-ghost{font-size:45vw}.arrival-bottom span:first-child{display:none}}
+@media(max-width:700px){.arrival-brand .deva-wordmark{font-size:14px;letter-spacing:.06em}}
 @media(max-width:700px) and (max-height:720px){.arrival-weapon-anchor{top:35%;width:min(30vw,17vh,135px)}.arrival-beats{bottom:113px}.arrival-beats strong{font-size:35px}}

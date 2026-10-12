@@ -2,6 +2,7 @@ const { defineConfig } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests/e2e',
   timeout: 60000,
+  workers: 3,
   use: { baseURL: 'http://127.0.0.1:8002', trace: 'retain-on-failure' },
   projects: [
     { name: 'desktop', use: { browserName: 'chromium', channel: 'chrome', viewport: { width: 1440, height: 900 } } },

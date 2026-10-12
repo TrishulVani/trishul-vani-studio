@@ -6,6 +6,13 @@
 
 # Changelog
 
+## Design 02 virtual hardware workbench — 2026-10-12
+
+- Adapted the user-supplied MK-IV prototype geometry into a larger interactive WebGL2 assembly viewer, with orbit, chapter focus, open, exploded and cutaway views.
+- Added a browser-based logical wiring workbench for a synchronized dual-microphone signal path, Raspberry Pi 5, Pico W, ESP32-S3, power and listener modules. Added controller command simulation, local project persistence and netlist/script export.
+- Connected a hardware workbench test action to the existing FastAPI synthetic audio processor, WAV playback and direct V2 laboratory report handoff. No physical Raspberry Pi or electrical emulation is claimed.
+- Increased the Hindi **त्रि** wordmark size, contrast and font clarity across V2. Version 1, backend and DSP algorithms remain unchanged.
+
 ## Version 2 animatic intro and operator flight revision — 2026-10-12
 
 - Rebuilt the scroll-controlled trident intro around the supplied animatic's four beats: upright awakening, turning, throw and impact. The trident now keeps its full silhouette while rotating, moves with eased interpolation and enters the landing after the completed strike. Reduced-motion, reverse input, Enter Site and Escape remain available.

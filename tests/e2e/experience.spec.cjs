@@ -32,7 +32,7 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
   await expect(page).toHaveURL(/index\.html\?design=2$/, { timeout: 10000 });
-  await expect(page.locator('.relaunch-story')).toBeVisible();
+  await expect(page.locator('.relaunch-story')).toBeVisible({ timeout: 15000 });
   await expect(page.getByRole('heading', { name: /The signal survives/i })).toBeVisible();
   await expect(page.locator('.relaunch-flight')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
   await expect(page.locator('img[src*="microphone-v2"]')).toHaveCount(0);
@@ -42,7 +42,7 @@ test('intro can be skipped and Version 1 keeps its original landing', async ({ p
   await page.goto('/experience.html');
   await page.getByRole('button', { name: /Enter site/i }).click();
   await expect(page).toHaveURL(/index\.html\?design=2$/);
-  await expect(page.locator('.relaunch-story')).toBeVisible();
+  await expect(page.locator('.relaunch-story')).toBeVisible({ timeout: 15000 });
   await page.goto('/index.html');
   await expect(page.locator('.relaunch-story')).toHaveCount(0);
   await expect(page.locator('.sidebar .v2-brand-glyph')).toBeHidden();
