@@ -6,6 +6,12 @@
 
 # Changelog
 
+## Public edition address swap — 2026-10-12
+
+- Mapped the cinematic introduction and connected lab to the main GitHub Pages address.
+- Preserved the previous mint introduction and original dashboard at `/design-v2/` as Version 2 / Original Edition.
+- Updated release documentation and CI assertions for both public shells. The audio algorithms and API were not changed by this release mapping.
+
 ## MK-V preview and matched audio evidence — 2026-10-12
 
 - Added a separate, unreleased MK-V product/evidence route with labelled concept artwork, integrated interactive MK-IV assembly, wiring, controller bench and real FastAPI synthetic DSP runs.

@@ -5,6 +5,10 @@
 
 # Build log (verified changes only)
 
+## 2026-10-12 — Public edition address swap
+
+The main Pages shell now targets the cinematic `/experience.html` route, while `/design-v2/` carries the previous mint shell and default dashboard. The two shell mappings passed 2/2 targeted Python tests; JavaScript syntax checks for the existing app, V2 controller and intro passed. The feature branch's earlier full CI run is green. Public deployment must be verified after both the app and Pages repositories update; this entry does not claim that the public addresses have already changed.
+
 ## 2026-10-12 — Design 02 virtual hardware workbench
 
 Feature commit `f21b39dc45740bc0116c8051e37e55561f18f1c5` on `feat/immersive-story` (draft PR #11). Adapted the supplied MK-IV geometry into a 261-mesh WebGL2 viewer, added a logical multi-controller wiring and script simulator, and connected software tests to the existing FastAPI audio endpoint. Sharpened and enlarged the V2 Hindi `त्रि` mark. Version 1 and the DSP implementation were not modified.
