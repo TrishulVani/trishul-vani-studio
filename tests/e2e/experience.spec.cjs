@@ -17,7 +17,7 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
 test('intro automatically leads to the rebuilt working landing', async ({ page }) => {
   await page.goto('/experience.html');
   await expect(page.locator('#arrival')).toBeVisible();
-  await expect(page.locator('.arrival-trident')).toBeVisible();
+  await expect(page.locator('.arrival-figure')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
   await expect.poll(() => page.locator('.arrival-wordmark').evaluate(el => Number(getComputedStyle(el).opacity)), { timeout: 5000 }).toBeGreaterThan(.5);
   await expect(page).toHaveURL(/index\.html\?design=2$/, { timeout: 20000 });
   await expect(page.locator('.relaunch-story')).toBeVisible();

@@ -112,3 +112,9 @@ body.design-v2 .tv-first{display:none}
 @media(max-width:650px){body.design-v2 .relaunch-chapter[data-index="0"] h1{font-size:clamp(54px,13.7vw,78px)}.relaunch-flight-wrap{width:72%;height:100%}.relaunch-story[data-chapter="2"] .relaunch-chapter[data-index="2"]{right:7%;width:86vw}.relaunch-chapter[data-index="1"] h2,.relaunch-chapter[data-index="2"] h2,.relaunch-chapter[data-index="3"] h2{font-size:clamp(50px,11.8vw,72px)}}
 @media(max-width:650px){.relaunch-story[data-chapter="2"] .relaunch-chapter[data-index="2"] h2{font-size:clamp(39px,10vw,54px)}.relaunch-story[data-chapter="2"] .relaunch-chapter[data-index="2"]{bottom:15%}}
 @media(prefers-reduced-motion:reduce){.relaunch-flight{animation:none}.relaunch-flight-wrap,.relaunch-chamber{transition:none}}
+/* The same signal-field figure now carries the intro into the landing. */
+.arrival-figure{position:absolute;z-index:1;height:min(78vh,780px);max-width:72vw;object-fit:contain;transform:translate3d(0,var(--arrival-y,9vh),0) rotateY(var(--arrival-rot-y,-36deg)) rotateZ(var(--arrival-rot-z,-8deg)) scale(var(--arrival-scale,.68));opacity:var(--arrival-opacity,.55);filter:drop-shadow(0 30px 38px #000c) drop-shadow(0 0 50px #d6b77855);will-change:transform,opacity}
+.arrival[data-phase="5"] .arrival-figure{animation:arrival-figure-reveal 1.2s cubic-bezier(.16,.75,.2,1) both}
+@keyframes arrival-figure-reveal{0%{transform:translate3d(0,-3vh,0) scale(1.18);opacity:1}65%{transform:translate3d(0,1vh,130px) scale(2.1);opacity:.94}100%{transform:translate3d(0,10vh,500px) scale(7);filter:blur(18px);opacity:0}}
+@media(max-width:650px){.arrival-figure{height:62vh;max-width:92vw}}
+@media(prefers-reduced-motion:reduce){.arrival-figure{animation:none!important;transition:none!important}}
