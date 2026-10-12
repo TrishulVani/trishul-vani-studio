@@ -228,6 +228,11 @@
     const reportHeight = () => parent.postMessage({ type: 'tv-hardware-height', height: document.documentElement.scrollHeight }, location.origin);
     new ResizeObserver(reportHeight).observe(document.body);
     addEventListener('load', reportHeight);
+    addEventListener('message', event => {
+      if (event.origin !== location.origin || event.source !== parent || event.data?.type !== 'tv-hardware-go') return;
+      if (!['model', 'wiring', 'code', 'software-test'].includes(event.data.target)) return;
+      $(event.data.target).scrollIntoView({ behavior: 'instant' });
+    });
     reportHeight();
   }
   window.hardwareBenchV2 = { issues, design: () => structuredClone(design) };

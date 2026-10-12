@@ -6,6 +6,18 @@
 
 # Changelog
 
+## Public edition address swap — 2026-10-12
+
+- Mapped the cinematic introduction and connected lab to the main GitHub Pages address.
+- Preserved the previous mint introduction and original dashboard at `/design-v2/` as Version 2 / Original Edition.
+- Updated release documentation and CI assertions for both public shells. The audio algorithms and API were not changed by this release mapping.
+
+## MK-V preview and matched audio evidence — 2026-10-12
+
+- Added a separate, unreleased MK-V product/evidence route with labelled concept artwork, integrated interactive MK-IV assembly, wiring, controller bench and real FastAPI synthetic DSP runs.
+- Added same-time RAW/processed playback, common-scale PCM envelopes, actual metrics/WAV downloads, five-scenario browser checks and explicit unavailable-backend status. No physical device, CAD accuracy or firmware emulation is claimed.
+- Kept the green browser favicon and Hindi `त्रि` wordmark across MK-V and all established routes. V1 and the audio algorithms were not changed.
+
 ## Integrated V2 virtual rig and MK-V baseline — 2026-10-12
 
 - Embedded the existing MK-IV hardware workbench directly in V2 while retaining its standalone route and V1. Added a deterministic multi-controller virtual deployment report: script errors identify board/line, wiring and code determine task readiness, and virtual device indicators respond to code changes. The FastAPI experiment remains real offline DSP rather than emulated Pi execution.
