@@ -73,3 +73,9 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Reviewed the supplied screen recording, animatic, HTML theme preview and V4 color brief as references. Built native canvas interference waves, pointer-reactive moving blocks, perspective notation ribbons and original corridor artwork around the existing operator. The action now runs woman → interstellar passage → glass break → rear-view cockpit → fly-off → audio lab.
 - Added the supplied gold glyph to V2 navigation/branding and a layered scroll-interpolated atmosphere across intro, landing, laboratory and editor. V1 and backend/DSP source are unchanged; reduced-motion behavior remains available.
 - Browser verification passed 42/42 across desktop, tablet and mobile. JavaScript syntax and diff checks passed. Public V2 remains on the old version until visual approval and release.
+
+## 2026-10-12 — animatic-directed intro and independent operator passage
+
+- Reviewed the supplied `Trishul_Vani_Fusion_Concept_Animatic.mp4` frame by frame as a motion reference. Rebuilt the V2 intro with an idle axial turn and reversible awakening, horizontal throw, rush and impact; it now uses the original trident asset in a faster, smoother native animation instead of embedding the supplied video.
+- Generated an empty corridor plate and a transparent flying operator from the established character artwork. The independent layers allow the woman to grow and travel through the passage before the glass fracture and cockpit handoff, while keeping the page responsive to scrolling in both directions.
+- Applied **त्रिSHUL VANI** as the V2 wordmark throughout the intro, landing and editor. Updated browser and CI checks for the new assets. The final local browser suite passed 42/42 across desktop, tablet and mobile; JavaScript syntax and diff checks passed. V1 and backend/DSP code remain unchanged; public release still awaits review.

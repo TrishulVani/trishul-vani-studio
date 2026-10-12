@@ -6,6 +6,12 @@
 
 # Changelog
 
+## Version 2 animatic intro and operator flight revision — 2026-10-12
+
+- Rebuilt the scroll-controlled trident intro around the supplied animatic's four beats: upright awakening, turning, throw and impact. The trident now keeps its full silhouette while rotating, moves with eased interpolation and enters the landing after the completed strike. Reduced-motion, reverse input, Enter Site and Escape remain available.
+- Split the interstellar passage into an original empty corridor plate and a separate transparent operator. Her position and scale now respond to scroll before the glass break, with a cleaner handoff to the rear-view cockpit.
+- Updated the V2 wordmark to **त्रिSHUL VANI** throughout the intro, landing and editor. V1, the FastAPI endpoints and DSP implementation remain unchanged. The full browser suite passed 42/42 across desktop, tablet and mobile, including connected processing and export. Public V2 release is pending review.
+
 ## Version 2 signal corridor revision — 2026-10-12
 
 - Reordered the single scroll journey to match the requested action: responsive wave field and moving blocks, three notation-engraved ribbons, growing operator, interstellar passage, glass break, rear-view cockpit, fly-off, and return to the working audio laboratory. Pointer movement bends the waves and shifts the blocks; scrolling forwards and backwards drives the transitions.

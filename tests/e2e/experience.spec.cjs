@@ -20,11 +20,12 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await expect(page.locator('.arrival-figure')).toHaveCount(0);
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
   await expect(page.locator('.arrival-brand .v2-brand-glyph')).toBeVisible();
+  await expect(page.locator('.arrival-brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();
   const spin = page.locator('.arrival-weapon-body');
   expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('arrival-idle-spin');
   await expect(page).toHaveURL(/experience\.html$/);
-  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 850, deltaMode: 0 });
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
   await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '1');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
@@ -39,7 +40,7 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
 
 test('intro can be skipped and Version 1 keeps its original landing', async ({ page }) => {
   await page.goto('/experience.html');
-  await page.getByRole('button', { name: /Skip intro/i }).click();
+  await page.getByRole('button', { name: /Enter site/i }).click();
   await expect(page).toHaveURL(/index\.html\?design=2$/);
   await expect(page.locator('.relaunch-story')).toBeVisible();
   await page.goto('/index.html');
@@ -52,6 +53,7 @@ test('the supplied gold mark appears throughout V2 without replacing V1 branding
   await page.goto('/index.html?design=2');
   const sideMark = page.locator('.sidebar .v2-brand-glyph');
   expect(await sideMark.evaluate(img => img.complete && img.naturalWidth > 0)).toBeTruthy();
+  await expect(page.locator('.sidebar .brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.flyover-brand .v2-brand-glyph')).toBeVisible();
   await expect(page.locator('.v2-journey-brand .v2-brand-glyph')).toBeVisible();
   await page.goto('/studio.html?design=2');
@@ -81,7 +83,8 @@ test('the operator crosses ribbons and a glass barrier before cockpit flight and
   await expect(scene).toHaveCount(1);
   await expect(scene.locator('.v2-journey-operator')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
   await expect(scene.locator('.v2-journey-flight img')).toHaveAttribute('src', '/assets/operator-b2-journey-v2.png');
-  await expect(scene.locator('.v2-journey-passage img')).toHaveAttribute('src', '/assets/operator-signal-passage-v2.png');
+  await expect(scene.locator('.v2-journey-passage img')).toHaveAttribute('src', '/assets/signal-corridor-plate-v2.png');
+  await expect(scene.locator('.v2-journey-traveler')).toHaveAttribute('src', '/assets/operator-flight-cutout-v2.png');
   await expect(scene.locator('.v2-journey-ribbons textPath')).toHaveCount(3);
   await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; });
   const go = async progress => page.evaluate(progress => {
@@ -102,10 +105,12 @@ test('the operator crosses ribbons and a glass barrier before cockpit flight and
   expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--passage-opacity')))).toBeGreaterThan(0);
   expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--ribbons-opacity')))).toBeGreaterThan(0);
   expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--voxels-opacity')))).toBeGreaterThan(0);
+  const travelerBefore = await scene.evaluate(el => Number(el.style.getPropertyValue('--traveler-scale')));
   await go(.56);
   await expect(page.locator('#v2-journey-phase')).toContainText('GLASS BREAK');
   expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--operator-scale')))).toBeLessThan(closeScale);
   expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--shards-opacity')))).toBeGreaterThan(0);
+  expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--traveler-scale')))).toBeGreaterThan(travelerBefore);
   await go(.78);
   await expect(page.locator('#v2-journey-phase')).toContainText('COCKPIT FLIGHT');
   expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--flight-opacity')))).toBeGreaterThan(.9);
