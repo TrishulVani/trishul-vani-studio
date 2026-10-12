@@ -61,3 +61,9 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Used the supplied HTML as a design and motion reference, and extracted its embedded WebP for the V2 landing. Implemented a repository-native sticky flyover with a one-to-one forward/reverse scroll path, readout and reduced-motion handling; the existing signal-field figure follows in the chamber narrative.
 - Carried its charcoal, steel and copper colors through the V2 intro, dashboard and spectral editor. The flyover is labelled a visual study, not an Indian service aircraft or validated field recording. Version 1 and DSP algorithms were not changed.
 - Final local Playwright: 33/33 desktop, tablet and mobile checks passed, including forward/reverse flyover, intro entry, connected processing, export and spectral editing. JavaScript syntax and diff checks passed. Remote CI is verified after the branch push.
+
+## 2026-10-12 — trident intro and continuous flight story
+
+- The supplied `preview.html` provided the trident asset and motion reference. The V2 intro now idles in axial rotation, then responds to wheel/touch/keyboard input with a reversible turn, rush and impact; completion or Skip/Escape leads to the same connected landing.
+- Replaced the three environmental panels with a single sticky narrative. Its new rear-view cockpit image was generated using the existing operator image as reference; this is illustrative concept art. The final chapter links and scrolls directly into the real audio lab.
+- Updated CI asset and syntax checks. The final full local browser run passed 36/36 across desktop, tablet and mobile, including actual wheel-driven intro entry, lab processing, exports and spectral edits. No backend or V1 source behavior was altered.

@@ -1,0 +1,23 @@
+body.experience-v2:has(.arrival){overflow:hidden}
+body.experience-v2 .arrival{background:radial-gradient(ellipse 50% 70% at 50% 48%,#263029 0,#111b1b 38%,#080d15 76%);perspective:1200px}
+body.experience-v2 .arrival:before{opacity:.22;background:repeating-radial-gradient(circle at 50% 49%,transparent 0 74px,#d6aa791c 75px,transparent 76px),repeating-linear-gradient(0deg,transparent 0 79px,#a0abb41c 80px)}
+body.experience-v2 .arrival:after{background:radial-gradient(circle,#fff0cf 0,#dfb77d 22%,#52604e 48%,#080d15 76%)}
+body.experience-v2 .arrival-rings{opacity:calc(.15 + var(--arrival-progress,0) * .25);border-color:#caa87544;box-shadow:0 0 0 8vw #cba77a0a,0 0 0 19vw #b6c2c706,0 0 150px #d6aa7922;transform:rotateX(67deg) scale(calc(.7 + var(--arrival-progress,0) * .6))}
+.arrival-weapon-anchor{position:absolute;z-index:3;left:50%;top:49%;width:min(20vw,23vh,235px);transform:translate3d(-50%,-50%,0);transform-style:preserve-3d;will-change:transform,opacity;opacity:var(--weapon-opacity,1)}
+.arrival-weapon-body{position:relative;transform-style:preserve-3d;transform-origin:50% 50%;animation:arrival-idle-spin 6s linear infinite;will-change:transform}
+.arrival-weapon,.arrival-weapon-echo{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;pointer-events:none;filter:drop-shadow(0 0 14px #e9c58755) drop-shadow(0 24px 30px #000b)}
+.arrival-weapon-echo{position:absolute;inset:0;opacity:.25;filter:blur(9px) saturate(1.6);transform:translateZ(-10px)}
+.arrival-weapon{transform:translateZ(3px)}
+@keyframes arrival-idle-spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+.arrival.is-moving .arrival-weapon-body{animation:none}
+.arrival-wordmark{z-index:1;transform:translateY(var(--arrival-word-y,34px));opacity:var(--arrival-word-opacity,0)}
+body.experience-v2 .arrival-wordmark strong{color:#d5ac77}
+body.experience-v2 .arrival-wordmark span{color:#c0c8c6}
+body.experience-v2 .arrival-timeline span{background:linear-gradient(90deg,#6c8d78,#d6aa79,#f0dfbf)}
+body.experience-v2 .arrival-top button{border-color:#d6aa7980;color:#f4e9d8}
+body.experience-v2 .arrival-top button:hover{background:#d6aa7929}
+body.experience-v2 .arrival-bottom{color:#b8c4c8}
+body.experience-v2 .arrival[data-phase="5"]:after{animation:none;transform:translate(-50%,-50%) scale(calc(var(--arrival-impact,0) * 15));opacity:var(--arrival-impact,0)}
+.arrival-scroll-hint{position:absolute;z-index:6;left:50%;bottom:clamp(120px,12vh,165px);transform:translateX(-50%);color:#d6aa79;font:750 9px Manrope,Arial,sans-serif;letter-spacing:.28em;white-space:nowrap;opacity:calc(1 - var(--arrival-progress,0) * 5)}
+@media(max-width:700px){.arrival-weapon-anchor{width:min(35vw,22vh,175px)}.arrival-scroll-hint{bottom:145px}.arrival-bottom span:first-child{display:none}}
+@media(prefers-reduced-motion:reduce){.arrival-weapon-body{animation:none}.arrival-weapon-anchor{will-change:auto}}

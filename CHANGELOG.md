@@ -6,6 +6,12 @@
 
 # Changelog
 
+## Version 2 trident and flight narrative candidate — 2026-10-12
+
+- Replaced the three Ground/Sea/Air panels with one reversible scroll scene: the operator grows, enters a portal, appears aboard a rear-view flying-wing concept flight, breaks through stylized glass and returns to the working audio laboratory.
+- Replaced the operator in the V2 intro with the trident asset from the supplied `preview.html`. It rotates on its upright axis at rest; wheel, touch and keyboard input drive and reverse its turn and impact before entering the landing. Skip and Escape remain available.
+- Extended the forest-black, charcoal and copper visual system through the intro, landing, connected lab and editor. Version 1, API and DSP algorithms were not changed. Browser verification passed all 36 desktop, tablet and mobile cases.
+
 ## Version 2 flyover candidate — 2026-10-12
 
 - Added a reversible, scroll-controlled B-2 concept flyover before the connected sound story, using the image from the user-supplied `B2_Spirit_Scroll_Flyover.html`. The aircraft is illustrative artwork, not Indian service equipment or a performance claim.

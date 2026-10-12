@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/design-v2.css?v=20261012g">
   <link rel="stylesheet" href="/relaunch-v2.css?v=5">
   <link rel="stylesheet" href="/flyover-v2.css?v=2">
+  <link rel="stylesheet" href="/journey-v2.css?v=1">
 <link rel="stylesheet" href="/tour.css"></head>
 <body><script>if(new URLSearchParams(location.search).get('design')==='2'){document.body.classList.add('design-v2');document.querySelector('meta[name="theme-color"]').content='#080d15'}</script>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -96,11 +97,21 @@
         <article class="metric-card"><span class="mini-index">03 / DATA RECORDS</span><div class="metric-line"><strong id="experiment-count">00</strong><img class="metric-trident" src="/trident.svg?v=theme2mint" alt=""></div><small>Saved experiment runs</small><div class="metric-micro">LOCAL • FULLY REPRODUCIBLE</div></article>
         <article class="metric-card"><span class="mini-index">04 / READINESS</span><div class="metric-line"><strong class="metric-readiness">ALPHA</strong><span class="metric-arrow">◇</span></div><small>Offline software prototype</small><div class="metric-micro">HARDWARE NOT VALIDATED</div></article>
       </div>
-      <section id="environments" class="v2-service-theatre" aria-labelledby="service-theatre-title">
-        <div class="v2-theatre-intro"><span>03 ENVIRONMENTS / ONE SIGNAL PATH</span><h2 id="service-theatre-title">The environment changes.<br><em>The listening continues.</em></h2><p>Illustrative acoustic scenes inspired by ground, sea, and air communications. They are visual concepts, not operational recordings or field validation.</p></div>
-        <article id="environment-ground" class="v2-service-scene v2-ground"><div class="v2-sound-horizon" aria-hidden="true"></div><div class="v2-service-copy"><span>01 / GROUND</span><h3>Steady machinery.<br>Moving voices.</h3><p>A reference microphone tracks persistent interference while the primary microphone carries speech and noise.</p><a href="#audio-lab">Explore steady noise</a></div><div class="v2-terrain" aria-hidden="true"></div></article>
-        <article id="environment-sea" class="v2-service-scene v2-sea"><div class="v2-sound-horizon" aria-hidden="true"></div><div class="v2-service-copy"><span>02 / SEA</span><h3>Changing wind.<br>Changing signal.</h3><p>Spatial wave motion suggests variable interference; the processor continually updates its noise estimate.</p><a href="#audio-lab">Explore variable noise</a></div><div class="v2-sea-lines" aria-hidden="true"></div></article>
-        <article id="environment-air" class="v2-service-scene v2-air"><div class="v2-sound-horizon" aria-hidden="true"></div><div class="v2-service-copy"><span>03 / AIR</span><h3>An impulse passes.<br>The voice remains.</h3><p>Short transients trigger adaptation control in this software prototype. The aircraft form is an abstract transition, not a tested platform.</p><a href="#audio-lab">Explore impulsive noise</a></div><img class="v2-air-shadow" src="/assets/flying-wing-shadow-v2.svg" alt="" aria-hidden="true"></article>
+      <section id="environments" class="v2-journey" aria-label="Illustrated flight into the audio laboratory">
+        <div class="v2-journey-stage">
+          <div class="v2-journey-stars" aria-hidden="true"></div>
+          <div class="v2-journey-portal" aria-hidden="true"><span></span><span></span><span></span></div>
+          <img class="v2-journey-operator" src="/assets/signal-operator-v2.png" alt="" aria-hidden="true">
+          <div class="v2-journey-flight" aria-hidden="true"><img src="/assets/operator-b2-journey-v2.png" alt=""></div>
+          <div class="v2-journey-shockwave" aria-hidden="true"></div>
+          <div class="v2-journey-shards" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="v2-journey-copy v2-journey-copy-a"><span>01 / THE HUMAN SIGNAL</span><h2>Follow the<br><em>voice.</em></h2><p>A signal moves through noise. Scroll to follow it beyond the frame.</p></div>
+          <div class="v2-journey-copy v2-journey-copy-b"><span>02 / BEYOND THE FRAME</span><h2>Into the<br><em>unknown.</em></h2><p>A cinematic flight concept gives way to the measurements that matter.</p></div>
+          <div class="v2-journey-copy v2-journey-copy-c"><span>03 / BACK TO EVIDENCE</span><h2>Break through.<br><em>Listen closer.</em></h2><p>The scene ends. The working processor begins.</p><a href="#audio-lab">Enter the audio laboratory</a></div>
+          <div class="v2-journey-top"><span>TRISHUL VANI / SIGNAL JOURNEY</span><span>ILLUSTRATIVE SCENE · NOT A SERVICE PLATFORM</span></div>
+          <div class="v2-journey-bottom"><span id="v2-journey-phase">01 / APPROACH</span><span>SCROLL TO MOVE THE STORY</span></div>
+          <div class="v2-journey-progress" aria-hidden="true"><span></span></div>
+        </div>
       </section>
       <section id="audio-lab" class="section-block">
         <div class="section-head"><div><span class="section-index">[ 02 ] EXPERIMENTATION</span><h2>Audio laboratory<span class="title-dot">.</span></h2></div><span class="section-hint">CONTROLLED INPUT TO VERIFIED OUTPUT</span></div>
@@ -157,5 +168,6 @@
 <script defer src="/design-v2.js?v=20261011f"></script>
 <script defer src="/relaunch-v2.js?v=5"></script>
 <script defer src="/flyover-v2.js?v=2"></script>
+<script defer src="/journey-v2.js?v=1"></script>
 <script defer src="/tour.js"></script></body>
 </html>

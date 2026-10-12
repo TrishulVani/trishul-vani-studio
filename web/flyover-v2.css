@@ -80,3 +80,17 @@ body.design-v2 .v2-sound-horizon{border-color:#d6aa7955;filter:drop-shadow(0 0 2
 @media(max-width:700px){.flyover-v2{height:310vh}.flyover-stage{min-height:450px}.flyover-header{padding:22px 23px;font-size:9px;letter-spacing:.12em}.flyover-status{font-size:8px;letter-spacing:.08em}.flyover-bracket.top-left,.flyover-bracket.top-right{top:85px}.flyover-bracket.bottom-left,.flyover-bracket.bottom-right{bottom:148px}.flyover-bracket.top-left,.flyover-bracket.bottom-left{left:23px}.flyover-bracket.top-right,.flyover-bracket.bottom-right{right:23px}.flyover-bracket{width:19px;height:19px}.flyover-craft{width:125vw}.flyover-back strong{font-size:19vw}.flyover-back small{letter-spacing:.29em;font-size:9px}.flyover-hud{left:23px;right:23px;bottom:24px}.flyover-hud h1{font-size:clamp(32px,8vw,50px)}.flyover-hud p{max-width:230px;font-size:11px}.flyover-eyebrow{font-size:8px;letter-spacing:.15em}.flyover-readout{min-width:88px}.flyover-readout strong{font-size:14px}.flyover-readout span{font-size:8px;letter-spacing:.08em;white-space:normal}.flyover-hint{bottom:165px;font-size:8px}}
 @media(max-width:700px){.flyover-stage{height:calc(100svh - 66px);min-height:0}.flyover-hud{bottom:104px}.flyover-readout{align-self:flex-start}.flyover-hint{top:122px;bottom:auto;left:23px;transform:none}.flyover-bracket.bottom-left,.flyover-bracket.bottom-right{bottom:94px}}
 @media(prefers-reduced-motion:reduce){.flyover-cloud,.flyover-craft{transition:none!important}.arrival-figure{animation:none!important}}
+
+/* Forest-black metal from the supplied trident study, with slate reserved for flight. */
+body.design-v2{--flight-bg:#080d0c;--flight-panel:#111b1a;--flight-panel-2:#182321;--flight-line:#344943;--bg:#080d0c;--surface:#111b1a;--surface-2:#182321;--line:#344943;background:#080d0c}
+body.design-v2 .main,body.design-v2 .content,body.design-v2 main,body.design-v2 .page{background:#080d0c}
+body.design-v2 .sidebar,body.design-v2 .topbar,body.design-v2 header,body.design-v2 .rail{background:#0b1514!important;border-color:#3b514b88}
+body.design-v2 .panel,body.design-v2 .lab-card,body.design-v2 .step-card,body.design-v2 .workspace .panel,body.design-v2 .metric-card{background:linear-gradient(145deg,#182320,#0c1514);border-color:#6681744a}
+body.design-v2 .scenario,body.design-v2 .dataset-card,body.design-v2 .dataset-intro,body.design-v2 .history-row,body.design-v2 .capability-row{background:#17211f;border-color:#51685f66}
+body.design-v2 .file-upload,body.design-v2 .wave-card,body.design-v2 .playback-row,body.design-v2 .wave-select{background:#0b1514;border-color:#60796c88}
+body.design-v2 .nav-item.active,body.design-v2 .rail nav a.active{background:#302b25;color:#f7e8ce}
+body.experience-v2{--bg:#080d0c;--panel:#111b1a;--panel2:#182321;--line:#344943;background:#080d0c}
+body.experience-v2 .site-head{background:#0b1514e8;border-color:#344943}
+body.experience-v2 .hero{background:radial-gradient(ellipse at 68% 47%,#4c584180,transparent 66%),radial-gradient(ellipse at 15% 95%,#aa754e33,transparent 60%),#080d0c}
+body.experience-v2 .split,body.experience-v2 .spectral{background:linear-gradient(125deg,#080d0c,#182622)}
+body.experience-v2 .concept,body.experience-v2 .policies,body.experience-v2 .evidence{background:radial-gradient(circle at 95% 30%,#8a63404d,transparent 38%),#080d0c}

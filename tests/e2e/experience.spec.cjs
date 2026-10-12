@@ -14,12 +14,22 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('intro automatically leads to the rebuilt working landing', async ({ page }) => {
+test('trident idles, scrolls forward, rewinds, and enters the working landing', async ({ page }) => {
   await page.goto('/experience.html');
   await expect(page.locator('#arrival')).toBeVisible();
-  await expect(page.locator('.arrival-figure')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
-  await expect.poll(() => page.locator('.arrival-wordmark').evaluate(el => Number(getComputedStyle(el).opacity)), { timeout: 5000 }).toBeGreaterThan(.5);
-  await expect(page).toHaveURL(/index\.html\?design=2$/, { timeout: 20000 });
+  await expect(page.locator('.arrival-figure')).toHaveCount(0);
+  await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
+  const spin = page.locator('.arrival-weapon-body');
+  const before = await spin.evaluate(el => getComputedStyle(el).transform);
+  await page.waitForTimeout(300);
+  expect(await spin.evaluate(el => getComputedStyle(el).transform)).not.toBe(before);
+  await expect(page).toHaveURL(/experience\.html$/);
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 850, deltaMode: 0 });
+  await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
+  await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
+  await expect(page).toHaveURL(/index\.html\?design=2$/, { timeout: 10000 });
   await expect(page.locator('.relaunch-story')).toBeVisible();
   await expect(page.getByRole('heading', { name: /The signal survives/i })).toBeVisible();
   await expect(page.locator('.relaunch-flight')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
@@ -34,6 +44,39 @@ test('intro can be skipped and Version 1 keeps its original landing', async ({ p
   await page.goto('/index.html');
   await expect(page.locator('.relaunch-story')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: /Clarity under pressure/i })).toBeVisible();
+});
+
+test('three environment cards become one reversible flight into the audio lab', async ({ page }) => {
+  await page.goto('/index.html?design=2');
+  await expect(page.locator('.v2-service-scene')).toHaveCount(0);
+  const scene = page.locator('.v2-journey');
+  await expect(scene).toHaveCount(1);
+  await expect(scene.locator('.v2-journey-operator')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
+  await expect(scene.locator('.v2-journey-flight img')).toHaveAttribute('src', '/assets/operator-b2-journey-v2.png');
+  await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; });
+  const go = async progress => page.evaluate(progress => {
+    const scene = document.querySelector('.v2-journey');
+    const top = scene.getBoundingClientRect().top + scrollY;
+    scrollTo({ top: top + (scene.offsetHeight - scene.querySelector('.v2-journey-stage').clientHeight) * progress, behavior: 'instant' });
+  }, progress);
+  await go(.14);
+  await expect(page.locator('#v2-journey-phase')).toContainText('APPROACH');
+  const closeScale = await scene.evaluate(el => Number(el.style.getPropertyValue('--operator-scale')));
+  await go(.58);
+  await expect(page.locator('#v2-journey-phase')).toContainText('FLIGHT');
+  expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--operator-scale')))).toBeLessThan(closeScale);
+  expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--flight-opacity')))).toBeGreaterThan(.9);
+  await go(.84);
+  await expect(page.locator('#v2-journey-phase')).toContainText('BREAKTHROUGH');
+  expect(await scene.evaluate(el => Number(el.style.getPropertyValue('--shards-opacity')))).toBeGreaterThan(0);
+  await go(.96);
+  await expect(page.getByRole('link', { name: 'Enter the audio laboratory' })).toBeVisible();
+  await page.getByRole('link', { name: 'Enter the audio laboratory' }).click();
+  await expect(page).toHaveURL(/#audio-lab$/);
+  await expect(page.getByRole('heading', { name: /Audio laboratory/ })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+  await page.goto('/index.html');
+  await expect(page.locator('.v2-journey')).toBeHidden();
 });
 
 test('sound chamber grows to full width and the figure moves through it', async ({ page }) => {
