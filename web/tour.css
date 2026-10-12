@@ -15,3 +15,9 @@ body.design-v2 .tv-tour-kicker,body.design-v2 .tv-video-note,body.design-v2 .tv-
 body.design-v2 .tv-tour-actions button{border-color:#596996;background:#1c2750;color:#f5f6ff}
 body.design-v2 .tv-tour-target{outline-color:#a8bbff!important}
 body.design-v2 .tv-help-button:focus-visible,body.design-v2 .tv-tour button:focus-visible{outline-color:#a8bbff}
+body.design-v2 .tv-help-button,body.design-v2 .tv-first,body.design-v2 .tv-tour{background:#0e2118;color:#eef5ec;border-color:#729675}
+body.design-v2 .tv-first button,body.design-v2 .tv-tour-actions [data-action=next]{background:#9ddcb5;color:#092116}
+body.design-v2 .tv-tour-kicker,body.design-v2 .tv-video-note,body.design-v2 .tv-video-note a{color:#d6b778!important}
+body.design-v2 .tv-tour-actions button{border-color:#729675;background:#193a26;color:#eef5ec}
+body.design-v2 .tv-tour-target{outline-color:#d6b778!important}
+body.design-v2 .tv-help-button:focus-visible,body.design-v2 .tv-tour button:focus-visible{outline-color:#d6b778}

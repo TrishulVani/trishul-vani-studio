@@ -8,13 +8,14 @@
   story.innerHTML = `
     <div class="relaunch-stage">
       <canvas id="relaunch-field" aria-hidden="true"></canvas>
+      <div class="relaunch-media" aria-hidden="true"><img class="relaunch-shot shot-ground" src="/assets/signal-ground-v2.png" alt=""><img class="relaunch-shot shot-sea" src="/assets/signal-sea-v2.png" alt=""><img class="relaunch-shot shot-air" src="/assets/signal-air-v2.png" alt=""><span class="relaunch-media-index" id="relaunch-media-index">FIELD 01 / GROUND</span><span class="relaunch-media-corner"></span></div>
       <div class="relaunch-orbit" aria-hidden="true"></div>
       <img class="relaunch-art" src="/assets/trident-sculpture-v2.png" alt="" aria-hidden="true">
       <div class="relaunch-top"><span>TRISHUL VANI / 2026</span><span id="relaunch-count">01 / 04</span></div>
       <div class="relaunch-chapter is-current" data-index="0"><span class="relaunch-kicker">SOUND INTELLIGENCE / INDEPENDENT RESEARCH</span><h1>Hear what<br><em>matters.</em></h1><p>A research instrument for speech clarity in the demanding acoustic conditions of ground, sea and air.</p><a href="#audio-lab">Start with the audio lab <span aria-hidden="true">↗</span></a></div>
-      <div class="relaunch-chapter" data-index="1"><span class="relaunch-kicker">01 / THE SIGNAL</span><h2>One voice.<br><em>Two perspectives.</em></h2><p>Speech and noise reach the primary input. A second input hears the environment. The real processor compares both.</p></div>
-      <div class="relaunch-chapter" data-index="2"><span class="relaunch-kicker">02 / ADAPTATION</span><h2>Ground. Sea.<br><em>Air.</em></h2><p>Steady hum, changing ambience and sudden transients call for different responses. These are visual concepts, not field recordings.</p></div>
-      <div class="relaunch-chapter" data-index="3"><span class="relaunch-kicker">03 / EVIDENCE</span><h2>Make every<br><em>result visible.</em></h2><p>Generate or upload audio. Compare each processing stage, inspect the waveform and export a reproducible experiment.</p><a href="#audio-lab">Enter the working lab <span aria-hidden="true">↗</span></a></div>
+      <div class="relaunch-chapter" data-index="1"><span class="relaunch-kicker">01 / GROUND · STEADY INTERFERENCE</span><h2>Find the voice<br><em>inside the noise.</em></h2><p>Two inputs observe one environment. The adaptive filter learns the persistent hum while preserving the speech path.</p></div>
+      <div class="relaunch-chapter" data-index="2"><span class="relaunch-kicker">02 / SEA · CHANGING CONDITIONS</span><h2>Nothing<br><em>stays still.</em></h2><p>Wind and water shift around the reference signal. The processor updates its estimate as the sound field changes.</p></div>
+      <div class="relaunch-chapter" data-index="3"><span class="relaunch-kicker">03 / AIR · SUDDEN TRANSIENTS</span><h2>Clarity is<br><em>a decision.</em></h2><p>Impulsive events call for controlled adaptation. Test the real processing path, listen to every stage and keep the evidence.</p><a href="#audio-lab">Enter the working lab <span aria-hidden="true">↗</span></a></div>
       <div class="relaunch-side"><span>SCROLL TO MOVE THROUGH SOUND</span><i></i><span>NO AUTOPLAY AUDIO</span></div>
       <div class="relaunch-progress" aria-hidden="true"><span></span></div>
     </div>`;
@@ -26,14 +27,34 @@
   const ctx = canvas.getContext('2d');
   const chapters = [...story.querySelectorAll('.relaunch-chapter')];
   const count = document.getElementById('relaunch-count');
+  const mediaIndex = document.getElementById('relaunch-media-index');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let pointerX = .5, pointerY = .5, progress = 0, active = -1, raf = 0;
   const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
   function update() {
     const rect = story.getBoundingClientRect();
     progress = clamp(-rect.top / Math.max(1, story.offsetHeight - innerHeight));
+    const expand = clamp(progress / .28);
+    const eased = expand * expand * (3 - 2 * expand);
+    const compact = innerWidth < 650;
+    story.style.setProperty('--media-left', `${(compact ? 5 * (1 - eased) : 43 * (1 - eased)).toFixed(2)}vw`);
+    story.style.setProperty('--media-top', `${(compact ? 48 * (1 - eased) : 17 * (1 - eased)).toFixed(2)}vh`);
+    story.style.setProperty('--media-width', `${(compact ? 90 + 10 * eased : 52 + 48 * eased).toFixed(2)}vw`);
+    story.style.setProperty('--media-height', `${(compact ? 44 + 56 * eased : 67 + 33 * eased).toFixed(2)}vh`);
+    story.style.setProperty('--media-radius', `${Math.round(14 * (1 - eased))}px`);
+    story.style.setProperty('--media-shade', (.08 + eased * .45).toFixed(3));
+    story.style.setProperty('--media-zoom', (1.14 - progress * .1).toFixed(3));
+    story.style.setProperty('--art-x', `${(-12 * progress).toFixed(2)}vw`);
+    story.style.setProperty('--art-y', `${(5 * progress).toFixed(2)}vh`);
+    story.style.setProperty('--art-rot-y', `${Math.round(140 * progress)}deg`);
+    story.style.setProperty('--art-rot-z', `${Math.round(18 * progress)}deg`);
+    story.style.setProperty('--art-scale', (1 - progress * .3).toFixed(3));
+    story.style.setProperty('--art-opacity', clamp(1 - progress * 3.7).toFixed(3));
+    story.style.setProperty('--orbit-x', `${Math.round(72 - progress * 45)}deg`);
+    story.style.setProperty('--orbit-z', `${Math.round(progress * 170)}deg`);
+    story.style.setProperty('--orbit-scale', (.7 + progress * .6).toFixed(3));
     const index = Math.min(3, Math.floor(progress * 4));
-    if (index !== active) { active = index; chapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === index)); count.textContent = `0${index + 1} / 04`; story.dataset.chapter = String(index); }
+    if (index !== active) { active = index; chapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === index)); count.textContent = `0${index + 1} / 04`; mediaIndex.textContent = index <= 1 ? 'FIELD 01 / GROUND' : index === 2 ? 'FIELD 02 / SEA' : 'FIELD 03 / AIR'; story.dataset.chapter = String(index); }
     story.style.setProperty('--story-progress', progress.toFixed(4));
   }
   function draw(time) {
@@ -46,7 +67,7 @@
     for (let ring = 0; ring < 25; ring++) {
       const radius = ((ring / 25 + progress * .5 + (reduce ? 0 : time * .000025)) % 1) * Math.max(w, h) * .85;
       ctx.beginPath(); ctx.ellipse(centerX, centerY, radius, radius * (.45 + progress * .22), progress * .15, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(177,162,240,${(.13 * (1 - radius / (Math.max(w, h) * .85))).toFixed(3)})`;
+      ctx.strokeStyle = `rgba(151,224,193,${(.13 * (1 - radius / (Math.max(w, h) * .85))).toFixed(3)})`;
       ctx.lineWidth = ring % 5 === 0 ? 1.4 : .6; ctx.stroke();
     }
     if (active >= 1) {
@@ -59,12 +80,12 @@
           const y = yBase + (line - 10) * 13 + wave;
           if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = `rgba(168,155,241,${.016 + line / 170})`; ctx.stroke();
+        ctx.strokeStyle = `rgba(128,208,174,${.016 + line / 170})`; ctx.stroke();
       }
     }
     raf = requestAnimationFrame(draw);
   }
-  story.addEventListener('pointermove', e => { pointerX = e.clientX / innerWidth; pointerY = e.clientY / innerHeight; }, { passive: true });
+  story.addEventListener('pointermove', e => { pointerX = e.clientX / innerWidth; pointerY = e.clientY / innerHeight; story.style.setProperty('--media-drift-x', `${Math.round((pointerX - .5) * -24)}px`); story.style.setProperty('--media-drift-y', `${Math.round((pointerY - .5) * -16)}px`); }, { passive: true });
   addEventListener('scroll', update, { passive: true }); addEventListener('resize', update);
   update(); raf = requestAnimationFrame(draw);
   new IntersectionObserver(entries => { if (entries[0].isIntersecting && !raf) raf = requestAnimationFrame(draw); }, { rootMargin: '100px' }).observe(story);
