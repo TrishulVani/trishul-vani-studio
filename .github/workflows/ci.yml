@@ -38,19 +38,48 @@ jobs:
           node --check web/app.js
           node --check web/studio.js
           node --check web/design-v2.js
+          node --check web/experience.js
+          node --check web/arrival-v2.js
+          node --check web/relaunch-v2.js
+          node --check web/flyover-v2.js
+          node --check web/journey-v2.js
+          node --check web/atmosphere-v4.js
+          node --check web/brand-v2.js
+          node --check web/tour.js
+          test -s web/tour.css
+          test -s docs/TUTORIAL_STORYBOARD.md
           node tests/dsp-core.test.cjs
       - name: Verify Design 02 assets
         run: |
           test -s web/design-v2.css
           test -s web/design-v2.js
+          test -s web/experience.html
+          test -s web/experience.css
           test -s web/trident.svg
-          test -s web/trident-v2.svg
+          test -s web/mark-v2.svg
+          test -s web/assets/signal-chamber-v2.png
+          test -s web/assets/signal-operator-v2.png
+          test -s web/assets/b2-flyover-v2.webp
+          test -s web/flyover-v2.css
+          test -s web/journey-v2.css
+          test -s web/intro-v2.css
+          test -s web/brand-v2.css
+          test -s web/brand-v2.js
+          test -s web/atmosphere-v4.css
+          test -s web/assets/operator-b2-journey-v2.png
+          test -s web/assets/operator-signal-passage-v2.png
+          test -s web/assets/signal-corridor-plate-v2.png
+          test -s web/assets/operator-flight-cutout-v2.png
+          test -s web/assets/preview-trident-v2.webp
+          test -s web/assets/brand-glyph-v2.png
           test -s web/assets/signal-microphones-v2.webp
           test -s deploy/pages/design-v2/index.html
-          test -s deploy/pages/design-v2/trident.svg
+          test -s deploy/pages/design-v2/mark.svg
+          test -s deploy/pages/design-v2/signal-microphones-v2.webp
           grep -q 'design-v2.css' web/index.html
           grep -q 'design-v2.css' web/studio.html
-          grep -q 'design=2' deploy/pages/design-v2/index.html
+          grep -q 'experience.html' deploy/pages/index.html
+          grep -q 'index.html' deploy/pages/design-v2/index.html
       - name: Verify artifacts are excluded
         run: |
           git check-ignore artifacts/secret-test.wav
@@ -62,3 +91,24 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build app image
         run: docker build -t trishul-vani:ci .
+  browser:
+    name: Connected browser flows
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Python and browser dependencies
+        run: |
+          python -m pip install -r requirements-dev.txt
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chrome
+      - name: Run desktop tablet and mobile journeys
+        run: pnpm exec playwright test --workers=2

@@ -171,6 +171,9 @@ def apply(sid: str, recipe: Recipe):
     lid = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
     with LOCK:
         doc = manifest(sid)
+        previous = next((layer for layer in doc['layers'] if layer['id'] == lid), None)
+        if previous is not None and (path/(lid+'.wav')).is_file():
+            return previous
         sf.write(path/(lid+'.wav'), out, FS, subtype='FLOAT')
         entry = dict(id=lid, label=f'Spectral edit · {len(recipe.edits)} operations', kind='spectral',
                      recipe=payload, sha256=hashlib.sha256((path/(lid+'.wav')).read_bytes()).hexdigest(), **diagnostics(out))

@@ -48,6 +48,7 @@ def test_spectral_full_flow(tmp_path,monkeypatch):
     assert a.status_code==200,a.text
     b=client.post(base+'/render',json=recipe)
     assert a.json()['sha256']==b.json()['sha256']
+    assert hashlib.sha256((tmp_path/sid/(a.json()['id']+'.wav')).read_bytes()).hexdigest()==b.json()['sha256']
     assert source==(tmp_path/sid/'source.wav').read_bytes()
     out=client.get(base+'/audio/'+a.json()['id'])
     assert len(sf.read(io.BytesIO(out.content))[0])==16001

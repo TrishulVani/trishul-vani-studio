@@ -9,6 +9,9 @@ venv/
 artifacts/*
 !artifacts/.gitkeep
 node_modules/
+test-results/
+playwright-report/
+.pytest-tmp-v2/
 .DS_Store
 .pyright/
 *.log

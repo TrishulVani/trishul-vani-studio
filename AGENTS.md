@@ -10,3 +10,7 @@ Read `CODEX_MASTER_PROMPT.md` and `docs/ROADMAP.md` before editing. Respect `doc
 - Each task: inspect → plan ≤5 lines → implement → tests → diff review → docs/BUILD_LOG & CHANGELOG → commit → push to **confirmed correct remote** → check CI. If no authorized remote, record pending push, continue local commits; never substitute unrelated GitHub repository.
 - Current default checks: `python -m pytest -q`, `node --check web/app.js`, `python -m compileall -q app scripts`. Add more focused tests as features grow.
 - Final status must say what executed, tests results, commit ID and whether push/CI are actually verified; do not assume success.
+
+## Current visual direction (user revision, 2026-10-11)
+
+Preserve Version 1 at the root URL. Design 02 and future preview work may depart from the older mint-only palette: use one coherent restrained system and the user-supplied trident reference shape. Do not merge or replace the current live entry until candidate screenshots and functional tests have been reviewed. This supersedes the older palette sentence above only for Design 02; all DSP, truthfulness, accessibility and Git verification rules remain in force. Onboarding and MySQL are separate tested milestones; do not imply that a database makes audio durable.
