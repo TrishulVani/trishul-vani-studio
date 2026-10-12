@@ -5,6 +5,12 @@
 
 # Build log (verified changes only)
 
+## 2026-10-12 — Design 02 virtual hardware workbench
+
+Feature commit `f21b39dc45740bc0116c8051e37e55561f18f1c5` on `feat/immersive-story` (draft PR #11). Adapted the supplied MK-IV geometry into a 261-mesh WebGL2 viewer, added a logical multi-controller wiring and script simulator, and connected software tests to the existing FastAPI audio endpoint. Sharpened and enlarged the V2 Hindi `त्रि` mark. Version 1 and the DSP implementation were not modified.
+
+Verified locally: `.\\.venv\\Scripts\\python.exe -m pytest -q --basetemp=.pytest-ci-hardware` → **17 passed**; `pnpm exec playwright test --reporter=line` → **48 passed** across desktop, tablet and mobile (including the new workbench-to-audio-lab path); `node --check` for `web/app.js`, `web/hardware-v2.js`, and `web/hardware-model-v2.js`; Python `compileall`; model JSON parsed with 261 meshes; `git diff --cached --check` clean. The first unrestricted Python test invocation hit a Windows temp-directory permission error; a repository-local basetemp resolved it. The first 6-worker browser run had one tablet navigation timeout; the isolated retry passed, and the full 3-worker rerun passed 48/48. No physical device, electrical fit, embedded timing or firmware execution has been validated. Public Design 02 release remains pending visual approval.
+
 ## 2026-10-10 — Initial software workbench creation
 
 **Delivered locally:** DSP engine, hybrid DSP fallback, FastAPI app, responsive dashboard, audio upload and playback, dataset evaluation CLI, Docker + CI configs, tests and reference documentation. Recorded local Git commits are supplied in the accompanying Git bundle. CI on GitHub is **not yet executed**. Actual RNNoise weights/models have **not yet been installed**. External LibriSpeech/DEMAND files have **not yet been downloaded**. Raspberry Pi/native C++/two-node work **not yet performed**.
