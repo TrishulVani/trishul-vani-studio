@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="/design-v2.css?v=20261012g">
   <link rel="stylesheet" href="/relaunch-v2.css?v=5">
   <link rel="stylesheet" href="/flyover-v2.css?v=2">
-  <link rel="stylesheet" href="/journey-v2.css?v=1">
-<link rel="stylesheet" href="/tour.css"></head>
+  <link rel="stylesheet" href="/journey-v2.css?v=3"><link rel="stylesheet" href="/brand-v2.css?v=1">
+<link rel="stylesheet" href="/tour.css"><link rel="stylesheet" href="/atmosphere-v4.css?v=1"></head>
 <body><script>if(new URLSearchParams(location.search).get('design')==='2'){document.body.classList.add('design-v2');document.querySelector('meta[name="theme-color"]').content='#080d15'}</script>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
@@ -33,7 +33,7 @@
 </svg>
 <div class="app-shell">
   <aside class="sidebar" aria-label="Main navigation">
-    <a href="#overview" class="brand"><img class="brand-symbol" src="/trident.svg?v=theme2mint" alt=""><span><strong>TRISHUL<span class="brand-thin">VANI</span></strong><small>RESEARCH WORKBENCH</small></span></a>
+    <a href="#overview" class="brand"><img class="v2-brand-glyph" src="/assets/brand-glyph-v2.png" alt=""><img class="brand-symbol" src="/trident.svg?v=theme2mint" alt=""><span><strong>TRISHUL<span class="brand-thin">VANI</span></strong><small>RESEARCH WORKBENCH</small></span></a>
     <div class="sidebar-group-title">WORKSPACE <span>01 / 04</span></div>
     <nav class="nav-items">
       <a class="nav-item active" href="#overview"><svg><use href="#i-grid"/></svg><span>Overview</span><span class="nav-current"></span></a>
@@ -100,15 +100,23 @@
       <section id="environments" class="v2-journey" aria-label="Illustrated flight into the audio laboratory">
         <div class="v2-journey-stage">
           <div class="v2-journey-stars" aria-hidden="true"></div>
+          <canvas class="v2-journey-refraction" aria-hidden="true"></canvas>
+          <div class="v2-journey-voxels" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <svg class="v2-journey-ribbons" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="journey-ribbon-metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#092d26"/><stop offset=".32" stop-color="#c7ac78"/><stop offset=".5" stop-color="#174c3d"/><stop offset=".75" stop-color="#d6b580"/><stop offset="1" stop-color="#071e1a"/></linearGradient><path id="journey-ribbon-a" d="M-170 755 C240 680 350 195 790 270 S1230 600 1610 84"/><path id="journey-ribbon-b" d="M-170 280 C140 90 340 575 730 586 S1160 225 1590 450"/><path id="journey-ribbon-c" d="M-150 585 C170 500 500 790 940 420 S1300 330 1600 735"/></defs><g class="ribbon-band"><use href="#journey-ribbon-a"/><text><textPath href="#journey-ribbon-a" startOffset="9%">♪　♫　♬　♪　♫　♬　♪　♫　♬</textPath></text></g><g class="ribbon-band"><use href="#journey-ribbon-b"/><text><textPath href="#journey-ribbon-b" startOffset="16%">♬　♪　♫　♬　♪　♫　♬　♪</textPath></text></g><g class="ribbon-band"><use href="#journey-ribbon-c"/><text><textPath href="#journey-ribbon-c" startOffset="25%">♫　♬　♪　♫　♬　♪　♫</textPath></text></g></svg>
           <div class="v2-journey-portal" aria-hidden="true"><span></span><span></span><span></span></div>
           <img class="v2-journey-operator" src="/assets/signal-operator-v2.png" alt="" aria-hidden="true">
+          <div class="v2-journey-passage" aria-hidden="true"><img src="/assets/operator-signal-passage-v2.png" alt=""></div>
           <div class="v2-journey-flight" aria-hidden="true"><img src="/assets/operator-b2-journey-v2.png" alt=""></div>
+          <div class="v2-journey-departure" aria-hidden="true"><img src="/assets/b2-flyover-v2.webp" alt=""></div>
           <div class="v2-journey-shockwave" aria-hidden="true"></div>
+          <svg class="v2-journey-cracks" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true"><path d="M504 352 267 96M504 352 737 73M504 352 979 237M504 352 911 646M504 352 554 698M504 352 103 650M504 352 12 306M504 352 267 96 346 59M504 352 737 73 800 104M504 352 979 237 928 338M504 352 911 646 819 597M504 352 103 650 193 585M504 352 12 306 126 274"/></svg>
           <div class="v2-journey-shards" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <div class="v2-journey-copy v2-journey-copy-a"><span>01 / THE HUMAN SIGNAL</span><h2>Follow the<br><em>voice.</em></h2><p>A signal moves through noise. Scroll to follow it beyond the frame.</p></div>
-          <div class="v2-journey-copy v2-journey-copy-b"><span>02 / BEYOND THE FRAME</span><h2>Into the<br><em>unknown.</em></h2><p>A cinematic flight concept gives way to the measurements that matter.</p></div>
-          <div class="v2-journey-copy v2-journey-copy-c"><span>03 / BACK TO EVIDENCE</span><h2>Break through.<br><em>Listen closer.</em></h2><p>The scene ends. The working processor begins.</p><a href="#audio-lab">Enter the audio laboratory</a></div>
-          <div class="v2-journey-top"><span>TRISHUL VANI / SIGNAL JOURNEY</span><span>ILLUSTRATIVE SCENE · NOT A SERVICE PLATFORM</span></div>
+          <div class="v2-journey-copy v2-journey-copy-b"><span>02 / INTERSTELLAR PASSAGE</span><h2>Through the<br><em>unknown.</em></h2><p>The human signal travels through a field of interference.</p></div>
+          <div class="v2-journey-copy v2-journey-copy-c"><span>03 / THE BREAKTHROUGH</span><h2>Break the<br><em>surface.</em></h2><p>One last barrier gives way before the flight begins.</p></div>
+          <div class="v2-journey-copy v2-journey-copy-d"><span>04 / FLIGHT</span><h2>Carry the<br><em>voice forward.</em></h2><p>From behind the aircraft, the journey moves toward its destination.</p></div>
+          <div class="v2-journey-copy v2-journey-copy-e"><span>05 / BACK TO EVIDENCE</span><h2>Now listen<br><em>closer.</em></h2><p>The cinematic journey ends at the working processor.</p><a href="#audio-lab">Enter the audio laboratory</a></div>
+          <div class="v2-journey-top"><span class="v2-journey-brand"><img class="v2-brand-glyph" src="/assets/brand-glyph-v2.png" alt="">TRISHUL VANI / SIGNAL JOURNEY</span><span>ILLUSTRATIVE SCENE · NOT A SERVICE PLATFORM</span></div>
           <div class="v2-journey-bottom"><span id="v2-journey-phase">01 / APPROACH</span><span>SCROLL TO MOVE THE STORY</span></div>
           <div class="v2-journey-progress" aria-hidden="true"><span></span></div>
         </div>
@@ -168,6 +176,6 @@
 <script defer src="/design-v2.js?v=20261011f"></script>
 <script defer src="/relaunch-v2.js?v=5"></script>
 <script defer src="/flyover-v2.js?v=2"></script>
-<script defer src="/journey-v2.js?v=1"></script>
-<script defer src="/tour.js"></script></body>
+<script defer src="/journey-v2.js?v=3"></script>
+<script defer src="/tour.js"></script><script defer src="/atmosphere-v4.js?v=1"></script></body>
 </html>

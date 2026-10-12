@@ -93,6 +93,7 @@
     arrival.style.setProperty('--arrival-word-y', `${Math.round(34 * (1 - impact))}px`);
     arrival.style.setProperty('--arrival-impact', impact.toFixed(3));
     arrival.dataset.phase = String(Math.min(5, Math.floor(p * 6)));
+    arrival.dataset.beat = String(p < .2 ? 0 : p < .47 ? 1 : p < .86 ? 2 : 3);
     label.textContent = stages[p < .2 ? 0 : p < .47 ? 1 : p < .86 ? 2 : p < .97 ? 3 : 4];
     draw(p);
   }

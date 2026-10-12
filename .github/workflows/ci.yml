@@ -43,7 +43,7 @@ jobs:
           node --check web/relaunch-v2.js
           node --check web/flyover-v2.js
           node --check web/journey-v2.js
-          node --check web/arrival-v2.js
+          node --check web/atmosphere-v4.js
           node --check web/tour.js
           test -s web/tour.css
           test -s docs/TUTORIAL_STORYBOARD.md
@@ -62,8 +62,12 @@ jobs:
           test -s web/flyover-v2.css
           test -s web/journey-v2.css
           test -s web/intro-v2.css
+          test -s web/brand-v2.css
+          test -s web/atmosphere-v4.css
           test -s web/assets/operator-b2-journey-v2.png
+          test -s web/assets/operator-signal-passage-v2.png
           test -s web/assets/preview-trident-v2.webp
+          test -s web/assets/brand-glyph-v2.png
           test -s web/assets/signal-microphones-v2.webp
           test -s deploy/pages/design-v2/index.html
           test -s deploy/pages/design-v2/mark.svg

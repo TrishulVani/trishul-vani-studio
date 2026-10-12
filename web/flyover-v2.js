@@ -16,7 +16,7 @@
       <div class="flyover-back" aria-hidden="true"><span>PROJECT / TRISHUL VANI</span><strong>LISTEN.</strong><small>BEYOND THE VISIBLE</small></div>
       <div class="flyover-aura" aria-hidden="true"></div>
       <div class="flyover-craft" aria-hidden="true"><img src="/assets/b2-flyover-v2.webp" alt=""></div>
-      <div class="flyover-header"><span>TRISHUL VANI <i>/</i> SOUND INTELLIGENCE</span><span class="flyover-status"><b></b> SCROLL LINK ACTIVE</span></div>
+      <div class="flyover-header"><span class="flyover-brand"><img class="v2-brand-glyph" src="/assets/brand-glyph-v2.png" alt="">TRISHUL VANI <i>/</i> SOUND INTELLIGENCE</span><span class="flyover-status"><b></b> SCROLL LINK ACTIVE</span></div>
       <i class="flyover-bracket top-left"></i><i class="flyover-bracket top-right"></i><i class="flyover-bracket bottom-left"></i><i class="flyover-bracket bottom-right"></i>
       <div class="flyover-hud"><div><span class="flyover-eyebrow">01 / B-2 SPIRIT VISUAL STUDY</span><h1>Sound moves<br>through every mission.</h1><p>Illustrative flyover. Explore the signal, then put the real processor to work.</p></div><div class="flyover-readout"><strong id="flyover-percent">000%</strong><span id="flyover-direction">SCROLL DOWN TO FLY</span></div></div>
       <div class="flyover-hint">SCROLL TO CONTROL THE FLYOVER</div>

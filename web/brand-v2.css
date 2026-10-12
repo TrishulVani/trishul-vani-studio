@@ -1,0 +1,10 @@
+.v2-brand-glyph{display:none;flex:none;width:32px;height:29px;object-fit:contain;image-rendering:auto;box-shadow:0 0 18px #c8a46f17}
+body.design-v2 .v2-brand-glyph,body.experience-v2 .v2-brand-glyph{display:block}
+body.design-v2 .sidebar .brand-symbol,body.design-v2 .rail .brand .trident{display:none}
+body.design-v2 .sidebar .brand .v2-brand-glyph,body.design-v2 .rail .brand .v2-brand-glyph{width:36px;height:32px;margin-right:11px}
+body.experience-v2 .identity .v2-brand-glyph{width:36px;height:32px}
+body.experience-v2 footer .v2-brand-glyph{width:30px;height:27px}
+.arrival-brand,.flyover-brand,.v2-journey-brand{display:inline-flex;align-items:center;gap:12px}
+.arrival-brand .v2-brand-glyph,.flyover-brand .v2-brand-glyph,.v2-journey-brand .v2-brand-glyph{width:30px;height:27px}
+@media(max-width:700px){body.design-v2 .rail .brand{display:flex}}
+@media(max-width:650px){.arrival-brand,.flyover-brand,.v2-journey-brand{gap:7px}.arrival-brand .v2-brand-glyph,.flyover-brand .v2-brand-glyph,.v2-journey-brand .v2-brand-glyph{width:27px;height:24px}}

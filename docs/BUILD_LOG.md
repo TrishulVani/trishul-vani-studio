@@ -67,3 +67,9 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - The supplied `preview.html` provided the trident asset and motion reference. The V2 intro now idles in axial rotation, then responds to wheel/touch/keyboard input with a reversible turn, rush and impact; completion or Skip/Escape leads to the same connected landing.
 - Replaced the three environmental panels with a single sticky narrative. Its new rear-view cockpit image was generated using the existing operator image as reference; this is illustrative concept art. The final chapter links and scrolls directly into the real audio lab.
 - Updated CI asset and syntax checks. The final full local browser run passed 36/36 across desktop, tablet and mobile, including actual wheel-driven intro entry, lab processing, exports and spectral edits. No backend or V1 source behavior was altered.
+
+## 2026-10-12 — recording-guided signal corridor and V4 atmosphere
+
+- Reviewed the supplied screen recording, animatic, HTML theme preview and V4 color brief as references. Built native canvas interference waves, pointer-reactive moving blocks, perspective notation ribbons and original corridor artwork around the existing operator. The action now runs woman → interstellar passage → glass break → rear-view cockpit → fly-off → audio lab.
+- Added the supplied gold glyph to V2 navigation/branding and a layered scroll-interpolated atmosphere across intro, landing, laboratory and editor. V1 and backend/DSP source are unchanged; reduced-motion behavior remains available.
+- Browser verification passed 42/42 across desktop, tablet and mobile. JavaScript syntax and diff checks passed. Public V2 remains on the old version until visual approval and release.
