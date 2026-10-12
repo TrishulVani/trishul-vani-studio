@@ -10,7 +10,7 @@
       <canvas id="relaunch-field" aria-hidden="true"></canvas>
       <div class="relaunch-media" aria-hidden="true"><img class="relaunch-chamber" src="/assets/signal-chamber-v2.png" alt=""><div class="relaunch-energy"></div><div class="relaunch-flight-wrap"><img class="relaunch-flight" src="/assets/signal-operator-v2.png" alt=""></div><span class="relaunch-media-index" id="relaunch-media-index">TRANSMISSION 01 / ACQUIRE</span><span class="relaunch-media-corner"></span></div>
       <div class="relaunch-orbit" aria-hidden="true"></div>
-      <div class="relaunch-top"><span>TRISHUL VANI / 2026</span><span id="relaunch-count">01 / 04</span></div>
+      <div class="relaunch-top"><span>त्रिSHUL VANI / 2026</span><span id="relaunch-count">01 / 04</span></div>
       <div class="relaunch-chapter is-current" data-index="0"><span class="relaunch-kicker">SOUND INTELLIGENCE / INDEPENDENT RESEARCH</span><h1>The signal<br><em>survives.</em></h1><p>Discover speech clarity under pressure. A research instrument shaped for the changing acoustic conditions of ground, sea and air.</p><a href="#audio-lab">Enter the audio lab <span aria-hidden="true">↗</span></a></div>
       <div class="relaunch-chapter" data-index="1"><span class="relaunch-kicker">01 / ACQUIRE</span><h2>Listen beyond<br><em>the obvious.</em></h2><p>Primary and reference channels capture the same acoustic world from different positions. Their difference carries useful evidence.</p></div>
       <div class="relaunch-chapter" data-index="2"><span class="relaunch-kicker">02 / SEPARATE</span><h2>Let noise move.<br><em>Keep the voice.</em></h2><p>Adaptive cancellation follows changing interference while the speech path stays measurable and available for comparison.</p></div>

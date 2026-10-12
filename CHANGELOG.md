@@ -6,6 +6,12 @@
 
 # Changelog
 
+## Integrated V2 virtual rig and MK-V baseline — 2026-10-12
+
+- Embedded the existing MK-IV hardware workbench directly in V2 while retaining its standalone route and V1. Added a deterministic multi-controller virtual deployment report: script errors identify board/line, wiring and code determine task readiness, and virtual device indicators respond to code changes. The FastAPI experiment remains real offline DSP rather than emulated Pi execution.
+- Improved the existing mesh material lighting, corrected the concept board label to Raspberry Pi 4 Model B, and aligned the green favicon plus Hindi `त्रि` branding across page titles and visible marks.
+- Recorded the MK-V baseline design and route audit with desktop/tablet/mobile screenshots. A generated product render is concept artwork, not hardware evidence. Physical wiring, firmware flashing, GLB/CAD and measured hardware remain unverified.
+
 ## Design 02 virtual hardware workbench — 2026-10-12
 
 - Adapted the user-supplied MK-IV prototype geometry into a larger interactive WebGL2 assembly viewer, with orbit, chapter focus, open, exploded and cutaway views.

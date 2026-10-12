@@ -29,7 +29,7 @@
       const wav = await response.blob();
       const form = new FormData();
       form.append('file', wav, 'synthetic-engine-example.wav');
-      form.append('provenance', `Synthetic TRISHUL VANI engine experiment ${record.id}`);
+      form.append('provenance', `Synthetic त्रिSHUL VANI engine experiment ${record.id}`);
       const session = await json('/api/spectral/sessions', { method: 'POST', body: form });
       if (!/^[a-f0-9]{16}$/.test(session.id || '')) throw new Error('Invalid spectral session');
       const view = await json(`/api/spectral/sessions/${session.id}/view`);

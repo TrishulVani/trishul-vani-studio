@@ -3,7 +3,7 @@
   const key = 'trishul-vani-tour-v1';
   const progressKey = 'trishul-vani-tour-progress';
   const steps = [
-    { page: 'lab', target: '.hero', title: 'A research workbench', body: 'TRISHUL VANI compares offline speech-enhancement methods. This alpha is not a certified live or hardware system.' },
+    { page: 'lab', target: '.hero', title: 'A research workbench', body: 'त्रिSHUL VANI compares offline speech-enhancement methods. This alpha is not a certified live or hardware system.' },
     { page: 'lab', target: '#audio-lab', title: 'Choose a controlled input', body: 'Select a noise profile, input SNR, duration and random seed. The built-in signal is synthetic, not human speech.' },
     { page: 'lab', target: '#run-btn', title: 'Run, listen and compare', body: 'Run the actual processor, then compare RAW, NLMS, spectral and hybrid audio. Scores need the right clean reference; missing measurements stay unavailable.' },
     { page: 'studio', target: '#drop-zone', title: 'Inspect the spectrum', body: 'Import a permitted WAV or FLAC file, or load the synthetic test tone. The STFT view comes from the source audio. Preview and apply a selected region without changing the original.' },
@@ -11,7 +11,7 @@
   ];
   const root = document.createElement('div');
   root.className = 'tv-help';
-  root.innerHTML = '<button type="button" class="tv-help-button" aria-haspopup="dialog">? Help &amp; tour</button><div class="tv-first" hidden><strong>New to TRISHUL VANI?</strong><span>A five-step tour shows the real controls.</span><button type="button" data-action="start">Take tour</button><button type="button" data-action="dismiss" aria-label="Dismiss tour suggestion">×</button></div><dialog class="tv-tour" aria-labelledby="tv-tour-title"><div class="tv-tour-kicker">GUIDED WORKSPACE TOUR <span class="tv-tour-count"></span></div><h2 id="tv-tour-title"></h2><p class="tv-tour-body"></p><p class="tv-video-note">80-second video: coming soon. <a href="https://github.com/TrishulVani/trishul-vani-studio#open-the-working-application" target="_blank" rel="noopener">Read the text guide</a>.</p><div class="tv-tour-actions"><button type="button" data-action="skip">Skip</button><span></span><button type="button" data-action="back">Back</button><button type="button" data-action="next">Next</button></div></dialog>';
+  root.innerHTML = '<button type="button" class="tv-help-button" aria-haspopup="dialog">? Help &amp; tour</button><div class="tv-first" hidden><strong>New to त्रिSHUL VANI?</strong><span>A five-step tour shows the real controls.</span><button type="button" data-action="start">Take tour</button><button type="button" data-action="dismiss" aria-label="Dismiss tour suggestion">×</button></div><dialog class="tv-tour" aria-labelledby="tv-tour-title"><div class="tv-tour-kicker">GUIDED WORKSPACE TOUR <span class="tv-tour-count"></span></div><h2 id="tv-tour-title"></h2><p class="tv-tour-body"></p><p class="tv-video-note">80-second video: coming soon. <a href="https://github.com/TrishulVani/trishul-vani-studio#open-the-working-application" target="_blank" rel="noopener">Read the text guide</a>.</p><div class="tv-tour-actions"><button type="button" data-action="skip">Skip</button><span></span><button type="button" data-action="back">Back</button><button type="button" data-action="next">Next</button></div></dialog>';
   document.body.append(root);
   const dialog = root.querySelector('dialog');
   const prompt = root.querySelector('.tv-first');

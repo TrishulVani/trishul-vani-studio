@@ -5,7 +5,7 @@
     mic: { name: 'Close-talk microphone', family: 'SENSOR', detail: 'Analog signal concept', ports: [['OUT', 'analog_out', 'CH 1']] },
     ambient: { name: 'Ambient microphone', family: 'SENSOR', detail: 'Correlated-noise reference', ports: [['OUT', 'analog_out', 'CH 2']] },
     adc: { name: 'Shared-clock stereo capture', family: 'INTERFACE', detail: 'Single two-channel ADC / USB interface', ports: [['IN1', 'analog_in', 'CH 1'], ['IN2', 'analog_in', 'CH 2'], ['USB', 'usb_out', 'PCM']] },
-    pi: { name: 'Raspberry Pi 5', family: 'LINUX SBC', detail: 'Virtual field DSP controller', ports: [['USB', 'usb_in', 'PCM'], ['AUDIO', 'audio_out', 'OUT'], ['TX', 'uart_tx', 'UART'], ['RX', 'uart_rx', 'UART'], ['GPIO17', 'gpio_out', 'DIGITAL'], ['GPIO27', 'gpio_in', 'DIGITAL'], ['5V', 'power5_in', 'PWR'], ['GND', 'gnd_in', 'RETURN']] },
+    pi: { name: 'Raspberry Pi 4 Model B', family: 'LINUX SBC', detail: 'Virtual field DSP controller; concept geometry', ports: [['USB', 'usb_in', 'PCM'], ['AUDIO', 'audio_out', 'OUT'], ['TX', 'uart_tx', 'UART'], ['RX', 'uart_rx', 'UART'], ['GPIO17', 'gpio_out', 'DIGITAL'], ['GPIO27', 'gpio_in', 'DIGITAL'], ['5V', 'power5_in', 'PWR'], ['GND', 'gnd_in', 'RETURN']] },
     pico: { name: 'Raspberry Pi Pico W', family: 'MICROCONTROLLER', detail: 'Control and status companion', ports: [['TX', 'uart_tx', 'UART'], ['RX', 'uart_rx', 'UART'], ['GP15', 'gpio_out', 'DIGITAL'], ['GP14', 'gpio_in', 'DIGITAL'], ['3V3', 'power3_in', 'PWR'], ['GND', 'gnd_in', 'RETURN']] },
     esp32: { name: 'ESP32-S3', family: 'MICROCONTROLLER', detail: 'Optional control/link experiment', ports: [['TX', 'uart_tx', 'UART'], ['RX', 'uart_rx', 'UART'], ['GPIO5', 'gpio_out', 'DIGITAL'], ['GPIO4', 'gpio_in', 'DIGITAL'], ['3V3', 'power3_in', 'PWR'], ['GND', 'gnd_in', 'RETURN']] },
     receiver: { name: 'Control-room listener', family: 'OUTPUT', detail: 'Virtual playback sink', ports: [['AUDIO', 'audio_in', 'PCM']] },
@@ -26,7 +26,7 @@
       ['pi1', 'GPIO17', 'esp1', 'GPIO4'], ['esp1', 'GPIO5', 'pi1', 'GPIO27']
     ],
     scripts: {
-      pi1: '# Virtual control script for Raspberry Pi 5\nMODE HYBRID\nSET GPIO17 HIGH\nREAD GPIO27\nSEND UART READY\nLOG Field DSP route armed',
+      pi1: '# Virtual control script for Raspberry Pi 4 Model B\nMODE HYBRID\nSTREAM ON\nSET GPIO17 HIGH\nREAD GPIO27\nSEND UART READY\nLOG Field DSP route armed',
       pico1: '# Virtual control script for Pico W\nSET GP15 HIGH\nREAD GP14\nSEND UART STATUS_OK\nLOG Pico status online',
       esp1: '# Virtual control script for ESP32-S3\nSET GPIO5 HIGH\nREAD GPIO4\nLOG ESP32 companion online'
     }
@@ -41,6 +41,7 @@
   let activeBoard = design.modules.find(m => m.type === 'pi')?.id || 'pi1';
   let virtualPins = {};
   let lastReport = null;
+  let lastRig = null;
   const esc = value => String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   const moduleOf = id => design.modules.find(m => m.id === id);
   const portOf = (id, port) => DEFINITIONS[moduleOf(id)?.type]?.ports.find(p => p[0] === port);
@@ -120,8 +121,33 @@
     $('wiring-state').textContent = problems.length ? `${problems.length} wiring check${problems.length === 1 ? '' : 's'} to resolve` : 'Virtual signal path ready';
     $('wiring-state').classList.toggle('ready', !problems.length);
     $('wiring-issues').innerHTML = problems.length ? problems.map(p => `<li>${esc(p)}</li>`).join('') : '<li>Both mic channels share one capture interface.</li><li>Power and return paths are connected in the virtual netlist.</li>';
-    $('wire-list').innerHTML = design.wires.map((w, i) => `<div class="wire-entry"><span>${esc(w[0])}.${esc(w[1])} → ${esc(w[2])}.${esc(w[3])}</span><button type="button" data-wire="${i}" aria-label="Remove wire ${i + 1}">Remove</button></div>`).join('');
+    $('wire-list').innerHTML = design.wires.map((w, i) => `<div class="wire-entry"><span>${esc(w[0])}.${esc(w[1])} → ${esc(w[2])}.${esc(w[3])}</span><div><button type="button" data-inspect-wire="${i}" aria-label="Inspect wire ${i + 1}">Inspect</button><button type="button" data-wire="${i}" aria-label="Remove wire ${i + 1}">Remove</button></div></div>`).join('');
     $('wire-list').querySelectorAll('[data-wire]').forEach(button => button.addEventListener('click', () => { design.wires.splice(Number(button.dataset.wire), 1); save(); renderAll(); }));
+    $('wire-list').querySelectorAll('[data-inspect-wire]').forEach(button => button.addEventListener('click', () => inspectWire(Number(button.dataset.inspectWire))));
+  }
+  function inspectWire(index) {
+    const w = design.wires[index];
+    if (!w) return;
+    const source = moduleOf(w[0]), sink = moduleOf(w[2]), port = portOf(w[0], w[1]);
+    const kind = port?.[1] || 'unknown';
+    let state = 'Topology only — run the virtual rig for a logical state.';
+    if (lastRig?.ok) {
+      if (kind === 'gpio_out') {
+        const pinValue = lastRig.pins[`${w[0]}.${w[1]}`];
+        state = `${w[0]}.${w[1]} is ${pinValue === 1 ? 'HIGH' : pinValue === 0 ? 'LOW' : 'UNKNOWN'} in this virtual run.`;
+      }
+      else if (kind.startsWith('power') || kind === 'gnd_out') state = `Virtual destination ${lastRig.power?.[w[2]] ? 'powered' : 'not confirmed powered'}; current and voltage are not measured.`;
+      else if (kind === 'uart_tx') state = `Virtual message path ${lastRig.logs.some(l => l.includes(`→ ${w[2]}.RX`)) ? 'used' : 'not used'} in this run.`;
+      else state = 'Logical route connected; no physical signal measurement.';
+    }
+    $('connection-inspector').innerHTML = `<strong>${esc(DEFINITIONS[source.type].name)} ${esc(w[1])} → ${esc(DEFINITIONS[sink.type].name)} ${esc(w[3])}</strong><dl><dt>Net ${index + 1}</dt><dd>${esc(kind.replaceAll('_', ' '))}</dd><dt>Source port</dt><dd>${esc(port[2])}</dd><dt>Destination port</dt><dd>${esc(portOf(w[2], w[3])[2])}</dd><dt>Virtual state</dt><dd>${esc(state)}</dd><dt>Physical status</dt><dd>Unverified. Confirm connector, voltage, driver and test with instruments.</dd></dl>`;
+  }
+  function inspectPart(meshId) {
+    const mapped = { primary_mic: 'mic1', ambient_mic: 'mic2', adc_board: 'adc1', pi_pcb: 'pi1', field_lid: 'pi1', wifi_ap: 'esp1', display_shell: 'receiver1', bank: 'supply1' }[meshId];
+    if (!mapped) return;
+    const related = design.wires.map((w, i) => ({ w, i })).filter(x => x.w[0] === mapped || x.w[2] === mapped);
+    $('part-connections').innerHTML = related.length ? related.map(({ w, i }) => `<button type="button" data-part-wire="${i}">${esc(w[0])}.${esc(w[1])} → ${esc(w[2])}.${esc(w[3])}</button>`).join('') : '<span>No logical nets for this part.</span>';
+    $('part-connections').querySelectorAll('[data-part-wire]').forEach(button => button.addEventListener('click', () => { inspectWire(Number(button.dataset.partWire)); $('wiring').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }));
   }
   function renderBoardSelector() {
     const list = design.modules.filter(m => ['pi','pico','esp32'].includes(m.type));
@@ -130,7 +156,7 @@
     $('code-board').value = activeBoard;
     $('code-input').value = design.scripts[activeBoard] || `# Virtual script for ${activeBoard}\nLOG Ready`;
   }
-  function renderAll() { renderModules(); renderIssues(); renderBoardSelector(); }
+  function renderAll() { lastRig = null; renderModules(); renderIssues(); renderBoardSelector(); }
   function addBoard() {
     if (design.modules.length >= 16) { $('port-hint').textContent = 'Maximum 16 modules in one virtual design.'; return; }
     const type = $('board-type').value;
@@ -139,40 +165,23 @@
     design.scripts[id] = `# Virtual control script for ${DEFINITIONS[type].name}\nLOG ${id} ready`;
     activeBoard = id; save(); renderAll(); $('port-hint').textContent = `${DEFINITIONS[type].name} added. Connect power, ground and a control link.`;
   }
-  function runScript() {
-    const source = $('code-input').value, module = moduleOf(activeBoard), lines = source.split(/\r?\n/), log = [], pins = {};
-    if (!module || source.length > 4000 || lines.length > 40) { $('serial-output').textContent = 'Script limit: 40 lines / 4000 characters.'; return; }
-    let time = 0, error = false;
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim(); if (!line || line.startsWith('#')) continue;
-      let match;
-      if ((match = /^MODE\s+(RAW|NLMS|SPECTRAL|HYBRID)$/i.exec(line))) {
-        if (module.type !== 'pi') { log.push(`L${i+1}: MODE is available on the Raspberry Pi processor only.`); error = true; break; }
-        $('test-track').value = match[1].toLowerCase(); log.push(`${time} ms  DSP mode → ${match[1].toUpperCase()}`);
-      } else if ((match = /^SET\s+([A-Z0-9]+)\s+(HIGH|LOW)$/i.exec(line))) {
-        const pin = match[1].toUpperCase();
-        if (!DEFINITIONS[module.type].ports.some(p => p[0] === pin && p[1] === 'gpio_out')) { log.push(`L${i+1}: ${pin} is not a modeled output on ${module.id}.`); error = true; break; }
-        pins[pin] = match[2].toUpperCase() === 'HIGH' ? 1 : 0; virtualPins[`${module.id}.${pin}`] = pins[pin];
-        log.push(`${time} ms  ${pin} ← ${pins[pin] ? 'HIGH' : 'LOW'}${design.wires.some(w => w[0] === module.id && w[1] === pin) ? ' / wired' : ' / no load connected'}`);
-      } else if ((match = /^READ\s+([A-Z0-9]+)$/i.exec(line))) {
-        const pin = match[1].toUpperCase();
-        if (!DEFINITIONS[module.type].ports.some(p => p[0] === pin && p[1] === 'gpio_in')) { log.push(`L${i+1}: ${pin} is not a modeled input on ${module.id}.`); error = true; break; }
-        const driver = design.wires.find(w => w[2] === module.id && w[3] === pin);
-        log.push(`${time} ms  ${pin} → ${driver ? (virtualPins[`${driver[0]}.${driver[1]}`] ?? 0) : 'UNWIRED'}`);
-      } else if ((match = /^SEND\s+UART\s+([A-Z0-9_ -]{1,40})$/i.exec(line))) {
-        const path = design.wires.find(w => w[0] === module.id && w[1] === 'TX');
-        log.push(`${time} ms  UART ${match[1].trim()} → ${path ? `${path[2]}.${path[3]}` : 'UNWIRED'}`);
-      } else if ((match = /^WAIT\s+(\d{1,4})$/i.exec(line))) {
-        const delay = Number(match[1]); if (delay > 1000) { log.push(`L${i+1}: WAIT is limited to 1000 virtual ms.`); error = true; break; }
-        time += delay; log.push(`${time} ms  virtual clock advanced`);
-      } else if ((match = /^LOG\s+(.{1,80})$/i.exec(line))) log.push(`${time} ms  ${match[1]}`);
-      else { log.push(`L${i+1}: Unsupported command. See syntax below the editor.`); error = true; break; }
-    }
-    $('serial-output').textContent = (error ? 'SIMULATION STOPPED\n' : 'SIMULATION COMPLETE\n') + log.join('\n');
-    $('virtual-pins').innerHTML = Object.entries(pins).map(([pin, value]) => `<span>${esc(pin)} ${value ? 'HIGH' : 'LOW'}</span>`).join('');
+  function runRig() {
+    design.scripts[activeBoard] = $('code-input').value;
     save();
+    lastRig = window.virtualRigV2.run(design, DEFINITIONS);
+    const result = lastRig;
+    $('serial-output').textContent = (result.ok ? 'SIMULATION COMPLETE\n' : 'SIMULATION STOPPED\n') + (result.errors.length ? result.errors.join('\n') : result.logs.join('\n'));
+    $('virtual-pins').innerHTML = Object.entries(result.pins).map(([pin, value]) => `<span>${esc(pin)} ${value ? 'HIGH' : 'LOW'}</span>`).join('');
+    $('rig-summary').textContent = result.ok ? `${result.tasks.filter(t => t.pass).length} / ${result.tasks.length} virtual tasks ready` : `${result.errors.length} script error${result.errors.length === 1 ? '' : 's'} — deploy stopped`;
+    $('task-results').innerHTML = result.ok ? result.tasks.map(t => `<div class="task-row ${t.pass ? 'pass' : 'fail'}"><strong>${t.pass ? 'READY' : 'BLOCKED'} · ${esc(t.name)}</strong><span>${esc(t.reason)}</span></div>`).join('') : result.errors.map(e => `<div class="task-row fail"><strong>CODE ERROR</strong><span>${esc(e)}</span></div>`).join('');
+    if (result.ok) $('test-track').value = result.mode;
+    $('test-status').textContent = result.ok ? (result.tasks.slice(0, 4).every(t => t.pass) ? 'Virtual path ready; run the connected DSP test to measure software output.' : 'Virtual path blocked. Fix the listed task before processing.') : 'Virtual deployment stopped. Fix script errors before processing.';
+    window.hardwareModelV2?.setDeviceState?.({ boot: Boolean(result.power?.pi1), stream: Boolean(result.stream), control: Boolean(result.pins?.['pi1.GPIO17']) });
+    return result;
   }
   async function runSoftware() {
+    const rig = runRig();
+    if (!rig.ok || !rig.tasks.slice(0, 4).every(t => t.pass)) return;
     const missing = issues();
     if (missing.length) { $('test-status').textContent = `Virtual circuit is incomplete: ${missing[0]}`; return; }
     const noise = $('test-noise').value, snr_db = Number($('test-snr').value), duration_s = Number($('test-duration').value), seed = Number($('test-seed').value);
@@ -182,9 +191,9 @@
       const response = await fetch('/api/experiments/simulate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ noise, snr_db, duration_s, seed }) });
       if (!response.ok) { const data = await response.json().catch(() => ({})); throw Error(typeof data.detail === 'string' ? data.detail : `Processor returned ${response.status}`); }
       lastReport = await response.json();
-      $('test-status').textContent = `Software run ${lastReport.id} complete. The virtual circuit was a configuration gate; audio was processed by FastAPI, not by an emulated Pi.`;
+      $('test-status').textContent = `Software run ${lastReport.id} complete in ${rig.mode.toUpperCase()} preview mode. The virtual circuit gated this test; FastAPI processed the audio, not an emulated Pi.`;
       const metrics = lastReport.metrics || {}, fmt = value => typeof value === 'number' && Number.isFinite(value) ? `${value.toFixed(2)} dB` : 'N/A';
-      $('test-metrics').innerHTML = `<div class="metric"><span>Input SNR · synthetic clean reference</span><strong>${fmt(metrics.raw?.snr_db)}</strong></div><div class="metric"><span>Hybrid output SNR · software</span><strong>${fmt(metrics.hybrid?.snr_db)}</strong></div><div class="metric"><span>Processing source</span><strong>${esc(lastReport.model || 'spectral DSP fallback')}</strong></div>`;
+      $('test-metrics').innerHTML = `<div class="metric"><span>Input SNR · synthetic clean reference</span><strong>${fmt(metrics.raw?.snr_db)}</strong></div><div class="metric"><span>${esc(rig.mode.toUpperCase())} output SNR · offline software</span><strong>${fmt(metrics[rig.mode]?.snr_db)}</strong></div><div class="metric"><span>Processing source</span><strong>${esc(lastReport.model || 'spectral DSP fallback')}</strong></div>`;
       $('test-audio').hidden = false; $('open-lab').href = `/index.html?design=2&run=${encodeURIComponent(lastReport.id)}&track=${encodeURIComponent($('test-track').value)}#audio-lab`;
       setAudio();
     } catch (error) { $('test-status').textContent = `Connected processor unavailable: ${error.message}`; }
@@ -202,11 +211,24 @@
   $('code-board').addEventListener('change', () => { design.scripts[activeBoard] = $('code-input').value; activeBoard = $('code-board').value; save(); renderBoardSelector(); });
   $('code-input').addEventListener('input', () => { design.scripts[activeBoard] = $('code-input').value; save(); });
   $('load-example').addEventListener('click', () => { const fresh = defaults().scripts; $('code-input').value = fresh[activeBoard] || `# Virtual script\nLOG ${activeBoard} ready`; design.scripts[activeBoard] = $('code-input').value; save(); });
-  $('run-code').addEventListener('click', runScript);
+  $('run-code').addEventListener('click', runRig);
   $('run-software').addEventListener('click', runSoftware);
   $('test-track').addEventListener('change', setAudio);
+  $('hotspots').addEventListener('click', event => {
+    const buttons = [...$('hotspots').querySelectorAll('.hotspot')];
+    const index = buttons.indexOf(event.target);
+    const meshes = ['primary_mic', 'ambient_mic', 'field_lid', 'pi_pcb', 'adc_board', 'wifi_ap', 'display_shell'];
+    if (index >= 0) inspectPart(meshes[index]);
+  });
+  $('viewer').addEventListener('click', () => setTimeout(() => inspectPart(window.hardwareModelV2?.selectedPart?.()), 0));
   addEventListener('resize', () => requestAnimationFrame(drawWires));
   new ResizeObserver(() => requestAnimationFrame(drawWires)).observe($('wiring-stage'));
   renderAll();
+  if (document.body.classList.contains('embedded')) {
+    const reportHeight = () => parent.postMessage({ type: 'tv-hardware-height', height: document.documentElement.scrollHeight }, location.origin);
+    new ResizeObserver(reportHeight).observe(document.body);
+    addEventListener('load', reportHeight);
+    reportHeight();
+  }
   window.hardwareBenchV2 = { issues, design: () => structuredClone(design) };
 })();
