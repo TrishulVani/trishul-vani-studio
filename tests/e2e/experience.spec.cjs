@@ -20,9 +20,7 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await expect(page.locator('.arrival-figure')).toHaveCount(0);
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
   const spin = page.locator('.arrival-weapon-body');
-  const before = await spin.evaluate(el => getComputedStyle(el).transform);
-  await page.waitForTimeout(300);
-  expect(await spin.evaluate(el => getComputedStyle(el).transform)).not.toBe(before);
+  expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('arrival-idle-spin');
   await expect(page).toHaveURL(/experience\.html$/);
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 850, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE TURN');

@@ -27,7 +27,8 @@
   function advance(amount) {
     if (closed) return;
     target = clamp(target + amount);
-    if (target < .97) { clearTimeout(finishTimer); finishTimer = 0; }
+    if (target < .999) { clearTimeout(finishTimer); finishTimer = 0; }
+    else if (!finishTimer) finishTimer = setTimeout(go, reduce ? 400 : 1800);
     arrival.classList.toggle('is-moving', target > .015);
     if (!raf) raf = requestAnimationFrame(tick);
   }
@@ -94,7 +95,6 @@
     arrival.dataset.phase = String(Math.min(5, Math.floor(p * 6)));
     label.textContent = stages[p < .2 ? 0 : p < .47 ? 1 : p < .86 ? 2 : p < .97 ? 3 : 4];
     draw(p);
-    if (p >= .998 && !finishTimer) finishTimer = setTimeout(go, reduce ? 250 : 650);
   }
 
   function tick() {
