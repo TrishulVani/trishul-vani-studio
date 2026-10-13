@@ -315,6 +315,24 @@ body.design-v2 .section-block{max-width:1600px;margin:0 auto;padding-left:5vw;pa
 }
 @keyframes v2-sonar{to{transform:translate(-50%,-50%) rotate(1turn)}}
 @media(prefers-reduced-motion:reduce){body.design-v2 .hero:after{animation:none}}
+
+/* Mission-control dashboard: compact work-area entry points in the existing V2 palette. */
+body.design-v2 .workspace-dashboard{position:relative;z-index:6;max-width:1600px;margin:0 auto;padding:38px clamp(22px,5vw,82px) 48px;color:#f1f0e9}
+body.design-v2 .workspace-dashboard-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}
+body.design-v2 .workspace-dashboard-heading h2{margin:9px 0 0;font:650 clamp(26px,3vw,40px)/1.05 'Manrope','DM Sans',sans-serif;letter-spacing:-.055em;color:#f4f1e8}
+body.design-v2 .workspace-dashboard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+body.design-v2 .workspace-dashboard-card{min-width:0;min-height:192px;padding:19px 20px 17px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;border:1px solid #af98714a;border-radius:13px;background:linear-gradient(145deg,#102319ed,#0a1711f5);color:#e9eee6;text-decoration:none;box-shadow:0 14px 38px #0003}
+body.design-v2 .workspace-dashboard-card:hover,body.design-v2 .workspace-dashboard-card:focus-visible{border-color:#c8ad7a;background:linear-gradient(145deg,#183627,#0d1d14);outline:none}
+body.design-v2 .workspace-dashboard-top{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+body.design-v2 .workspace-dashboard-icon{width:37px;height:37px;display:grid;place-items:center;border:1px solid #c5a9756b;border-radius:10px;background:#c5a97512;color:#d8c394;font:500 23px/1 'Manrope',sans-serif}
+body.design-v2 .workspace-dashboard-index{color:#a6b5a7;font:700 9px/1.2 'IBM Plex Mono',monospace;letter-spacing:.12em}
+body.design-v2 .workspace-dashboard-card strong{font:650 17px/1.2 'Manrope','DM Sans',sans-serif;color:#f1f0e9}
+body.design-v2 .workspace-dashboard-card>span:nth-of-type(2){color:#b7c1b6;font:400 11px/1.6 'DM Sans',sans-serif}
+body.design-v2 .workspace-dashboard-card>b{margin-top:auto;padding-top:9px;color:#d9c18e;font:700 10px/1.2 'DM Sans',sans-serif;letter-spacing:.04em}
+body.design-v2 .workspace-dashboard-card>b i{font-style:normal;margin-left:5px}
+@media(max-width:900px){body.design-v2 .workspace-dashboard{padding:32px 24px 42px}body.design-v2 .workspace-dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){body.design-v2 .workspace-dashboard{padding:22px 16px 32px}body.design-v2 .workspace-dashboard-heading{align-items:flex-start;margin-bottom:16px}body.design-v2 .workspace-dashboard-heading .section-hint{display:none}body.design-v2 .workspace-dashboard-grid{gap:9px}body.design-v2 .workspace-dashboard-card{min-height:170px;padding:14px 13px;border-radius:12px}body.design-v2 .workspace-dashboard-card strong{font-size:15px}body.design-v2 .workspace-dashboard-index{font-size:8px}body.design-v2[data-mobile-view]:not([data-mobile-view="overview"]) #workspace-dashboard{display:none}}
+@media(max-width:390px){body.design-v2 .workspace-dashboard-grid{grid-template-columns:1fr}body.design-v2 .workspace-dashboard-card{min-height:140px}}
 @media(min-width:901px){body.design-v2 .page-kicker{display:none}body.design-v2 .hero-main{padding-top:22vh}body.design-v2 .hero{scroll-margin-top:0}}
 /* Three acoustic environments create a scroll story within the working app. */
 .v2-service-theatre{display:none}

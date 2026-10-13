@@ -22,6 +22,17 @@ def test_working_lab_and_studio_are_published_as_static_routes():
     assert 'src="studio.js"' in studio
 
 
+def test_overview_dashboard_links_to_existing_workspaces_and_keeps_the_story():
+    lab = (WEB / "lab.html").read_text(encoding="utf-8-sig")
+    dashboard = lab.index('id="workspace-dashboard"')
+    story = lab.index('class="v2-cinema"')
+    assert dashboard < story
+    for target in ('href="#audio-lab"', 'href="/studio.html"', 'href="#hardware-lab"', 'href="#datasets"'):
+        assert target in lab[dashboard:story]
+    assert 'id="environments"' in lab
+    assert ".workspace-dashboard-grid" in (WEB / "design-v2.css").read_text(encoding="utf-8-sig")
+
+
 def test_original_edition_stays_on_the_static_host():
     page = (WEB / "design-v2" / "index.html").read_text(encoding="utf-8-sig")
     assert 'src="/lab.html?design=2"' in page
