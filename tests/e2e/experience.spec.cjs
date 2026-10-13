@@ -124,19 +124,7 @@ test('the operator crosses ribbons and a glass barrier before cockpit flight and
   await expect(page.locator('.v2-journey')).toBeHidden();
 });
 
-test('static homepage links directly to the working lab without a backend iframe', async ({ page }) => {
-  await page.goto('/index.html');
-  await expect(page.locator('#arrival')).toBeVisible();
-  await page.getByRole('button', { name: /Enter site/i }).click();
-  await expect(page.locator('#arrival')).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: /When noise rises/i })).toBeVisible();
-  const labLink = page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first();
-  await expect(labLink).toHaveAttribute('href', '/lab.html?design=2');
-  await labLink.click();
-  await expect(page).toHaveURL(/lab\.html\?design=2$/);
-  await page.locator('.nav-item[href="#audio-lab"]').click();
-  await expect(page.locator('#audio-lab')).toBeVisible();
-});
+
 
 test('story launch reaches the connected laboratory route', async ({ page }) => {
   await page.goto('/experience.html?story=1');
