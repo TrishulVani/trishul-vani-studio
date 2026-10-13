@@ -321,6 +321,10 @@
       location.assign(link.href);
     }, 1320);
   });
-  loadMeta();
-  loadEvidence();
+  // Give the cinematic entry a clean first paint before waking the free API.
+  // Both calls remain best-effort and never gate navigation or animation.
+  const warmExperienceData = () => { loadMeta(); loadEvidence(); };
+  window.addEventListener('load', () => {
+    window.setTimeout(warmExperienceData, 900);
+  }, { once: true });
 })();

@@ -16,6 +16,6 @@ services:
     runtime: static
     branch: main
     rootDir: web
-    buildCommand: echo "Static frontend: no build required"
+    buildCommand: echo ready
     staticPublishPath: .
     autoDeployTrigger: checksPass
