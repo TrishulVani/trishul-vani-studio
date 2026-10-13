@@ -134,6 +134,7 @@ test('static homepage links directly to the working lab without a backend iframe
   await expect(labLink).toHaveAttribute('href', '/lab.html?design=2');
   await labLink.click();
   await expect(page).toHaveURL(/lab\.html\?design=2$/);
+  await page.locator('.nav-item[href="#audio-lab"]').click();
   await expect(page.locator('#audio-lab')).toBeVisible();
 });
 
@@ -141,6 +142,7 @@ test('story launch reaches the connected laboratory route', async ({ page }) => 
   await page.goto('/experience.html?story=1');
   await page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
   await expect(page).toHaveURL(/lab\.html\?design=2$/);
+  await page.locator('.nav-item[href="#audio-lab"]').click();
   await expect(page.locator('#audio-lab')).toBeVisible();
   await expect(page.locator('#run-btn')).toBeVisible();
 });
