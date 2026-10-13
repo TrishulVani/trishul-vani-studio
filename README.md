@@ -8,7 +8,7 @@
 
 **A connected spectral studio and speech-enhancement research laboratory with real processing, reproducible records, auditable metrics, and automated tests.**
 
-[![Live Studio](https://img.shields.io/badge/LIVE_STUDIO-trishulvani.github.io-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishulvani.github.io/)
+[![Live Studio](https://img.shields.io/badge/LIVE_STUDIO-Render_CDN-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishul-vani-frontend.onrender.com/)
 [![Python CI](https://img.shields.io/github/actions/workflow/status/TrishulVani/trishul-vani-studio/ci.yml?style=for-the-badge&label=TESTS)](https://github.com/TrishulVani/trishul-vani-studio/actions)
 [![Source](https://img.shields.io/badge/SOURCE-PUBLIC-82b98b?style=for-the-badge&labelColor=080e10)](https://github.com/TrishulVani/trishul-vani-studio)
 
@@ -19,7 +19,7 @@
 
 ### Release editions
 
-The current cinematic experience is the **main website** at [trishulvani.github.io](https://trishulvani.github.io/). The previous mint introduction and original dashboard remain available as **Version 2 / Original Edition** at [trishulvani.github.io/design-v2/](https://trishulvani.github.io/design-v2/). Both use the same Python audio processor. The version labels describe the public addresses, not separate DSP implementations.
+The current cinematic experience is the **main website** at [trishul-vani-frontend.onrender.com](https://trishul-vani-frontend.onrender.com/). The previous mint introduction and original dashboard remain available as **Version 2 / Original Edition** at [trishul-vani-frontend.onrender.com/design-v2/](https://trishul-vani-frontend.onrender.com/design-v2/). Both use the same Python audio processor. The version labels describe the public addresses, not separate DSP implementations.
 
 **New hardware workbench:** [Open the local Design 02 hardware lab](http://127.0.0.1:8002/hardware.html) to inspect the supplied prototype's adapted 3D enclosure, build a logical dual-microphone circuit with Raspberry Pi 4 Model B, Pico W and ESP32-S3 controller options, test bounded virtual control scripts and send a synthetic experiment through the real Python backend. Runs can be opened directly in the V2 audio laboratory. This is a **virtual design and software test**, not Raspberry Pi or electrical emulation; see [scope, usage and limits](docs/HARDWARE_WORKBENCH.md). The Hindi **त्रि** wordmark now uses a larger, crisp Devanagari font on V2.
 
@@ -37,13 +37,13 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 | Destination | URL | Purpose |
 |---|---|---|
-| Main website (improved Version 1) | **https://trishulvani.github.io/** | Cinematic trident introduction, signal story, connected dashboard and studio |
-| Version 2 / Original Edition | **https://trishulvani.github.io/design-v2/** | Previous mint introduction and original connected dashboard |
+| Main website (improved Version 1) | **https://trishul-vani-frontend.onrender.com/** | Cinematic trident introduction, signal story, connected dashboard and studio; static CDN, no Render web-service wake-up |
+| Version 2 / Original Edition | **https://trishul-vani-frontend.onrender.com/design-v2/** | Previous mint introduction and original connected dashboard |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
 
-The main address serves the cinematic frontend directly from GitHub Pages' CDN, so the intro and interface do not wait for a Render cold start. It wakes Render in the background and sends only `/api/...` processing requests there. A random browser-local capability isolates each visitor without third-party cookies. The Original Edition remains available at its separate address. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+The main address serves the cinematic frontend from Render Static Sites' global CDN, so the intro and interface do not wait for the sleeping Python web service. It sends only `/api/...` processing requests to the separate Render API. A random browser-local capability isolates each visitor without third-party cookies. The Original Edition remains available at its separate path. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ### First-visit guidance
 
@@ -55,14 +55,14 @@ On the preview branch, Mission Control and Spectral Studio include a **? Help & 
 2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
 3. The cinematic experience opens on the main address. Its trident intro waits for scroll, touch or keyboard input while rotating gently at rest; the completed strike takes the visitor into the connected landing. That landing combines a reversible aircraft flyover, a framed acoustic chamber and the operator-to-corridor-to-glass-to-cockpit-to-lab journey. The palette follows the supplied V4 atmosphere brief across the intro, landing, lab and editor. Motion reduces when the visitor requests reduced motion. [Lusion](https://lusion.co/), [Spaace](https://lusion.co/projects/spaace/) and [DDD 2024](https://lusion.co/projects/ddd_2024/) informed the pacing and spatial composition; their images, code and branding are not used.
 
-The public website and backend are separate services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the responsive frontend, and Render hosts this repository's Python processor. The canonical frontend source remains in [`web/`](web/).
+The public website and backend are separate Render services: the static site publishes [`web/`](web/) to the global CDN and the existing web service runs this repository's Python processor. GitHub remains source control and CI; it does not serve the public site.
 
 ### Release and CI/CD
 
 - **Main website / improved Version 1:** the cinematic intro, landing and connected lab are at the root address.
 - **Version 2 / Original Edition:** the previous mint intro and default dashboard live at `/design-v2/`. The two editions use the same v0.2 alpha DSP and API.
 - GitHub Actions runs Python 3.11/3.12 API and DSP tests, JavaScript syntax/DSP tests, Design 02 asset checks and a Docker build on pushes and pull requests. The workflow is in [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
-- Render automatically builds this repository's `main` Docker image on every new commit. Feature-branch CI is checked before merging; main CI runs alongside deployment and does not gate it. GitHub Pages publishes the public shell from `TrishulVani/trishulvani.github.io` `main` branch. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
+- Render publishes the `web/` static frontend to its CDN and automatically builds this repository's `main` Docker image for the Python API. Feature-branch CI is checked before merging; main CI runs alongside deployment and does not gate it. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
 
 > [!NOTE]
 > Render's free processor can take about a minute to wake after inactivity, but it no longer blocks the website or its intro. The frontend starts waking it immediately. Hosted workspaces use an unguessable browser-local capability; storage remains temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
@@ -171,7 +171,7 @@ A valid model enables **RNNoise** as a *separate* fifth method and changes the h
 
 ```mermaid
 flowchart LR
-    P[GitHub Pages CDN<br/>intro + responsive web lab] --> A[Browser UI]
+P[Render Static CDN<br/>intro + responsive web lab] --> A[Browser UI]
     A -->|workspace-scoped JSON + WAV| B[Render FastAPI processor]
     B --> C[Dataset mixer / two-mic ingest]
     C --> D[NLMS reference baseline]

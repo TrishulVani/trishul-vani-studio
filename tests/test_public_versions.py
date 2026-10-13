@@ -1,34 +1,28 @@
-"""Guard the two public addresses against an accidental edition reversal."""
+"""Guard the Render Static Site publication structure and entry routes."""
 
-from html.parser import HTMLParser
 from pathlib import Path
 
 
-PAGES = Path(__file__).resolve().parents[1] / "deploy" / "pages"
-BACKEND = "https://trishul-vani-studio.onrender.com"
+WEB = Path(__file__).resolve().parents[1] / "web"
 
 
-class FrameParser(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.sources = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == "iframe":
-            self.sources.append(dict(attrs).get("src"))
+def test_main_address_is_a_direct_cinematic_entry_without_backend_iframe():
+    page = (WEB / "index.html").read_text(encoding="utf-8-sig")
+    assert 'id="arrival"' in page
+    assert 'src="/arrival-v2.js?v=6"' in page
+    assert "<iframe" not in page
 
 
-def _frame(path):
-    page = (PAGES / path).read_text(encoding="utf-8-sig")
-    parser = FrameParser()
-    parser.feed(page)
-    assert len(parser.sources) == 1
-    return parser.sources[0]
+def test_working_lab_and_studio_are_published_as_static_routes():
+    lab = (WEB / "lab.html").read_text(encoding="utf-8-sig")
+    studio = (WEB / "studio.html").read_text(encoding="utf-8-sig")
+    assert 'id="audio-lab"' in lab
+    assert 'id="analytics"' in lab
+    assert 'src="/app.js?v=20261013a"' in lab
+    assert 'src="studio.js"' in studio
 
 
-def test_main_address_opens_cinematic_experience():
-    assert _frame("index.html") == f"{BACKEND}/experience.html"
-
-
-def test_original_edition_opens_previous_default_dashboard():
-    assert _frame("design-v2/index.html") == f"{BACKEND}/index.html"
+def test_original_edition_stays_on_the_static_host():
+    page = (WEB / "design-v2" / "index.html").read_text(encoding="utf-8-sig")
+    assert 'src="/lab.html?design=2"' in page
+    assert "trishul-vani-studio.onrender.com/index.html" not in page

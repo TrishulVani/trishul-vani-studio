@@ -31,22 +31,18 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
-  await expect(page).toHaveURL(/index\.html\?design=2$/, { timeout: 10000 });
-  await expect(page.locator('.relaunch-story')).toBeVisible({ timeout: 15000 });
-  await expect(page.getByRole('heading', { name: /The signal survives/i })).toBeVisible();
-  await expect(page.locator('.relaunch-flight')).toHaveAttribute('src', '/assets/signal-operator-v2.png');
+  await expect(page.locator('#arrival')).toHaveCount(0, { timeout: 10000 });
+  await expect(page.getByRole('heading', { name: /When noise rises/i })).toBeVisible();
+  await expect(page.locator('#story')).toBeVisible();
   await expect(page.locator('img[src*="microphone-v2"]')).toHaveCount(0);
 });
 
-test('intro can be skipped and Version 1 keeps its original landing', async ({ page }) => {
+test('intro can be skipped in place and routes visitors to the connected lab', async ({ page }) => {
   await page.goto('/experience.html');
   await page.getByRole('button', { name: /Enter site/i }).click();
-  await expect(page).toHaveURL(/index\.html\?design=2$/);
-  await expect(page.locator('.relaunch-story')).toBeVisible({ timeout: 15000 });
-  await page.goto('/index.html');
-  await expect(page.locator('.relaunch-story')).toHaveCount(0);
-  await expect(page.locator('.sidebar .v2-brand-glyph')).toBeHidden();
-  await expect(page.getByRole('heading', { name: /Clarity under pressure/i })).toBeVisible();
+  await expect(page.locator('#arrival')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: /When noise rises/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toHaveAttribute('href', '/lab.html?design=2');
 });
 
 test('the supplied gold mark appears throughout V2 without replacing V1 branding', async ({ page }) => {

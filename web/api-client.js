@@ -2,8 +2,8 @@
   'use strict';
 
   const productionBackend = 'https://trishul-vani-studio.onrender.com';
-  const isPages = location.hostname === 'trishulvani.github.io';
-  const backend = isPages ? productionBackend : '';
+  const remoteStaticHosts = new Set(['trishulvani.github.io', 'trishul-vani-frontend.onrender.com']);
+  const backend = remoteStaticHosts.has(location.hostname) ? productionBackend : '';
   const tokenKey = 'trishul-vani-workspace-v1';
 
   function workspaceToken() {

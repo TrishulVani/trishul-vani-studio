@@ -1,10 +1,10 @@
 # Deployment
 
-Main website (improved Version 1): https://trishulvani.github.io
+Main website (improved Version 1): https://trishul-vani-frontend.onrender.com
 
-Version 2 / Original Edition: https://trishulvani.github.io/design-v2/
+Version 2 / Original Edition: https://trishul-vani-frontend.onrender.com/design-v2/
 
-Backend: https://trishul-vani-studio.onrender.com — Render free Docker web service from this repository. No ChatGPT hosting is used. The responsive frontend is deployed from `web/` to GitHub Pages in [TrishulVani/trishulvani.github.io](https://github.com/TrishulVani/trishulvani.github.io).
+Backend: https://trishul-vani-studio.onrender.com — Render Docker web service from this repository. The responsive frontend is a separate Render Static Site built from `web/` and served from Render's global CDN; this avoids GitHub Pages and avoids waiting for the API web service to wake before the interface appears. GitHub remains the source repository and CI host only.
 
 ## Publish flow
 
@@ -15,8 +15,8 @@ Backend: https://trishul-vani-studio.onrender.com — Render free Docker web ser
 
 No frontend API key is required. `web/api-client.js` selects the Render backend on the Pages hostname, starts a health request during the intro, and scopes requests with a random browser-local workspace capability. If the backend URL changes, update that file and release the Pages copy.
 
-Set `TRISHUL_PUBLIC_HOSTING=1` for visitor-isolated temporary workspaces. Direct Render visits use an HttpOnly Secure cookie; the GitHub Pages frontend uses the equivalent 256-bit capability in a request header. Only the exact Pages origin and local preview origins may write across origins. Dataset registry uploads remain local-only. Storage cap: 250 MiB. The service runs one worker.
+Set `TRISHUL_PUBLIC_HOSTING=1` for visitor-isolated temporary workspaces. Direct API visits use an HttpOnly Secure cookie; the Render Static Site frontend uses the equivalent 256-bit capability in a request header. Only the exact static-site origin and local preview origins may write across origins. Dataset registry uploads remain local-only. Storage cap: 250 MiB. The service runs one worker.
 
-Free Render storage is ephemeral and services sleep when idle. Export WAV/JSON to keep results. This is a research prototype, not a durable archive or production SLA. GitHub Pages serves the interface independently, so a sleeping processor cannot delay first paint.
+Free Render web-service storage is ephemeral and the API may sleep when idle. Export WAV/JSON to keep results. This is a research prototype, not a durable archive or production SLA. The Render Static Site is served independently over its CDN, so a sleeping processor cannot delay first paint.
 
 Local: install requirements-dev.txt, run pytest, then uvicorn app.main:app --port 8000. Docker: docker compose up --build. Optional browser-only edition: python scripts/build_public.py.

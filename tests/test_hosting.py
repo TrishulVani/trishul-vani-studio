@@ -12,6 +12,7 @@ import soundfile as sf
 with TestClient(app, base_url="https://testserver") as a, TestClient(app, base_url="https://testserver") as b:
     assert a.get('/api/spectral/sessions').status_code == 401
     assert a.get('/studio.html').status_code == 200
+    assert a.get('/lab.html?design=2').status_code == 200
     assert b.get('/studio.html').status_code == 200
     assert a.cookies.get('trishul_workspace') != b.cookies.get('trishul_workspace')
     assert a.get('/api/spectral/sessions').json() == []
@@ -37,6 +38,14 @@ with TestClient(app, base_url="https://testserver") as a, TestClient(app, base_u
     assert preflight.headers['access-control-allow-origin'] == 'https://trishulvani.github.io'
     assert a.get('/api/meta',headers=pages).status_code == 200
     assert a.get('/api/meta?workspace='+token,headers={'Origin':'https://trishulvani.github.io'}).status_code == 200
+    static_origin='https://trishul-vani-frontend.onrender.com'
+    static_preflight=a.options('/api/experiments/simulate',headers={
+        'Origin':static_origin,
+        'Access-Control-Request-Method':'POST',
+        'Access-Control-Request-Headers':'content-type,x-trishul-workspace',
+    })
+    assert static_preflight.status_code == 200, static_preflight.text
+    assert static_preflight.headers['access-control-allow-origin'] == static_origin
     invalid=a.post('/api/experiments/simulate',headers=pages,json={'noise':'not-real'})
     assert invalid.status_code == 422, invalid.text
 '''

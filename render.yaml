@@ -11,3 +11,11 @@ services:
         value: "1"
       - key: TRISHUL_HOST_DATA
         value: /tmp/trishul
+  - type: web
+    name: trishul-vani-frontend
+    runtime: static
+    branch: main
+    rootDir: web
+    buildCommand: echo "Static frontend: no build required"
+    staticPublishPath: .
+    autoDeployTrigger: checksPass

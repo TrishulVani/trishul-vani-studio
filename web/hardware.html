@@ -8,12 +8,12 @@
   <title>त्रिSHUL VANI / Hardware workbench</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/hardware-v2.css?v=1">
-</head>
-<body><script src="/api-client.js"></script><script>if(new URLSearchParams(location.search).has('embed'))document.body.classList.add('embedded')</script>
+<link rel="preconnect" href="https://trishul-vani-studio.onrender.com" crossorigin></head>
+<body><script src="/api-client.js?v=20261013a"></script><script>if(new URLSearchParams(location.search).has('embed'))document.body.classList.add('embedded')</script>
   <a class="skip-link" href="#model">Skip to hardware workbench</a>
   <header class="hardware-top">
-    <a class="hardware-brand" href="/index.html?design=2" aria-label="त्रिSHUL VANI Version 2 home"><img src="/assets/brand-glyph-v2.png" alt=""><span><strong class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</strong><small>HARDWARE / VIRTUAL WORKBENCH</small></span></a>
-    <nav aria-label="Hardware navigation"><a href="/index.html?design=2">Mission control</a><a href="#wiring">Wiring</a><a href="#code">Code</a><a href="#software-test">Software test</a></nav>
+    <a class="hardware-brand" href="/lab.html?design=2" aria-label="त्रिSHUL VANI Version 2 home"><img src="/assets/brand-glyph-v2.png" alt=""><span><strong class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</strong><small>HARDWARE / VIRTUAL WORKBENCH</small></span></a>
+    <nav aria-label="Hardware navigation"><a href="/lab.html?design=2">Mission control</a><a href="#wiring">Wiring</a><a href="#code">Code</a><a href="#software-test">Software test</a></nav>
     <span class="prototype-pill">SIMULATION / NO DEVICE CONNECTED</span>
   </header>
   <main>
@@ -63,10 +63,10 @@
 
     <section id="software-test" class="hardware-section" aria-labelledby="test-title">
       <div class="section-title"><div><p class="eyebrow">04 / CONNECTED SOFTWARE TEST</p><h2 id="test-title">Validate with sound.</h2></div><p>This section calls the existing FastAPI processor. Hardware status remains virtual.</p></div>
-      <div class="test-layout"><div class="test-config"><div class="test-fields"><label>Noise environment<select id="test-noise"><option value="factory">Factory</option><option value="engine">Engine</option><option value="wind">Wind</option><option value="impulse">Impulse</option><option value="crowd">Crowd</option></select></label><label>Input SNR (dB)<input id="test-snr" type="number" value="-4" min="-15" max="20"></label><label>Duration (s)<select id="test-duration"><option>1.5</option><option selected>3</option><option>5</option><option>8</option></select></label><label>Seed<input id="test-seed" type="number" value="42" min="0" max="2147483647"></label></div><button id="run-software" type="button" class="primary-link">Run connected DSP test</button><p class="fine">The signal is synthetic; measured results describe the software run only. No Raspberry Pi timing or two-microphone hardware is inferred.</p></div><div class="test-result"><span class="eyebrow">PROCESSOR RESULT</span><div id="test-status" role="status">No test run yet.</div><div id="test-metrics"></div><div class="test-audio" id="test-audio" hidden><label for="test-track">Listen to output</label><select id="test-track"><option value="raw">Raw</option><option value="nlms">NLMS</option><option value="spectral">Spectral DSP</option><option value="hybrid">Hybrid</option></select><audio id="test-player" controls preload="none"></audio><a id="open-lab" href="/index.html?design=2#audio-lab">Open result in V2 Audio Laboratory</a></div></div></div>
+      <div class="test-layout"><div class="test-config"><div class="test-fields"><label>Noise environment<select id="test-noise"><option value="factory">Factory</option><option value="engine">Engine</option><option value="wind">Wind</option><option value="impulse">Impulse</option><option value="crowd">Crowd</option></select></label><label>Input SNR (dB)<input id="test-snr" type="number" value="-4" min="-15" max="20"></label><label>Duration (s)<select id="test-duration"><option>1.5</option><option selected>3</option><option>5</option><option>8</option></select></label><label>Seed<input id="test-seed" type="number" value="42" min="0" max="2147483647"></label></div><button id="run-software" type="button" class="primary-link">Run connected DSP test</button><p class="fine">The signal is synthetic; measured results describe the software run only. No Raspberry Pi timing or two-microphone hardware is inferred.</p></div><div class="test-result"><span class="eyebrow">PROCESSOR RESULT</span><div id="test-status" role="status">No test run yet.</div><div id="test-metrics"></div><div class="test-audio" id="test-audio" hidden><label for="test-track">Listen to output</label><select id="test-track"><option value="raw">Raw</option><option value="nlms">NLMS</option><option value="spectral">Spectral DSP</option><option value="hybrid">Hybrid</option></select><audio id="test-player" controls preload="none"></audio><a id="open-lab" href="/lab.html?design=2#audio-lab">Open result in V2 Audio Laboratory</a></div></div></div>
     </section>
   </main>
-  <footer><strong class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</strong><span>VIRTUAL ASSEMBLY / SOFTWARE TESTS / PHYSICAL VALIDATION PENDING</span><a href="/index.html?design=2">Return to V2</a></footer>
+  <footer><strong class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</strong><span>VIRTUAL ASSEMBLY / SOFTWARE TESTS / PHYSICAL VALIDATION PENDING</span><a href="/lab.html?design=2">Return to V2</a></footer>
   <script defer src="/hardware-model-v2.js?v=1"></script>
   <script defer src="/virtual-rig-v2.js?v=1"></script>
   <script defer src="/hardware-v2.js?v=2"></script>

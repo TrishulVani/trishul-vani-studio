@@ -256,6 +256,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         'https://trishulvani.github.io',
+        'https://trishul-vani-frontend.onrender.com',
         'http://127.0.0.1:8765',
         'http://localhost:8765',
     ],
