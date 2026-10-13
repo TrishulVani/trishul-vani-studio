@@ -9,11 +9,11 @@ Backend: https://trishul-vani-studio.onrender.com — Render Docker web service 
 ## Publish flow
 
 1. Push application changes to a feature branch. GitHub Actions verifies Python 3.11/3.12 tests, frontend checks and the Docker build.
-2. Merge validated changes into `main`. Render is connected to this repository and set to **Auto-Deploy: On Commit**, so it builds the new Docker image automatically. GitHub Actions also runs on `main`; that run reports validation but does not gate the deployment. Check feature-branch CI before merging.
-3. Copy the verified `web/` release to the Pages repository, publish `experience.html` as the root `index.html`, and preserve the dashboard as `lab.html`. Keep `design-v2/` at its matching subdirectory. Push the Pages `main` branch.
-4. Verify `/api/health` and `/docs` on Render, then visit the public URL, let the intro finish, and run a synthetic experiment or import an audio file.
+2. Merge validated changes into `main`. Render builds the Python API automatically; GitHub Actions reports validation. Check feature-branch CI before merging.
+3. Sync the Render Blueprint in the Render dashboard once. It creates a static CDN site rooted at `web/` alongside the existing Docker API. Enable **Auto-Deploy** for both services.
+4. Verify the static root and `/design-v2/` open without API availability, then verify `/api/health` on the backend and run a synthetic experiment or import audio. Do not retire GitHub Pages until this Render URL is live and verified.
 
-No frontend API key is required. `web/api-client.js` selects the Render backend on the Pages hostname, starts a health request during the intro, and scopes requests with a random browser-local workspace capability. If the backend URL changes, update that file and release the Pages copy.
+No frontend API key is required. `web/api-client.js` selects the Render backend on the Render Static Site hostname and scopes requests with a random browser-local workspace capability. The intro renders before its optional metadata and saved-experiment requests begin. If the backend URL changes, update that file and release the static frontend.
 
 Set `TRISHUL_PUBLIC_HOSTING=1` for visitor-isolated temporary workspaces. Direct API visits use an HttpOnly Secure cookie; the Render Static Site frontend uses the equivalent 256-bit capability in a request header. Only the exact static-site origin and local preview origins may write across origins. Dataset registry uploads remain local-only. Storage cap: 250 MiB. The service runs one worker.
 

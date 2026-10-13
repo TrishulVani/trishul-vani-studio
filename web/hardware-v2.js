@@ -194,7 +194,7 @@
       $('test-status').textContent = `Software run ${lastReport.id} complete in ${rig.mode.toUpperCase()} preview mode. The virtual circuit gated this test; FastAPI processed the audio, not an emulated Pi.`;
       const metrics = lastReport.metrics || {}, fmt = value => typeof value === 'number' && Number.isFinite(value) ? `${value.toFixed(2)} dB` : 'N/A';
       $('test-metrics').innerHTML = `<div class="metric"><span>Input SNR · synthetic clean reference</span><strong>${fmt(metrics.raw?.snr_db)}</strong></div><div class="metric"><span>${esc(rig.mode.toUpperCase())} output SNR · offline software</span><strong>${fmt(metrics[rig.mode]?.snr_db)}</strong></div><div class="metric"><span>Processing source</span><strong>${esc(lastReport.model || 'spectral DSP fallback')}</strong></div>`;
-      $('test-audio').hidden = false; $('open-lab').href = `/index.html?design=2&run=${encodeURIComponent(lastReport.id)}&track=${encodeURIComponent($('test-track').value)}#audio-lab`;
+      $('test-audio').hidden = false; $('open-lab').href = `/lab.html?design=2&run=${encodeURIComponent(lastReport.id)}&track=${encodeURIComponent($('test-track').value)}#audio-lab`;
       setAudio();
     } catch (error) { $('test-status').textContent = `Connected processor unavailable: ${error.message}`; }
     finally { $('run-software').disabled = false; }
@@ -203,7 +203,7 @@
     if (!lastReport) return;
     const method = $('test-track').value;
     $('test-player').src = window.trishulApiUrl(`/api/experiments/${encodeURIComponent(lastReport.id)}/audio/${method}`);
-    $('open-lab').href = `/index.html?design=2&run=${encodeURIComponent(lastReport.id)}&track=${encodeURIComponent(method)}#audio-lab`;
+    $('open-lab').href = `/lab.html?design=2&run=${encodeURIComponent(lastReport.id)}&track=${encodeURIComponent(method)}#audio-lab`;
   }
   $('add-board').addEventListener('click', addBoard);
   $('reset-wiring').addEventListener('click', () => { design = defaults(); activeBoard = 'pi1'; selectedPort = null; virtualPins = {}; save(); renderAll(); $('port-hint').textContent = 'Reference virtual circuit restored.'; });

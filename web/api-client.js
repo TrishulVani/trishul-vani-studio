@@ -33,7 +33,6 @@
     return nativeFetch(backend + path, { ...options, headers, credentials: 'omit' });
   };
 
-  // Start Render while the unchanged cinematic intro is playing. Failure is
-  // intentionally silent; normal controls keep their existing retry states.
-  if (backend) window.fetch('/api/health', { cache: 'no-store' }).catch(() => {});
+  // Keep this bootstrap network-free. The static site must paint even while
+  // the optional API is asleep; pages request the API only when they need it.
 })();
