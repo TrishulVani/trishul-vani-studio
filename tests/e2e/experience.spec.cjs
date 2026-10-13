@@ -62,7 +62,7 @@ test('site-wide atmosphere changes with scroll and reverses without affecting V1
   await expect(page.locator('.tv-atmosphere > span')).toHaveCount(5);
   await expect(page.locator('body')).toHaveAttribute('data-tv-tone', 'navy');
   const firstNavy = await page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-navy-opacity')));
-  await page.locator('#audio-lab').scrollIntoViewIfNeeded();
+  await /lab.html?design=2
   await expect.poll(() => page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-forest-opacity')))).toBeGreaterThan(.3);
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await expect.poll(() => page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-navy-opacity')))).toBeGreaterThanOrEqual(firstNavy - .01);
