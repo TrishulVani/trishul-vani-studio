@@ -11,8 +11,8 @@ const backend={
   view:(id,layer,start,end)=>request(`/sessions/${id}/view?layer=${layer}&start_s=${start}&end_s=${end}`),
   render:(id,edits)=>request(`/sessions/${id}/render`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({edits})}),
   external:(id,file)=>{const form=new FormData();form.append('file',file);form.append('tool',el('external-tool').value||'Unknown');form.append('settings',el('external-settings').value||'unknown');form.append('offset_ms',el('offset').value);return request(`/sessions/${id}/reference`,{method:'POST',body:form})},
-  audio:(id,layer)=>`/api/spectral/sessions/${id}/audio/${layer}`,
-  recipe:id=>`/api/spectral/sessions/${id}/export`
+  audio:(id,layer)=>window.trishulApiUrl(`/api/spectral/sessions/${id}/audio/${layer}`),
+  recipe:id=>window.trishulApiUrl(`/api/spectral/sessions/${id}/export`)
 };
 let engine=backend;
 function lock(busy){S.busy=busy;for(const id of ['apply','preview','play','ab'])el(id).disabled=busy||!S.session;el('demo').disabled=busy;el('source-file').disabled=busy;el('reference-file').disabled=busy;el('undo').disabled=busy||!S.edits.length;el('redo').disabled=busy||!S.redo.length;el('session-state').textContent=busy?'PROCESSING…':S.session?'SESSION / '+S.session.id.slice(0,8).toUpperCase():'NO SESSION LOADED'}

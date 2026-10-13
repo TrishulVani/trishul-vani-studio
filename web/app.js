@@ -40,7 +40,7 @@ function drawWaveform(values=[]) {
   waves.forEach((value,i)=>{const x=(i+.5)*w/waves.length;const len=Math.max(1,Math.min(.95,Math.abs(value)/high))*h*.45;ctx.moveTo(x,center-len);ctx.lineTo(x,center+len)});
   ctx.stroke();ctx.shadowBlur=0;
 }
-function audioUrl(method){return `/api/experiments/${state.report.id}/audio/${method}`}
+function audioUrl(method){return window.trishulApiUrl(`/api/experiments/${state.report.id}/audio/${method}`)}
 function setTrack(track){
   if(!['raw','nlms','spectral','hybrid','rnnoise'].includes(track))return;
   if(state.report && !state.report.metrics[track])return;
@@ -81,7 +81,7 @@ function renderReport(report){
   $('#wave-end').textContent=`00:${num(report.duration_s).padStart(4,'0')}`;
   $('#wave-mid').textContent=`00:${num(report.duration_s/2).padStart(4,'0')}`;
   $('#flow-residual').textContent=report.model==='rnnoise'?'RNNOISE':'SPECTRAL';
-  const link=$('#csv-download');link.classList.remove('disabled');link.href=`/api/experiments/${report.id}/export.csv`;link.setAttribute('aria-disabled','false');link.download=`trishul-${report.id}.csv`;
+  const link=$('#csv-download');link.classList.remove('disabled');link.href=window.trishulApiUrl(`/api/experiments/${report.id}/export.csv`);link.setAttribute('aria-disabled','false');link.download=`trishul-${report.id}.csv`;
   renderChart(report);setTrack(state.track in report.metrics?state.track:'raw');
 }
 async function run(){

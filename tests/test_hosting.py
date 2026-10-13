@@ -26,6 +26,19 @@ with TestClient(app, base_url="https://testserver") as a, TestClient(app, base_u
     assert b.get('/api/spectral/sessions/'+sid).status_code == 404
     assert a.post('/api/experiments/simulate', headers={'Origin':'https://evil.example'},json={}).status_code == 403
     assert b.post('/api/registry',json={}).status_code == 403
+    token='a'*64
+    pages={'Origin':'https://trishulvani.github.io','X-Trishul-Workspace':token}
+    preflight=a.options('/api/experiments/simulate',headers={
+        'Origin':'https://trishulvani.github.io',
+        'Access-Control-Request-Method':'POST',
+        'Access-Control-Request-Headers':'content-type,x-trishul-workspace',
+    })
+    assert preflight.status_code == 200, preflight.text
+    assert preflight.headers['access-control-allow-origin'] == 'https://trishulvani.github.io'
+    assert a.get('/api/meta',headers=pages).status_code == 200
+    assert a.get('/api/meta?workspace='+token,headers={'Origin':'https://trishulvani.github.io'}).status_code == 200
+    invalid=a.post('/api/experiments/simulate',headers=pages,json={'noise':'not-real'})
+    assert invalid.status_code == 422, invalid.text
 '''
     env = dict(os.environ, TRISHUL_PUBLIC_HOSTING='1', TRISHUL_HOST_DATA=str(tmp_path))
     result = subprocess.run([sys.executable,'-c',code],env=env,capture_output=True,text=True,timeout=30)

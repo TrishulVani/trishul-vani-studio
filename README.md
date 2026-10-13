@@ -43,7 +43,7 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
 
-Both GitHub Pages addresses embed the same Render-hosted application. The main address opens `/experience.html`, which enters the `?design=2` dashboard. The Original Edition embeds the default dashboard after its mint introduction. The frontend calls FastAPI using same-origin `/api/...` routes, so uploads, STFT analysis, edits, experiment processing, history and exports are connected to the deployed Python service. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+The main address serves the cinematic frontend directly from GitHub Pages' CDN, so the intro and interface do not wait for a Render cold start. It wakes Render in the background and sends only `/api/...` processing requests there. A random browser-local capability isolates each visitor without third-party cookies. The Original Edition remains available at its separate address. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ### First-visit guidance
 
@@ -55,7 +55,7 @@ On the preview branch, Mission Control and Spectral Studio include a **? Help & 
 2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
 3. The cinematic experience opens on the main address. Its trident intro waits for scroll, touch or keyboard input while rotating gently at rest; the completed strike takes the visitor into the connected landing. That landing combines a reversible aircraft flyover, a framed acoustic chamber and the operator-to-corridor-to-glass-to-cockpit-to-lab journey. The palette follows the supplied V4 atmosphere brief across the intro, landing, lab and editor. Motion reduces when the visitor requests reduced motion. [Lusion](https://lusion.co/), [Spaace](https://lusion.co/projects/spaace/) and [DDD 2024](https://lusion.co/projects/ddd_2024/) informed the pacing and spatial composition; their images, code and branding are not used.
 
-The public website and the backend are separate repositories/services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the entry shell on GitHub Pages, and this repository hosts the full app on Render. The source for the Pages shell is mirrored in [`deploy/pages/`](deploy/pages/).
+The public website and backend are separate services: [`TrishulVani/trishulvani.github.io`](https://github.com/TrishulVani/trishulvani.github.io) hosts the responsive frontend, and Render hosts this repository's Python processor. The canonical frontend source remains in [`web/`](web/).
 
 ### Release and CI/CD
 
@@ -65,7 +65,7 @@ The public website and the backend are separate repositories/services: [`Trishul
 - Render automatically builds this repository's `main` Docker image on every new commit. Feature-branch CI is checked before merging; main CI runs alongside deployment and does not gate it. GitHub Pages publishes the public shell from `TrishulVani/trishulvani.github.io` `main` branch. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
 
 > [!NOTE]
-> Render's free service can take about a minute to wake. Hosted workspaces are separated by an unguessable secure browser cookie, but storage is temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
+> Render's free processor can take about a minute to wake after inactivity, but it no longer blocks the website or its intro. The frontend starts waking it immediately. Hosted workspaces use an unguessable browser-local capability; storage remains temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
 
 ## What is working now
 
@@ -171,8 +171,8 @@ A valid model enables **RNNoise** as a *separate* fifth method and changes the h
 
 ```mermaid
 flowchart LR
-    P[trishulvani.github.io<br/>intro + public entry] --> A[Hosted web lab / UI]
-    A -->|same-origin JSON + WAV| B[Render FastAPI service]
+    P[GitHub Pages CDN<br/>intro + responsive web lab] --> A[Browser UI]
+    A -->|workspace-scoped JSON + WAV| B[Render FastAPI processor]
     B --> C[Dataset mixer / two-mic ingest]
     C --> D[NLMS reference baseline]
     C --> E[Spectral baseline]

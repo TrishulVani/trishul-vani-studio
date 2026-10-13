@@ -13,6 +13,12 @@ from starlette.responses import JSONResponse
 
 owner = ContextVar('workspace_owner', default='local')
 
+PUBLIC_FRONTEND_ORIGINS = {
+    'https://trishulvani.github.io',
+    'http://127.0.0.1:8765',
+    'http://localhost:8765',
+}
+
 class WorkspacePath:
     def __init__(self, base): self.base = Path(base)
     def path(self): return self.base / owner.get()
@@ -30,15 +36,21 @@ def enable_hosting(app):
 
     @app.middleware('http')
     async def workspace(request, call_next):
-        session = request.cookies.get('trishul_workspace', '')
+        # GitHub Pages serves the frontend from its CDN while Render provides
+        # processing. A browser-generated capability keeps each workspace
+        # isolated without depending on third-party cookies.
+        header_session = request.headers.get('x-trishul-workspace', '')
+        query_session = request.query_params.get('workspace', '')
+        session = header_session or query_session or request.cookies.get('trishul_workspace', '')
         valid = bool(re.fullmatch(r'[a-f0-9]{64}', session))
         if not valid: session = secrets.token_hex(32)
         api = request.url.path.startswith('/api/')
-        if api and not valid and request.url.path != '/api/health':
+        if api and request.method != 'OPTIONS' and not valid and request.url.path != '/api/health':
             return JSONResponse({'detail':'Open the app first to establish a private workspace. Enable cookies, or open the backend directly.'},401)
         if request.method in ('POST','PUT','DELETE','PATCH'):
             origin = request.headers.get('origin')
-            if origin and origin != str(request.base_url).rstrip('/'):
+            same_origin = str(request.base_url).rstrip('/')
+            if origin and origin not in PUBLIC_FRONTEND_ORIGINS and origin != same_origin:
                 return JSONResponse({'detail':'Cross-origin write rejected'},403)
             now=time.monotonic()
             # Bounded in-memory abuse guard; one request per visitor every second.
@@ -57,7 +69,7 @@ def enable_hosting(app):
             response=await call_next(request)
             response.headers['Cache-Control']='private, no-store' if api else 'no-cache'
             response.headers['Referrer-Policy']='no-referrer'
-            if not valid:
+            if not valid and not header_session and not query_session:
                 response.set_cookie('trishul_workspace',session,httponly=True,secure=True,samesite='none',max_age=86400*7)
             return response
         finally: owner.reset(token)

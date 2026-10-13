@@ -105,7 +105,7 @@
     $(`play-${method}`).addEventListener('click', () => {
       if (!sample || !safeId(sample.id)) return;
       audio.pause();
-      audio.src = `/api/experiments/${sample.id}/audio/${method}`;
+      audio.src = window.trishulApiUrl(`/api/experiments/${sample.id}/audio/${method}`);
       drawWave(sample.waveforms?.[method]);
       audio.load();
       $('audio-caption').textContent = `${method === 'raw' ? 'Raw primary mixture' : 'Hybrid output'} · synthetic engine example · press Play to listen.`;

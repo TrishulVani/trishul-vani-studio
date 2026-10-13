@@ -8,7 +8,7 @@
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const fmt = (value, digits = 2) => typeof value === 'number' && Number.isFinite(value) ? value.toFixed(digits) : 'N/A';
   const clock = sec => `${Math.floor((Number(sec) || 0) / 60)}:${((Number(sec) || 0) % 60).toFixed(1).padStart(4, '0')}`;
-  const audioUrl = track => `/api/experiments/${encodeURIComponent(state.report.id)}/audio/${track}`;
+  const audioUrl = track => window.trishulApiUrl(`/api/experiments/${encodeURIComponent(state.report.id)}/audio/${track}`);
   function loadAssembly() { if (!frame.src) frame.src = '/hardware.html?embed=1#model'; }
   new IntersectionObserver(entries => { if (entries[0].isIntersecting) loadAssembly(); }, { rootMargin: '300px' }).observe($('assembly'));
   addEventListener('message', event => {

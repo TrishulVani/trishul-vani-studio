@@ -16,6 +16,7 @@ from threading import RLock
 import numpy as np
 import soundfile as sf
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -251,4 +252,16 @@ app.include_router(registry_router)
 app.include_router(spectral_router)
 from .hosting import enable_hosting
 enable_hosting(app)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        'https://trishulvani.github.io',
+        'http://127.0.0.1:8765',
+        'http://localhost:8765',
+    ],
+    allow_credentials=False,
+    allow_methods=['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allow_headers=['Content-Type', 'X-Trishul-Workspace'],
+    expose_headers=['Content-Disposition'],
+)
 app.mount('/',StaticFiles(directory=BASE/'web',html=True),name='web')

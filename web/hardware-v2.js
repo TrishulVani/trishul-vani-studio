@@ -202,7 +202,7 @@
   function setAudio() {
     if (!lastReport) return;
     const method = $('test-track').value;
-    $('test-player').src = `/api/experiments/${encodeURIComponent(lastReport.id)}/audio/${method}`;
+    $('test-player').src = window.trishulApiUrl(`/api/experiments/${encodeURIComponent(lastReport.id)}/audio/${method}`);
     $('open-lab').href = `/index.html?design=2&run=${encodeURIComponent(lastReport.id)}&track=${encodeURIComponent(method)}#audio-lab`;
   }
   $('add-board').addEventListener('click', addBoard);
