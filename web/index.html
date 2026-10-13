@@ -18,6 +18,7 @@
     .landing-frame.is-entering{opacity:1;transform:scale(1)}
     .arrival{z-index:2000}
     @media(prefers-reduced-motion:reduce){.landing-frame{transition:none;transform:none}}
+    body{font-family:var(--r-display,system-ui,sans-serif)}
   </style>
 </head>
 <body class="experience-v2">
@@ -33,7 +34,22 @@
     <div class="arrival-bottom"><span>THE FORCE AWAKENS / SIGNAL JOURNEY</span><span id="arrival-stage">01 / THE AWAKENING</span><span id="arrival-meter">000 / 100</span></div>
     <div class="arrival-timeline" aria-hidden="true"><span></span></div>
   </div>
+  <script>
+    (()=>{
+      const intro=document.getElementById('arrival');
+      const landing=document.getElementById('landing-frame');
+      if(!intro||!landing)return;
+      const reveal=()=>{
+        if(!intro.classList.contains('is-exiting'))return;
+        landing.removeAttribute('aria-hidden');
+        landing.classList.add('is-entering');
+        observer.disconnect();
+      };
+      const observer=new MutationObserver(reveal);
+      observer.observe(intro,{attributes:true,attributeFilter:['class']});
+    })();
+  </script>
   <script defer src="/brand-v2.js?v=1"></script>
-  <script defer src="/arrival-v2.js?v=7"></script>
+  <script defer src="/arrival-v2.js?v=6"></script>
 </body>
 </html>
