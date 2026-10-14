@@ -6,6 +6,11 @@
 
 # Changelog
 
+## 2026-10-14 — give the intro trident more visible 3D form
+
+- Increased the WebGL model's depth, added chamfered metal edges and directional/specular lighting that changes as it turns. The detailed gold-and-green artwork, intro layout, and motion sequence remain in place.
+- Added browser coverage that checks the generated 3D side mesh and model depth; this specifically guards against silently falling back to a flat image.
+
 ## 2026-10-14 — restore overview step and model the intro trident in 3D
 
 - The root intro now hands off to the existing overview/story page; its existing “Enter त्रिSHUL VANI” links open the working lab. Same-page story links remain in place, while browser Back returns from the lab to the overview on the same studio host.

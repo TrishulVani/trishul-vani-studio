@@ -10,7 +10,7 @@ def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     page = (WEB / "index.html").read_text(encoding="utf-8-sig")
     assert 'id="arrival"' in page
     assert 'src="/arrival-v2.js?v=9"' in page
-    assert 'src="/trident-3d.js?v=1"' in page
+    assert 'src="/trident-3d.js?v=2"' in page
     assert 'id="landing-frame"' in page
     assert 'src="/experience.html?story=1"' in page
     assert ".landing-frame.is-entering" in page
@@ -26,6 +26,8 @@ def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     model = (WEB / "trident-3d.js").read_text(encoding="utf-8-sig")
     assert "getContext('webgl'" in model
     assert "gl.drawArrays(gl.TRIANGLES,0,sideCount)" in model
+    assert "d=.30,bevel=.035" in model
+    assert "vNormal" in model and "specular" in model
     assert ".arrival-weapon-body.has-3d" in (WEB / "intro-v2.css").read_text(encoding="utf-8-sig")
 
 

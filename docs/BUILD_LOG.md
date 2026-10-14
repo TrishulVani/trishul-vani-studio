@@ -5,6 +5,12 @@
 
 # Build log (verified changes only)
 
+## 2026-10-14 — improve visible depth in the intro trident
+
+- Replaced the paper-thin extrusion with a deeper WebGL silhouette, beveled front/rear edges, and per-face directional/specular lighting. The supplied trident art, color, and intro composition are unchanged.
+- Verified the focused source assertions (6/6), JavaScript syntax, and `git diff --check`. Added desktop/tablet/mobile E2E assertions for model depth and generated side-mesh geometry; those browser checks await CI because a local app server could not be started in this sandbox.
+- The currently deployed Render build still has the previous model until this change clears CI and is manually deployed.
+
 ## 2026-10-14 — restore overview-before-lab flow and model the intro trident in 3D
 
 - Root flow is now trident intro → existing overview/story page (`/experience.html?story=1`) → working lab via its existing Enter links. Same-page overview anchors retain native scrolling, and the top-level history tracks workspace changes so Back returns to the overview.
