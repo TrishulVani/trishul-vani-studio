@@ -54,7 +54,28 @@
       };
       const bindFrameHistory=()=>{
         recordFrameNavigation();
-        if(landing.contentWindow!==historyWindow){historyWindow=landing.contentWindow;historyWindow.addEventListener('hashchange',recordFrameNavigation)}
+        if(landing.contentWindow!==historyWindow){
+          historyWindow=landing.contentWindow;
+          historyWindow.addEventListener('hashchange',recordFrameNavigation);
+          try{
+            const doc=landing.contentDocument;
+            if(doc&&!doc.documentElement.dataset.studioHistoryBound){
+              doc.documentElement.dataset.studioHistoryBound='true';
+              doc.addEventListener('click',event=>{
+                const anchor=event.target.closest('a[href]');
+                if(!anchor||anchor.target||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+                const destination=new URL(anchor.href,location.href);
+                if(destination.origin!==location.origin)return;
+                const target=destination.pathname+destination.search+destination.hash;
+                if(target===frameUrl())return;
+                event.preventDefault();
+                lastFrameUrl=target;
+                history.pushState({tvFrame:target},'',location.href);
+                landing.src=target;
+              },true);
+            }
+          }catch(_){}
+        }
       };
       const reveal=()=>{
         if(!intro.classList.contains('is-exiting'))return;
