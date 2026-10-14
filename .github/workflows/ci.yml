@@ -76,7 +76,7 @@ jobs:
           test -s deploy/pages/design-v2/index.html
           test -s deploy/pages/design-v2/mark.svg
           test -s deploy/pages/design-v2/signal-microphones-v2.webp
-          grep -q 'design-v2.css' web/index.html
+          grep -q 'experience.css' web/index.html
           grep -q 'design-v2.css' web/studio.html
           grep -q 'trishul-vani-frontend.onrender.com' deploy/pages/index.html
           grep -q 'location.replace' deploy/pages/index.html
