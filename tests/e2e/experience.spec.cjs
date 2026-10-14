@@ -66,6 +66,7 @@ test('site-wide atmosphere changes with scroll and reverses without affecting V1
   await expect(page.locator('.tv-atmosphere > span')).toHaveCount(5);
   await expect(page.locator('body')).toHaveAttribute('data-tv-tone', 'navy');
   const firstNavy = await page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-navy-opacity')));
+  await page.locator('.nav-item[href="#audio-lab"]').click();
   await page.locator('#audio-lab').evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
   await expect.poll(() => page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-forest-opacity')))).toBeGreaterThan(.3);
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
@@ -191,6 +192,9 @@ test('laboratory runs a measured experiment and exports evidence', async ({ page
   await page.getByRole('button', { name: 'Run signal analysis' }).click();
   const wav = page.getByRole('link', { name: 'Download selected WAV' });
   await expect(wav).toHaveAttribute('href', /\/api\/experiments\/[a-f0-9]{12}\/audio\/raw$/, { timeout: 45000 });
+  if (await page.locator('.nav-item[href="#analytics"]').isVisible()) {
+    await page.locator('.nav-item[href="#analytics"]').click();
+  }
   const csv = page.getByRole('link', { name: 'EXPORT CSV' });
   await expect(csv).toHaveAttribute('href', /\/api\/experiments\/[a-f0-9]{12}\/export\.csv$/);
   expect((await request.get(await wav.getAttribute('href'))).ok()).toBeTruthy();
