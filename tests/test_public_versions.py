@@ -28,7 +28,7 @@ def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     assert 'href="/lab.html?design=2"' in story
     assert 'class="arrival-weapon-3d"' not in page
     intro_css = (WEB / "intro-v2.css").read_text(encoding="utf-8-sig")
-    assert "animation:arrival-idle-spin 6s linear infinite" in intro_css
+    assert "animation:arrival-idle-spin 9s ease-in-out infinite" in intro_css
     assert "@keyframes arrival-idle-spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}" in intro_css
 
 
