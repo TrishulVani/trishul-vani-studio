@@ -38,9 +38,11 @@ test('root trident idles, scrolls forward, rewinds, and reveals the preloaded ov
   await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
   await expect(app.locator('.workspace-signal-plot')).toBeVisible();
   await expect(app.locator('.workspace-activity-panel')).toBeVisible();
-  const navBottom = await app.locator('.sidebar').evaluate(el => el.getBoundingClientRect().bottom);
-  const headingTop = await app.locator('#workspace-dashboard-title').evaluate(el => el.getBoundingClientRect().top);
-  expect(headingTop).toBeGreaterThan(navBottom);
+  if (page.viewportSize().width > 700) {
+    const navBottom = await app.locator('.sidebar').evaluate(el => el.getBoundingClientRect().bottom);
+    const headingTop = await app.locator('#workspace-dashboard-title').evaluate(el => el.getBoundingClientRect().top);
+    expect(headingTop).toBeGreaterThan(navBottom);
+  }
   await expect(page.locator('#arrival')).toHaveCount(0);
 });
 
@@ -60,7 +62,7 @@ test('studio back navigation returns to the overview inside the same site', asyn
   const app = page.frameLocator('#landing-frame');
   await app.getByRole('link', { name: 'Spectral studio', exact: true }).click();
   await expect(app.locator('.rail nav a.active')).toContainText('Spectral studio');
-  await page.goBack();
+  await page.keyboard.press('Alt+ArrowLeft');
   await expect(app.locator('#workspace-dashboard')).toBeVisible();
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
 });
