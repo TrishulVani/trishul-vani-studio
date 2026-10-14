@@ -23,16 +23,16 @@
     cancelAnimationFrame(raf);
     clearTimeout(finishTimer);
     try { sessionStorage.setItem('tv-v2-arrival', '1'); } catch (_) { /* Navigation still works. */ }
-    // The landing story is already underneath the intro. Reveal it in place
-    // so GitHub Pages never reloads the intro route or sends visitors to the lab.
     arrival.classList.add('is-exiting');
-    setTimeout(() => arrival.remove(), 900);
+    setTimeout(() => location.replace('/lab.html?design=2'), reduce ? 0 : 420);
   }
   function advance(amount) {
     if (closed) return;
     target = clamp(target + amount);
     if (target < .999) { clearTimeout(finishTimer); finishTimer = 0; }
-    else if (!finishTimer) finishTimer = setTimeout(go, reduce ? 350 : 1450);
+    else if (!finishTimer) finishTimer = setTimeout(() => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, 100);
     arrival.classList.toggle('is-moving', target > .012);
     if (!raf) raf = requestAnimationFrame(tick);
   }
@@ -114,8 +114,9 @@
   function tick() {
     raf = 0;
     const diff = target - visual;
-    visual += Math.abs(diff) < .0001 ? diff : diff * (reduce ? .46 : .13);
+    visual += Math.abs(diff) < .0001 ? diff : diff * (reduce ? .46 : .18);
     render(visual);
+    if (target >= .999 && visual >= .995) { go(); return; }
     if (Math.abs(target - visual) > .0001) raf = requestAnimationFrame(tick);
   }
   addEventListener('resize', () => draw(visual));
