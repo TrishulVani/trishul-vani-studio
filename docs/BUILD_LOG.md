@@ -5,6 +5,12 @@
 
 # Build log (verified changes only)
 
+## 2026-10-14 — restore overview-before-lab flow and deepen intro trident
+
+- Root flow is now trident intro → existing overview/story page (`/experience.html?story=1`) → working lab via its existing Enter links. Same-page overview anchors retain native scrolling, and the top-level history tracks workspace changes so Back returns to the overview.
+- Kept the trident artwork, layout, and established colors. Added five thin image-depth layers for an extruded axial turn and changed scroll easing to elapsed-time smoothing. The coordinated intro/overview crossfade lasts 760 ms; reduced-motion visitors skip the delay.
+- Validation will be recorded after focused Python tests, JavaScript checks, and desktop/tablet/mobile browser CI complete.
+
 ## 2026-10-12 — Public edition address swap
 
 The main Pages shell now targets the cinematic `/experience.html` route, while `/design-v2/` carries the previous mint shell and default dashboard. The two shell mappings passed 2/2 targeted Python tests; JavaScript syntax checks for the existing app, V2 controller and intro passed. The feature branch's earlier full CI run is green. Public deployment must be verified after both the app and Pages repositories update; this entry does not claim that the public addresses have already changed.

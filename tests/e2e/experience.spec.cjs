@@ -14,11 +14,12 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('root trident idles, scrolls forward, rewinds, and reveals the preloaded overview in place', async ({ page }) => {
+test('root trident idles in 3D, scrolls forward, rewinds, and reveals the overview before the lab', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#arrival')).toBeVisible();
   await expect(page.locator('.arrival-figure')).toHaveCount(0);
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
+  await expect(page.locator('.arrival-weapon-depth')).toHaveCount(5);
   await expect(page.locator('.arrival-brand .v2-brand-glyph')).toBeVisible();
   await expect(page.locator('.arrival-brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();
@@ -33,6 +34,9 @@ test('root trident idles, scrolls forward, rewinds, and reveals the preloaded ov
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 5000 });
   const app = page.frameLocator('#landing-frame');
+  await expect(app.locator('#hero-title')).toBeVisible();
+  await expect(app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toBeVisible();
+  await app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
   await expect(app.locator('#workspace-dashboard')).toBeVisible();
   await expect(app.locator('.workspace-dashboard-metric')).toHaveCount(4);
   await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
@@ -46,25 +50,26 @@ test('root trident idles, scrolls forward, rewinds, and reveals the preloaded ov
   await expect(page.locator('#arrival')).toHaveCount(0);
 });
 
-test('intro skip goes directly to the overview dashboard', async ({ page }) => {
+test('intro skip returns the overview page before entering the working lab', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Enter site/i }).click();
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 3000 });
   const app = page.frameLocator('#landing-frame');
-  await expect(app.locator('#workspace-dashboard')).toBeVisible();
-  await expect(app.locator('.workspace-dashboard-metric')).toHaveCount(4);
-  await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
+  await expect(app.locator('#hero-title')).toBeVisible();
+  await expect(app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toBeVisible();
 });
 
 test('studio back navigation returns to the overview inside the same site', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Enter site/i }).click();
   const app = page.frameLocator('#landing-frame');
+  await expect(app.locator('#hero-title')).toBeVisible();
+  await app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
   await expect(app.locator('#workspace-dashboard')).toBeVisible();
   await app.getByRole('link', { name: /Spectral studio/ }).last().click();
   await expect(app.locator('.rail nav a.active')).toContainText('Spectral studio');
   await page.evaluate(() => history.back());
-  await expect(app.locator('#workspace-dashboard')).toBeVisible();
+  await expect(app.locator('#hero-title')).toBeVisible();
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
 });
 

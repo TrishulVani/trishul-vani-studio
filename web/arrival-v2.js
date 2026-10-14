@@ -5,6 +5,17 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const anchor = arrival.querySelector('.arrival-weapon-anchor');
   const weapon = arrival.querySelector('.arrival-weapon-body');
+  const frontFace = weapon?.querySelector('.arrival-weapon');
+  if (frontFace && !weapon.querySelector('.arrival-weapon-depth')) {
+    for (const depth of [-6, -3, 0, 3, 6]) {
+      const layer = frontFace.cloneNode(false);
+      layer.className = 'arrival-weapon-depth';
+      layer.alt = '';
+      layer.setAttribute('aria-hidden', 'true');
+      layer.style.setProperty('--weapon-depth', `${depth}px`);
+      weapon.insertBefore(layer, frontFace);
+    }
+  }
   const label = document.getElementById('arrival-stage');
   const meter = document.getElementById('arrival-meter');
   const canvas = document.getElementById('arrival-field');
@@ -108,10 +119,14 @@
     meter.textContent = `${String(Math.round(p * 100)).padStart(3, '0')} / 100`;
     draw(p);
   }
-  function tick() {
+  let lastFrameTime = 0;
+  function tick(now) {
     raf = 0;
     const diff = target - visual;
-    visual += Math.abs(diff) < .0001 ? diff : diff * (reduce ? .46 : .18);
+    const elapsed = lastFrameTime ? Math.min(64, now - lastFrameTime) : 16.7;
+    lastFrameTime = now;
+    const smoothing = reduce ? 1 : 1 - Math.exp(-elapsed / 82);
+    visual += Math.abs(diff) < .0001 ? diff : diff * smoothing;
     render(visual);
     if (target >= .999 && visual >= .995) { go(); return; }
     if (Math.abs(target - visual) > .0001) raf = requestAnimationFrame(tick);

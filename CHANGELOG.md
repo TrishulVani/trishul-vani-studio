@@ -6,6 +6,12 @@
 
 # Changelog
 
+## 2026-10-14 — restore overview step and give intro trident depth
+
+- The root intro now hands off to the existing overview/story page; its existing “Enter त्रिSHUL VANI” links open the working lab. Same-page story links remain in place, while browser Back returns from the lab to the overview on the same studio host.
+- Smoothed the trident-to-overview crossfade with frame-rate-independent motion and a longer coordinated fade. Added a shallow extruded image stack to the existing trident so axial rotation reveals physical depth; artwork, color, and layout remain unchanged.
+- Verification: focused static route tests, JavaScript syntax, and browser CI results are recorded with the PR after execution.
+
 ## Public edition address swap — 2026-10-12
 
 - Mapped the cinematic introduction and connected lab to the main GitHub Pages address.
