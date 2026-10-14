@@ -10,7 +10,7 @@ def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     page = (WEB / "index.html").read_text(encoding="utf-8-sig")
     assert 'id="arrival"' in page
     assert 'src="/arrival-v2.js?v=10"' in page
-    assert 'src="/trident-3d.js?v=5"' in page
+    assert 'src="/trident-3d.js' not in page
     assert 'id="landing-frame"' in page
     assert 'src="/experience.html?story=1"' in page
     assert ".landing-frame.is-entering" in page
@@ -23,16 +23,10 @@ def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     story = (WEB / "experience.html").read_text(encoding="utf-8-sig")
     assert 'id="hero-title"' in story
     assert 'href="/lab.html?design=2"' in story
-    assert 'class="arrival-weapon-3d"' in page
-    model = (WEB / "trident-3d.js").read_text(encoding="utf-8-sig")
-    assert "getContext('webgl'" in model
-    assert "d=.30,bevel=.035" in model
-    assert "Math.sin(now*.00035)*.14" in model
-    assert "gl.drawArrays(gl.TRIANGLES,0,sideCount)" in model
-    assert "body.dataset.modelDepth=String(d)" in model
-    assert "gl.drawArrays(gl.TRIANGLE_STRIP,0,4)" in model
-    assert "vNormal" in model and "specular" in model
-    assert ".arrival-weapon-body.has-3d" in (WEB / "intro-v2.css").read_text(encoding="utf-8-sig")
+    assert 'class="arrival-weapon-3d"' not in page
+    intro_css = (WEB / "intro-v2.css").read_text(encoding="utf-8-sig")
+    assert "animation:arrival-idle-spin 6s linear infinite" in intro_css
+    assert "@keyframes arrival-idle-spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}" in intro_css
 
 
 def test_studio_host_is_the_single_site_and_api_origin():

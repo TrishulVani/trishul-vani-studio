@@ -6,6 +6,11 @@
 
 # Changelog
 
+## 2026-10-14 — restore the visible intro trident spin
+
+- Restored the earlier detailed trident artwork and its six-second axial rotation after the WebGL replacement made the symbol look narrow and nearly still. The intro and overview handoff remain unchanged.
+- Added a browser assertion that the visible trident transform actually advances while idle.
+
 ## 2026-10-14 — replace the flat trident cutout with a volumetric model
 
 - Rebuilt the intro object from separate blades, swept 3D tines, a turned shaft, raised jewel, and sculpted fittings. Its axial spin reveals the actual model geometry instead of an image plane with an extruded edge.
