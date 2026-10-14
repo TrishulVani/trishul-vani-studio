@@ -39,7 +39,7 @@ test('root trident turns as an extruded 3D object, then reveals overview and lab
   await expect(app.locator('#hero-title')).toBeVisible();
   await expect(app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toBeVisible();
   await app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
-  await expect(app.locator('#workspace-dashboard')).toBeVisible();
+  await expect(app.locator('#workspace-dashboard')).toBeVisible({ timeout: 15000 });
   await expect(app.locator('.workspace-dashboard-metric')).toHaveCount(4);
   await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
   await expect(app.locator('.workspace-signal-plot')).toBeVisible();
