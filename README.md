@@ -35,6 +35,10 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 ### Open the working application
 
+The Mission Control dashboard adapts the task-first layout, status cards, and responsive navigation from the [Instagram dashboard reference supplied for this project](https://www.instagram.com/p/DeRlstZTj3Q/) to the existing TRISHUL VANI theme.
+
+Operator documentation: [indexed PDF guide](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Operator_Guide.pdf) and [editable Markdown source](docs/TRISHUL_VANI_OPERATOR_GUIDE.md).
+
 | Destination | URL | Purpose |
 |---|---|---|
 | Main website | **https://trishul-vani-frontend.onrender.com/** | Trident introduction, responsive Mission Control dashboard, cinematic story, and connected studio |

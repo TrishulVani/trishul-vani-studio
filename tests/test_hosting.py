@@ -46,6 +46,8 @@ with TestClient(app, base_url="https://testserver") as a, TestClient(app, base_u
     })
     assert static_preflight.status_code == 200, static_preflight.text
     assert static_preflight.headers['access-control-allow-origin'] == static_origin
+    static_write={'Origin':static_origin,'X-Trishul-Workspace':'b'*64}
+    assert a.post('/api/experiments/simulate',headers=static_write,json={'noise':'not-real'}).status_code == 422
     invalid=a.post('/api/experiments/simulate',headers=pages,json={'noise':'not-real'})
     assert invalid.status_code == 422, invalid.text
 '''

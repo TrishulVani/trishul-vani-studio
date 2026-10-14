@@ -5,6 +5,31 @@
   let sample = null;
   const safeId = id => /^[a-f0-9]{12}$/.test(id || '');
   const reportError = error => error instanceof Error ? error.message : String(error);
+  function drawIllustrativeSpectrum() {
+    const canvas = $('story-spectrum');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const { width, height } = canvas;
+    const frame = ctx.createImageData(width, height);
+    for (let y = 0; y < height; y++) {
+      const frequency = 1 - y / height;
+      for (let x = 0; x < width; x++) {
+        const time = x / width;
+        const sweep = Math.exp(-Math.pow((time - .24) / .11, 2));
+        const pulse = Math.exp(-Math.pow((time - .66) / .018, 2));
+        const harmonic = Math.pow(Math.max(0, Math.sin((frequency * 12 + time * 2.3) * Math.PI)), 10);
+        const lowBed = Math.exp(-Math.pow((frequency - .13 - .045 * Math.sin(time * 9)) / .075, 2));
+        const energy = Math.min(1, .025 + sweep * harmonic * .78 + pulse * (.15 + frequency * .6) + lowBed * .36);
+        const i = (y * width + x) * 4;
+        frame.data[i] = Math.round(6 + energy * 170);
+        frame.data[i + 1] = Math.round(13 + energy * 145);
+        frame.data[i + 2] = Math.round(17 + energy * 79);
+        frame.data[i + 3] = 255;
+      }
+    }
+    ctx.putImageData(frame, 0, 0);
+    canvas.setAttribute('aria-label', 'Illustrative spectrogram preview, not measured audio data');
+  }
   function drawWave(values) {
     if (!Array.isArray(values) || !values.length) return;
     const canvas = $('comparison-wave'), ctx = canvas.getContext('2d');
@@ -112,6 +137,7 @@
       audio.focus();
     });
   }
+  drawIllustrativeSpectrum();
   const progress = document.querySelector('.chapter-progress span');
   if ('IntersectionObserver' in window) {
     const links = [...document.querySelectorAll('.chapter-rail a')];
