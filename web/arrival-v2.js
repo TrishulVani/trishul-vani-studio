@@ -30,9 +30,7 @@
     if (closed) return;
     target = clamp(target + amount);
     if (target < .999) { clearTimeout(finishTimer); finishTimer = 0; }
-    else if (!finishTimer) finishTimer = setTimeout(() => {
-      if (!raf) raf = requestAnimationFrame(tick);
-    }, 100);
+    else if (!finishTimer) finishTimer = setTimeout(go, reduce ? 0 : 520);
     arrival.classList.toggle('is-moving', target > .012);
     if (!raf) raf = requestAnimationFrame(tick);
   }
