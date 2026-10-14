@@ -6,6 +6,11 @@
 
 # Changelog
 
+## 2026-10-14 — replace the flat trident cutout with a volumetric model
+
+- Rebuilt the intro object from separate blades, swept 3D tines, a turned shaft, raised jewel, and sculpted fittings. Its axial spin reveals the actual model geometry instead of an image plane with an extruded edge.
+- Kept the established green-and-gold intro, layout, and entrance sequence. Added CI assertions for the modeled parts and WebGL mesh.
+
 ## 2026-10-14 — give the intro trident more visible 3D form
 
 - Increased the WebGL model's depth, added chamfered metal edges and directional/specular lighting that changes as it turns. The detailed gold-and-green artwork, intro layout, and motion sequence remain in place.
