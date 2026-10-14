@@ -4,7 +4,6 @@
   if (new URLSearchParams(location.search).get('story') === '1') { arrival.remove(); return; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const anchor = arrival.querySelector('.arrival-weapon-anchor');
-  const weapon = arrival.querySelector('.arrival-weapon-body');
   const label = document.getElementById('arrival-stage');
   const meter = document.getElementById('arrival-meter');
   const canvas = document.getElementById('arrival-field');
@@ -93,8 +92,12 @@
     const scale = mix(1, .9, turn) * mix(1, 1.25, flight) * mix(1, 7.2, rush * rush);
     const x = innerWidth * (.12 * flight - .08 * rush), y = innerHeight * (-.035 * turn + .05 * rush);
     anchor.style.transform = reduce ? 'translate3d(-50%,-50%,0)' : `translate3d(calc(-50% + ${x.toFixed(2)}px),calc(-50% + ${y.toFixed(2)}px),${(rush * 180).toFixed(1)}px) scale(${scale.toFixed(4)})`;
-    if (arrival.classList.contains('is-moving')) weapon.style.transform = reduce ? 'none' : `rotateZ(${(90 * turn).toFixed(2)}deg) rotateX(${(-10 * turn).toFixed(2)}deg) rotateY(${(18 * Math.sin(flight * Math.PI * 2) + 24 * rush).toFixed(2)}deg)`;
-    else weapon.style.removeProperty('transform');
+    const idleSpin = performance.now() * .0007;
+    window.tvArrivalPose = {
+      x: reduce ? 0 : -.17 * turn,
+      y: reduce ? 0 : idleSpin + .42 * turn + 1.15 * flight + 1.7 * rush,
+      z: reduce ? 0 : .08 * turn
+    };
     arrival.style.setProperty('--arrival-progress', p.toFixed(4));
     arrival.style.setProperty('--arrival-trails', (flight * (1 - part(p, .86, .98))).toFixed(4));
     arrival.style.setProperty('--arrival-impact', impact.toFixed(4));
@@ -108,10 +111,14 @@
     meter.textContent = `${String(Math.round(p * 100)).padStart(3, '0')} / 100`;
     draw(p);
   }
-  function tick() {
+  let lastFrameTime = 0;
+  function tick(now) {
     raf = 0;
     const diff = target - visual;
-    visual += Math.abs(diff) < .0001 ? diff : diff * (reduce ? .46 : .18);
+    const elapsed = lastFrameTime ? Math.min(64, now - lastFrameTime) : 16.7;
+    lastFrameTime = now;
+    const smoothing = reduce ? 1 : 1 - Math.exp(-elapsed / 82);
+    visual += Math.abs(diff) < .0001 ? diff : diff * smoothing;
     render(visual);
     if (target >= .999 && visual >= .995) { go(); return; }
     if (Math.abs(target - visual) > .0001) raf = requestAnimationFrame(tick);

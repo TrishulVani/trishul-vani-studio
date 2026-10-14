@@ -6,6 +6,12 @@
 
 # Changelog
 
+## 2026-10-14 — restore overview step and model the intro trident in 3D
+
+- The root intro now hands off to the existing overview/story page; its existing “Enter त्रिSHUL VANI” links open the working lab. Same-page story links remain in place, while browser Back returns from the lab to the overview on the same studio host.
+- Smoothed the trident-to-overview crossfade with frame-rate-independent motion and a longer coordinated fade. The existing detailed trident image is now textured on a WebGL model with a generated, extruded alpha silhouette and side faces, so its axial turn reveals real thickness while preserving the supplied artwork, color, and layout.
+- Updated the same-host history flow so Back from an app tool returns to the overview. Focused route tests pass; browser CI confirms the WebGL renderer and overview navigation on tablet/mobile, with browser Back passing across all devices. One desktop lab-route check exceeded its 5-second wait, so the test now allows 15 seconds for that iframe transition.
+
 ## Public edition address swap — 2026-10-12
 
 - Mapped the cinematic introduction and connected lab to the main GitHub Pages address.

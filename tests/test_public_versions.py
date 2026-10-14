@@ -9,13 +9,24 @@ WEB = Path(__file__).resolve().parents[1] / "web"
 def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     page = (WEB / "index.html").read_text(encoding="utf-8-sig")
     assert 'id="arrival"' in page
-    assert 'src="/arrival-v2.js?v=7"' in page
+    assert 'src="/arrival-v2.js?v=9"' in page
+    assert 'src="/trident-3d.js?v=1"' in page
     assert 'id="landing-frame"' in page
-    assert 'src="/lab.html?design=2#overview"' in page
+    assert 'src="/experience.html?story=1"' in page
     assert ".landing-frame.is-entering" in page
     assert "new MutationObserver(reveal)" in page
     arrival = (WEB / "arrival-v2.js").read_text(encoding="utf-8-sig")
     assert "location.replace('/lab.html?design=2')" not in arrival
+    assert "Math.exp(-elapsed / 82)" in arrival
+    assert "window.tvArrivalPose" in arrival
+    story = (WEB / "experience.html").read_text(encoding="utf-8-sig")
+    assert 'id="hero-title"' in story
+    assert 'href="/lab.html?design=2"' in story
+    assert 'class="arrival-weapon-3d"' in page
+    model = (WEB / "trident-3d.js").read_text(encoding="utf-8-sig")
+    assert "getContext('webgl'" in model
+    assert "gl.drawArrays(gl.TRIANGLES,0,sideCount)" in model
+    assert ".arrival-weapon-body.has-3d" in (WEB / "intro-v2.css").read_text(encoding="utf-8-sig")
 
 
 def test_studio_host_is_the_single_site_and_api_origin():

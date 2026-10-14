@@ -9,12 +9,12 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="/assets/preview-trident-v2.webp" fetchpriority="high">
   <link rel="stylesheet" href="/relaunch-v2.css?v=6">
-  <link rel="stylesheet" href="/intro-v2.css?v=5">
+  <link rel="stylesheet" href="/intro-v2.css?v=7">
   <link rel="stylesheet" href="/brand-v2.css?v=3">
   <link rel="stylesheet" href="/atmosphere-v4.css?v=1">
   <style>
     html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#06110f}
-    .landing-frame{position:fixed;inset:0;width:100%;height:100%;border:0;background:#06110f;opacity:.001;transform:scale(1.018);transition:opacity 1.08s cubic-bezier(.2,.72,.18,1),transform 1.08s cubic-bezier(.2,.72,.18,1);will-change:opacity,transform}
+    .landing-frame{position:fixed;inset:0;width:100%;height:100%;border:0;background:#06110f;opacity:.001;transform:scale(1.012);transition:opacity 1.22s cubic-bezier(.22,1,.36,1),transform 1.22s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
     .landing-frame.is-entering{opacity:1;transform:scale(1)}
     .arrival{z-index:2000}
     @media(prefers-reduced-motion:reduce){.landing-frame{transition:none;transform:none}}
@@ -22,13 +22,13 @@
   </style>
 </head>
 <body class="experience-v2">
-  <iframe class="landing-frame" id="landing-frame" title="त्रिSHUL VANI audio and hardware workspace" src="/lab.html?design=2#overview" allow="autoplay; fullscreen" referrerpolicy="same-origin" aria-hidden="true" tabindex="-1"></iframe>
+  <iframe class="landing-frame" id="landing-frame" title="त्रिSHUL VANI overview and research story" src="/experience.html?story=1" allow="autoplay; fullscreen" referrerpolicy="same-origin" aria-hidden="true" tabindex="-1"></iframe>
   <div class="arrival" id="arrival" role="dialog" aria-label="त्रिSHUL VANI introduction" aria-modal="true">
     <canvas id="arrival-field" aria-hidden="true"></canvas>
     <div class="arrival-top"><span class="arrival-brand"><img class="v2-brand-glyph" src="/assets/brand-glyph-v2.png" alt=""><b class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</b><small>THE SOUND OF FORCE</small></span><span class="arrival-live">● SIGNAL ONLINE<br><small>EXPERIENCE 01 / 04</small></span><button type="button" id="arrival-skip">ENTER SITE</button></div>
     <div class="arrival-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="arrival-ghost" aria-hidden="true"><span lang="hi">त्रि</span>SHUL</div>
-    <div class="arrival-center"><div class="arrival-rings" aria-hidden="true"></div><div class="arrival-weapon-anchor" aria-hidden="true"><div class="arrival-weapon-body"><img class="arrival-weapon-echo" src="/assets/preview-trident-v2.webp" alt=""><img class="arrival-weapon" src="/assets/preview-trident-v2.webp" alt=""></div></div><div class="arrival-wordmark" aria-hidden="true"><span><span lang="hi">त्रि</span>SHUL VANI / SOUND INTELLIGENCE</span><strong>THE FORCE<br>HAS A VOICE.</strong></div></div>
+    <div class="arrival-center"><div class="arrival-rings" aria-hidden="true"></div><div class="arrival-weapon-anchor" aria-hidden="true"><div class="arrival-weapon-body"><canvas class="arrival-weapon-3d" aria-hidden="true"></canvas><img class="arrival-weapon-echo" src="/assets/preview-trident-v2.webp" alt=""><img class="arrival-weapon" src="/assets/preview-trident-v2.webp" alt=""></div></div><div class="arrival-wordmark" aria-hidden="true"><span><span lang="hi">त्रि</span>SHUL VANI / SOUND INTELLIGENCE</span><strong>THE FORCE<br>HAS A VOICE.</strong></div></div>
     <div class="arrival-scroll-hint" aria-hidden="true">SCROLL TO SUMMON</div>
     <div class="arrival-beats" aria-hidden="true"><span>THE DIVINE WEAPON / 01—04</span><strong data-beat="0">The power awakens.</strong><strong data-beat="1">The trident aligns.</strong><strong data-beat="2">Nothing can stop it.</strong><strong data-beat="3">The force has a voice.</strong><p id="arrival-subline">A trident. A signal. One continuous journey.</p></div>
     <div class="arrival-bottom"><span>THE FORCE AWAKENS / SIGNAL JOURNEY</span><span id="arrival-stage">01 / THE AWAKENING</span><span id="arrival-meter">000 / 100</span></div>
@@ -39,6 +39,7 @@
       const intro=document.getElementById('arrival');
       const landing=document.getElementById('landing-frame');
       if(!intro||!landing)return;
+      const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
       let frameReady=landing.contentDocument?.readyState==='complete';
       let entered=false;
       let lastFrameUrl='';
@@ -67,11 +68,15 @@
                 const destination=new URL(anchor.href,location.href);
                 if(destination.origin!==location.origin)return;
                 const target=destination.pathname+destination.search+destination.hash;
+                const current=new URL(frameUrl(),location.origin);
+                if(destination.pathname===current.pathname&&destination.search===current.search)return;
                 if(target===frameUrl())return;
                 event.preventDefault();
                 lastFrameUrl=target;
-                history.pushState({tvFrame:target},'',location.href);
-                landing.src=target;
+                // Create one Back step into the workspace; keep inner tools on that step so Back returns to the overview.
+                if(current.pathname==='/experience.html'&&destination.pathname==='/lab.html')history.pushState({tvFrame:target},'',location.href);
+                else history.replaceState({tvFrame:target},'',location.href);
+                landing.contentWindow.location.replace(target);
               },true);
             }
           }catch(_){}
@@ -86,9 +91,9 @@
         landing.removeAttribute('tabindex');
         landing.classList.add('is-entering');
         observer.disconnect();
-        const heading=landing.contentDocument?.getElementById('workspace-dashboard-title');
+        const heading=landing.contentDocument?.getElementById('hero-title');
         if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}
-        setTimeout(()=>intro.remove(),420);
+        setTimeout(()=>intro.remove(),reduceMotion?0:760);
       };
       const observer=new MutationObserver(reveal);
       observer.observe(intro,{attributes:true,attributeFilter:['class']});
@@ -101,11 +106,12 @@
       window.addEventListener('popstate',event=>{
         if(!entered)return;
         const target=event.state?.tvFrame;
-        if(target&&target!==frameUrl()){lastFrameUrl=target;landing.src=target}
+        if(target&&target!==frameUrl()){lastFrameUrl=target;landing.contentWindow.location.replace(target)}
       });
     })();
   </script>
   <script defer src="/brand-v2.js?v=1"></script>
-  <script defer src="/arrival-v2.js?v=7"></script>
+  <script defer src="/arrival-v2.js?v=9"></script>
+  <script defer src="/trident-3d.js?v=1"></script>
 </body>
 </html>
