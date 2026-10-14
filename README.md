@@ -19,7 +19,7 @@
 
 ### Release editions
 
-The **target main website** is [trishul-vani-frontend.onrender.com](https://trishul-vani-frontend.onrender.com/), backed by the Render Static Site in `render.yaml`. Render must sync that Blueprint before this URL is live; until then the currently published frontend remains on GitHub Pages. The previous mint introduction and original dashboard are assigned to [Version 2 / Original Edition](https://trishul-vani-frontend.onrender.com/design-v2/) once the static site is provisioned. Both versions use the same Python audio processor.
+The **main website** is [trishul-vani-frontend.onrender.com](https://trishul-vani-frontend.onrender.com/), backed by the Render Static Site in `render.yaml`. The dark trident introduction leads into the audio Mission Control dashboard and connected workspaces. The previous mint introduction remains at [Version 2 / Original Edition](https://trishul-vani-frontend.onrender.com/design-v2/). Both versions use the same Python audio processor. The former GitHub Pages entry points redirect to Render after this release is merged.
 
 **New hardware workbench:** [Open the local Design 02 hardware lab](http://127.0.0.1:8002/hardware.html) to inspect the supplied prototype's adapted 3D enclosure, build a logical dual-microphone circuit with Raspberry Pi 4 Model B, Pico W and ESP32-S3 controller options, test bounded virtual control scripts and send a synthetic experiment through the real Python backend. Runs can be opened directly in the V2 audio laboratory. This is a **virtual design and software test**, not Raspberry Pi or electrical emulation; see [scope, usage and limits](docs/HARDWARE_WORKBENCH.md). The Hindi **त्रि** wordmark now uses a larger, crisp Devanagari font on V2.
 
@@ -37,8 +37,8 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 | Destination | URL | Purpose |
 |---|---|---|
-| Main website (improved Version 1) | **https://trishul-vani-frontend.onrender.com/** *(target; activate Render Blueprint)* | Cinematic trident introduction, signal story, connected dashboard and studio; static CDN, no Render web-service wake-up |
-| Version 2 / Original Edition | **https://trishul-vani-frontend.onrender.com/design-v2/** *(target; activate Render Blueprint)* | Previous mint introduction and original connected dashboard |
+| Main website | **https://trishul-vani-frontend.onrender.com/** | Trident introduction, responsive Mission Control dashboard, cinematic story, and connected studio |
+| Version 2 / Original Edition | **https://trishul-vani-frontend.onrender.com/design-v2/** | Previous mint introduction and original connected dashboard |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
