@@ -33,7 +33,10 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
   await expect(page).toHaveURL(/lab\.html\?design=2$/, { timeout: 5000 });
   await expect(page.locator('#workspace-dashboard')).toBeVisible();
-  await expect(page.locator('.workspace-dashboard-card')).toHaveCount(4);
+  await expect(page.locator('.workspace-dashboard-metric')).toHaveCount(4);
+  await expect(page.locator('.workspace-dashboard-links>a')).toHaveCount(4);
+  await expect(page.locator('.workspace-signal-plot')).toBeVisible();
+  await expect(page.locator('.workspace-activity-panel')).toBeVisible();
   await expect(page.locator('body')).toHaveClass(/arrived-through-portal/);
 });
 
@@ -42,7 +45,8 @@ test('intro skip goes directly to the overview dashboard', async ({ page }) => {
   await page.getByRole('button', { name: /Enter site/i }).click();
   await expect(page).toHaveURL(/lab\.html\?design=2$/, { timeout: 3000 });
   await expect(page.locator('#workspace-dashboard')).toBeVisible();
-  await expect(page.locator('.workspace-dashboard-card')).toHaveCount(4);
+  await expect(page.locator('.workspace-dashboard-metric')).toHaveCount(4);
+  await expect(page.locator('.workspace-dashboard-links>a')).toHaveCount(4);
 });
 
 test('the supplied gold mark appears throughout V2 without replacing V1 branding', async ({ page }) => {

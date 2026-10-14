@@ -1,7 +1,5 @@
 # त्रिSHUL VANI · Original Edition
 
-Public address: https://trishulvani.github.io/design-v2/
+Public address: https://trishul-vani-frontend.onrender.com/design-v2/
 
-This separate GitHub Pages address preserves the previous mint trident introduction and original dashboard. Its iframe opens `https://trishul-vani-studio.onrender.com/index.html`. The backend/API is shared with the improved main website, whose cinematic experience is at the root address.
-
-Source and test results: https://github.com/TrishulVani/trishul-vani-studio
+The former GitHub Pages address redirects to the Render-hosted Original Edition. Source, test results, and deployment configuration: https://github.com/TrishulVani/trishul-vani-studio
