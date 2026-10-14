@@ -125,3 +125,5 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Built a distinct MK-V preview page with clearly marked concept render, an in-page route into the existing 3D assembly and controller bench, and a real FastAPI A/B workspace. The image is generated artwork; the mesh remains an illustrative MK-IV scene, not CAD.
 - Added matched-position RAW/NLMS/Spectral/Hybrid listening, WAV download, backend capability labels, and waveform RMS envelopes with a shared amplitude scale. A synthetic run does not establish human-speech intelligibility or physical performance.
 - Captured populated desktop/mobile audio evidence. Five seeded factory/engine/wind/impulse/crowd scenarios produced separate stored reports and WAVs. Full Playwright suite passed **72/72** across desktop/tablet/mobile; Python API/DSP tests passed **17/17**. Physical device remains disconnected and unmeasured. The public V2 alias remains on the earlier release, pending visual signoff.
+
+- Intro trident rollback: restored the prior textured, beveled WebGL form and kept the current intro-to-overview flow intact. Focused public-version tests pass.
