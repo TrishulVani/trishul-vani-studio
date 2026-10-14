@@ -5,6 +5,11 @@
 
 # Build log (verified changes only)
 
+## 2026-10-14 — volumetric intro trident follow-up
+
+- Replaced the image-on-silhouette renderer with generated WebGL geometry: three blades, two curved tapered tines, turned grip, spiral inlay, jewel, collars, and pommel. The existing green-and-gold palette and entrance animation remain.
+- Added a cache-busted renderer version and public-version/browser assertions for modeled parts and vertex output. Node syntax and `git diff --check` pass; focused Python and connected-browser checks are pending CI.
+
 ## 2026-10-14 — improve visible depth in the intro trident
 
 - Replaced the paper-thin extrusion with a deeper WebGL silhouette, beveled front/rear edges, and per-face directional/specular lighting. The supplied trident art, color, and intro composition are unchanged.
