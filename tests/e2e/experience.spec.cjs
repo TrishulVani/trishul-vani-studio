@@ -33,6 +33,14 @@ test('root trident visibly rotates, then reveals overview and lab', async ({ pag
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
   await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '1');
+  await expect.poll(() => spin.evaluate(el => {
+    const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return (Math.atan2(matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
+  })).toBeGreaterThan(65);
+  expect(await spin.evaluate(el => {
+    const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return (Math.atan2(matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
+  })).toBeLessThan(100);
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
