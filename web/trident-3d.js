@@ -28,7 +28,7 @@
   const fragmentSource = `
     precision mediump float; varying vec3 vColor; varying vec3 vNormal; varying vec3 vView;
     void main(){
-      vec3 n=normalize(vNormal); vec3 lightA=normalize(vec3(-0.48,0.68,0.95)); vec3 lightB=normalize(vec3(0.7,0.05,0.5));
+      vec3 n=normalize(vNormal); if(!gl_FrontFacing)n=-n; vec3 lightA=normalize(vec3(-0.48,0.68,0.95)); vec3 lightB=normalize(vec3(0.7,0.05,0.5));
       float diffuse=max(dot(n,lightA),0.0)*0.82+max(dot(n,lightB),0.0)*0.24;
       vec3 halfA=normalize(lightA+normalize(vView));
       float specular=pow(max(dot(n,halfA),0.0),30.0)*0.9;
@@ -122,7 +122,7 @@
   const upload=(values,loc,size)=>{const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,0,0);buffers.push(buffer);};
   upload(positions,position,3);upload(colors,colorLoc,3);upload(normals,normalLoc,3);
   body.dataset.modelType='volumetric-mesh';body.dataset.modelParts='3-blades,curved-tines,turned-shaft,raised-fittings';body.dataset.modelVertices=String(vertexCount);body.classList.add('has-3d');
-  gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.enable(gl.CULL_FACE);gl.frontFace(gl.CCW);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);
+  gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.disable(gl.CULL_FACE);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);
   function resize(){const rect=canvas.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,1.5),width=Math.max(1,Math.round(rect.width*ratio)),height=Math.max(1,Math.round(rect.height*ratio));if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;gl.viewport(0,0,width,height);}}
   function draw(now){
     resize();gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(program);
