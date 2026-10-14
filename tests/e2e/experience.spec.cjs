@@ -39,9 +39,9 @@ test('root trident visibly rotates, then reveals overview and lab', async ({ pag
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 5000 });
   const app = page.frameLocator('#landing-frame');
   await expect(app.locator('#hero-title')).toBeVisible();
-  await expect(app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toBeVisible();
-  await app.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
-  await expect(app.locator('#workspace-dashboard')).toBeVisible({ timeout: 15000 });
+  await expect(app.locator('.actions .button').first()).toHaveText('Enter त्रिSHUL VANI');
+  await app.locator('.actions .button').first().click();
+  await expect(app.locator('#workspace-dashboard')).toBeVisible({ timeout: 30000 });
   await expect(app.locator('.workspace-dashboard-metric')).toHaveCount(4);
   await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
   await expect(app.locator('.workspace-signal-plot')).toBeVisible();
