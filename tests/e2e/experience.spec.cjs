@@ -25,7 +25,8 @@ test('root trident turns as an extruded 3D object, then reveals overview and lab
   await expect(page.locator('.arrival-brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();
   const spin = page.locator('.arrival-weapon-body');
-  expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('arrival-idle-spin');
+  expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('none');
+  expect(await page.locator('.arrival-weapon-3d').evaluate(canvas => !!canvas.getContext('webgl'))).toBeTruthy();
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE TURN');

@@ -9,7 +9,7 @@
 
 - Root flow is now trident intro → existing overview/story page (`/experience.html?story=1`) → working lab via its existing Enter links. Same-page overview anchors retain native scrolling, and the top-level history tracks workspace changes so Back returns to the overview.
 - Kept the trident artwork, layout, and established colors. The new WebGL model textures the supplied art onto an alpha-extruded mesh with real side faces and axial rotation; scroll easing uses elapsed time, and the coordinated intro/overview crossfade lasts 760 ms (skipped for reduced motion).
-- Focused route checks pass (6/6), JavaScript syntax and `git diff --check` pass. The prior browser run exposed route/back-navigation failures; this revision corrects those behaviors and awaits the desktop/tablet/mobile CI rerun before release.
+- Focused route checks pass (6/6), JavaScript syntax and `git diff --check` pass. Browser CI now confirms overview entry and Back behavior across desktop, tablet, and mobile; its only remaining failures expected the removed CSS spin animation, so the test now verifies the WebGL renderer instead. Awaiting the final CI rerun before release.
 
 ## 2026-10-12 — Public edition address swap
 
