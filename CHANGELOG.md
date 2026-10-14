@@ -6,11 +6,11 @@
 
 # Changelog
 
-## 2026-10-14 — restore overview step and give intro trident depth
+## 2026-10-14 — restore overview step and model the intro trident in 3D
 
 - The root intro now hands off to the existing overview/story page; its existing “Enter त्रिSHUL VANI” links open the working lab. Same-page story links remain in place, while browser Back returns from the lab to the overview on the same studio host.
-- Smoothed the trident-to-overview crossfade with frame-rate-independent motion and a longer coordinated fade. Added a shallow extruded image stack to the existing trident so axial rotation reveals physical depth; artwork, color, and layout remain unchanged.
-- Verification: focused static route tests, JavaScript syntax, and browser CI results are recorded with the PR after execution.
+- Smoothed the trident-to-overview crossfade with frame-rate-independent motion and a longer coordinated fade. The existing detailed trident image is now textured on a WebGL model with a generated, extruded alpha silhouette and side faces, so its axial turn reveals real thickness while preserving the supplied artwork, color, and layout.
+- Updated the same-host history flow so Back from an app tool returns to the overview. Local route tests and JavaScript syntax checks pass; browser CI is rerunning after the navigation correction.
 
 ## Public edition address swap — 2026-10-12
 

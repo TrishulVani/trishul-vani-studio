@@ -5,11 +5,11 @@
 
 # Build log (verified changes only)
 
-## 2026-10-14 — restore overview-before-lab flow and deepen intro trident
+## 2026-10-14 — restore overview-before-lab flow and model the intro trident in 3D
 
 - Root flow is now trident intro → existing overview/story page (`/experience.html?story=1`) → working lab via its existing Enter links. Same-page overview anchors retain native scrolling, and the top-level history tracks workspace changes so Back returns to the overview.
-- Kept the trident artwork, layout, and established colors. Added five thin image-depth layers for an extruded axial turn and changed scroll easing to elapsed-time smoothing. The coordinated intro/overview crossfade lasts 760 ms; reduced-motion visitors skip the delay.
-- Validation will be recorded after focused Python tests, JavaScript checks, and desktop/tablet/mobile browser CI complete.
+- Kept the trident artwork, layout, and established colors. The new WebGL model textures the supplied art onto an alpha-extruded mesh with real side faces and axial rotation; scroll easing uses elapsed time, and the coordinated intro/overview crossfade lasts 760 ms (skipped for reduced motion).
+- Focused route checks pass (6/6), JavaScript syntax and `git diff --check` pass. The prior browser run exposed route/back-navigation failures; this revision corrects those behaviors and awaits the desktop/tablet/mobile CI rerun before release.
 
 ## 2026-10-12 — Public edition address swap
 

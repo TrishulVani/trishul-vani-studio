@@ -14,12 +14,13 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('root trident idles in 3D, scrolls forward, rewinds, and reveals the overview before the lab', async ({ page }) => {
+test('root trident turns as an extruded 3D object, then reveals overview and lab', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#arrival')).toBeVisible();
   await expect(page.locator('.arrival-figure')).toHaveCount(0);
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
-  await expect(page.locator('.arrival-weapon-depth')).toHaveCount(5);
+  await expect(page.locator('.arrival-weapon-3d')).toBeVisible();
+  await expect(page.locator('.arrival-weapon-body')).toHaveClass(/has-3d/);
   await expect(page.locator('.arrival-brand .v2-brand-glyph')).toBeVisible();
   await expect(page.locator('.arrival-brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();

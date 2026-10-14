@@ -9,7 +9,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="/assets/preview-trident-v2.webp" fetchpriority="high">
   <link rel="stylesheet" href="/relaunch-v2.css?v=6">
-  <link rel="stylesheet" href="/intro-v2.css?v=6">
+  <link rel="stylesheet" href="/intro-v2.css?v=7">
   <link rel="stylesheet" href="/brand-v2.css?v=3">
   <link rel="stylesheet" href="/atmosphere-v4.css?v=1">
   <style>
@@ -28,7 +28,7 @@
     <div class="arrival-top"><span class="arrival-brand"><img class="v2-brand-glyph" src="/assets/brand-glyph-v2.png" alt=""><b class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</b><small>THE SOUND OF FORCE</small></span><span class="arrival-live">● SIGNAL ONLINE<br><small>EXPERIENCE 01 / 04</small></span><button type="button" id="arrival-skip">ENTER SITE</button></div>
     <div class="arrival-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="arrival-ghost" aria-hidden="true"><span lang="hi">त्रि</span>SHUL</div>
-    <div class="arrival-center"><div class="arrival-rings" aria-hidden="true"></div><div class="arrival-weapon-anchor" aria-hidden="true"><div class="arrival-weapon-body"><img class="arrival-weapon-echo" src="/assets/preview-trident-v2.webp" alt=""><img class="arrival-weapon" src="/assets/preview-trident-v2.webp" alt=""></div></div><div class="arrival-wordmark" aria-hidden="true"><span><span lang="hi">त्रि</span>SHUL VANI / SOUND INTELLIGENCE</span><strong>THE FORCE<br>HAS A VOICE.</strong></div></div>
+    <div class="arrival-center"><div class="arrival-rings" aria-hidden="true"></div><div class="arrival-weapon-anchor" aria-hidden="true"><div class="arrival-weapon-body"><canvas class="arrival-weapon-3d" aria-hidden="true"></canvas><img class="arrival-weapon-echo" src="/assets/preview-trident-v2.webp" alt=""><img class="arrival-weapon" src="/assets/preview-trident-v2.webp" alt=""></div></div><div class="arrival-wordmark" aria-hidden="true"><span><span lang="hi">त्रि</span>SHUL VANI / SOUND INTELLIGENCE</span><strong>THE FORCE<br>HAS A VOICE.</strong></div></div>
     <div class="arrival-scroll-hint" aria-hidden="true">SCROLL TO SUMMON</div>
     <div class="arrival-beats" aria-hidden="true"><span>THE DIVINE WEAPON / 01—04</span><strong data-beat="0">The power awakens.</strong><strong data-beat="1">The trident aligns.</strong><strong data-beat="2">Nothing can stop it.</strong><strong data-beat="3">The force has a voice.</strong><p id="arrival-subline">A trident. A signal. One continuous journey.</p></div>
     <div class="arrival-bottom"><span>THE FORCE AWAKENS / SIGNAL JOURNEY</span><span id="arrival-stage">01 / THE AWAKENING</span><span id="arrival-meter">000 / 100</span></div>
@@ -73,8 +73,10 @@
                 if(target===frameUrl())return;
                 event.preventDefault();
                 lastFrameUrl=target;
-                history.pushState({tvFrame:target},'',location.href);
-                landing.src=target;
+                // Create one Back step into the workspace; keep inner tools on that step so Back returns to the overview.
+                if(current.pathname==='/experience.html'&&destination.pathname==='/lab.html')history.pushState({tvFrame:target},'',location.href);
+                else history.replaceState({tvFrame:target},'',location.href);
+                landing.contentWindow.location.replace(target);
               },true);
             }
           }catch(_){}
@@ -104,11 +106,12 @@
       window.addEventListener('popstate',event=>{
         if(!entered)return;
         const target=event.state?.tvFrame;
-        if(target&&target!==frameUrl()){lastFrameUrl=target;landing.src=target}
+        if(target&&target!==frameUrl()){lastFrameUrl=target;landing.contentWindow.location.replace(target)}
       });
     })();
   </script>
   <script defer src="/brand-v2.js?v=1"></script>
-  <script defer src="/arrival-v2.js?v=8"></script>
+  <script defer src="/arrival-v2.js?v=9"></script>
+  <script defer src="/trident-3d.js?v=1"></script>
 </body>
 </html>
