@@ -4,11 +4,11 @@ body.experience-v2 .arrival:before{opacity:.22;background:repeating-radial-gradi
 body.experience-v2 .arrival:after{background:radial-gradient(circle,#fff0cf 0,#dfb77d 22%,#52604e 48%,#080d15 76%)}
 body.experience-v2 .arrival-rings{opacity:calc(.15 + var(--arrival-progress,0) * .25);border-color:#caa87544;box-shadow:0 0 0 8vw #cba77a0a,0 0 0 19vw #b6c2c706,0 0 150px #d6aa7922;transform:rotateX(67deg) scale(calc(.7 + var(--arrival-progress,0) * .6))}
 .arrival-weapon-anchor{position:absolute;z-index:3;left:50%;top:49%;width:min(20vw,23vh,235px);transform:translate3d(-50%,-50%,0);transform-style:preserve-3d;will-change:transform,opacity;opacity:var(--weapon-opacity,1)}
-.arrival-weapon-body{position:relative;transform-style:preserve-3d;transform-origin:50% 50%;animation:arrival-idle-spin 6s linear infinite;will-change:transform}
+.arrival-weapon-body{position:relative;transform-style:preserve-3d;transform-origin:50% 50%;animation:arrival-idle-spin 9s ease-in-out infinite;will-change:transform}
 .arrival-weapon,.arrival-weapon-echo{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;pointer-events:none;filter:drop-shadow(0 0 14px #e9c58755) drop-shadow(0 24px 30px #000b)}
 .arrival-weapon-echo{position:absolute;inset:0;opacity:.25;filter:blur(9px) saturate(1.6);transform:translateZ(-10px)}
 .arrival-weapon{transform:translateZ(3px)}
-@keyframes arrival-idle-spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@keyframes arrival-idle-spin{0%,100%{transform:rotateY(-5deg)}50%{transform:rotateY(5deg)}}
 .arrival.is-moving .arrival-weapon-body{animation:none}
 .arrival-wordmark{z-index:1;transform:translateY(var(--arrival-word-y,34px));opacity:var(--arrival-word-opacity,0)}
 body.experience-v2 .arrival-wordmark strong{color:#d5ac77}
