@@ -37,7 +37,7 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 The Mission Control dashboard adapts the task-first layout, status cards, and responsive navigation from the [Instagram dashboard reference supplied for this project](https://www.instagram.com/p/DeRlstZTj3Q/) to the existing TRISHUL VANI theme.
 
-Operator documentation: [indexed PDF guide](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Operator_Guide.pdf) and [editable Markdown source](docs/TRISHUL_VANI_OPERATOR_GUIDE.md).
+Operator documentation: [indexed PDF guide](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Operator_Guide.pdf), [captioned product walkthrough video](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Walkthrough.webm), and [editable Markdown source](docs/TRISHUL_VANI_OPERATOR_GUIDE.md).
 
 | Destination | URL | Purpose |
 |---|---|---|
@@ -51,7 +51,7 @@ The main address serves the cinematic frontend from Render Static Sites' global 
 
 ### First-visit guidance
 
-On the preview branch, Mission Control and Spectral Studio include a **? Help & tour** control in both designs. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The 80-second product video is **not yet recorded**; see [`docs/TUTORIAL_STORYBOARD.md`](docs/TUTORIAL_STORYBOARD.md) and caption draft for the planned authentic screen capture. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
+Mission Control and Spectral Studio include a **? Help & tour** control in both designs. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The [1:28 captioned walkthrough](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Walkthrough.webm) demonstrates the live audio processor and bounded virtual-hardware workflow; the [recorded timeline](docs/TUTORIAL_STORYBOARD.md) lists each segment. The Instagram dashboard reference is linked above and in the indexed operator guide. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
 
 ### Visual experience and flow
 
