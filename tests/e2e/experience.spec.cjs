@@ -61,9 +61,9 @@ test('studio back navigation returns to the overview inside the same site', asyn
   await page.getByRole('button', { name: /Enter site/i }).click();
   const app = page.frameLocator('#landing-frame');
   await expect(app.locator('#workspace-dashboard')).toBeVisible();
-  await app.getByRole('link', { name: 'Spectral studio', exact: true }).click();
+  await app.getByRole('link', { name: /Spectral studio/ }).last().click();
   await expect(app.locator('.rail nav a.active')).toContainText('Spectral studio');
-  await page.keyboard.press('Alt+ArrowLeft');
+  await page.evaluate(() => history.back());
   await expect(app.locator('#workspace-dashboard')).toBeVisible();
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
 });
