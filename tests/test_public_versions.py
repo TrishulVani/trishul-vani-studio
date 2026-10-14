@@ -6,11 +6,14 @@ from pathlib import Path
 WEB = Path(__file__).resolve().parents[1] / "web"
 
 
-def test_main_address_is_a_direct_cinematic_entry_without_backend_iframe():
+def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     page = (WEB / "index.html").read_text(encoding="utf-8-sig")
     assert 'id="arrival"' in page
     assert 'src="/arrival-v2.js?v=6"' in page
-    assert "<iframe" not in page
+    assert 'id="landing-frame"' in page
+    assert 'src="/lab.html?design=2&amp;release=ec436603#overview"' in page
+    assert ".landing-frame.is-entering" in page
+    assert "new MutationObserver(reveal)" in page
 
 
 def test_working_lab_and_studio_are_published_as_static_routes():

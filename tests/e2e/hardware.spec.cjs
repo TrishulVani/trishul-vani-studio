@@ -25,7 +25,7 @@ test('virtual assembly, circuit, controller logic and real DSP handoff', async (
   await expect(page.locator('#test-status')).toContainText(/Software run .* complete/, { timeout: 90000 });
   await expect(page.locator('#test-player')).toHaveAttribute('src', /\/api\/experiments\/[^/]+\/audio\/hybrid/);
   await page.getByRole('link', { name: 'Open result in V2 Audio Laboratory' }).click();
-  await expect(page).toHaveURL(/index\.html\?design=2&run=.*&track=hybrid#audio-lab/);
+  await expect(page).toHaveURL(/lab\.html\?design=2&run=.*&track=hybrid#audio-lab/);
   await expect(page.locator('#run-tag')).toContainText('RUN /', { timeout: 30000 });
   await expect(page.locator('#track-title')).toHaveText('TRISHUL Hybrid');
   expect(errors).toEqual([]);
@@ -53,7 +53,7 @@ test('a one-line code change changes virtual tasks and blocks audio route', asyn
 });
 
 test('hardware laboratory is available inside V2 without replacing V1', async ({ page }) => {
-  await page.goto('/index.html?design=2#hardware-lab');
+  await page.goto('/lab.html?design=2#hardware-lab');
   const frame = page.frameLocator('#hardware-lab-frame');
   await expect(frame.locator('#model-title')).toBeVisible();
   await expect(frame.locator('#code-input')).toBeVisible();
@@ -62,7 +62,7 @@ test('hardware laboratory is available inside V2 without replacing V1', async ({
 });
 
 test('V2 Hindi mark is legible and hardware layout fits viewport', async ({ page }) => {
-  await page.goto('/index.html?design=2');
+  await page.goto('/lab.html?design=2');
   const mark = page.locator('.sidebar .deva-wordmark [lang="hi"]');
   await expect(mark).toHaveText('त्रि');
   expect(await mark.evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);
@@ -72,7 +72,7 @@ test('V2 Hindi mark is legible and hardware layout fits viewport', async ({ page
 });
 
 test('the same green favicon and Hindi brand appear across site pages', async ({ page }) => {
-  for (const route of ['/index.html', '/index.html?design=2', '/experience.html', '/studio.html', '/hardware.html', '/hardware-mkv.html', '/about.html']) {
+  for (const route of ['/index.html', '/lab.html?design=2', '/experience.html', '/studio.html', '/hardware.html', '/hardware-mkv.html', '/about.html']) {
     await page.goto(route);
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', /favicon\.svg/);
     await expect(page).toHaveTitle(/त्रिSHUL VANI/);

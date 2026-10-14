@@ -7,7 +7,7 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   await expect(page.getByRole('heading', { name: /When noise rises/ })).toBeVisible();
   await expect(page.locator('main section')).toHaveCount(6);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
-  await expect(page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toHaveAttribute('href', '/index.html?design=2');
+  await expect(page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toHaveAttribute('href', '/lab.html?design=2');
   await page.getByRole('link', { name: 'Explore how it works' }).click();
   await expect(page).toHaveURL(/#problem$/);
   await expect(page.getByText('DSP fallback; not neural AI')).toBeVisible();
@@ -50,7 +50,7 @@ test('intro skip goes directly to the overview dashboard', async ({ page }) => {
 });
 
 test('the supplied gold mark appears throughout V2 without replacing V1 branding', async ({ page }) => {
-  await page.goto('/index.html?design=2');
+  await page.goto('/lab.html?design=2');
   const sideMark = page.locator('.sidebar .v2-brand-glyph');
   expect(await sideMark.evaluate(img => img.complete && img.naturalWidth > 0)).toBeTruthy();
   await expect(page.locator('.sidebar .brand [lang="hi"]')).toHaveText('त्रि');
@@ -62,7 +62,7 @@ test('the supplied gold mark appears throughout V2 without replacing V1 branding
 });
 
 test('site-wide atmosphere changes with scroll and reverses without affecting V1', async ({ page }) => {
-  await page.goto('/index.html?design=2');
+  await page.goto('/lab.html?design=2');
   await expect(page.locator('.tv-atmosphere > span')).toHaveCount(5);
   await expect(page.locator('body')).toHaveAttribute('data-tv-tone', 'navy');
   const firstNavy = await page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-navy-opacity')));
@@ -77,7 +77,7 @@ test('site-wide atmosphere changes with scroll and reverses without affecting V1
 });
 
 test('the operator crosses ribbons and a glass barrier before cockpit flight and lab', async ({ page }) => {
-  await page.goto('/index.html?design=2');
+  await page.goto('/lab.html?design=2');
   await expect(page.locator('.v2-service-scene')).toHaveCount(0);
   const scene = page.locator('.v2-journey');
   await expect(scene).toHaveCount(1);
@@ -128,46 +128,15 @@ test('the operator crosses ribbons and a glass barrier before cockpit flight and
   await expect(page.locator('.v2-journey')).toBeHidden();
 });
 
-test('sound chamber grows to full width and the figure moves through it', async ({ page }) => {
-  await page.goto('/index.html?design=2');
-  const media = page.locator('.relaunch-media');
-  const firstWidth = (await media.boundingBox()).width;
-  expect(firstWidth).toBeLessThan(page.viewportSize().width * .97);
-  await page.evaluate(() => { const scene = document.querySelector('.relaunch-story'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .62); });
-  await expect(page.locator('.relaunch-story')).toHaveAttribute('data-chapter', '2');
-  await expect.poll(async () => (await media.boundingBox()).width).toBeGreaterThan(page.viewportSize().width * .98);
-  await expect(page.locator('.relaunch-flight')).toBeVisible();
-  await expect(page.locator('.relaunch-media-index')).toContainText('SEPARATE');
-});
 
-test('aircraft flyover follows scroll in both directions before the sound story', async ({ page }) => {
-  await page.goto('/index.html?design=2');
-  const flyover = page.locator('.flyover-v2');
-  const craft = page.locator('.flyover-craft');
-  await expect(flyover).toBeVisible();
-  await expect(craft.locator('img')).toHaveAttribute('src', '/assets/b2-flyover-v2.webp');
-  await expect(page.locator('.relaunch-story')).toBeVisible();
-  const progress = async () => Number((await page.locator('#flyover-percent').innerText()).replace('%', ''));
-  await page.evaluate(() => { const scene = document.querySelector('.flyover-v2'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .66); });
-  await expect.poll(progress).toBeGreaterThan(60);
-  const forward = await craft.evaluate(el => getComputedStyle(el).transform);
-  await page.evaluate(() => { const scene = document.querySelector('.flyover-v2'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .23); });
-  await expect.poll(progress).toBeLessThan(30);
-  await expect(page.locator('#flyover-direction')).toContainText('REWINDING');
-  expect(await craft.evaluate(el => getComputedStyle(el).transform)).not.toBe(forward);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
-  await page.goto('/index.html');
-  await expect(page.locator('.flyover-v2')).toHaveCount(0);
-});
 
-test('story launch reaches the redesigned working lab', async ({ page }) => {
+test('story launch reaches the connected laboratory route', async ({ page }) => {
   await page.goto('/experience.html?story=1');
   await page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
-  await expect(page.locator('.launch-portal.is-active .throw-object img')).toHaveCount(6);
-  await expect(page).toHaveURL(/index\.html\?design=2$/);
-  await expect(page.getByRole('heading', { name: /The signal survives/i })).toBeVisible();
-  await expect(page.locator('.relaunch-story')).toBeVisible();
-  await expect(page.locator('img[src*="microphone-v2"]')).toHaveCount(0);
+  await expect(page).toHaveURL(/lab\.html\?design=2$/);
+  await page.locator('.nav-item[href="#audio-lab"]').click();
+  await expect(page.locator('#audio-lab')).toBeVisible();
+  await expect(page.locator('#run-btn')).toBeVisible();
 });
 
 test('microphone scene responds to scroll while keeping its content readable', async ({ page }) => {
@@ -212,14 +181,11 @@ test('reduced motion and disconnected processor keep navigation usable', async (
   await expect(page.getByText(/processor is unavailable/i)).toBeVisible();
   await expect(page.getByRole('link', { name: 'Open Spectral Studio' })).toHaveAttribute('href', '/studio.html?design=2');
   await page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first().click();
-  await expect(page).toHaveURL(/index\.html\?design=2/);
+  await expect(page).toHaveURL(/lab\.html\?design=2/);
 });
 
 test('laboratory runs a measured experiment and exports evidence', async ({ page, request }) => {
-  await page.goto('/index.html?design=2');
-  await expect(page.locator('.relaunch-story')).toBeVisible();
-  await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; const scene = document.querySelector('.relaunch-story'); scrollTo(0, scene.offsetTop + (scene.offsetHeight - innerHeight) * .87); });
-  await expect(page.locator('.relaunch-story')).toHaveAttribute('data-chapter', '3');
+  await page.goto('/lab.html?design=2#audio-lab');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
   await expect(page.locator('.status-pill')).toContainText('PROCESSOR CONNECTED');
   await page.getByRole('button', { name: 'Run signal analysis' }).click();

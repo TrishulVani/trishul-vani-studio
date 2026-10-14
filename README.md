@@ -8,7 +8,7 @@
 
 **A connected spectral studio and speech-enhancement research laboratory with real processing, reproducible records, auditable metrics, and automated tests.**
 
-[![Live Studio](https://img.shields.io/badge/LIVE_STUDIO-Render_CDN-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishul-vani-frontend.onrender.com/)
+[![Render Static Site target](https://img.shields.io/badge/WEBSITE_HOST-Render_CDN-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishul-vani-frontend.onrender.com/)
 [![Python CI](https://img.shields.io/github/actions/workflow/status/TrishulVani/trishul-vani-studio/ci.yml?style=for-the-badge&label=TESTS)](https://github.com/TrishulVani/trishul-vani-studio/actions)
 [![Source](https://img.shields.io/badge/SOURCE-PUBLIC-82b98b?style=for-the-badge&labelColor=080e10)](https://github.com/TrishulVani/trishul-vani-studio)
 
@@ -19,7 +19,7 @@
 
 ### Release editions
 
-The current cinematic experience is the **main website** at [trishul-vani-frontend.onrender.com](https://trishul-vani-frontend.onrender.com/). The previous mint introduction and original dashboard remain available as **Version 2 / Original Edition** at [trishul-vani-frontend.onrender.com/design-v2/](https://trishul-vani-frontend.onrender.com/design-v2/). Both use the same Python audio processor. The version labels describe the public addresses, not separate DSP implementations.
+The **target main website** is [trishul-vani-frontend.onrender.com](https://trishul-vani-frontend.onrender.com/), backed by the Render Static Site in `render.yaml`. Render must sync that Blueprint before this URL is live; until then the currently published frontend remains on GitHub Pages. The previous mint introduction and original dashboard are assigned to [Version 2 / Original Edition](https://trishul-vani-frontend.onrender.com/design-v2/) once the static site is provisioned. Both versions use the same Python audio processor.
 
 **New hardware workbench:** [Open the local Design 02 hardware lab](http://127.0.0.1:8002/hardware.html) to inspect the supplied prototype's adapted 3D enclosure, build a logical dual-microphone circuit with Raspberry Pi 4 Model B, Pico W and ESP32-S3 controller options, test bounded virtual control scripts and send a synthetic experiment through the real Python backend. Runs can be opened directly in the V2 audio laboratory. This is a **virtual design and software test**, not Raspberry Pi or electrical emulation; see [scope, usage and limits](docs/HARDWARE_WORKBENCH.md). The Hindi **त्रि** wordmark now uses a larger, crisp Devanagari font on V2.
 
@@ -37,13 +37,13 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 | Destination | URL | Purpose |
 |---|---|---|
-| Main website (improved Version 1) | **https://trishul-vani-frontend.onrender.com/** | Cinematic trident introduction, signal story, connected dashboard and studio; static CDN, no Render web-service wake-up |
-| Version 2 / Original Edition | **https://trishul-vani-frontend.onrender.com/design-v2/** | Previous mint introduction and original connected dashboard |
+| Main website (improved Version 1) | **https://trishul-vani-frontend.onrender.com/** *(target; activate Render Blueprint)* | Cinematic trident introduction, signal story, connected dashboard and studio; static CDN, no Render web-service wake-up |
+| Version 2 / Original Edition | **https://trishul-vani-frontend.onrender.com/design-v2/** *(target; activate Render Blueprint)* | Previous mint introduction and original connected dashboard |
 | Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
 | Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
 
-The main address serves the cinematic frontend from Render Static Sites' global CDN, so the intro and interface do not wait for the sleeping Python web service. It sends only `/api/...` processing requests to the separate Render API. A random browser-local capability isolates each visitor without third-party cookies. The Original Edition remains available at its separate path. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+The main address serves the cinematic frontend from Render Static Sites' global CDN, so the intro and interface do not wait for the sleeping Python web service. It sends only `/api/...` processing requests to the separate Render API, beginning after the intro's first paint. A random browser-local capability isolates each visitor without third-party cookies. The Original Edition remains available at its separate path. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ### First-visit guidance
 
@@ -65,7 +65,7 @@ The public website and backend are separate Render services: the static site pub
 - Render publishes the `web/` static frontend to its CDN and automatically builds this repository's `main` Docker image for the Python API. Feature-branch CI is checked before merging; main CI runs alongside deployment and does not gate it. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
 
 > [!NOTE]
-> Render's free processor can take about a minute to wake after inactivity, but it no longer blocks the website or its intro. The frontend starts waking it immediately. Hosted workspaces use an unguessable browser-local capability; storage remains temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
+> Render's free processor can take about a minute to wake after inactivity, but it no longer blocks the website or its intro. The static intro paints first; API metadata and saved experiments load in the background shortly afterward. Hosted workspaces use an unguessable browser-local capability; storage remains temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
 
 ## What is working now
 

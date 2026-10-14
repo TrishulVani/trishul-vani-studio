@@ -71,7 +71,7 @@
     $('mkv-download').href = audioUrl(state.track);
     $('mkv-download').download = `trishul-${report.id}-${state.track}.wav`;
     $('mkv-download').setAttribute('aria-disabled', 'false');
-    $('mkv-full-lab').href = `/index.html?design=2&run=${encodeURIComponent(report.id)}&track=${state.track}#audio-lab`;
+    $('mkv-full-lab').href = `/lab.html?design=2&run=${encodeURIComponent(report.id)}&track=${state.track}#audio-lab`;
   }
   function selectTrack(track) {
     if (!state.report || !tracks.includes(track) || !state.report.metrics?.[track]) return;
