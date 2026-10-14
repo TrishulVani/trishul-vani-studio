@@ -31,18 +31,22 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
-  await expect(page.locator('#arrival')).toHaveCount(0, { timeout: 10000 });
-  await expect(page.getByRole('heading', { name: /When noise rises/i })).toBeVisible();
-  await expect(page.locator('#story')).toBeVisible();
-  await expect(page.locator('img[src*="microphone-v2"]')).toHaveCount(0);
+  await expect(page).toHaveURL(/lab\.html\?design=2$/, { timeout: 5000 });
+  await expect(page.locator('#workspace-dashboard')).toBeVisible();
+  await expect(page.locator('.workspace-dashboard-metric')).toHaveCount(4);
+  await expect(page.locator('.workspace-dashboard-links>a')).toHaveCount(4);
+  await expect(page.locator('.workspace-signal-plot')).toBeVisible();
+  await expect(page.locator('.workspace-activity-panel')).toBeVisible();
+  await expect(page.locator('body')).toHaveClass(/arrived-through-portal/);
 });
 
-test('intro can be skipped in place and routes visitors to the connected lab', async ({ page }) => {
+test('intro skip goes directly to the overview dashboard', async ({ page }) => {
   await page.goto('/experience.html');
   await page.getByRole('button', { name: /Enter site/i }).click();
-  await expect(page.locator('#arrival')).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: /When noise rises/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Enter त्रिSHUL VANI' }).first()).toHaveAttribute('href', '/lab.html?design=2');
+  await expect(page).toHaveURL(/lab\.html\?design=2$/, { timeout: 3000 });
+  await expect(page.locator('#workspace-dashboard')).toBeVisible();
+  await expect(page.locator('.workspace-dashboard-metric')).toHaveCount(4);
+  await expect(page.locator('.workspace-dashboard-links>a')).toHaveCount(4);
 });
 
 test('the supplied gold mark appears throughout V2 without replacing V1 branding', async ({ page }) => {
@@ -62,8 +66,10 @@ test('site-wide atmosphere changes with scroll and reverses without affecting V1
   await expect(page.locator('.tv-atmosphere > span')).toHaveCount(5);
   await expect(page.locator('body')).toHaveAttribute('data-tv-tone', 'navy');
   const firstNavy = await page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-navy-opacity')));
-  await /lab.html?design=2
+  await page.locator('.nav-item[href="#audio-lab"]').click();
+  await page.locator('#audio-lab').evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
   await expect.poll(() => page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-forest-opacity')))).toBeGreaterThan(.3);
+  await page.locator('.nav-item[href="#overview"]').click();
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await expect.poll(() => page.evaluate(() => Number(document.body.style.getPropertyValue('--tv-navy-opacity')))).toBeGreaterThanOrEqual(firstNavy - .01);
   await page.goto('/studio.html?design=2');
@@ -187,9 +193,13 @@ test('laboratory runs a measured experiment and exports evidence', async ({ page
   await page.getByRole('button', { name: 'Run signal analysis' }).click();
   const wav = page.getByRole('link', { name: 'Download selected WAV' });
   await expect(wav).toHaveAttribute('href', /\/api\/experiments\/[a-f0-9]{12}\/audio\/raw$/, { timeout: 45000 });
+  const wavHref = await wav.getAttribute('href');
+  if (await page.locator('.nav-item[href="#analytics"]').isVisible()) {
+    await page.locator('.nav-item[href="#analytics"]').click();
+  }
   const csv = page.getByRole('link', { name: 'EXPORT CSV' });
   await expect(csv).toHaveAttribute('href', /\/api\/experiments\/[a-f0-9]{12}\/export\.csv$/);
-  expect((await request.get(await wav.getAttribute('href'))).ok()).toBeTruthy();
+  expect((await request.get(wavHref)).ok()).toBeTruthy();
   const exported = await request.get(await csv.getAttribute('href'));
   expect(exported.ok()).toBeTruthy();
   expect(await exported.text()).toContain('snr_db');

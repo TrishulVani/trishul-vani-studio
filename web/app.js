@@ -110,6 +110,7 @@ async function uploadDual(){
 async function refreshHistory(){
   try{
     const runs=await api('/api/experiments');$('#experiment-count').textContent=String(runs.length).padStart(2,'0');
+    const dashboardCount=$('#dashboard-experiment-count');if(dashboardCount)dashboardCount.textContent=String(runs.length).padStart(2,'0');
     const el=$('#history-content');
     if(!runs.length){el.innerHTML='<p class="empty-message">No recorded experiments. Each finished experiment is saved locally with its parameters and generated WAV outputs.</p>';return;}
     el.innerHTML=runs.slice(0,14).map(r=>`<button class="history-row" data-id="${escapeHtml(r.id)}"><span><strong>${escapeHtml(r.noise)}</strong><small>${escapeHtml(shortTime(r.created_at))} · ${escapeHtml(r.source)}</small></span><span class="id">${escapeHtml(r.id)}</span><span><strong>${num(r.snr_db)} dB</strong><small>Input SNR</small></span><span><strong>${num(r.metrics?.hybrid?.snr_db)} dB</strong><small>Hybrid output</small></span><span><svg><use href="#i-arrow"/></svg></span></button>`).join('');
@@ -121,6 +122,7 @@ async function loadMeta(){
   if(health.status!=='ok')throw new Error('Health check failed');
   state.meta=meta;
   $('#processor-status').textContent='PYTHON PROCESSOR CONNECTED';
+  const dashboardProcessor=$('.dashboard-processor-state');if(dashboardProcessor)dashboardProcessor.textContent='Connected';
   $('#retry-connection').hidden=true;
   $('#hero-ai-state').textContent=meta.capabilities.rnnoise?'RNNOISE ENABLED':'SPECTRAL FALLBACK / NO AI MODEL';
   const capabilities=[['Adaptive NLMS','nlms'],['Spectral DSP baseline','spectral'],['Hybrid reference controller','hybrid'],['Real RNNoise neural enhancement','rnnoise'],['STOI intelligibility scoring','stoi'],['PESQ scoring (optional)','pesq']];
@@ -150,10 +152,12 @@ window.addEventListener('hashchange',setMobileViewFromHash);window.addEventListe
   drawWaveform();setTrack('raw');
   const checkConnection=async()=>{
     $('#processor-status').textContent='CONNECTING TO PROCESSOR';
+    const dashboardProcessor=$('.dashboard-processor-state');if(dashboardProcessor)dashboardProcessor.textContent='Checking';
     const results=await Promise.allSettled([loadMeta(),refreshHistory(),loadDatasets()]);
     const err=results.find(x=>x.status==='rejected');
     if(results[0].status==='rejected'){
       $('#processor-status').textContent='PROCESSOR UNAVAILABLE';
+      const dashboardProcessor=$('.dashboard-processor-state');if(dashboardProcessor)dashboardProcessor.textContent='Offline';
       $('#retry-connection').hidden=false;
     }
     if(err)notify('Service not fully available: '+err.reason.message,true);
