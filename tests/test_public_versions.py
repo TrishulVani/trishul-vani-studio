@@ -1,4 +1,4 @@
-"""Guard the Render Static Site publication structure and entry routes."""
+"""Guard the unified studio site routes and intro-to-overview entry."""
 
 from pathlib import Path
 
@@ -9,11 +9,22 @@ WEB = Path(__file__).resolve().parents[1] / "web"
 def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     page = (WEB / "index.html").read_text(encoding="utf-8-sig")
     assert 'id="arrival"' in page
-    assert 'src="/arrival-v2.js?v=6"' in page
+    assert 'src="/arrival-v2.js?v=7"' in page
     assert 'id="landing-frame"' in page
-    assert 'src="/lab.html?design=2&amp;release=ec436603#overview"' in page
+    assert 'src="/lab.html?design=2#overview"' in page
     assert ".landing-frame.is-entering" in page
     assert "new MutationObserver(reveal)" in page
+    arrival = (WEB / "arrival-v2.js").read_text(encoding="utf-8-sig")
+    assert "location.replace('/lab.html?design=2')" not in arrival
+
+
+def test_studio_host_is_the_single_site_and_api_origin():
+    client = (WEB / "api-client.js").read_text(encoding="utf-8-sig")
+    readme = (WEB.parent / "README.md").read_text(encoding="utf-8-sig")
+    render = (WEB.parent / "render.yaml").read_text(encoding="utf-8-sig")
+    assert "trishul-vani-studio.onrender.com" in client
+    assert "https://trishul-vani-studio.onrender.com/" in readme
+    assert "name: trishul-vani-frontend" not in render
 
 
 def test_working_lab_and_studio_are_published_as_static_routes():
@@ -21,7 +32,7 @@ def test_working_lab_and_studio_are_published_as_static_routes():
     studio = (WEB / "studio.html").read_text(encoding="utf-8-sig")
     assert 'id="audio-lab"' in lab
     assert 'id="analytics"' in lab
-    assert 'src="/app.js?v=20261013a"' in lab
+    assert 'src="/app.js?v=20261014a"' in lab
     assert 'src="studio.js"' in studio
 
 
@@ -40,17 +51,17 @@ def test_overview_dashboard_links_to_existing_workspaces_and_keeps_the_story():
     assert ".workspace-dashboard-metrics" in (WEB / "design-v2.css").read_text(encoding="utf-8-sig")
 
 
-def test_original_edition_stays_on_the_static_host():
+def test_original_edition_stays_on_the_studio_host():
     page = (WEB / "design-v2" / "index.html").read_text(encoding="utf-8-sig")
     assert 'src="/lab.html?design=2"' in page
     assert "trishul-vani-studio.onrender.com/index.html" not in page
 
 
-def test_github_pages_entry_redirects_to_render_without_iframe():
+def test_github_pages_entry_redirects_to_studio_without_iframe():
     pages = Path(__file__).resolve().parents[1] / "deploy" / "pages"
     main = (pages / "index.html").read_text(encoding="utf-8-sig")
     original = (pages / "design-v2" / "index.html").read_text(encoding="utf-8-sig")
-    assert "location.replace('https://trishul-vani-frontend.onrender.com/" in main
-    assert "location.replace('https://trishul-vani-frontend.onrender.com/design-v2/" in original
+    assert "location.replace('https://trishul-vani-studio.onrender.com/" in main
+    assert "location.replace('https://trishul-vani-studio.onrender.com/design-v2/" in original
     assert "<iframe" not in main.lower()
     assert "github.io" not in (pages / "README.md").read_text(encoding="utf-8-sig")

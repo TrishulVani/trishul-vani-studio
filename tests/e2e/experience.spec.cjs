@@ -14,8 +14,8 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('trident idles, scrolls forward, rewinds, and enters the working landing', async ({ page }) => {
-  await page.goto('/experience.html');
+test('root trident idles, scrolls forward, rewinds, and reveals the preloaded overview in place', async ({ page }) => {
+  await page.goto('/');
   await expect(page.locator('#arrival')).toBeVisible();
   await expect(page.locator('.arrival-figure')).toHaveCount(0);
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
@@ -24,29 +24,48 @@ test('trident idles, scrolls forward, rewinds, and enters the working landing', 
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();
   const spin = page.locator('.arrival-weapon-body');
   expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('arrival-idle-spin');
-  await expect(page).toHaveURL(/experience\.html$/);
+  await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
   await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '1');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
-  await expect(page).toHaveURL(/lab\.html\?design=2$/, { timeout: 5000 });
-  await expect(page.locator('#workspace-dashboard')).toBeVisible();
-  await expect(page.locator('.workspace-dashboard-metric')).toHaveCount(4);
-  await expect(page.locator('.workspace-dashboard-links>a')).toHaveCount(4);
-  await expect(page.locator('.workspace-signal-plot')).toBeVisible();
-  await expect(page.locator('.workspace-activity-panel')).toBeVisible();
-  await expect(page.locator('body')).toHaveClass(/arrived-through-portal/);
+  await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 5000 });
+  const app = page.frameLocator('#landing-frame');
+  await expect(app.locator('#workspace-dashboard')).toBeVisible();
+  await expect(app.locator('.workspace-dashboard-metric')).toHaveCount(4);
+  await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
+  await expect(app.locator('.workspace-signal-plot')).toBeVisible();
+  await expect(app.locator('.workspace-activity-panel')).toBeVisible();
+  if (page.viewportSize().width > 700) {
+    const navBottom = await app.locator('.sidebar').evaluate(el => el.getBoundingClientRect().bottom);
+    const headingTop = await app.locator('#workspace-dashboard-title').evaluate(el => el.getBoundingClientRect().top);
+    expect(headingTop).toBeGreaterThan(navBottom);
+  }
+  await expect(page.locator('#arrival')).toHaveCount(0);
 });
 
 test('intro skip goes directly to the overview dashboard', async ({ page }) => {
-  await page.goto('/experience.html');
+  await page.goto('/');
   await page.getByRole('button', { name: /Enter site/i }).click();
-  await expect(page).toHaveURL(/lab\.html\?design=2$/, { timeout: 3000 });
-  await expect(page.locator('#workspace-dashboard')).toBeVisible();
-  await expect(page.locator('.workspace-dashboard-metric')).toHaveCount(4);
-  await expect(page.locator('.workspace-dashboard-links>a')).toHaveCount(4);
+  await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 3000 });
+  const app = page.frameLocator('#landing-frame');
+  await expect(app.locator('#workspace-dashboard')).toBeVisible();
+  await expect(app.locator('.workspace-dashboard-metric')).toHaveCount(4);
+  await expect(app.locator('.workspace-dashboard-links>a')).toHaveCount(4);
+});
+
+test('studio back navigation returns to the overview inside the same site', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Enter site/i }).click();
+  const app = page.frameLocator('#landing-frame');
+  await expect(app.locator('#workspace-dashboard')).toBeVisible();
+  await app.getByRole('link', { name: /Spectral studio/ }).last().click();
+  await expect(app.locator('.rail nav a.active')).toContainText('Spectral studio');
+  await page.evaluate(() => history.back());
+  await expect(app.locator('#workspace-dashboard')).toBeVisible();
+  await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
 });
 
 test('the supplied gold mark appears throughout V2 without replacing V1 branding', async ({ page }) => {

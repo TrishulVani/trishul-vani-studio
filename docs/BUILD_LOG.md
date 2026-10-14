@@ -72,6 +72,13 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Carried its charcoal, steel and copper colors through the V2 intro, dashboard and spectral editor. The flyover is labelled a visual study, not an Indian service aircraft or validated field recording. Version 1 and DSP algorithms were not changed.
 - Final local Playwright: 33/33 desktop, tablet and mobile checks passed, including forward/reverse flyover, intro entry, connected processing, export and spectral editing. JavaScript syntax and diff checks passed. Remote CI is verified after the branch push.
 
+# 2026-10-14 — single-origin studio, intro handoff, and navigation repair
+
+- Consolidated Render publication to the existing `trishul-vani-studio.onrender.com` web service: FastAPI serves both `web/` and `/api/*`, and legacy GitHub Pages paths redirect to the studio host.
+- Kept the trident intro at `/` and preloaded Mission Control in the background. Completing or skipping the intro now reveals the overview in place, avoiding a second page load and preserving the studio address.
+- Fixed the desktop dashboard header overlap and mobile browser-back restoration; updated release docs and regenerated the indexed operator guide with the canonical address.
+- Verification: `tests/test_public_versions.py` passed **6/6** and JavaScript syntax checks passed. Local browser E2E and the broader API subprocess suite could not complete in this Windows sandbox because local server/subprocess operations time out; no live deployment is claimed until Render confirms the deploy.
+
 ## 2026-10-12 — trident intro and continuous flight story
 
 - The supplied `preview.html` provided the trident asset and motion reference. The V2 intro now idles in axial rotation, then responds to wheel/touch/keyboard input with a reversible turn, rush and impact; completion or Skip/Escape leads to the same connected landing.

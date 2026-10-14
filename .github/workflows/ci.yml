@@ -79,9 +79,9 @@ jobs:
           grep -q 'arrival-v2.js' web/index.html
           grep -q 'design-v2.css' web/lab.html
           grep -q 'design-v2.css' web/studio.html
-          grep -q 'trishul-vani-frontend.onrender.com' deploy/pages/index.html
+          grep -q 'trishul-vani-studio.onrender.com' deploy/pages/index.html
           grep -q 'location.replace' deploy/pages/index.html
-          grep -q 'trishul-vani-frontend.onrender.com/design-v2/' deploy/pages/design-v2/index.html
+          grep -q 'trishul-vani-studio.onrender.com/design-v2/' deploy/pages/design-v2/index.html
           grep -q 'location.replace' deploy/pages/design-v2/index.html
       - name: Verify artifacts are excluded
         run: |

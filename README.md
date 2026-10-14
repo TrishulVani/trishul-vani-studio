@@ -8,7 +8,7 @@
 
 **A connected spectral studio and speech-enhancement research laboratory with real processing, reproducible records, auditable metrics, and automated tests.**
 
-[![Render Static Site target](https://img.shields.io/badge/WEBSITE_HOST-Render_CDN-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishul-vani-frontend.onrender.com/)
+[![Website and API](https://img.shields.io/badge/WEBSITE-Render-b8f6b2?style=for-the-badge&labelColor=080e10)](https://trishul-vani-studio.onrender.com/)
 [![Python CI](https://img.shields.io/github/actions/workflow/status/TrishulVani/trishul-vani-studio/ci.yml?style=for-the-badge&label=TESTS)](https://github.com/TrishulVani/trishul-vani-studio/actions)
 [![Source](https://img.shields.io/badge/SOURCE-PUBLIC-82b98b?style=for-the-badge&labelColor=080e10)](https://github.com/TrishulVani/trishul-vani-studio)
 
@@ -19,7 +19,7 @@
 
 ### Release editions
 
-The **main website** is [trishul-vani-frontend.onrender.com](https://trishul-vani-frontend.onrender.com/), backed by the Render Static Site in `render.yaml`. The dark trident introduction leads into the audio Mission Control dashboard and connected workspaces. The previous mint introduction remains at [Version 2 / Original Edition](https://trishul-vani-frontend.onrender.com/design-v2/). Both versions use the same Python audio processor. The former GitHub Pages entry points redirect to Render after this release is merged.
+The single public website is [trishul-vani-studio.onrender.com](https://trishul-vani-studio.onrender.com/). It serves the trident introduction, Mission Control, Spectral Studio, audio laboratory, virtual hardware workspace, and the Python API from one origin. The same address keeps navigation and processing connected without a second frontend host. The previous mint introduction remains at [Version 2 / Original Edition](https://trishul-vani-studio.onrender.com/design-v2/).
 
 **New hardware workbench:** [Open the local Design 02 hardware lab](http://127.0.0.1:8002/hardware.html) to inspect the supplied prototype's adapted 3D enclosure, build a logical dual-microphone circuit with Raspberry Pi 4 Model B, Pico W and ESP32-S3 controller options, test bounded virtual control scripts and send a synthetic experiment through the real Python backend. Runs can be opened directly in the V2 audio laboratory. This is a **virtual design and software test**, not Raspberry Pi or electrical emulation; see [scope, usage and limits](docs/HARDWARE_WORKBENCH.md). The Hindi **त्रि** wordmark now uses a larger, crisp Devanagari font on V2.
 
@@ -37,39 +37,38 @@ Implemented: real STFT visualization, non-destructive attenuation/isolation, imm
 
 The Mission Control dashboard adapts the task-first layout, status cards, and responsive navigation from the [Instagram dashboard reference supplied for this project](https://www.instagram.com/p/DeRlstZTj3Q/) to the existing TRISHUL VANI theme.
 
-Operator documentation: [indexed PDF guide](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Operator_Guide.pdf), [captioned product walkthrough video](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Walkthrough.webm), and [editable Markdown source](docs/TRISHUL_VANI_OPERATOR_GUIDE.md).
+Operator documentation: [indexed PDF guide](https://trishul-vani-studio.onrender.com/guides/TRISHUL_VANI_Operator_Guide.pdf), [captioned product walkthrough video](https://trishul-vani-studio.onrender.com/guides/TRISHUL_VANI_Walkthrough.webm), and [editable Markdown source](docs/TRISHUL_VANI_OPERATOR_GUIDE.md).
 
 | Destination | URL | Purpose |
 |---|---|---|
-| Main website | **https://trishul-vani-frontend.onrender.com/** | Trident introduction, responsive Mission Control dashboard, cinematic story, and connected studio |
-| Version 2 / Original Edition | **https://trishul-vani-frontend.onrender.com/design-v2/** | Previous mint introduction and original connected dashboard |
-| Direct Python application | https://trishul-vani-studio.onrender.com/ | FastAPI dashboard, experiment lab and spectral editor |
-| Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Direct editor access if a browser blocks embedded cookies |
+| Main website and connected backend | **https://trishul-vani-studio.onrender.com/** | Intro, Mission Control, workspaces, and same-origin Python processing API |
+| Version 2 / Original Edition | **https://trishul-vani-studio.onrender.com/design-v2/** | Previous mint introduction and original connected dashboard |
+| Spectral workspace | https://trishul-vani-studio.onrender.com/studio.html | Spectral editor |
 | API documentation | https://trishul-vani-studio.onrender.com/docs | Interactive endpoint reference |
 
-The main address serves the cinematic frontend from Render Static Sites' global CDN, so the intro and interface do not wait for the sleeping Python web service. It sends only `/api/...` processing requests to the separate Render API, beginning after the intro's first paint. A random browser-local capability isolates each visitor without third-party cookies. The Original Edition remains available at its separate path. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+The studio address serves both the web interface and FastAPI application. The intro and overview load from the same service as `/api/...` processing requests, and a browser-local capability isolates each visitor's workspace. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ### First-visit guidance
 
-Mission Control and Spectral Studio include a **? Help & tour** control in both designs. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The [1:19 captioned walkthrough](https://trishul-vani-frontend.onrender.com/guides/TRISHUL_VANI_Walkthrough.webm) demonstrates the live audio processor and bounded virtual-hardware workflow; the [recorded timeline](docs/TUTORIAL_STORYBOARD.md) lists each segment. The Instagram dashboard reference is linked above and in the indexed operator guide. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
+Mission Control and Spectral Studio include a **? Help & tour** control in both designs. The five-step guided tour highlights real controls across both screens, can be skipped or replayed, and stores only the tour choice in browser local storage. The [1:19 captioned walkthrough](https://trishul-vani-studio.onrender.com/guides/TRISHUL_VANI_Walkthrough.webm) demonstrates the live audio processor and bounded virtual-hardware workflow; the [recorded timeline](docs/TUTORIAL_STORYBOARD.md) lists each segment. The Instagram dashboard reference is linked above and in the indexed operator guide. The processor badge checks `/api/health` and `/api/meta`, reports disconnection honestly, and offers Retry.
 
 ### Visual experience and flow
 
-1. The public address opens on an original, sculpted trident and animated signal field. It enters the connected dashboard automatically after 8.5 seconds; the Enter button and Escape key can advance earlier.
+1. The public address opens on the original sculpted-trident introduction. Scroll or select Enter Site to complete the throw and reveal the preloaded Mission Control overview without changing the address.
 2. The dashboard is the actual working application. Start a synthetic experiment, import your own WAV/FLAC recordings, or launch the spectral editor. The browser stays at the public address while navigating inside the embedded workspace.
 3. The cinematic experience opens on the main address. Its trident intro waits for scroll, touch or keyboard input while rotating gently at rest; the completed strike takes the visitor into the connected landing. That landing combines a reversible aircraft flyover, a framed acoustic chamber and the operator-to-corridor-to-glass-to-cockpit-to-lab journey. The palette follows the supplied V4 atmosphere brief across the intro, landing, lab and editor. Motion reduces when the visitor requests reduced motion. [Lusion](https://lusion.co/), [Spaace](https://lusion.co/projects/spaace/) and [DDD 2024](https://lusion.co/projects/ddd_2024/) informed the pacing and spatial composition; their images, code and branding are not used.
 
-The public website and backend are separate Render services: the static site publishes [`web/`](web/) to the global CDN and the existing web service runs this repository's Python processor. GitHub remains source control and CI; it does not serve the public site.
+The public website and API share `https://trishul-vani-studio.onrender.com`. Render serves the static files in [`web/`](web/) and the Python API in the same FastAPI process and origin. GitHub remains source control and CI; it does not serve the public site.
 
 ### Release and CI/CD
 
 - **Main website / improved Version 1:** the cinematic intro, landing and connected lab are at the root address.
 - **Version 2 / Original Edition:** the previous mint intro and default dashboard live at `/design-v2/`. The two editions use the same v0.2 alpha DSP and API.
 - GitHub Actions runs Python 3.11/3.12 API and DSP tests, JavaScript syntax/DSP tests, Design 02 asset checks and a Docker build on pushes and pull requests. The workflow is in [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
-- Render publishes the `web/` static frontend to its CDN and automatically builds this repository's `main` Docker image for the Python API. Feature-branch CI is checked before merging; main CI runs alongside deployment and does not gate it. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
+- Render builds one Docker web service from `main`; FastAPI serves `web/` and `/api/*` from the same studio origin. Feature-branch CI is checked before merging; main CI runs alongside deployment. See the [deployment guide](docs/DEPLOYMENT.md) for configuration and verification.
 
 > [!NOTE]
-> Render's free processor can take about a minute to wake after inactivity, but it no longer blocks the website or its intro. The static intro paints first; API metadata and saved experiments load in the background shortly afterward. Hosted workspaces use an unguessable browser-local capability; storage remains temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
+> Render's free service can take about a minute to wake after inactivity. Because the frontend and API now share one service, the first page request waits for that wake-up; once running, the intro appears before metadata and saved-experiment requests finish. Hosted workspaces use an unguessable browser-local capability; storage remains temporary and resets when the service restarts. Export WAV, CSV and JSON results you need to retain.
 
 ## What is working now
 
@@ -175,8 +174,8 @@ A valid model enables **RNNoise** as a *separate* fifth method and changes the h
 
 ```mermaid
 flowchart LR
-P[Render Static CDN<br/>intro + responsive web lab] --> A[Browser UI]
-    A -->|workspace-scoped JSON + WAV| B[Render FastAPI processor]
+P[Single Render studio origin<br/>intro + frontend + API] --> A[Browser UI]
+    A -->|same-origin workspace API + WAV| B[FastAPI processor]
     B --> C[Dataset mixer / two-mic ingest]
     C --> D[NLMS reference baseline]
     C --> E[Spectral baseline]

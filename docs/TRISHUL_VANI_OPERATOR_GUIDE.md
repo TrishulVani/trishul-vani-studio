@@ -4,14 +4,14 @@
 
 ## Official workspace
 
-- Main site: https://trishul-vani-frontend.onrender.com/
-- Mission Control and audio workspace: https://trishul-vani-frontend.onrender.com/lab.html?design=2
-- Virtual hardware: https://trishul-vani-frontend.onrender.com/hardware.html
-- Spectral Studio: https://trishul-vani-frontend.onrender.com/studio.html
+- Main site: https://trishul-vani-studio.onrender.com/
+- Mission Control and audio workspace: https://trishul-vani-studio.onrender.com/lab.html?design=2
+- Virtual hardware: https://trishul-vani-studio.onrender.com/hardware.html
+- Spectral Studio: https://trishul-vani-studio.onrender.com/studio.html
 - API reference: https://trishul-vani-studio.onrender.com/docs
 - Source and change history: https://github.com/TrishulVani/trishul-vani-studio
 
-The Render address is the public site. GitHub is source control and CI. If the backend has been idle, its first request may take longer while the service wakes. The static introduction and interface load separately from audio processing.
+The studio address serves both the public site and processing API. GitHub is source control and CI. If the backend has been idle, the first API request may take longer while the service wakes; the interface remains available.
 
 ## 1. Mission Control
 
@@ -114,10 +114,10 @@ The Render free service may sleep between uses and server-side experiment storag
 
 ## Quick links
 
-- [Main website](https://trishul-vani-frontend.onrender.com/)
-- [Mission Control](https://trishul-vani-frontend.onrender.com/lab.html?design=2)
-- [Audio Laboratory](https://trishul-vani-frontend.onrender.com/lab.html?design=2#audio-lab)
-- [Hardware Workbench](https://trishul-vani-frontend.onrender.com/hardware.html)
-- [Spectral Studio](https://trishul-vani-frontend.onrender.com/studio.html)
+- [Main website](https://trishul-vani-studio.onrender.com/)
+- [Mission Control](https://trishul-vani-studio.onrender.com/lab.html?design=2)
+- [Audio Laboratory](https://trishul-vani-studio.onrender.com/lab.html?design=2#audio-lab)
+- [Hardware Workbench](https://trishul-vani-studio.onrender.com/hardware.html)
+- [Spectral Studio](https://trishul-vani-studio.onrender.com/studio.html)
 - [API documentation](https://trishul-vani-studio.onrender.com/docs)
 - [GitHub project](https://github.com/TrishulVani/trishul-vani-studio)

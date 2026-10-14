@@ -1,8 +1,8 @@
 # TRISHUL VANI public website
 
-Main website (cinematic intro and connected workspace): https://trishul-vani-frontend.onrender.com/
+Main website (cinematic intro, overview, and connected workspace): https://trishul-vani-studio.onrender.com/
 
-Original Edition: https://trishul-vani-frontend.onrender.com/design-v2/
+Original Edition: https://trishul-vani-studio.onrender.com/design-v2/
 
 The website opens with the trident introduction and flows into Mission Control, a responsive dashboard for audio experiments, spectral inspection, hardware simulation, and results. The former GitHub Pages addresses redirect to these Render addresses; GitHub hosts the source and CI only.
 
