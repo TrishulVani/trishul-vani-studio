@@ -25,5 +25,6 @@ test('mobile lab opens on Overview and bottom navigation switches working sectio
 
   await page.goBack();
   await expect(page.locator('body')).toHaveAttribute('data-mobile-view', 'audio');
+  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
   expect(errors).toEqual([]);
 });

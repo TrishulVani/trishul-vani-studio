@@ -8,7 +8,7 @@
   <title>त्रिSHUL VANI — Signal Intelligence</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="/assets/preview-trident-v2.webp" fetchpriority="high">
-  <link rel="stylesheet" href="/relaunch-v2.css?v=5">
+  <link rel="stylesheet" href="/relaunch-v2.css?v=6">
   <link rel="stylesheet" href="/intro-v2.css?v=5">
   <link rel="stylesheet" href="/brand-v2.css?v=3">
   <link rel="stylesheet" href="/atmosphere-v4.css?v=1">
@@ -22,7 +22,7 @@
   </style>
 </head>
 <body class="experience-v2">
-  <iframe class="landing-frame" id="landing-frame" title="त्रिSHUL VANI audio and hardware workspace" src="/lab.html?design=2&amp;release=ec436603#overview" allow="autoplay; fullscreen" referrerpolicy="same-origin" aria-hidden="true" tabindex="-1"></iframe>
+  <iframe class="landing-frame" id="landing-frame" title="त्रिSHUL VANI audio and hardware workspace" src="/lab.html?design=2#overview" allow="autoplay; fullscreen" referrerpolicy="same-origin" aria-hidden="true" tabindex="-1"></iframe>
   <div class="arrival" id="arrival" role="dialog" aria-label="त्रिSHUL VANI introduction" aria-modal="true">
     <canvas id="arrival-field" aria-hidden="true"></canvas>
     <div class="arrival-top"><span class="arrival-brand"><img class="v2-brand-glyph" src="/assets/brand-glyph-v2.png" alt=""><b class="deva-wordmark"><span lang="hi">त्रि</span>SHUL VANI</b><small>THE SOUND OF FORCE</small></span><span class="arrival-live">● SIGNAL ONLINE<br><small>EXPERIENCE 01 / 04</small></span><button type="button" id="arrival-skip">ENTER SITE</button></div>
@@ -39,17 +39,24 @@
       const intro=document.getElementById('arrival');
       const landing=document.getElementById('landing-frame');
       if(!intro||!landing)return;
+      let frameReady=landing.contentDocument?.readyState==='complete';
       const reveal=()=>{
         if(!intro.classList.contains('is-exiting'))return;
+        if(!frameReady)return;
         landing.removeAttribute('aria-hidden');
+        landing.removeAttribute('tabindex');
         landing.classList.add('is-entering');
         observer.disconnect();
+        const heading=landing.contentDocument?.getElementById('workspace-dashboard-title');
+        if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}
+        setTimeout(()=>intro.remove(),420);
       };
       const observer=new MutationObserver(reveal);
       observer.observe(intro,{attributes:true,attributeFilter:['class']});
+      landing.addEventListener('load',()=>{frameReady=true;reveal()},{once:true});
     })();
   </script>
   <script defer src="/brand-v2.js?v=1"></script>
-  <script defer src="/arrival-v2.js?v=6"></script>
+  <script defer src="/arrival-v2.js?v=7"></script>
 </body>
 </html>

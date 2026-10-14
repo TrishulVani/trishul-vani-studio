@@ -118,3 +118,9 @@ body.design-v2 .tv-first{display:none}
 @keyframes arrival-figure-reveal{0%{transform:translate3d(0,-3vh,0) scale(1.18);opacity:1}65%{transform:translate3d(0,1vh,130px) scale(2.1);opacity:.94}100%{transform:translate3d(0,10vh,500px) scale(7);filter:blur(18px);opacity:0}}
 @media(max-width:650px){.arrival-figure{height:62vh;max-width:92vw}}
 @media(prefers-reduced-motion:reduce){.arrival-figure{animation:none!important;transition:none!important}}
+
+/* Keep the desktop header in document flow so it cannot cover Mission Control. */
+@media(min-width:701px){
+  body.design-v2 .topbar{position:relative!important;inset:auto!important;margin:98px 0 0!important;height:70px;z-index:1;background:transparent!important}
+  body.design-v2 .workspace-dashboard{padding-top:18px}
+}

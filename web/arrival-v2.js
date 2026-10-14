@@ -24,7 +24,6 @@
     clearTimeout(finishTimer);
     try { sessionStorage.setItem('tv-v2-arrival', '1'); } catch (_) { /* Navigation still works. */ }
     arrival.classList.add('is-exiting');
-    setTimeout(() => location.replace('/lab.html?design=2'), reduce ? 0 : 420);
   }
   function advance(amount) {
     if (closed) return;

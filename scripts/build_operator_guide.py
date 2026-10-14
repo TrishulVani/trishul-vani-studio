@@ -115,7 +115,7 @@ def parse_source(styles):
         Paragraph("College research and engineering review edition  /  14 October 2026", styles["CoverMeta"]),
         Spacer(1, 1.3 * inch),
         Paragraph("PUBLIC WORKSPACE", styles["CoverMeta"]),
-        Paragraph('<link href="https://trishul-vani-frontend.onrender.com/" color="#e4bd8a">trishul-vani-frontend.onrender.com</link>', styles["CoverUrl"]),
+        Paragraph('<link href="https://trishul-vani-studio.onrender.com/" color="#e4bd8a">trishul-vani-studio.onrender.com</link>', styles["CoverUrl"]),
         Paragraph("Indexed PDF with clickable contents and section bookmarks", styles["CoverMeta"]),
         PageBreak(),
         Paragraph("Contents", styles["GuideH1"]),
