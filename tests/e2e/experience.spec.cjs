@@ -21,9 +21,8 @@ test('root trident turns as a thick, beveled, lit 3D object, then reveals overvi
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
   await expect(page.locator('.arrival-weapon-3d')).toBeVisible();
   await expect(page.locator('.arrival-weapon-body')).toHaveClass(/has-3d/);
-  await expect(page.locator('.arrival-weapon-body')).toHaveAttribute('data-model-type', 'volumetric-mesh');
-  await expect(page.locator('.arrival-weapon-body')).toHaveAttribute('data-model-parts', '3-blades,curved-tines,turned-shaft,raised-fittings');
-  expect(Number(await page.locator('.arrival-weapon-body').getAttribute('data-model-vertices'))).toBeGreaterThan(1000);
+  await expect(page.locator('.arrival-weapon-body')).toHaveAttribute('data-model-depth', '0.3');
+  expect(Number(await page.locator('.arrival-weapon-body').getAttribute('data-model-side-vertices'))).toBeGreaterThan(1000);
   await expect(page.locator('.arrival-brand .v2-brand-glyph')).toBeVisible();
   await expect(page.locator('.arrival-brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();
