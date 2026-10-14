@@ -98,7 +98,10 @@
   function draw(now){
     resize();gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(program);
     const pose=window.tvArrivalPose||{};const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const yaw=reduce?0:root.classList.contains('is-moving')&&Number.isFinite(pose.y)?pose.y:now*.0007;
+    // Keep the textured face readable during idle; a full spin turns the
+    // image-backed model edge-on and makes the trident look like a sheet.
+    const idleYaw=Math.sin(now*.00035)*.14;
+    const yaw=reduce?0:root.classList.contains('is-moving')&&Number.isFinite(pose.y)?pose.y:idleYaw;
     gl.uniform3f(rotationLoc,Number(pose.x)||0,yaw,Number(pose.z)||0);gl.uniform1f(aspectLoc,canvas.width/Math.max(1,canvas.height));gl.uniform1i(imageLoc,0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
     if(sideCount){gl.uniform1f(texturedLoc,0);for(const item of sideBuffers){gl.bindBuffer(gl.ARRAY_BUFFER,item.buffer);gl.enableVertexAttribArray(item.loc);gl.vertexAttribPointer(item.loc,item.size,gl.FLOAT,false,0,0);}gl.drawArrays(gl.TRIANGLES,0,sideCount);}
     gl.uniform1f(texturedLoc,1);

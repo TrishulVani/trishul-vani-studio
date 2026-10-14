@@ -92,10 +92,12 @@
     const scale = mix(1, .9, turn) * mix(1, 1.25, flight) * mix(1, 7.2, rush * rush);
     const x = innerWidth * (.12 * flight - .08 * rush), y = innerHeight * (-.035 * turn + .05 * rush);
     anchor.style.transform = reduce ? 'translate3d(-50%,-50%,0)' : `translate3d(calc(-50% + ${x.toFixed(2)}px),calc(-50% + ${y.toFixed(2)}px),${(rush * 180).toFixed(1)}px) scale(${scale.toFixed(4)})`;
-    const idleSpin = performance.now() * .0007;
+    // Animate a restrained turn while idle, then turn into the throw without
+    // letting the image-backed trident disappear edge-on.
+    const throwTurn = .22 * turn + .48 * flight + .72 * rush;
     window.tvArrivalPose = {
       x: reduce ? 0 : -.17 * turn,
-      y: reduce ? 0 : idleSpin + .42 * turn + 1.15 * flight + 1.7 * rush,
+      y: reduce ? 0 : throwTurn,
       z: reduce ? 0 : .08 * turn
     };
     arrival.style.setProperty('--arrival-progress', p.toFixed(4));
