@@ -30,18 +30,18 @@ test('root trident visibly rotates, then reveals overview and lab', async ({ pag
   const rotationAfter = await spin.evaluate(el => getComputedStyle(el).transform);
   expect(rotationAfter).not.toBe(rotationBefore);
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
-  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
-  await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
-  await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '1');
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 850, deltaMode: 0 });
+  await expect(page.locator('#arrival-stage')).toContainText('THE THROW');
+  await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '2');
   await expect.poll(() => spin.evaluate(el => {
     const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
-    return (Math.atan2(matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
-  })).toBeGreaterThan(65);
+    return (Math.atan2(-matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
+  })).toBeGreaterThan(75);
   expect(await spin.evaluate(el => {
     const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
-    return (Math.atan2(matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
-  })).toBeLessThan(100);
-  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
+    return (Math.atan2(-matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
+  })).toBeLessThan(105);
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -900, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 5000 });
