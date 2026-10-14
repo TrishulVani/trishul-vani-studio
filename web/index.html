@@ -40,9 +40,27 @@
       const landing=document.getElementById('landing-frame');
       if(!intro||!landing)return;
       let frameReady=landing.contentDocument?.readyState==='complete';
+      let entered=false;
+      let lastFrameUrl='';
+      let historyWindow=null;
+      const frameUrl=()=>{try{const u=new URL(landing.contentWindow.location.href);return u.pathname+u.search+u.hash}catch(_){return ''}};
+      const recordFrameNavigation=()=>{
+        const next=frameUrl();
+        if(!next)return;
+        if(!entered){lastFrameUrl=next;history.replaceState({tvFrame:next},'',location.href);return}
+        if(next===lastFrameUrl)return;
+        lastFrameUrl=next;
+        history.pushState({tvFrame:next},'',location.href);
+      };
+      const bindFrameHistory=()=>{
+        recordFrameNavigation();
+        if(landing.contentWindow!==historyWindow){historyWindow=landing.contentWindow;historyWindow.addEventListener('hashchange',recordFrameNavigation)}
+      };
       const reveal=()=>{
         if(!intro.classList.contains('is-exiting'))return;
         if(!frameReady)return;
+        entered=true;
+        bindFrameHistory();
         landing.removeAttribute('aria-hidden');
         landing.removeAttribute('tabindex');
         landing.classList.add('is-entering');
@@ -53,7 +71,17 @@
       };
       const observer=new MutationObserver(reveal);
       observer.observe(intro,{attributes:true,attributeFilter:['class']});
-      landing.addEventListener('load',()=>{frameReady=true;reveal()},{once:true});
+      landing.addEventListener('load',()=>{
+        frameReady=true;
+        historyWindow=null;
+        bindFrameHistory();
+        reveal();
+      });
+      window.addEventListener('popstate',event=>{
+        if(!entered)return;
+        const target=event.state?.tvFrame;
+        if(target&&target!==frameUrl()){lastFrameUrl=target;landing.src=target}
+      });
     })();
   </script>
   <script defer src="/brand-v2.js?v=1"></script>
