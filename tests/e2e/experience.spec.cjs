@@ -14,21 +14,21 @@ test('six-scene story remains navigable and connected', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('root trident turns as a thick, beveled, lit 3D object, then reveals overview and lab', async ({ page }) => {
+test('root trident visibly rotates, then reveals overview and lab', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#arrival')).toBeVisible();
   await expect(page.locator('.arrival-figure')).toHaveCount(0);
   await expect(page.locator('.arrival-weapon')).toHaveAttribute('src', '/assets/preview-trident-v2.webp');
-  await expect(page.locator('.arrival-weapon-3d')).toBeVisible();
-  await expect(page.locator('.arrival-weapon-body')).toHaveClass(/has-3d/);
-  await expect(page.locator('.arrival-weapon-body')).toHaveAttribute('data-model-depth', '0.3');
-  expect(Number(await page.locator('.arrival-weapon-body').getAttribute('data-model-side-vertices'))).toBeGreaterThan(1000);
+  await expect(page.locator('.arrival-weapon-3d')).toHaveCount(0);
   await expect(page.locator('.arrival-brand .v2-brand-glyph')).toBeVisible();
   await expect(page.locator('.arrival-brand [lang="hi"]')).toHaveText('त्रि');
   await expect(page.locator('.arrival[data-beat="0"] .arrival-beats [data-beat="0"]')).toBeVisible();
   const spin = page.locator('.arrival-weapon-body');
-  expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('none');
-  expect(await page.locator('.arrival-weapon-3d').evaluate(canvas => !!canvas.getContext('webgl'))).toBeTruthy();
+  expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('arrival-idle-spin');
+  const rotationBefore = await spin.evaluate(el => getComputedStyle(el).transform);
+  await page.waitForTimeout(220);
+  const rotationAfter = await spin.evaluate(el => getComputedStyle(el).transform);
+  expect(rotationAfter).not.toBe(rotationBefore);
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
