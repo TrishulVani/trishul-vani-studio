@@ -4,6 +4,7 @@
   if (new URLSearchParams(location.search).get('story') === '1') { arrival.remove(); return; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const anchor = arrival.querySelector('.arrival-weapon-anchor');
+  const weapon = arrival.querySelector('.arrival-weapon-body');
   const label = document.getElementById('arrival-stage');
   const meter = document.getElementById('arrival-meter');
   const canvas = document.getElementById('arrival-field');
@@ -15,6 +16,7 @@
   const mix = (a, b, t) => a + (b - a) * t;
   const stars = Array.from({ length: 110 }, (_, i) => ({ x: (i * .6180339887 + .137) % 1, y: (i * .7548776662 + .379) % 1, size: i % 11 === 0 ? 1.5 : .65 }));
   let target = 0, visual = 0, raf = 0, closed = false, touchY = null, finishTimer = 0;
+  let idleYaw = 0, idlePoseCaptured = false;
 
   function go() {
     if (closed) return;
@@ -26,10 +28,22 @@
   }
   function advance(amount) {
     if (closed) return;
+    if (!idlePoseCaptured && amount > 0) {
+      const transform = getComputedStyle(weapon).transform;
+      if (transform && transform !== 'none') {
+        try {
+          const matrix = new DOMMatrixReadOnly(transform);
+          idleYaw = Math.atan2(matrix.m13, matrix.m11) * 180 / Math.PI;
+        } catch (_) { idleYaw = 0; }
+      }
+      idlePoseCaptured = true;
+    }
     target = clamp(target + amount);
     if (target < .999) { clearTimeout(finishTimer); finishTimer = 0; }
     else if (!finishTimer) finishTimer = setTimeout(go, reduce ? 0 : 520);
     arrival.classList.toggle('is-moving', target > .012);
+    if (target > .012 && !reduce) weapon.style.transform = `rotateY(${idleYaw.toFixed(2)}deg)`;
+    if (target <= .012) { idlePoseCaptured = false; idleYaw = 0; }
     if (!raf) raf = requestAnimationFrame(tick);
   }
   arrival.addEventListener('wheel', event => {
@@ -92,6 +106,13 @@
     const scale = mix(1, .9, turn) * mix(1, 1.25, flight) * mix(1, 7.2, rush * rush);
     const x = innerWidth * (.12 * flight - .08 * rush), y = innerHeight * (-.035 * turn + .05 * rush);
     anchor.style.transform = reduce ? 'translate3d(-50%,-50%,0)' : `translate3d(calc(-50% + ${x.toFixed(2)}px),calc(-50% + ${y.toFixed(2)}px),${(rush * 180).toFixed(1)}px) scale(${scale.toFixed(4)})`;
+    // Carry the live idle angle into the scroll animation, ease to a forward
+    // facing pose, then roll the upright trident a quarter turn for flight.
+    if (!reduce && arrival.classList.contains('is-moving')) {
+      const align = part(p, .006, .15);
+      const yaw = idleYaw * (1 - align) + 8 * Math.sin(flight * Math.PI * 2);
+      weapon.style.transform = `rotateZ(${(90 * turn).toFixed(2)}deg) rotateX(${(-6 * turn).toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg)`;
+    } else if (!arrival.classList.contains('is-moving')) weapon.style.removeProperty('transform');
     // Animate a restrained turn while idle, then turn into the throw without
     // letting the image-backed trident disappear edge-on.
     const throwTurn = .22 * turn + .48 * flight + .72 * rush;

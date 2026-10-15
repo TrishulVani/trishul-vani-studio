@@ -127,4 +127,4 @@ Public release 7039244: all six remote checks succeeded (Python 3.11/3.12 and Do
 - Captured populated desktop/mobile audio evidence. Five seeded factory/engine/wind/impulse/crowd scenarios produced separate stored reports and WAVs. Full Playwright suite passed **72/72** across desktop/tablet/mobile; Python API/DSP tests passed **17/17**. Physical device remains disconnected and unmeasured. The public V2 alias remains on the earlier release, pending visual signoff.
 
 - Intro trident rollback: restored the prior textured, beveled WebGL form and kept the current intro-to-overview flow intact. Focused public-version tests pass.
-- Intro follow-up: returned to the familiar detailed artwork with a visible six-second turn after the WebGL version looked narrow and appeared still. The overview handoff remains intact; browser coverage now checks that the image transform changes while idle.
+- Intro follow-up: returned to the familiar detailed artwork with its nine-second idle turn after the WebGL version looked narrow and appeared still. The overview handoff remains intact; browser coverage now checks that the image transform changes while idle.

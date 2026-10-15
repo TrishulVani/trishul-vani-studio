@@ -26,17 +26,28 @@ test('root trident visibly rotates, then reveals overview and lab', async ({ pag
   const spin = page.locator('.arrival-weapon-body');
   expect(await spin.evaluate(el => getComputedStyle(el).animationName)).toBe('arrival-idle-spin');
   const rotationBefore = await spin.evaluate(el => getComputedStyle(el).transform);
-  await page.waitForTimeout(220);
+  // The idle turn eases in over nine seconds; sample far enough from its
+  // zero-velocity start so Chromium's rounded matrix has a visible delta.
+  await page.waitForTimeout(800);
   const rotationAfter = await spin.evaluate(el => getComputedStyle(el).transform);
   expect(rotationAfter).not.toBe(rotationBefore);
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/);
-  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 650, deltaMode: 0 });
-  await expect(page.locator('#arrival-stage')).toContainText('THE TURN');
-  await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '1');
-  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -760, deltaMode: 0 });
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 850, deltaMode: 0 });
+  await expect(page.locator('#arrival-stage')).toContainText('THE THROW');
+  await expect(page.locator('.arrival')).toHaveAttribute('data-beat', '2');
+  await expect.poll(() => spin.evaluate(el => {
+    const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return (Math.atan2(-matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
+  })).toBeGreaterThan(75);
+  expect(await spin.evaluate(el => {
+    const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return (Math.atan2(-matrix.m21, matrix.m11) * 180 / Math.PI + 360) % 360;
+  })).toBeLessThan(105);
+  await page.locator('#arrival').dispatchEvent('wheel', { deltaY: -900, deltaMode: 0 });
   await expect(page.locator('#arrival-stage')).toContainText('THE AWAKENING');
   await page.locator('#arrival').dispatchEvent('wheel', { deltaY: 2500, deltaMode: 0 });
   await expect(page).toHaveURL(/127\.0\.0\.1:8002\/$/, { timeout: 5000 });
+  await expect(page.locator('#arrival')).toHaveCount(0, { timeout: 5000 });
   const app = page.frameLocator('#landing-frame');
   await expect(app.locator('#hero-title')).toBeVisible();
   await expect(app.locator('.actions .button').first()).toHaveText('Enter त्रिSHUL VANI');

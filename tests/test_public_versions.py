@@ -9,7 +9,7 @@ WEB = Path(__file__).resolve().parents[1] / "web"
 def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     page = (WEB / "index.html").read_text(encoding="utf-8-sig")
     assert 'id="arrival"' in page
-    assert 'src="/arrival-v2.js?v=10"' in page
+    assert 'src="/arrival-v2.js?v=11"' in page
     assert 'src="/trident-3d.js' not in page
     assert 'id="landing-frame"' in page
     assert 'src="/experience.html?story=1"' in page
@@ -20,12 +20,15 @@ def test_main_address_enters_the_preserved_lab_through_the_cinematic_intro():
     assert "Math.exp(-elapsed / 82)" in arrival
     assert "window.tvArrivalPose" in arrival
     assert "const throwTurn = .22 * turn + .48 * flight + .72 * rush" in arrival
+    assert "const align = part(p, .006, .15)" in arrival
+    assert "rotateZ(${(90 * turn).toFixed(2)}deg)" in arrival
+    assert "getComputedStyle(weapon).transform" in arrival
     story = (WEB / "experience.html").read_text(encoding="utf-8-sig")
     assert 'id="hero-title"' in story
     assert 'href="/lab.html?design=2"' in story
     assert 'class="arrival-weapon-3d"' not in page
     intro_css = (WEB / "intro-v2.css").read_text(encoding="utf-8-sig")
-    assert "animation:arrival-idle-spin 6s linear infinite" in intro_css
+    assert "animation:arrival-idle-spin 9s ease-in-out infinite" in intro_css
     assert "@keyframes arrival-idle-spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}" in intro_css
 
 
